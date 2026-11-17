@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.0 0.0 512.0 512.0" width="256" height="256" role="img" aria-label="Qube app icon">
+<title>Qube app icon</title>
+
+<rect x="1.5" y="1.5" width="509" height="509" rx="112" fill="#111214"/><g transform="translate(256,256) scale(1.72)">
+<defs>
+  <linearGradient id="ad-edge" gradientUnits="userSpaceOnUse" x1="-95" y1="-70" x2="95" y2="70"><stop offset="0" stop-color="#F6F2EA"/><stop offset="0.3" stop-color="#FFF0C9"/><stop offset="0.55" stop-color="#FFF0C9"/><stop offset="0.72" stop-color="#FFB817"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="ad-inner" gradientUnits="userSpaceOnUse" x1="0" y1="-60" x2="0" y2="100"><stop offset="0" stop-color="#F6F2EA"/><stop offset="0.45" stop-color="#FFF0C9"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="ad-top" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="87" y2="-50">
+    <stop offset="0" stop-color="#F6F2EA" stop-opacity="0.22499999999999998"/><stop offset="0.5" stop-color="#FFF0C9" stop-opacity="0.42"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.35"/>
+  </linearGradient>
+  <linearGradient id="ad-left" gradientUnits="userSpaceOnUse" x1="-80" y1="-50" x2="0" y2="100">
+    <stop offset="0" stop-color="#F6F2EA" stop-opacity="0.255"/><stop offset="0.55" stop-color="#FFF0C9" stop-opacity="0.195"/><stop offset="1" stop-color="#FFF0C9" stop-opacity="0.10725000000000001"/>
+  </linearGradient>
+  <linearGradient id="ad-right" gradientUnits="userSpaceOnUse" x1="10" y1="-20" x2="87" y2="90">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.294"/><stop offset="0.45" stop-color="#FFB817" stop-opacity="0.42"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.57"/>
+  </linearGradient>
+  <radialGradient id="ad-core" gradientUnits="userSpaceOnUse" cx="6" cy="8" r="62">
+    <stop offset="0" stop-color="#F6F2EA" stop-opacity="0.55"/><stop offset="0.35" stop-color="#FFF0C9" stop-opacity="0.385"/><stop offset="0.7" stop-color="#FFF0C9" stop-opacity="0.099"/><stop offset="1" stop-color="#FFF0C9" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="ad-halo" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="135">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.4"/><stop offset="0.45" stop-color="#FFF0C9" stop-opacity="0.18000000000000002"/><stop offset="1" stop-color="#FFF0C9" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="ad-haloGold" gradientUnits="userSpaceOnUse" cx="48" cy="22" r="105">
+    <stop offset="0" stop-color="#FFB817" stop-opacity="0.32000000000000006"/><stop offset="0.55" stop-color="#FFB817" stop-opacity="0.12"/><stop offset="1" stop-color="#FFB817" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="ad-sheen" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="-20" y2="40">
+    <stop offset="0" stop-color="#F6F2EA" stop-opacity="0.35"/><stop offset="1" stop-color="#F6F2EA" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="ad-glow" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="wide"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="tight"/>
+    <feMerge><feMergeNode in="wide"/><feMergeNode in="wide"/><feMergeNode in="tight"/></feMerge>
+  </filter>
+  <filter id="ad-soft" x="-50%" y="-400%" width="200%" height="900%">
+    <feGaussianBlur stdDeviation="14"/>
+  </filter>
+</defs>
+<g>
+  
+  <!-- ambient glow behind the glass -->
+  <circle cx="0" cy="0" r="135" fill="url(#ad-halo)"/>
+  <circle cx="48" cy="22" r="105" fill="url(#ad-haloGold)"/>
+  <!-- see-through glass faces -->
+  <polygon points="0.00,-100.00 86.60,-50.00 0.00,0.00 -86.60,-50.00" fill="url(#ad-top)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#ad-left)"/>
+  <polygon points="0.00,0.00 86.60,-50.00 86.60,50.00 0.00,100.00" fill="url(#ad-right)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#ad-sheen)"/>
+  <!-- light trapped inside -->
+  <circle cx="6" cy="8" r="62" fill="url(#ad-core)"/>
+  <!-- hidden (back) edges, visible through the glass -->
+  <path d="M0.00,-100.00 L0.00,0.00 M-86.60,50.00 L0.00,0.00 L86.60,50.00" fill="none" stroke="url(#ad-edge)" stroke-width="1.6" stroke-opacity="0.38" stroke-linecap="round"/>
+  <!-- glow pass -->
+  <g filter="url(#ad-glow)" opacity="0.95" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#ad-edge)" stroke-width="5"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#ad-edge)" stroke-width="3.5"/>
+  </g>
+  <!-- crisp edges -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#ad-edge)" stroke-width="3.6"/>
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="#F6F2EA" stroke-opacity="0.45" stroke-width="1"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#ad-edge)" stroke-width="2.8"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#ad-inner)" stroke-opacity="0.75" stroke-width="1.1"/>
+  </g>
+</g></g>
+</svg>

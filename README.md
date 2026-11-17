@@ -21,13 +21,15 @@ css/
   knowledge.css     Knowledge Hub only: toolbar, category chips and document cards
   light.css         LIGHT mode (qualipro.se style). Only applies when light mode is on
 js/
-  app.js            Toasts, chat box, theme switch, dropdown menus, views, role (who sees the Admin Panel)
+  app.js            Toasts, chat box, theme switch, dropdown menus, views, role (who sees the Admin Panel),
+                    sidebar: mobile drawer (<= 768px) + "Hide navigation" icon rail on desktop
   calendar.js       Calendar card: week strip + agenda + event details popover (edit the EVENTS array)
   robot.js          Robot flight animation + drag-and-drop
   tour.js           Tour steps (edit the STEPS array) and tour logic
   features.js       Command palette (Cmd/Ctrl+K), modal + DOCS, checklist, quick access,
                     activity feed, sidebar quick links + their Edit button,
-                    Admin Panel (publish news + calendar events),
+                    News (dashboard slideshow, article reader, NEWS_DEFAULTS),
+                    Admin Panel (publish news with a cover image + calendar events),
                     Customize dashboard (drag the boxes into a new order)
   knowledge.js      Knowledge Hub view: the LIBRARY of documents, search, category filters,
                     sorting, the document modal and the .txt download. Registers every
@@ -38,11 +40,15 @@ js/
 assets/
   qp.glb            The 3D robot
   qp-robot.webp     2D robot, shown while the model loads or if it cannot load
+  news/             Default news covers, one per category (photos from Unsplash, free to use)
 ```
 
 Load order matters: CSS and scripts as listed in `index.html`.
 
 Handy:
+- Sidebar icons: SVG `<symbol>`s at the top of `index.html` (quick links: `LINK_ICONS` in `js/features.js`).
+- News: the starting articles are `NEWS_DEFAULTS` in `js/features.js` (copied into the browser on the first
+  visit), covers per category in `NEWS_COVERS`, slideshow length/speed in `HOME_SLIDES` / `SLIDE_EVERY`.
 - Brand colours: `--gold`, `--bg`, `--panel`… in `base.css` (dark) and `light.css` (light).
 - See the tour again: run `qpTour.reset()` in the browser console and reload.
 - Add a tool or document: add an entry to `DOCS` in `js/features.js`.
@@ -59,4 +65,5 @@ Handy:
   `data-view-link="name"` opens a view.
 - Saved in the browser (localStorage): `qp-theme`, `qp-pins`, `qp-recent`,
   `qp-onboarding`, `qp-quicklinks`, `qp-role`, `qp-news`, `qp-events`, `qp-dashboard-order-v2`,
-  `qp-kb-filter`.
+  `qp-nav-collapsed`, `qp-kb-filter`, `qp-news-v2` (all news, newest first; uploaded cover images are
+  stored in it, so the browser's ~5 MB limit applies).

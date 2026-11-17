@@ -244,3 +244,19 @@ html[data-theme="light"] .theme-btn .moon {
 h1 .name {
   color: inherit;
 }
+
+/* Hamburger (js/app.js, "Sidebar"): opens the sidebar drawer on phones only */
+.topbar .nav-btn {
+  flex: none;
+}
+.topbar .nav-toggle {
+  display: none;
+}
+@media (max-width: 768px) {
+  .topbar {
+    padding-left: 10px;
+  }
+  .topbar .nav-toggle {
+    display: grid;
+  }
+}

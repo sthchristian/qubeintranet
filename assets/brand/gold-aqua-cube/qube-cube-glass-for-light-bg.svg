@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-131.6 -145.0 263.2 302.0" width="400" height="459" role="img" aria-label="Qube cube">
+<title>Qube cube</title>
+
+
+<defs>
+  <linearGradient id="cl-edge" gradientUnits="userSpaceOnUse" x1="-95" y1="-70" x2="95" y2="70"><stop offset="0" stop-color="#22B8B6"/><stop offset="0.3" stop-color="#22B8B6"/><stop offset="0.52" stop-color="#9FD9B8"/><stop offset="0.7" stop-color="#FFB817"/><stop offset="1" stop-color="#F5A800"/></linearGradient>
+  <linearGradient id="cl-inner" gradientUnits="userSpaceOnUse" x1="0" y1="-60" x2="0" y2="100"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.5" stop-color="#FFF0C9"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="cl-top" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="87" y2="-50">
+    <stop offset="0" stop-color="#22B8B6" stop-opacity="0.42"/><stop offset="0.5" stop-color="#FFF0C9" stop-opacity="0.54"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.47"/>
+  </linearGradient>
+  <linearGradient id="cl-left" gradientUnits="userSpaceOnUse" x1="-80" y1="-50" x2="0" y2="100">
+    <stop offset="0" stop-color="#22B8B6" stop-opacity="0.44"/><stop offset="0.55" stop-color="#22B8B6" stop-opacity="0.36"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0.198"/>
+  </linearGradient>
+  <linearGradient id="cl-right" gradientUnits="userSpaceOnUse" x1="10" y1="-20" x2="87" y2="90">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.385"/><stop offset="0.45" stop-color="#FFB817" stop-opacity="0.55"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.7000000000000001"/>
+  </linearGradient>
+  <radialGradient id="cl-core" gradientUnits="userSpaceOnUse" cx="6" cy="8" r="62">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.6"/><stop offset="0.35" stop-color="#FFF0C9" stop-opacity="0.42"/><stop offset="0.7" stop-color="#22B8B6" stop-opacity="0.108"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="cl-halo" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="135">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.3"/><stop offset="0.45" stop-color="#22B8B6" stop-opacity="0.135"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="cl-haloGold" gradientUnits="userSpaceOnUse" cx="48" cy="22" r="105">
+    <stop offset="0" stop-color="#FFB817" stop-opacity="0.24"/><stop offset="0.55" stop-color="#FFB817" stop-opacity="0.09"/><stop offset="1" stop-color="#FFB817" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="cl-sheen" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="-20" y2="40">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="cl-glow" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="wide"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="tight"/>
+    <feMerge><feMergeNode in="wide"/><feMergeNode in="wide"/><feMergeNode in="tight"/></feMerge>
+  </filter>
+  <filter id="cl-soft" x="-50%" y="-400%" width="200%" height="900%">
+    <feGaussianBlur stdDeviation="14"/>
+  </filter>
+</defs>
+<g>
+  <ellipse cx="0" cy="118" rx="80" ry="10" fill="#111214" opacity="0.10" filter="url(#cl-soft)"/>
+  <!-- ambient glow behind the glass -->
+  <circle cx="0" cy="0" r="135" fill="url(#cl-halo)"/>
+  <circle cx="48" cy="22" r="105" fill="url(#cl-haloGold)"/>
+  <!-- see-through glass faces -->
+  <polygon points="0.00,-100.00 86.60,-50.00 0.00,0.00 -86.60,-50.00" fill="url(#cl-top)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#cl-left)"/>
+  <polygon points="0.00,0.00 86.60,-50.00 86.60,50.00 0.00,100.00" fill="url(#cl-right)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#cl-sheen)"/>
+  <!-- light trapped inside -->
+  <circle cx="6" cy="8" r="62" fill="url(#cl-core)"/>
+  <!-- hidden (back) edges, visible through the glass -->
+  <path d="M0.00,-100.00 L0.00,0.00 M-86.60,50.00 L0.00,0.00 L86.60,50.00" fill="none" stroke="url(#cl-edge)" stroke-width="1.6" stroke-opacity="0.45" stroke-linecap="round"/>
+  <!-- glow pass -->
+  <g filter="url(#cl-glow)" opacity="0.65" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#cl-edge)" stroke-width="5"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#cl-edge)" stroke-width="3.5"/>
+  </g>
+  <!-- crisp edges -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#cl-edge)" stroke-width="3.6"/>
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#cl-edge)" stroke-width="2.8"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#cl-inner)" stroke-opacity="0.55" stroke-width="1.1"/>
+  </g>
+</g>
+</svg>

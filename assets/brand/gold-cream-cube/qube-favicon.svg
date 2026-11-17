@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.0 0.0 64.0 64.0" width="64" height="64" role="img" aria-label="Qube favicon">
+<title>Qube favicon</title>
+
+<rect width="64" height="64" rx="14" fill="#111214"/><g transform="translate(32,32) scale(0.255)">
+<defs>
+  <linearGradient id="f-e" gradientUnits="userSpaceOnUse" x1="-90" y1="-60" x2="90" y2="60">
+    <stop offset="0" stop-color="#F6F2EA"/><stop offset="0.5" stop-color="#FFF0C9"/><stop offset="0.72" stop-color="#FFB817"/><stop offset="1" stop-color="#FFB817"/>
+  </linearGradient>
+</defs>
+<polygon points="0.00,-100.00 86.60,-50.00 0.00,0.00 -86.60,-50.00" fill="#FFF0C9" fill-opacity="0.55"/>
+<polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="#F6F2EA" fill-opacity="0.35"/>
+<polygon points="0.00,0.00 86.60,-50.00 86.60,50.00 0.00,100.00" fill="#FFB817" fill-opacity="0.85"/>
+<g fill="none" stroke="url(#f-e)" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke-width="9"/>
+  <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke-width="7"/>
+</g></g>
+</svg>

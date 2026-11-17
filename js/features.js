@@ -6,7 +6,8 @@
  *   - Command palette (Cmd/Ctrl + K, or the search field in the top bar)
  *   - New hire checklist (saved in localStorage)
  *   - Team activity feed (example data, edit FEED_SEED / FEED_POOL)
- *   - Admin Panel: publish news articles and calendar events (saved in localStorage)
+ *   - News: slideshow on the dashboard, article reader + list in the News view (saved in localStorage)
+ *   - Admin Panel: publish news articles (with a cover image) and calendar events (saved in localStorage)
  *   - Dashboard layout: "Customize dashboard" drag-and-drop order (saved in localStorage)
  * Uses helpers from app.js ($, $$, notify, reduce, showView, toggleTheme, closeMenus, isAdmin).
  * The chat drawer lives in chat.js.
@@ -590,7 +591,7 @@
     { label: "GitHub repositories", url: "" },
     { label: "Architecture wiki", url: "" },
   ];
-  const LINK_ICONS = ["▤", "⌘", "▣", "◈", "◉", "✳"];
+  const LINK_ICONS = ["i-board", "i-code", "i-doc", "i-link", "i-users", "i-flow"]; // SVG symbols in index.html
   let links = store.get("qp-quicklinks", LINK_DEFAULTS);
   const quickNav = $("#quick-nav");
   function renderLinks() {
@@ -598,7 +599,7 @@
       ? links
           .map(
             (l, n) =>
-              `<button type="button" data-link="${n}" title="${esc(l.label)}"><span class="nav-icon">${LINK_ICONS[n % LINK_ICONS.length]}</span><span class="label">${esc(l.label)}</span><span class="ext">↗</span></button>`,
+              `<button type="button" data-link="${n}" title="${esc(l.label)}"><span class="nav-icon"><svg class="ico"><use href="#${LINK_ICONS[n % LINK_ICONS.length]}" /></svg></span><span class="label">${esc(l.label)}</span><span class="ext"><svg class="ico"><use href="#i-ext" /></svg></span></button>`,
           )
           .join("")
       : `<div class="empty-note label" style="padding: 4px 12px">No links yet. Use Edit to add one.</div>`;
@@ -648,9 +649,9 @@
   renderLinks();
 
   /* =====================================================================
-     Admin Panel (HR + Manager): publish news articles and calendar events.
-     Both lists are saved in localStorage ("qp-news", "qp-events"), so they
-     only exist in this browser. News shows up on the dashboard and in the
+     News + Admin Panel (HR + Manager): publish news articles and calendar events.
+     Both lists are saved in localStorage ("qp-news-v2", "qp-events"), so they
+     only exist in this browser. News fills the dashboard slideshow and the
      News view; events are drawn by js/calendar.js.
      ===================================================================== */
   const NEWS_CATS = {
@@ -661,13 +662,103 @@
     people: ["People", "✳"],
   };
   const EVENT_TYPES = { meeting: "Meeting", event: "Event", deadline: "Deadline" };
-  const HOME_NEWS = 4; // how many articles the dashboard shows
+  const HOME_SLIDES = 5; // how many of the newest articles the dashboard slideshow shows
+  const SLIDE_EVERY = 6000; // ms between automatic slides (paused on hover / focus)
+  /* Built-in covers (assets/news, photos from Unsplash). An article without its own image gets its category's cover. */
+  const NEWS_COVERS = {
+    company: "assets/news/office.jpg",
+    engineering: "assets/news/engineering.jpg",
+    security: "assets/news/security.jpg",
+    hr: "assets/news/hr.jpg",
+    people: "assets/news/people.jpg",
+  };
+  /* The articles every browser starts with. They are copied into localStorage on the first visit;
+     after that the saved list is the source, and new articles are added to its front. */
+  const NEWS_DEFAULTS = [
+    {
+      id: "mfa-rollout",
+      title: "Multi-factor authentication rollout",
+      text: "Register your security key by Jun 15.",
+      body: "From June 15 every QualiPro account signs in with a hardware security key. Pick up two YubiKeys at the service desk (one primary, one backup) and register both under IT support. Lost a key? Report it within 24 hours so it can be blocked.",
+      cat: "security",
+      date: "2026-06-08",
+      img: "assets/news/security.jpg",
+    },
+    {
+      id: "core-42",
+      title: "QualiPro Core v4.2 is here",
+      text: "Release notes from Engineering.",
+      body: "Core v4.2 brings event-driven notifications, a 35% faster search API and the new role-based access layer. The legacy /v1/auth endpoints are deprecated and will be removed in v4.4, so plan your migration this quarter.",
+      cat: "engineering",
+      date: "2026-06-05",
+      img: "assets/news/engineering.jpg",
+    },
+    {
+      id: "midsummer",
+      title: "Office closed on Midsummer Eve",
+      text: "Plan deliveries and support cover early.",
+      body: "All offices are closed on Midsummer Eve. Agree on support cover with your team before then, and move client deliveries that land on that day. Glad midsommar!",
+      cat: "company",
+      date: "2026-06-03",
+      img: "assets/news/midsummer.jpg",
+    },
+    {
+      id: "parental-leave",
+      title: "Updated parental leave guide",
+      text: "Now in the Employee handbook.",
+      body: "The parental leave chapter has been rewritten with clearer steps, a planning checklist and the new top-up rules: 90% of your salary for six months. Find it under Employee handbook, Time off & leave.",
+      cat: "hr",
+      date: "2026-05-28",
+      img: "assets/news/hr.jpg",
+    },
+    {
+      id: "new-consultants",
+      title: "Welcome to our new consultants",
+      text: "Six people joined in May.",
+      body: "Six consultants joined QualiPro in May, across Engineering, POC Studio and Talent. Say hello at Friday's after-work, and find them in the Directory.",
+      cat: "people",
+      date: "2026-05-22",
+      img: "assets/news/people.jpg",
+    },
+  ];
+  const NEWS_KEY = "qp-news-v2"; // v2: the whole list (defaults + published), newest first
   const savedList = (key) => {
     const v = store.get(key, []);
     return Array.isArray(v) ? v.filter((x) => x && x.id && x.title && /^\d{4}-\d\d-\d\d$/.test(x.date)) : [];
   };
-  let news = savedList("qp-news"),
+  /* Only images we made or can trust: an uploaded data: image, a web address, or one of our own covers */
+  const safeImg = (src) =>
+    typeof src === "string" &&
+    (/^data:image\/(jpeg|png|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(src) ||
+      /^https?:\/\/[^\s"'<>()]+$/.test(src) ||
+      /^assets\/news\/[\w.-]+$/.test(src))
+      ? src
+      : "";
+  function loadNews() {
+    const saved = store.get(NEWS_KEY, null);
+    let list = Array.isArray(saved) ? saved : null;
+    if (!list) {
+      /* first visit: the defaults, with anything published by the older Admin Panel ("qp-news") in front */
+      const older = savedList("qp-news")
+        .sort((a, b) => b.date.localeCompare(a.date))
+        .map((n) => ({ ...n, own: true }));
+      list = [...older, ...NEWS_DEFAULTS];
+      store.set(NEWS_KEY, list);
+    }
+    return list
+      .filter((x) => x && x.id && x.title && /^\d{4}-\d\d-\d\d$/.test(x.date))
+      .map((x) => ({ ...x, id: String(x.id), cat: NEWS_CATS[x.cat] ? x.cat : "company", img: safeImg(x.img) }));
+  }
+  let news = loadNews(),
     events = savedList("qp-events");
+  const saveNews = () => {
+    try {
+      localStorage.setItem(NEWS_KEY, JSON.stringify(news));
+      return true;
+    } catch (e) {
+      return false; // full: usually too many uploaded images
+    }
+  };
   const pad = (n) => String(n).padStart(2, "0");
   const todayISO = () => {
     const d = new Date();
@@ -678,33 +769,178 @@
   const newsDate = (iso) => day(iso).toLocaleDateString("en-US", { month: "short", day: "numeric" });
   const eventDate = (iso) => day(iso).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
   const cat = (n) => NEWS_CATS[n.cat] || NEWS_CATS.company;
+  const cover = (n) => n.img || NEWS_COVERS[n.cat] || NEWS_COVERS.company;
+  const longDate = (iso) => day(iso).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  /* a cover that fails to load (dead link, offline) falls back to its category's built-in cover */
+  document.addEventListener(
+    "error",
+    (e) => {
+      const img = e.target;
+      if (!(img instanceof HTMLImageElement) || !img.dataset.cover || img.dataset.failed) return;
+      img.dataset.failed = "1";
+      img.src = NEWS_COVERS[img.dataset.cover] || NEWS_COVERS.company;
+    },
+    true,
+  );
 
-  /* Adds the published articles to both news lists and keeps each list newest first */
-  function renderNews() {
-    [
-      ["#news-home", HOME_NEWS],
-      ["#news-all", Infinity],
-    ].forEach(([sel, max]) => {
-      const box = $(sel);
-      if (!box) return;
-      box.querySelectorAll("[data-custom]").forEach((a) => a.remove());
-      box.insertAdjacentHTML(
-        "afterbegin",
-        news
+  /* ---------- News view: list + article reader ---------- */
+  const newsAll = $("#news-all"),
+    reader = $("#news-reader");
+  function renderNewsList() {
+    if (!newsAll) return;
+    newsAll.innerHTML = news.length
+      ? news
           .map(
             (n) =>
-              `<article class="news-item" data-custom><div class="news-ico" title="${esc(cat(n)[0])}">${cat(n)[1]}</div><div class="news-copy"><strong>${esc(n.title)}</strong><small>${esc(n.text || "")}</small></div><time class="date" datetime="${n.date}">${newsDate(n.date)}</time></article>`,
+              `<button type="button" class="news-item news-row" data-open-news="${esc(n.id)}"><img class="news-thumb" src="${esc(cover(n))}" data-cover="${n.cat}" alt="" loading="lazy" /><span class="news-copy"><strong>${esc(n.title)}</strong><small>${esc(n.text || "")}</small></span><time class="date" datetime="${n.date}">${newsDate(n.date)}</time></button>`,
           )
-          .join(""),
-      );
-      const when = (a) => a.querySelector("time")?.dateTime || "";
-      [...box.children]
-        .sort((a, b) => when(b).localeCompare(when(a)))
-        .forEach((a, i) => {
-          box.appendChild(a);
-          a.hidden = i >= max;
-        });
+          .join("")
+      : `<div class="empty-note">No news yet.</div>`;
+    markOpen();
+  }
+  let openId = null;
+  const markOpen = () =>
+    newsAll?.querySelectorAll("[data-open-news]").forEach((b) => b.classList.toggle("open", b.dataset.openNews === openId));
+  /* Opens an article in the News view (from the slideshow, the list, or anywhere with data-open-news) */
+  function openArticle(id) {
+    const n = news.find((x) => x.id === id);
+    if (!n || !reader) return;
+    if ($('.view[data-view="news"]').hidden) showView("news");
+    openId = id;
+    reader.innerHTML = `<img class="news-reader-cover" src="${esc(cover(n))}" data-cover="${n.cat}" alt="" />
+      <div class="news-reader-body">
+        <div class="news-reader-meta"><span>${esc(cat(n)[0])}</span><time datetime="${n.date}">${longDate(n.date)}</time></div>
+        <h2 id="news-reader-title">${esc(n.title)}</h2>
+        <p class="news-reader-lead">${esc(n.text || "")}</p>
+        ${n.body ? `<p>${esc(n.body)}</p>` : ""}
+        <button type="button" class="btn" data-close-reader>← All news</button>
+      </div>`;
+    reader.hidden = false;
+    markOpen();
+    scrollTo({ top: 0 });
+    reader.focus({ preventScroll: true });
+  }
+  function closeArticle(refocus) {
+    if (!reader || reader.hidden) return;
+    const was = openId;
+    reader.hidden = true;
+    openId = null;
+    markOpen();
+    if (refocus) newsAll.querySelector(`[data-open-news="${CSS.escape(was)}"]`)?.focus();
+  }
+  document.addEventListener("click", (e) => {
+    const open = e.target.closest("[data-open-news]");
+    if (open && !e.metaKey && !e.ctrlKey && !e.shiftKey) {
+      e.preventDefault(); // the slides are links to #news; we open the article ourselves
+      if (!slider || !slider.contains(open) || !slider.dataset.swiped) openArticle(open.dataset.openNews);
+    } else if (e.target.closest("[data-close-reader]")) closeArticle(true);
+    else if (e.target.closest('[data-view-link="news"]')) closeArticle(); // "View all" / sidebar: back to the list
+  });
+  /* leaving the News view (sidebar, search, back button) puts the article away */
+  const newsView = $('.view[data-view="news"]');
+  if (newsView) new MutationObserver(() => newsView.hidden && closeArticle()).observe(newsView, { attributeFilter: ["hidden"] });
+
+  /* ---------- Dashboard slideshow (#news-home) ---------- */
+  const slider = $("#news-home");
+  let slideAt = 0,
+    slideTimer = 0,
+    slideHold = 0; // > 0 while the pointer is over the slideshow or focus is inside it
+  const slides = () => news.slice(0, HOME_SLIDES);
+  function renderSlider() {
+    if (!slider) return;
+    const list = slides();
+    slideAt = Math.min(slideAt, Math.max(0, list.length - 1));
+    if (!list.length) {
+      slider.innerHTML = `<div class="news-slider-empty">No news yet. Published articles show up here.</div>`;
+      return;
+    }
+    slider.innerHTML = `<div class="news-track">${list
+      .map(
+        (n, i) =>
+          `<a class="news-slide" href="#news" data-open-news="${esc(n.id)}" aria-roledescription="slide" aria-label="${i + 1} of ${list.length}: ${esc(n.title)}">
+            <img src="${esc(cover(n))}" data-cover="${n.cat}" alt="" ${i ? 'loading="lazy"' : ""} />
+            <span class="news-slide-copy"><strong>${esc(n.title)}</strong><span class="read-more">Read more →</span></span>
+          </a>`,
+      )
+      .join("")}</div>${
+      list.length > 1
+        ? `<button type="button" class="news-nav prev" data-slide-step="-1" aria-label="Previous news"><svg class="ico"><use href="#i-chev" /></svg></button>
+      <button type="button" class="news-nav next" data-slide-step="1" aria-label="Next news"><svg class="ico"><use href="#i-chev" /></svg></button>
+      <div class="news-dots" role="group" aria-label="Choose a news story">${list
+        .map((n, i) => `<button type="button" data-slide-to="${i}" aria-label="Show news ${i + 1}: ${esc(n.title)}"></button>`)
+        .join("")}</div>`
+        : ""
+    }`;
+    showSlide(slideAt, false);
+  }
+  function showSlide(i, user = true) {
+    const all = slider.querySelectorAll(".news-slide"),
+      n = all.length;
+    if (!n) return;
+    slideAt = (i + n) % n;
+    slider.querySelector(".news-track").style.transform = `translateX(${-100 * slideAt}%)`;
+    all.forEach((s, k) => (s.inert = k !== slideAt)); // only the visible slide can be tabbed to or read out
+    slider.querySelectorAll("[data-slide-to]").forEach((d, k) => d.setAttribute("aria-current", k === slideAt));
+    if (user) scheduleSlide(); // a manual change restarts the 6 s wait
+  }
+  /* Auto-advance: only while the slideshow is on screen, nobody is pointing at it or typing in it,
+     the dashboard is not being rearranged, and the user has not asked for reduced motion */
+  function scheduleSlide() {
+    clearTimeout(slideTimer);
+    slideTimer = setTimeout(() => {
+      const busy =
+        slideHold > 0 || document.hidden || !slider.offsetParent || document.body.classList.contains("is-customizing") || reduce();
+      if (!busy) showSlide(slideAt + 1, false);
+      scheduleSlide();
+    }, SLIDE_EVERY);
+  }
+  if (slider) {
+    slider.addEventListener("click", (e) => {
+      const step = e.target.closest("[data-slide-step]"),
+        to = e.target.closest("[data-slide-to]");
+      if (step) showSlide(slideAt + +step.dataset.slideStep);
+      else if (to) showSlide(+to.dataset.slideTo);
     });
+    slider.addEventListener("keydown", (e) => {
+      const step = { ArrowLeft: -1, ArrowRight: 1 }[e.key];
+      if (!step || e.target.closest(".dash-handle")) return;
+      e.preventDefault();
+      showSlide(slideAt + step);
+      slider.querySelectorAll(".news-slide")[slideAt].focus({ preventScroll: true });
+    });
+    slider.addEventListener("pointerenter", () => slideHold++);
+    slider.addEventListener("pointerleave", () => {
+      slideHold = Math.max(0, slideHold - 1);
+      scheduleSlide();
+    });
+    slider.addEventListener("focusin", () => slideHold++);
+    slider.addEventListener("focusout", () => {
+      slideHold = Math.max(0, slideHold - 1);
+      scheduleSlide();
+    });
+    /* swipe left / right on touch screens (a swipe does not open the article) */
+    let swipe = null;
+    slider.addEventListener("pointerdown", (e) => {
+      if (e.pointerType !== "mouse") swipe = { x: e.clientX, y: e.clientY };
+      delete slider.dataset.swiped;
+    });
+    slider.addEventListener("pointerup", (e) => {
+      if (!swipe) return;
+      const dx = e.clientX - swipe.x;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(e.clientY - swipe.y)) {
+        slider.dataset.swiped = "1";
+        showSlide(slideAt + (dx < 0 ? 1 : -1));
+      }
+      swipe = null;
+    });
+    slider.addEventListener("pointercancel", () => (swipe = null));
+    scheduleSlide();
+  }
+  function renderNews(first) {
+    if (first) slideAt = 0; // a new article becomes the active slide
+    renderSlider();
+    renderNewsList();
+    if (openId && !news.some((n) => n.id === openId)) closeArticle();
   }
   const adminRow = (kind, id, icon, title, sub) =>
     `<div class="row"><div class="news-ico">${icon}</div><span><strong>${esc(title)}</strong><small>${esc(sub)}</small></span><button type="button" class="icon-btn" data-del="${kind}" data-id="${esc(id)}" aria-label="Remove ${esc(title)}">✕</button></div>`;
@@ -714,7 +950,7 @@
       ($(sel).innerHTML = rows.length ? `<div class="rows admin-list">${rows.join("")}</div>` : `<div class="empty-note">${empty}</div>`);
     draw(
       "#admin-news-list",
-      [...news].sort(byDate).map((n) => adminRow("news", n.id, cat(n)[1], n.title, `${cat(n)[0]} · ${newsDate(n.date)}`)),
+      news.filter((n) => n.own).map((n) => adminRow("news", n.id, `<img src="${esc(cover(n))}" data-cover="${n.cat}" alt="" />`, n.title, `${cat(n)[0]} · ${newsDate(n.date)}`)),
       "Nothing published yet. Articles you add show up on the dashboard.",
     );
     draw(
@@ -732,7 +968,7 @@
         ),
       "Nothing published yet. Events you add show up in the calendar.",
     );
-    $("#admin-news-count").textContent = news.length;
+    $("#admin-news-count").textContent = news.filter((n) => n.own).length;
     $("#admin-event-count").textContent = events.length;
   }
   const newsForm = $("#admin-news-form"),
@@ -751,18 +987,119 @@
       const b = e.target.closest("[data-type]");
       if (b) setType(b.dataset.type);
     });
+    /* ---------- Cover image: upload (resized + compressed here) or web address, with a live preview ---------- */
+    const imgFile = $("#admin-img-file"),
+      imgUrl = $("#admin-img-url"),
+      imgPrev = $("#admin-img-preview img"),
+      imgTag = $("#admin-img-tag"),
+      imgNote = $("#admin-img-note"),
+      imgClear = $("#admin-img-clear"),
+      IMG_NOTE = imgNote.textContent;
+    let upload = ""; // data: URL of the processed upload
+    function showPreview() {
+      const url = imgUrl.value.trim(),
+        own = upload || (safeImg(url) && /^https?:/.test(url) ? url : "");
+      imgPrev.dataset.cover = newsForm.elements.cat.value;
+      delete imgPrev.dataset.failed;
+      imgPrev.src = own || NEWS_COVERS[newsForm.elements.cat.value] || NEWS_COVERS.company;
+      imgTag.textContent = upload ? "Uploaded image" : own ? "Image from the web" : "Default cover";
+      imgClear.hidden = !own;
+    }
+    /* Shrinks a photo to fit 1280 × 800 and saves it as JPEG, lowering the quality until it is under ~300 KB,
+       so a few dozen articles fit in the browser's storage (about 5 MB). */
+    async function compress(file) {
+      const url = URL.createObjectURL(file);
+      try {
+        const img = await new Promise((res, rej) => {
+          const i = new Image();
+          i.onload = () => res(i);
+          i.onerror = rej;
+          i.src = url;
+        });
+        let scale = Math.min(1, 1280 / img.naturalWidth, 800 / img.naturalHeight),
+          q = 0.82,
+          out = "";
+        for (let tries = 0; tries < 8; tries++) {
+          const c = document.createElement("canvas");
+          c.width = Math.max(1, Math.round(img.naturalWidth * scale));
+          c.height = Math.max(1, Math.round(img.naturalHeight * scale));
+          const g = c.getContext("2d");
+          g.fillStyle = "#fff"; // transparent PNGs get a white background instead of black
+          g.fillRect(0, 0, c.width, c.height);
+          g.drawImage(img, 0, 0, c.width, c.height);
+          out = c.toDataURL("image/jpeg", q);
+          if (out.length < 400000) break; // ~300 KB of image data
+          if (q > 0.55) q -= 0.1;
+          else scale *= 0.8;
+        }
+        return out;
+      } finally {
+        URL.revokeObjectURL(url);
+      }
+    }
+    imgFile.addEventListener("change", async () => {
+      const file = imgFile.files[0];
+      if (!file) return;
+      if (!file.type.startsWith("image/") || file.size > 20e6) {
+        imgFile.value = "";
+        return notify("Pick an image file under 20 MB");
+      }
+      imgNote.textContent = "Preparing the image…";
+      try {
+        upload = await compress(file);
+        imgUrl.value = ""; // the upload wins over a pasted address
+        imgNote.textContent = `${file.name} · resized to ${Math.round((upload.length * 0.75) / 1024)} KB`;
+      } catch (err) {
+        upload = "";
+        imgNote.textContent = IMG_NOTE;
+        notify("That image could not be read");
+      }
+      imgFile.value = "";
+      showPreview();
+    });
+    imgUrl.addEventListener("input", () => {
+      if (imgUrl.value.trim()) {
+        upload = "";
+        imgNote.textContent = IMG_NOTE;
+      }
+      showPreview();
+    });
+    imgClear.addEventListener("click", () => {
+      upload = "";
+      imgUrl.value = "";
+      imgNote.textContent = IMG_NOTE;
+      showPreview();
+      imgFile.focus();
+    });
+    newsForm.elements.cat.addEventListener("change", showPreview);
+    const resetImage = () => {
+      upload = "";
+      imgNote.textContent = IMG_NOTE;
+      showPreview();
+    };
+
     newsForm.addEventListener("submit", (e) => {
       e.preventDefault();
       if (!isAdmin()) return notify("Only HR and managers can publish");
       const f = newsForm.elements,
         title = f.title.value.trim(),
-        text = f.text.value.trim();
+        text = f.text.value.trim(),
+        url = imgUrl.value.trim();
       if (!title || !text) return (title ? f.text : f.title).focus();
-      news.push({ id: newId(), title, text, cat: f.cat.value, date: f.date.value });
-      store.set("qp-news", news);
-      renderNews();
+      if (url && !upload && !safeImg(url)) {
+        notify("Use an image address that starts with https://");
+        return imgUrl.focus();
+      }
+      const n = { id: newId(), title, text, cat: f.cat.value, date: f.date.value, img: upload || url, own: true };
+      news.unshift(n); // newest first: it becomes the first slide on the dashboard
+      if (!saveNews()) {
+        news.shift();
+        return notify("Not enough room in this browser's storage. Try a smaller image or remove older articles.");
+      }
+      renderNews(true);
       renderAdmin();
       resetForm(newsForm);
+      resetImage();
       notify(`Published “${title}”`);
     });
     eventForm.addEventListener("submit", (e) => {
@@ -792,7 +1129,7 @@
       if (!b || !isAdmin()) return;
       if (b.dataset.del === "news") {
         news = news.filter((n) => n.id !== b.dataset.id);
-        store.set("qp-news", news);
+        saveNews();
         renderNews();
       } else {
         events = events.filter((ev) => ev.id !== b.dataset.id);
@@ -804,6 +1141,7 @@
     });
     resetForm(newsForm);
     resetForm(eventForm);
+    resetImage();
     renderAdmin();
   }
   renderNews();
@@ -1053,5 +1391,5 @@
   }
 
   /* Shared with chat.js */
-  window.qp = { DOCS, addDocs, openDoc, showModal, closeModal, closeOverlays, openPalette, esc };
+  window.qp = { DOCS, addDocs, openDoc, showModal, closeModal, closeOverlays, openPalette, esc, openArticle };
 })();

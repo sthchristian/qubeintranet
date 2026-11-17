@@ -74,6 +74,12 @@ html[data-theme="light"] .rail {
   border-right-color: var(--line);
   backdrop-filter: blur(6px);
 }
+html[data-theme="light"] .brand-logo--light {
+  display: block;
+}
+html[data-theme="light"] .brand-logo--dark {
+  display: none;
+}
 html[data-theme="light"] .brand-mark {
   color: #141412;
   box-shadow: 0 8px 20px #f4b22340;
@@ -126,6 +132,23 @@ html[data-theme="light"] .topbar {
 html[data-theme="light"] .crumb {
   color: #8a877c;
 }
+@media (max-width: 768px) {
+  html[data-theme="light"] .topbar {
+    padding-left: 10px; /* room for the hamburger */
+  }
+}
+html[data-theme="light"] .nav-collapse {
+  color: #5d5c55;
+  border-color: #e3ddcd;
+}
+html[data-theme="light"] .nav-collapse:hover {
+  background: #14141208;
+  border-color: var(--gold);
+  color: var(--ink);
+}
+html[data-theme="light"].nav-open .rail {
+  background: #fbfaf6; /* solid while it covers the page */
+}
 html[data-theme="light"] .icon-btn {
   background: #fff;
   border-color: #ebe5d4;
@@ -143,19 +166,29 @@ html[data-theme="light"] .badge {
 html[data-theme="light"] .top-sep {
   background: #ebe2c9;
 }
+/* Profile button: white like the other top bar buttons, black text, orange initials badge */
 html[data-theme="light"] .profile-btn {
-  background: #141412;
-  border-color: #141412;
-  color: #fff;
+  background: #fff;
+  border-color: #ebe5d4;
+  color: #141412;
 }
 html[data-theme="light"] .profile-btn:hover,
 html[data-theme="light"] .profile-btn[aria-expanded="true"] {
-  background: #2a2925;
-  border-color: #2a2925;
+  background: #fff;
+  border-color: var(--gold);
+}
+html[data-theme="light"] .profile-btn .user-meta {
+  font-weight: 600;
 }
 html[data-theme="light"] .profile-btn .user-meta small,
 html[data-theme="light"] .profile-btn .chev {
-  color: #b9b7ad;
+  color: #6b6a63;
+}
+html[data-theme="light"] .profile-btn .avatar,
+html[data-theme="light"] .me .avatar {
+  background: #ffb817;
+  color: #fff;
+  text-shadow: 0 1px 2px #7a4d0080;
 }
 html[data-theme="light"] .menu {
   background: #fff;
@@ -531,4 +564,20 @@ html[data-theme="light"] .is-customizing [data-dash].dragging:not(.widget) {
 }
 html[data-theme="light"] .dash-slot {
   background: #f4b2231a;
+}
+/* News: slideshow, list, reader (the slideshow text sits on the photo, so it stays white in both themes) */
+html[data-theme="light"] .news-slider,
+html[data-theme="light"] .news-reader {
+  border-color: var(--line);
+  box-shadow: 0 1px 2px #2a220f08;
+}
+html[data-theme="light"] .news-slide-copy strong,
+html[data-theme="light"] .news-reader h2 {
+  font-family: "Inter Tight", "Inter", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+html[data-theme="light"] .news-row.open {
+  border-color: var(--gold);
+  box-shadow: 0 8px 20px #2a220f10;
 }

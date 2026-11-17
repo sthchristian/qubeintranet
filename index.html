@@ -4,13 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>QualiPro · AI Knowledge Hub</title>
+    <!-- Browser-tab icon; swapped to match the light/dark theme (here and in js/app.js) -->
+    <link rel="icon" id="favicon" type="image/svg+xml" href="assets/brand/gold-cream-cube/qube-app-icon-dark-transparent.svg" />
     <!-- Apply the saved light/dark theme before the page paints (avoids a flash) -->
     <script>
       try {
         var t = localStorage.getItem("qp-theme");
         document.documentElement.dataset.theme =
           t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        /* sidebar shrunk to an icon rail on wider screens (js/app.js, "Sidebar") */
+        if (localStorage.getItem("qp-nav-collapsed") === "1") document.documentElement.classList.add("nav-collapsed");
       } catch (e) {}
+      document.getElementById("favicon").href =
+        "assets/brand/gold-cream-cube/qube-app-icon-" + document.documentElement.dataset.theme + "-transparent.svg";
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,13 +26,13 @@
     />
     <!-- ?v= makes the browser fetch a file again instead of using its cached copy.
          Raise the number on every css/ and js/ line here and below whenever one of those files changes. -->
-    <link rel="stylesheet" href="css/base.css?v=5" />
-    <link rel="stylesheet" href="css/mascot.css?v=5" />
-    <link rel="stylesheet" href="css/topbar.css?v=5" />
-    <link rel="stylesheet" href="css/tour.css?v=5" />
-    <link rel="stylesheet" href="css/features.css?v=5" />
-    <link rel="stylesheet" href="css/knowledge.css?v=6" />
-    <link rel="stylesheet" href="css/light.css?v=5" />
+    <link rel="stylesheet" href="css/base.css?v=10" />
+    <link rel="stylesheet" href="css/mascot.css?v=10" />
+    <link rel="stylesheet" href="css/topbar.css?v=10" />
+    <link rel="stylesheet" href="css/tour.css?v=10" />
+    <link rel="stylesheet" href="css/features.css?v=10" />
+    <link rel="stylesheet" href="css/knowledge.css?v=10" />
+    <link rel="stylesheet" href="css/light.css?v=10" />
   </head>
   <body>
     <!-- ===== Icon sprites (referenced with <use href="#i-...">) ===== -->
@@ -45,6 +51,33 @@
         <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
       </symbol>
       <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol>
+      <!-- Sidebar navigation (SVG, so phones never swap them for colour emoji) -->
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5" /><path d="M5.5 10v10h5v-6h3v6h5V10" /></symbol>
+      <symbol id="i-news" viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="16" rx="2" />
+        <path d="M7 8.5h10M7 12h10M7 15.5h6" />
+      </symbol>
+      <symbol id="i-headset" viewBox="0 0 24 24">
+        <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
+        <rect x="3" y="13.5" width="4" height="6" rx="1.5" />
+        <rect x="17" y="13.5" width="4" height="6" rx="1.5" />
+        <path d="M19 19.5a3 3 0 0 1-3 2.5h-2.5" />
+      </symbol>
+      <symbol id="i-board" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="18" height="18" rx="2.5" />
+        <path d="M8 7.5v7M12 7.5v4M16 7.5v9" />
+      </symbol>
+      <symbol id="i-doc" viewBox="0 0 24 24">
+        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+        <path d="M14 3v5h5M9 13h6M9 17h6" />
+      </symbol>
+      <symbol id="i-link" viewBox="0 0 24 24">
+        <path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1" />
+        <path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" />
+      </symbol>
+      <symbol id="i-ext" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" /></symbol>
+      <symbol id="i-chevs" viewBox="0 0 24 24"><path d="m11 17-5-5 5-5M18 17l-5-5 5-5" /></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /></symbol>
       <symbol id="i-user" viewBox="0 0 24 24">
         <circle cx="12" cy="8" r="4" />
         <path d="M4 21a8 8 0 0 1 16 0" />
@@ -107,30 +140,36 @@
     </svg>
     <div class="shell">
       <!-- ===== Sidebar navigation ===== -->
-      <aside class="rail">
+      <!-- On phones (<= 768px) this is a slide-out drawer opened from the top bar; on wider screens it can be hidden (js/app.js, "Sidebar") -->
+      <aside class="rail" id="side-nav" aria-label="Sidebar">
         <div class="brand">
-          <div class="brand-mark">Q</div>
-          <div class="brand-name">QualiPro<span>KNOWLEDGE HUB</span></div>
+          <img class="brand-logo brand-logo--light" src="assets/brand/gold-cream-cube/qube-logo-horizontal-light-transparent.svg" alt="Qube – The QualiPro Intranet" width="900" height="314" />
+          <img class="brand-logo brand-logo--dark" src="assets/brand/gold-cream-cube/qube-logo-horizontal-dark-transparent.svg" alt="Qube – The QualiPro Intranet" width="900" height="314" />
+          <button type="button" class="icon-btn nav-close" id="nav-close" aria-label="Close navigation">✕</button>
         </div>
+        <!-- Hide navigation: shrinks the sidebar to an icon rail on wider screens (js/app.js, "Sidebar") -->
+        <button type="button" class="nav-collapse" id="nav-collapse" aria-controls="side-nav" aria-expanded="true">
+          <span class="nav-icon"><svg class="ico"><use href="#i-chevs" /></svg></span><span class="label">Hide navigation</span>
+        </button>
         <div class="rail-label">Workspace</div>
         <nav class="nav" aria-label="Workspace navigation">
-          <button class="active" data-view-link="dashboard" aria-current="page">
-            <span class="nav-icon">⌂</span><span class="label">Dashboard</span>
+          <button class="active" data-view-link="dashboard" aria-current="page" title="Dashboard">
+            <span class="nav-icon"><svg class="ico"><use href="#i-home" /></svg></span><span class="label">Dashboard</span>
           </button>
-          <button data-view-link="news">
-            <span class="nav-icon">▤</span><span class="label">News & information</span>
+          <button data-view-link="news" title="News &amp; information">
+            <span class="nav-icon"><svg class="ico"><use href="#i-news" /></svg></span><span class="label">News & information</span>
           </button>
-          <button data-view-link="handbook">
-            <span class="nav-icon">▣</span><span class="label">Employee handbook</span>
+          <button data-view-link="handbook" title="Employee handbook">
+            <span class="nav-icon"><svg class="ico"><use href="#i-book" /></svg></span><span class="label">Employee handbook</span>
           </button>
-          <button data-view-link="knowledge">
+          <button data-view-link="knowledge" title="Knowledge Hub">
             <span class="nav-icon"><svg class="ico"><use href="#i-library" /></svg></span><span class="label">Knowledge Hub</span>
           </button>
-          <button data-view-link="it">
-            <span class="nav-icon">◉</span><span class="label">IT support</span>
+          <button data-view-link="it" title="IT support">
+            <span class="nav-icon"><svg class="ico"><use href="#i-headset" /></svg></span><span class="label">IT support</span>
           </button>
-          <button data-view-link="projects">
-            <span class="nav-icon">⌘</span><span class="label">Projects</span>
+          <button data-view-link="projects" title="Projects">
+            <span class="nav-icon"><svg class="ico"><use href="#i-flow" /></svg></span><span class="label">Projects</span>
           </button>
         </nav>
         <div class="rail-label rail-label-row">
@@ -140,11 +179,11 @@
         <nav class="nav quick-nav" id="quick-nav" aria-label="Quick links"></nav>
         <div class="rail-label">System</div>
         <nav class="nav">
-          <button data-view-link="settings">
-            <span class="nav-icon">⚙</span><span class="label">Settings</span>
+          <button data-view-link="settings" title="Settings">
+            <span class="nav-icon"><svg class="ico"><use href="#i-cog" /></svg></span><span class="label">Settings</span>
           </button>
           <!-- only shown for the HR and Manager roles (js/app.js, "Role") -->
-          <button data-view-link="admin" data-admin-only hidden>
+          <button data-view-link="admin" data-admin-only hidden title="Admin Panel">
             <span class="nav-icon"><svg class="ico"><use href="#i-shield" /></svg></span><span class="label">Admin Panel</span>
           </button>
         </nav>
@@ -152,6 +191,10 @@
       <main class="main">
         <!-- ===== Top bar: theme toggle, tour, notifications, profile ===== -->
         <header class="topbar">
+          <!-- Hamburger: opens the sidebar drawer on phones (hidden on wider screens) -->
+          <button type="button" class="icon-btn nav-btn nav-toggle" id="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="side-nav">
+            <svg class="ico"><use href="#i-menu" /></svg>
+          </button>
           <div class="crumb">Workspace&nbsp; / &nbsp;<b>Dashboard</b></div>
           <!-- Search field: opens the command palette (also Cmd/Ctrl + K) -->
           <button class="search-trigger" id="search-trigger" type="button" aria-label="Search and jump to (Cmd or Ctrl + K)">
@@ -390,25 +433,8 @@
               <h2>News & information</h2>
               <button data-view-link="news">View all ↗</button>
             </div>
-            <!-- articles published in the Admin Panel are added here by js/features.js (newest first) -->
-            <div class="news-list" id="news-home">
-              <article class="news-item">
-                <div class="news-ico">◈</div>
-                <div class="news-copy">
-                  <strong>Multi-factor authentication rollout</strong
-                  ><small>Register your security key by Jun 15.</small>
-                </div>
-                <time class="date" datetime="2026-06-08">Jun 8</time>
-              </article>
-              <article class="news-item">
-                <div class="news-ico">↗</div>
-                <div class="news-copy">
-                  <strong>QualiPro Core v4.2 is here</strong
-                  ><small>Release notes from Engineering.</small>
-                </div>
-                <time class="date" datetime="2026-06-05">Jun 5</time>
-              </article>
-            </div>
+            <!-- Slideshow of the newest articles, built by js/features.js ("News") from localStorage -->
+            <div class="news-slider" id="news-home" role="region" aria-roledescription="carousel" aria-label="Latest news"></div>
           </section>
           <!-- Calendar -->
           <section data-dash="calendar">
@@ -441,43 +467,10 @@
               <p>Company updates, newest first.</p>
             </div>
           </section>
-          <div class="news-list" id="news-all">
-            <article class="news-item">
-              <div class="news-ico">◈</div>
-              <div class="news-copy">
-                <strong>Multi-factor authentication rollout</strong><small>Register your security key by Jun 15.</small>
-              </div>
-              <time class="date" datetime="2026-06-08">Jun 8</time>
-            </article>
-            <article class="news-item">
-              <div class="news-ico">↗</div>
-              <div class="news-copy">
-                <strong>QualiPro Core v4.2 is here</strong><small>Release notes from Engineering.</small>
-              </div>
-              <time class="date" datetime="2026-06-05">Jun 5</time>
-            </article>
-            <article class="news-item">
-              <div class="news-ico">☀</div>
-              <div class="news-copy">
-                <strong>Office closed on Midsummer Eve</strong><small>Plan deliveries and support cover early.</small>
-              </div>
-              <time class="date" datetime="2026-06-03">Jun 3</time>
-            </article>
-            <article class="news-item">
-              <div class="news-ico">▣</div>
-              <div class="news-copy">
-                <strong>Updated parental leave guide</strong><small>Now in the Employee handbook.</small>
-              </div>
-              <time class="date" datetime="2026-05-28">May 28</time>
-            </article>
-            <article class="news-item">
-              <div class="news-ico">✳</div>
-              <div class="news-copy">
-                <strong>Welcome to our new consultants</strong><small>Six people joined in May.</small>
-              </div>
-              <time class="date" datetime="2026-05-22">May 22</time>
-            </article>
-          </div>
+          <!-- The article opened from the dashboard slideshow or the list below (js/features.js, "News") -->
+          <article class="news-reader" id="news-reader" aria-labelledby="news-reader-title" tabindex="-1" hidden></article>
+          <!-- every article, newest first (js/features.js, "News") -->
+          <div class="news-list" id="news-all"></div>
         </div>
         <!-- ===== VIEW: Employee handbook ===== -->
         <div class="view" data-view="handbook" hidden>
@@ -626,6 +619,27 @@
                   <label class="admin-field"><span>Category</span><select class="field" name="cat" id="admin-news-cat"></select></label>
                   <label class="admin-field"><span>Date</span><input class="field" name="date" type="date" required /></label>
                 </div>
+                <!-- Cover image: an uploaded file (resized + compressed in the browser) or a web address.
+                     Left empty, the category's default cover is used. -->
+                <div class="admin-field">
+                  <span id="admin-img-label">Cover image <i>optional</i></span>
+                  <div class="admin-image" role="group" aria-labelledby="admin-img-label">
+                    <div class="admin-image-preview" id="admin-img-preview">
+                      <img alt="Cover preview" />
+                      <span class="admin-image-tag" id="admin-img-tag">Default cover</span>
+                    </div>
+                    <div class="admin-image-inputs">
+                      <div class="admin-image-row">
+                        <label class="btn admin-upload">
+                          <input type="file" name="file" id="admin-img-file" accept="image/*" />Upload image
+                        </label>
+                        <button type="button" class="link-btn" id="admin-img-clear" hidden>Remove image</button>
+                      </div>
+                      <input class="field" name="img" id="admin-img-url" type="url" placeholder="…or paste an image address (https://…)" />
+                      <small class="admin-image-note" id="admin-img-note">JPG, PNG or WebP. Large photos are resized automatically.</small>
+                    </div>
+                  </div>
+                </div>
                 <div class="admin-foot"><button type="submit" class="btn primary">Publish article</button></div>
               </form>
               <div class="widget-sub">Published from this panel</div>
@@ -659,6 +673,8 @@
         </div>
       </main>
     </div>
+    <!-- ===== Backdrop behind the mobile navigation drawer (js/app.js, "Sidebar") ===== -->
+    <div class="nav-scrim" id="nav-scrim" aria-hidden="true"></div>
     <!-- ===== Toast + tour overlay elements (filled in by JS) ===== -->
     <div id="toast" class="toast" role="status"></div>
     <div id="tour-layer" class="tour-layer"></div>
@@ -732,15 +748,15 @@
         <button class="send" type="submit" aria-label="Send question">↑</button>
       </form>
     </aside>
-    <script src="js/app.js?v=5"></script>
-    <script src="js/calendar.js?v=5"></script>
-    <script src="js/robot.js?v=5"></script>
-    <script src="js/tour.js?v=5"></script>
-    <script src="js/features.js?v=6"></script>
-    <script src="js/knowledge.js?v=6"></script>
-    <script src="js/chat.js?v=5"></script>
+    <script src="js/app.js?v=10"></script>
+    <script src="js/calendar.js?v=10"></script>
+    <script src="js/robot.js?v=10"></script>
+    <script src="js/tour.js?v=10"></script>
+    <script src="js/features.js?v=10"></script>
+    <script src="js/knowledge.js?v=10"></script>
+    <script src="js/chat.js?v=10"></script>
     <!-- 3D mascot: <model-viewer> (local copy, no internet needed) + the animation code -->
     <script src="js/vendor/model-viewer-umd.min.js"></script>
-    <script src="js/mascot3d.js?v=5"></script>
+    <script src="js/mascot3d.js?v=10"></script>
   </body>
 </html>

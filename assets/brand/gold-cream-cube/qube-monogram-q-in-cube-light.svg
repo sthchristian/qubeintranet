@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.0 0.0 512.0 512.0" width="256" height="256" role="img" aria-label="Qube Q monogram">
+<title>Qube Q monogram</title>
+
+<rect x="1.5" y="1.5" width="509" height="509" rx="112" fill="#F6F2EA" stroke="#E2DACB" stroke-width="3"/><g transform="translate(256,256) scale(1.72)">
+<defs>
+  <linearGradient id="ml-edge" gradientUnits="userSpaceOnUse" x1="-95" y1="-70" x2="95" y2="70"><stop offset="0" stop-color="#111214"/><stop offset="0.36" stop-color="#111214"/><stop offset="0.6" stop-color="#FFB817"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="ml-inner" gradientUnits="userSpaceOnUse" x1="0" y1="-60" x2="0" y2="100"><stop offset="0" stop-color="#F6F2EA"/><stop offset="0.5" stop-color="#FFF0C9"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="ml-top" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="87" y2="-50">
+    <stop offset="0" stop-color="#111214" stop-opacity="0.17639999999999997"/><stop offset="0.5" stop-color="#FFF0C9" stop-opacity="0.54"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.47"/>
+  </linearGradient>
+  <linearGradient id="ml-left" gradientUnits="userSpaceOnUse" x1="-80" y1="-50" x2="0" y2="100">
+    <stop offset="0" stop-color="#111214" stop-opacity="0.1848"/><stop offset="0.55" stop-color="#111214" stop-opacity="0.1512"/><stop offset="1" stop-color="#111214" stop-opacity="0.08316"/>
+  </linearGradient>
+  <linearGradient id="ml-right" gradientUnits="userSpaceOnUse" x1="10" y1="-20" x2="87" y2="90">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.385"/><stop offset="0.45" stop-color="#FFB817" stop-opacity="0.55"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.7000000000000001"/>
+  </linearGradient>
+  <radialGradient id="ml-core" gradientUnits="userSpaceOnUse" cx="6" cy="8" r="62">
+    <stop offset="0" stop-color="#F6F2EA" stop-opacity="0.6"/><stop offset="0.35" stop-color="#FFF0C9" stop-opacity="0.42"/><stop offset="0.7" stop-color="#FFF0C9" stop-opacity="0.108"/><stop offset="1" stop-color="#FFF0C9" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="ml-halo" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="135">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.3"/><stop offset="0.45" stop-color="#FFF0C9" stop-opacity="0.135"/><stop offset="1" stop-color="#FFF0C9" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="ml-haloGold" gradientUnits="userSpaceOnUse" cx="48" cy="22" r="105">
+    <stop offset="0" stop-color="#FFB817" stop-opacity="0.24"/><stop offset="0.55" stop-color="#FFB817" stop-opacity="0.09"/><stop offset="1" stop-color="#FFB817" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="ml-sheen" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="-20" y2="40">
+    <stop offset="0" stop-color="#F6F2EA" stop-opacity="0.55"/><stop offset="1" stop-color="#F6F2EA" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="ml-glow" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="wide"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="tight"/>
+    <feMerge><feMergeNode in="wide"/><feMergeNode in="wide"/><feMergeNode in="tight"/></feMerge>
+  </filter>
+  <filter id="ml-soft" x="-50%" y="-400%" width="200%" height="900%">
+    <feGaussianBlur stdDeviation="14"/>
+  </filter>
+</defs>
+<g>
+  <ellipse cx="0" cy="118" rx="80" ry="10" fill="#111214" opacity="0.10" filter="url(#ml-soft)"/>
+  <!-- ambient glow behind the glass -->
+  <circle cx="0" cy="0" r="135" fill="url(#ml-halo)"/>
+  <circle cx="48" cy="22" r="105" fill="url(#ml-haloGold)"/>
+  <!-- see-through glass faces -->
+  <polygon points="0.00,-100.00 86.60,-50.00 0.00,0.00 -86.60,-50.00" fill="url(#ml-top)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#ml-left)"/>
+  <polygon points="0.00,0.00 86.60,-50.00 86.60,50.00 0.00,100.00" fill="url(#ml-right)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#ml-sheen)"/>
+  <!-- light trapped inside -->
+  <circle cx="6" cy="8" r="62" fill="url(#ml-core)"/>
+  <!-- hidden (back) edges, visible through the glass -->
+  <path d="M0.00,-100.00 L0.00,0.00 M-86.60,50.00 L0.00,0.00 L86.60,50.00" fill="none" stroke="url(#ml-edge)" stroke-width="1.6" stroke-opacity="0.45" stroke-linecap="round"/>
+  <!-- glow pass -->
+  <g filter="url(#ml-glow)" opacity="0.45" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#ml-edge)" stroke-width="5"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#ml-edge)" stroke-width="3.5"/>
+  </g>
+  <!-- crisp edges -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#ml-edge)" stroke-width="3.6"/>
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="#F6F2EA" stroke-opacity="0.35" stroke-width="1"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#ml-edge)" stroke-width="2.8"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#ml-inner)" stroke-opacity="0.55" stroke-width="1.1"/>
+  </g>
+</g></g><g transform="translate(187.26,186.73) scale(0.78)"><g transform="translate(-2941.7,-3608.4)"><path d="M2980.3,3745.51c12.045,32.896 42.699,56.076 72.875,43.434c0.55,-0.231 1.187,-0.038 1.504,0.467l3.316,5.275l1.243,1.917c0.446,0.688 0.1,1.614 -0.689,1.839c-8.178,2.327 -17.42,2.979 -25.247,2.959c-30.391,-0.077 -63.248,-18.643 -78.824,-47.095c-9.556,-17.454 -13.859,-37.026 -12.596,-57.117c1.35,-17.684 7.04,-34.718 17.194,-49.17c16.743,-23.827 38.948,-36.958 66.131,-39.519c0.726,-0.068 1.355,0.508 1.359,1.238l0.225,6.748c0.021,0.626 -0.437,1.16 -1.057,1.248c-7.535,1.066 -13.174,3.527 -19.481,8.093c-18.359,13.29 -27.769,33.692 -31.878,54.859c-4.213,21.705 -1.668,44.088 5.925,64.824" fill="#111214"/><path d="M3088.05,3751.69c-0.217,-0.333 -0.259,-0.747 -0.113,-1.116c2.727,-6.864 5.779,-16.407 7.314,-28.081c2.645,-20.117 -0.645,-35.656 -1.496,-39.421c-6.781,-30.012 -20.306,-49.848 -40.463,-60.524c-5.227,-2.769 -9.722,-4.329 -15.479,-4.942c-0.613,-0.065 -1.076,-0.585 -1.08,-1.201l-0.053,-6.845c-0.004,-0.674 0.539,-1.231 1.214,-1.23c14.418,0.009 26.403,3.677 39.197,10.554c32.205,17.311 52.519,52.614 51.029,88.466c-0.565,13.615 -1.875,20.164 -5.656,31.39c-3.393,10.078 -11.987,24.995 -19.57,32.579c-0.532,0.532 -1.41,0.47 -1.85,-0.14c-1.306,-1.81 -3.707,-5.156 -3.63,-5.183l-9.364,-14.306Z" fill="#FFB817"/><path d="M3131.67,3818.31c0.15,0.532 -1.947,1.912 -5.347,3.09c-1.863,0.646 -10.65,3.528 -23.039,0.281c-2.517,-0.66 -4.341,-1.352 -7.571,-2.577c-5.267,-1.998 -9.475,-4.024 -12.356,-5.516c-6.566,-9.606 -13.132,-19.213 -19.698,-28.82c-0.369,-0.541 -0.247,-1.275 0.278,-1.665c3.166,-2.353 7.137,-5.08 10.408,-9.079c3.411,-4.169 5.353,-6.72 7.505,-10.132c0.463,-0.734 1.525,-0.758 2.026,-0.05c9.636,13.605 15.554,23.259 25.475,37.168l8.457,12.671c0.833,1.047 2.116,2.361 3.985,3.289c4.675,2.319 9.653,0.551 9.877,1.34" fill="#FFB817"/><path d="M3008.41,3719.53c-0.151,-0.531 1.946,-1.911 5.346,-3.089c1.864,-0.646 10.65,-3.528 23.039,-0.281c2.518,0.659 4.341,1.351 7.572,2.577c5.115,1.94 9.231,3.907 12.102,5.384c0.169,0.087 0.309,0.213 0.416,0.369c6.394,9.356 12.789,18.713 19.184,28.069c0.221,0.323 0.296,0.751 0.106,1.093c-1.598,2.891 -6.6,9.919 -9.399,12.73c-3.427,3.443 -6.93,5.873 -9.69,7.205c-0.505,0.243 -1.111,0.077 -1.428,-0.386c-3.879,-5.677 -7.763,-11.352 -11.651,-17.025c-4.422,-6.453 -8.849,-12.901 -13.279,-19.345l-8.426,-12.626c-0.02,-0.03 -0.041,-0.059 -0.064,-0.087c-0.833,-1.04 -2.107,-2.332 -3.952,-3.247c-4.674,-2.32 -9.653,-0.552 -9.876,-1.341" fill="#FFB817"/></g></g>
+</svg>

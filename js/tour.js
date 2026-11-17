@@ -49,9 +49,9 @@ const tour = (function () {
       text: "Switch between light and dark mode whenever you like (or press D). We’ll remember your choice.",
     },
     {
-      target: ".news-list",
+      target: "#news-home",
       title: "Stay in the loop",
-      text: "Important company updates show up here, newest first.",
+      text: "The newest company updates, as a slideshow. Click one to read it.",
     },
     {
       target: "#cal",

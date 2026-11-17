@@ -1,0 +1,554 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.0 0.0 3000.0 2642.2" width="1500" height="1321" role="img" aria-label="Qube brand samples">
+<title>Qube brand samples</title>
+
+<rect x="0" y="0" width="3000" height="2642.1587141028767" fill="#F6F2EA"/><text x="120.00 163.12 204.00 242.68 281.36 304.48 327.60 350.72 389.40 430.28 468.96 509.84 550.72 573.84 612.52 651.20 696.52 735.20 769.44 808.12" y="150.00" font-family="Arial-BoldMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="700" font-size="40.00" fill="#111214" xml:space="preserve">QUBE · BRAND SAMPLES</text><text x="120.00 141.45 161.04 180.62 190.75 217.89 237.47 257.05 265.28 273.51 296.87 308.87 328.45 338.59 348.72 368.30 378.43 390.44 410.02 429.60 449.19 459.32 469.45 504.13 514.26 522.49 542.08 561.66 581.24 591.38 601.51 626.74 646.32 658.32 677.91 706.91 726.49 738.49 756.17 766.31 776.44 794.12 813.70 833.29 852.87 863.00 886.36 896.49 904.72 922.40 941.98 961.57" y="210.00" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="34.00" fill="#515151" xml:space="preserve">The QualiPro Intranet — logo, wordmark, cube &amp; icons</text><rect x="120" y="245" width="220" height="6" rx="3" fill="#FFB817"/><svg x="120" y="320" width="1340" height="467.0" viewBox="-228.6 -90.0 1336.1 465.6"><title>Qube – The QualiPro Intranet</title>
+<rect x="-228.5640646055102" y="-90" width="1336.0501292110205" height="465.57111115319066" fill="#F6F2EA"/>
+<g transform="translate(0,142.79) scale(1.6)">
+<defs>
+  <linearGradient id="Xhl-edge" gradientUnits="userSpaceOnUse" x1="-95" y1="-70" x2="95" y2="70"><stop offset="0" stop-color="#22B8B6"/><stop offset="0.3" stop-color="#22B8B6"/><stop offset="0.52" stop-color="#9FD9B8"/><stop offset="0.7" stop-color="#FFB817"/><stop offset="1" stop-color="#F5A800"/></linearGradient>
+  <linearGradient id="Xhl-inner" gradientUnits="userSpaceOnUse" x1="0" y1="-60" x2="0" y2="100"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.5" stop-color="#FFF0C9"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="Xhl-top" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="87" y2="-50">
+    <stop offset="0" stop-color="#22B8B6" stop-opacity="0.42"/><stop offset="0.5" stop-color="#FFF0C9" stop-opacity="0.54"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.47"/>
+  </linearGradient>
+  <linearGradient id="Xhl-left" gradientUnits="userSpaceOnUse" x1="-80" y1="-50" x2="0" y2="100">
+    <stop offset="0" stop-color="#22B8B6" stop-opacity="0.44"/><stop offset="0.55" stop-color="#22B8B6" stop-opacity="0.36"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0.198"/>
+  </linearGradient>
+  <linearGradient id="Xhl-right" gradientUnits="userSpaceOnUse" x1="10" y1="-20" x2="87" y2="90">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.385"/><stop offset="0.45" stop-color="#FFB817" stop-opacity="0.55"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.7000000000000001"/>
+  </linearGradient>
+  <radialGradient id="Xhl-core" gradientUnits="userSpaceOnUse" cx="6" cy="8" r="62">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.6"/><stop offset="0.35" stop-color="#FFF0C9" stop-opacity="0.42"/><stop offset="0.7" stop-color="#22B8B6" stop-opacity="0.108"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="Xhl-halo" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="135">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.3"/><stop offset="0.45" stop-color="#22B8B6" stop-opacity="0.135"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="Xhl-haloGold" gradientUnits="userSpaceOnUse" cx="48" cy="22" r="105">
+    <stop offset="0" stop-color="#FFB817" stop-opacity="0.24"/><stop offset="0.55" stop-color="#FFB817" stop-opacity="0.09"/><stop offset="1" stop-color="#FFB817" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="Xhl-sheen" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="-20" y2="40">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="Xhl-glow" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="wide"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="tight"/>
+    <feMerge><feMergeNode in="wide"/><feMergeNode in="wide"/><feMergeNode in="tight"/></feMerge>
+  </filter>
+  <filter id="Xhl-soft" x="-50%" y="-400%" width="200%" height="900%">
+    <feGaussianBlur stdDeviation="14"/>
+  </filter>
+</defs>
+<g>
+  <ellipse cx="0" cy="118" rx="80" ry="10" fill="#111214" opacity="0.10" filter="url(#Xhl-soft)"/>
+  <!-- ambient glow behind the glass -->
+  <circle cx="0" cy="0" r="135" fill="url(#Xhl-halo)"/>
+  <circle cx="48" cy="22" r="105" fill="url(#Xhl-haloGold)"/>
+  <!-- see-through glass faces -->
+  <polygon points="0.00,-100.00 86.60,-50.00 0.00,0.00 -86.60,-50.00" fill="url(#Xhl-top)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#Xhl-left)"/>
+  <polygon points="0.00,0.00 86.60,-50.00 86.60,50.00 0.00,100.00" fill="url(#Xhl-right)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#Xhl-sheen)"/>
+  <!-- light trapped inside -->
+  <circle cx="6" cy="8" r="62" fill="url(#Xhl-core)"/>
+  <!-- hidden (back) edges, visible through the glass -->
+  <path d="M0.00,-100.00 L0.00,0.00 M-86.60,50.00 L0.00,0.00 L86.60,50.00" fill="none" stroke="url(#Xhl-edge)" stroke-width="1.6" stroke-opacity="0.45" stroke-linecap="round"/>
+  <!-- glow pass -->
+  <g filter="url(#Xhl-glow)" opacity="0.65" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#Xhl-edge)" stroke-width="5"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#Xhl-edge)" stroke-width="3.5"/>
+  </g>
+  <!-- crisp edges -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#Xhl-edge)" stroke-width="3.6"/>
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#Xhl-edge)" stroke-width="2.8"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#Xhl-inner)" stroke-opacity="0.55" stroke-width="1.1"/>
+  </g>
+</g></g><g transform="translate(233.56,0)"><g transform="translate(-2941.7,-3608.4)"><path d="M2980.3,3745.51c12.045,32.896 42.699,56.076 72.875,43.434c0.55,-0.231 1.187,-0.038 1.504,0.467l3.316,5.275l1.243,1.917c0.446,0.688 0.1,1.614 -0.689,1.839c-8.178,2.327 -17.42,2.979 -25.247,2.959c-30.391,-0.077 -63.248,-18.643 -78.824,-47.095c-9.556,-17.454 -13.859,-37.026 -12.596,-57.117c1.35,-17.684 7.04,-34.718 17.194,-49.17c16.743,-23.827 38.948,-36.958 66.131,-39.519c0.726,-0.068 1.355,0.508 1.359,1.238l0.225,6.748c0.021,0.626 -0.437,1.16 -1.057,1.248c-7.535,1.066 -13.174,3.527 -19.481,8.093c-18.359,13.29 -27.769,33.692 -31.878,54.859c-4.213,21.705 -1.668,44.088 5.925,64.824" fill="#111214"/><path d="M3088.05,3751.69c-0.217,-0.333 -0.259,-0.747 -0.113,-1.116c2.727,-6.864 5.779,-16.407 7.314,-28.081c2.645,-20.117 -0.645,-35.656 -1.496,-39.421c-6.781,-30.012 -20.306,-49.848 -40.463,-60.524c-5.227,-2.769 -9.722,-4.329 -15.479,-4.942c-0.613,-0.065 -1.076,-0.585 -1.08,-1.201l-0.053,-6.845c-0.004,-0.674 0.539,-1.231 1.214,-1.23c14.418,0.009 26.403,3.677 39.197,10.554c32.205,17.311 52.519,52.614 51.029,88.466c-0.565,13.615 -1.875,20.164 -5.656,31.39c-3.393,10.078 -11.987,24.995 -19.57,32.579c-0.532,0.532 -1.41,0.47 -1.85,-0.14c-1.306,-1.81 -3.707,-5.156 -3.63,-5.183l-9.364,-14.306Z" fill="#FFB817"/><path d="M3131.67,3818.31c0.15,0.532 -1.947,1.912 -5.347,3.09c-1.863,0.646 -10.65,3.528 -23.039,0.281c-2.517,-0.66 -4.341,-1.352 -7.571,-2.577c-5.267,-1.998 -9.475,-4.024 -12.356,-5.516c-6.566,-9.606 -13.132,-19.213 -19.698,-28.82c-0.369,-0.541 -0.247,-1.275 0.278,-1.665c3.166,-2.353 7.137,-5.08 10.408,-9.079c3.411,-4.169 5.353,-6.72 7.505,-10.132c0.463,-0.734 1.525,-0.758 2.026,-0.05c9.636,13.605 15.554,23.259 25.475,37.168l8.457,12.671c0.833,1.047 2.116,2.361 3.985,3.289c4.675,2.319 9.653,0.551 9.877,1.34" fill="#FFB817"/><path d="M3008.41,3719.53c-0.151,-0.531 1.946,-1.911 5.346,-3.089c1.864,-0.646 10.65,-3.528 23.039,-0.281c2.518,0.659 4.341,1.351 7.572,2.577c5.115,1.94 9.231,3.907 12.102,5.384c0.169,0.087 0.309,0.213 0.416,0.369c6.394,9.356 12.789,18.713 19.184,28.069c0.221,0.323 0.296,0.751 0.106,1.093c-1.598,2.891 -6.6,9.919 -9.399,12.73c-3.427,3.443 -6.93,5.873 -9.69,7.205c-0.505,0.243 -1.111,0.077 -1.428,-0.386c-3.879,-5.677 -7.763,-11.352 -11.651,-17.025c-4.422,-6.453 -8.849,-12.901 -13.279,-19.345l-8.426,-12.626c-0.02,-0.03 -0.041,-0.059 -0.064,-0.087c-0.833,-1.04 -2.107,-2.332 -3.952,-3.247c-4.674,-2.32 -9.653,-0.552 -9.876,-1.341" fill="#FFB817"/></g><text x="212.50 427.86 628.82" y="190.00" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="262.00" fill="#111214" xml:space="preserve">UBE</text><rect x="0" y="228.00" width="783.92" height="5.0" rx="2.5" fill="#FFB817"/><text x="0.00 38.26 80.64 120.98 146.88 191.34 233.72 274.06 310.28 336.18 376.52 418.90 463.36 489.26 515.17 557.55 595.81 638.19 678.53 720.91 761.25" y="285.57" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="37.11" fill="#111214" xml:space="preserve">THE QUALIPRO INTRANET</text></g>
+</svg><svg x="1540" y="320" width="1340" height="467.0" viewBox="-228.6 -90.0 1336.1 465.6"><title>Qube – The QualiPro Intranet</title>
+<rect x="-228.5640646055102" y="-90" width="1336.0501292110205" height="465.57111115319066" fill="#111214"/>
+<g transform="translate(0,142.79) scale(1.6)">
+<defs>
+  <linearGradient id="Xhd-edge" gradientUnits="userSpaceOnUse" x1="-95" y1="-70" x2="95" y2="70"><stop offset="0" stop-color="#8FFFE0"/><stop offset="0.28" stop-color="#22B8B6"/><stop offset="0.5" stop-color="#FFF0C9"/><stop offset="0.7" stop-color="#FFB817"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="Xhd-inner" gradientUnits="userSpaceOnUse" x1="0" y1="-60" x2="0" y2="100"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.45" stop-color="#FFF0C9"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="Xhd-top" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="87" y2="-50">
+    <stop offset="0" stop-color="#8FFFE0" stop-opacity="0.3"/><stop offset="0.5" stop-color="#FFF0C9" stop-opacity="0.42"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.35"/>
+  </linearGradient>
+  <linearGradient id="Xhd-left" gradientUnits="userSpaceOnUse" x1="-80" y1="-50" x2="0" y2="100">
+    <stop offset="0" stop-color="#8FFFE0" stop-opacity="0.34"/><stop offset="0.55" stop-color="#22B8B6" stop-opacity="0.26"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0.14300000000000002"/>
+  </linearGradient>
+  <linearGradient id="Xhd-right" gradientUnits="userSpaceOnUse" x1="10" y1="-20" x2="87" y2="90">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.294"/><stop offset="0.45" stop-color="#FFB817" stop-opacity="0.42"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.57"/>
+  </linearGradient>
+  <radialGradient id="Xhd-core" gradientUnits="userSpaceOnUse" cx="6" cy="8" r="62">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/><stop offset="0.35" stop-color="#FFF0C9" stop-opacity="0.385"/><stop offset="0.7" stop-color="#22B8B6" stop-opacity="0.099"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="Xhd-halo" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="135">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.4"/><stop offset="0.45" stop-color="#22B8B6" stop-opacity="0.18000000000000002"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="Xhd-haloGold" gradientUnits="userSpaceOnUse" cx="48" cy="22" r="105">
+    <stop offset="0" stop-color="#FFB817" stop-opacity="0.32000000000000006"/><stop offset="0.55" stop-color="#FFB817" stop-opacity="0.12"/><stop offset="1" stop-color="#FFB817" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="Xhd-sheen" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="-20" y2="40">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.35"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="Xhd-glow" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="wide"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="tight"/>
+    <feMerge><feMergeNode in="wide"/><feMergeNode in="wide"/><feMergeNode in="tight"/></feMerge>
+  </filter>
+  <filter id="Xhd-soft" x="-50%" y="-400%" width="200%" height="900%">
+    <feGaussianBlur stdDeviation="14"/>
+  </filter>
+</defs>
+<g>
+  
+  <!-- ambient glow behind the glass -->
+  <circle cx="0" cy="0" r="135" fill="url(#Xhd-halo)"/>
+  <circle cx="48" cy="22" r="105" fill="url(#Xhd-haloGold)"/>
+  <!-- see-through glass faces -->
+  <polygon points="0.00,-100.00 86.60,-50.00 0.00,0.00 -86.60,-50.00" fill="url(#Xhd-top)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#Xhd-left)"/>
+  <polygon points="0.00,0.00 86.60,-50.00 86.60,50.00 0.00,100.00" fill="url(#Xhd-right)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#Xhd-sheen)"/>
+  <!-- light trapped inside -->
+  <circle cx="6" cy="8" r="62" fill="url(#Xhd-core)"/>
+  <!-- hidden (back) edges, visible through the glass -->
+  <path d="M0.00,-100.00 L0.00,0.00 M-86.60,50.00 L0.00,0.00 L86.60,50.00" fill="none" stroke="url(#Xhd-edge)" stroke-width="1.6" stroke-opacity="0.38" stroke-linecap="round"/>
+  <!-- glow pass -->
+  <g filter="url(#Xhd-glow)" opacity="0.95" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#Xhd-edge)" stroke-width="5"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#Xhd-edge)" stroke-width="3.5"/>
+  </g>
+  <!-- crisp edges -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#Xhd-edge)" stroke-width="3.6"/>
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="1"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#Xhd-edge)" stroke-width="2.8"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#Xhd-inner)" stroke-opacity="0.75" stroke-width="1.1"/>
+  </g>
+</g></g><g transform="translate(233.56,0)"><g transform="translate(-2941.7,-3608.4)"><path d="M2980.3,3745.51c12.045,32.896 42.699,56.076 72.875,43.434c0.55,-0.231 1.187,-0.038 1.504,0.467l3.316,5.275l1.243,1.917c0.446,0.688 0.1,1.614 -0.689,1.839c-8.178,2.327 -17.42,2.979 -25.247,2.959c-30.391,-0.077 -63.248,-18.643 -78.824,-47.095c-9.556,-17.454 -13.859,-37.026 -12.596,-57.117c1.35,-17.684 7.04,-34.718 17.194,-49.17c16.743,-23.827 38.948,-36.958 66.131,-39.519c0.726,-0.068 1.355,0.508 1.359,1.238l0.225,6.748c0.021,0.626 -0.437,1.16 -1.057,1.248c-7.535,1.066 -13.174,3.527 -19.481,8.093c-18.359,13.29 -27.769,33.692 -31.878,54.859c-4.213,21.705 -1.668,44.088 5.925,64.824" fill="#F6F2EA"/><path d="M3088.05,3751.69c-0.217,-0.333 -0.259,-0.747 -0.113,-1.116c2.727,-6.864 5.779,-16.407 7.314,-28.081c2.645,-20.117 -0.645,-35.656 -1.496,-39.421c-6.781,-30.012 -20.306,-49.848 -40.463,-60.524c-5.227,-2.769 -9.722,-4.329 -15.479,-4.942c-0.613,-0.065 -1.076,-0.585 -1.08,-1.201l-0.053,-6.845c-0.004,-0.674 0.539,-1.231 1.214,-1.23c14.418,0.009 26.403,3.677 39.197,10.554c32.205,17.311 52.519,52.614 51.029,88.466c-0.565,13.615 -1.875,20.164 -5.656,31.39c-3.393,10.078 -11.987,24.995 -19.57,32.579c-0.532,0.532 -1.41,0.47 -1.85,-0.14c-1.306,-1.81 -3.707,-5.156 -3.63,-5.183l-9.364,-14.306Z" fill="#FFB817"/><path d="M3131.67,3818.31c0.15,0.532 -1.947,1.912 -5.347,3.09c-1.863,0.646 -10.65,3.528 -23.039,0.281c-2.517,-0.66 -4.341,-1.352 -7.571,-2.577c-5.267,-1.998 -9.475,-4.024 -12.356,-5.516c-6.566,-9.606 -13.132,-19.213 -19.698,-28.82c-0.369,-0.541 -0.247,-1.275 0.278,-1.665c3.166,-2.353 7.137,-5.08 10.408,-9.079c3.411,-4.169 5.353,-6.72 7.505,-10.132c0.463,-0.734 1.525,-0.758 2.026,-0.05c9.636,13.605 15.554,23.259 25.475,37.168l8.457,12.671c0.833,1.047 2.116,2.361 3.985,3.289c4.675,2.319 9.653,0.551 9.877,1.34" fill="#FFB817"/><path d="M3008.41,3719.53c-0.151,-0.531 1.946,-1.911 5.346,-3.089c1.864,-0.646 10.65,-3.528 23.039,-0.281c2.518,0.659 4.341,1.351 7.572,2.577c5.115,1.94 9.231,3.907 12.102,5.384c0.169,0.087 0.309,0.213 0.416,0.369c6.394,9.356 12.789,18.713 19.184,28.069c0.221,0.323 0.296,0.751 0.106,1.093c-1.598,2.891 -6.6,9.919 -9.399,12.73c-3.427,3.443 -6.93,5.873 -9.69,7.205c-0.505,0.243 -1.111,0.077 -1.428,-0.386c-3.879,-5.677 -7.763,-11.352 -11.651,-17.025c-4.422,-6.453 -8.849,-12.901 -13.279,-19.345l-8.426,-12.626c-0.02,-0.03 -0.041,-0.059 -0.064,-0.087c-0.833,-1.04 -2.107,-2.332 -3.952,-3.247c-4.674,-2.32 -9.653,-0.552 -9.876,-1.341" fill="#FFB817"/></g><text x="212.50 427.86 628.82" y="190.00" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="262.00" fill="#F6F2EA" xml:space="preserve">UBE</text><rect x="0" y="228.00" width="783.92" height="5.0" rx="2.5" fill="#FFB817"/><text x="0.00 38.26 80.64 120.98 146.88 191.34 233.72 274.06 310.28 336.18 376.52 418.90 463.36 489.26 515.17 557.55 595.81 638.19 678.53 720.91 761.25" y="285.57" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="37.11" fill="#FFF0C9" xml:space="preserve">THE QUALIPRO INTRANET</text></g>
+</svg><svg x="120" y="856.9590599506025" width="640" height="653.8" viewBox="-110.0 -630.0 1003.9 1025.6"><title>Qube – The QualiPro Intranet</title>
+<rect x="-110" y="-630.0" width="1003.922" height="1025.5711111531907" fill="#F6F2EA"/>
+<g transform="translate(391.96,-320.00) scale(2.0)">
+<defs>
+  <linearGradient id="sl-edge" gradientUnits="userSpaceOnUse" x1="-95" y1="-70" x2="95" y2="70"><stop offset="0" stop-color="#22B8B6"/><stop offset="0.3" stop-color="#22B8B6"/><stop offset="0.52" stop-color="#9FD9B8"/><stop offset="0.7" stop-color="#FFB817"/><stop offset="1" stop-color="#F5A800"/></linearGradient>
+  <linearGradient id="sl-inner" gradientUnits="userSpaceOnUse" x1="0" y1="-60" x2="0" y2="100"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.5" stop-color="#FFF0C9"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="sl-top" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="87" y2="-50">
+    <stop offset="0" stop-color="#22B8B6" stop-opacity="0.42"/><stop offset="0.5" stop-color="#FFF0C9" stop-opacity="0.54"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.47"/>
+  </linearGradient>
+  <linearGradient id="sl-left" gradientUnits="userSpaceOnUse" x1="-80" y1="-50" x2="0" y2="100">
+    <stop offset="0" stop-color="#22B8B6" stop-opacity="0.44"/><stop offset="0.55" stop-color="#22B8B6" stop-opacity="0.36"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0.198"/>
+  </linearGradient>
+  <linearGradient id="sl-right" gradientUnits="userSpaceOnUse" x1="10" y1="-20" x2="87" y2="90">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.385"/><stop offset="0.45" stop-color="#FFB817" stop-opacity="0.55"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.7000000000000001"/>
+  </linearGradient>
+  <radialGradient id="sl-core" gradientUnits="userSpaceOnUse" cx="6" cy="8" r="62">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.6"/><stop offset="0.35" stop-color="#FFF0C9" stop-opacity="0.42"/><stop offset="0.7" stop-color="#22B8B6" stop-opacity="0.108"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="sl-halo" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="135">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.3"/><stop offset="0.45" stop-color="#22B8B6" stop-opacity="0.135"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="sl-haloGold" gradientUnits="userSpaceOnUse" cx="48" cy="22" r="105">
+    <stop offset="0" stop-color="#FFB817" stop-opacity="0.24"/><stop offset="0.55" stop-color="#FFB817" stop-opacity="0.09"/><stop offset="1" stop-color="#FFB817" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="sl-sheen" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="-20" y2="40">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="sl-glow" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="wide"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="tight"/>
+    <feMerge><feMergeNode in="wide"/><feMergeNode in="wide"/><feMergeNode in="tight"/></feMerge>
+  </filter>
+  <filter id="sl-soft" x="-50%" y="-400%" width="200%" height="900%">
+    <feGaussianBlur stdDeviation="14"/>
+  </filter>
+</defs>
+<g>
+  <ellipse cx="0" cy="118" rx="80" ry="10" fill="#111214" opacity="0.10" filter="url(#sl-soft)"/>
+  <!-- ambient glow behind the glass -->
+  <circle cx="0" cy="0" r="135" fill="url(#sl-halo)"/>
+  <circle cx="48" cy="22" r="105" fill="url(#sl-haloGold)"/>
+  <!-- see-through glass faces -->
+  <polygon points="0.00,-100.00 86.60,-50.00 0.00,0.00 -86.60,-50.00" fill="url(#sl-top)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#sl-left)"/>
+  <polygon points="0.00,0.00 86.60,-50.00 86.60,50.00 0.00,100.00" fill="url(#sl-right)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#sl-sheen)"/>
+  <!-- light trapped inside -->
+  <circle cx="6" cy="8" r="62" fill="url(#sl-core)"/>
+  <!-- hidden (back) edges, visible through the glass -->
+  <path d="M0.00,-100.00 L0.00,0.00 M-86.60,50.00 L0.00,0.00 L86.60,50.00" fill="none" stroke="url(#sl-edge)" stroke-width="1.6" stroke-opacity="0.45" stroke-linecap="round"/>
+  <!-- glow pass -->
+  <g filter="url(#sl-glow)" opacity="0.65" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#sl-edge)" stroke-width="5"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#sl-edge)" stroke-width="3.5"/>
+  </g>
+  <!-- crisp edges -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#sl-edge)" stroke-width="3.6"/>
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#sl-edge)" stroke-width="2.8"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#sl-inner)" stroke-opacity="0.55" stroke-width="1.1"/>
+  </g>
+</g></g><g transform="translate(-2941.7,-3608.4)"><path d="M2980.3,3745.51c12.045,32.896 42.699,56.076 72.875,43.434c0.55,-0.231 1.187,-0.038 1.504,0.467l3.316,5.275l1.243,1.917c0.446,0.688 0.1,1.614 -0.689,1.839c-8.178,2.327 -17.42,2.979 -25.247,2.959c-30.391,-0.077 -63.248,-18.643 -78.824,-47.095c-9.556,-17.454 -13.859,-37.026 -12.596,-57.117c1.35,-17.684 7.04,-34.718 17.194,-49.17c16.743,-23.827 38.948,-36.958 66.131,-39.519c0.726,-0.068 1.355,0.508 1.359,1.238l0.225,6.748c0.021,0.626 -0.437,1.16 -1.057,1.248c-7.535,1.066 -13.174,3.527 -19.481,8.093c-18.359,13.29 -27.769,33.692 -31.878,54.859c-4.213,21.705 -1.668,44.088 5.925,64.824" fill="#111214"/><path d="M3088.05,3751.69c-0.217,-0.333 -0.259,-0.747 -0.113,-1.116c2.727,-6.864 5.779,-16.407 7.314,-28.081c2.645,-20.117 -0.645,-35.656 -1.496,-39.421c-6.781,-30.012 -20.306,-49.848 -40.463,-60.524c-5.227,-2.769 -9.722,-4.329 -15.479,-4.942c-0.613,-0.065 -1.076,-0.585 -1.08,-1.201l-0.053,-6.845c-0.004,-0.674 0.539,-1.231 1.214,-1.23c14.418,0.009 26.403,3.677 39.197,10.554c32.205,17.311 52.519,52.614 51.029,88.466c-0.565,13.615 -1.875,20.164 -5.656,31.39c-3.393,10.078 -11.987,24.995 -19.57,32.579c-0.532,0.532 -1.41,0.47 -1.85,-0.14c-1.306,-1.81 -3.707,-5.156 -3.63,-5.183l-9.364,-14.306Z" fill="#FFB817"/><path d="M3131.67,3818.31c0.15,0.532 -1.947,1.912 -5.347,3.09c-1.863,0.646 -10.65,3.528 -23.039,0.281c-2.517,-0.66 -4.341,-1.352 -7.571,-2.577c-5.267,-1.998 -9.475,-4.024 -12.356,-5.516c-6.566,-9.606 -13.132,-19.213 -19.698,-28.82c-0.369,-0.541 -0.247,-1.275 0.278,-1.665c3.166,-2.353 7.137,-5.08 10.408,-9.079c3.411,-4.169 5.353,-6.72 7.505,-10.132c0.463,-0.734 1.525,-0.758 2.026,-0.05c9.636,13.605 15.554,23.259 25.475,37.168l8.457,12.671c0.833,1.047 2.116,2.361 3.985,3.289c4.675,2.319 9.653,0.551 9.877,1.34" fill="#FFB817"/><path d="M3008.41,3719.53c-0.151,-0.531 1.946,-1.911 5.346,-3.089c1.864,-0.646 10.65,-3.528 23.039,-0.281c2.518,0.659 4.341,1.351 7.572,2.577c5.115,1.94 9.231,3.907 12.102,5.384c0.169,0.087 0.309,0.213 0.416,0.369c6.394,9.356 12.789,18.713 19.184,28.069c0.221,0.323 0.296,0.751 0.106,1.093c-1.598,2.891 -6.6,9.919 -9.399,12.73c-3.427,3.443 -6.93,5.873 -9.69,7.205c-0.505,0.243 -1.111,0.077 -1.428,-0.386c-3.879,-5.677 -7.763,-11.352 -11.651,-17.025c-4.422,-6.453 -8.849,-12.901 -13.279,-19.345l-8.426,-12.626c-0.02,-0.03 -0.041,-0.059 -0.064,-0.087c-0.833,-1.04 -2.107,-2.332 -3.952,-3.247c-4.674,-2.32 -9.653,-0.552 -9.876,-1.341" fill="#FFB817"/></g><text x="212.50 427.86 628.82" y="190.00" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="262.00" fill="#111214" xml:space="preserve">UBE</text><rect x="0" y="228.00" width="783.92" height="5.0" rx="2.5" fill="#FFB817"/><text x="0.00 38.26 80.64 120.98 146.88 191.34 233.72 274.06 310.28 336.18 376.52 418.90 463.36 489.26 515.17 557.55 595.81 638.19 678.53 720.91 761.25" y="285.57" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="37.11" fill="#111214" xml:space="preserve">THE QUALIPRO INTRANET</text>
+</svg><svg x="820" y="856.9590599506025" width="640" height="653.8" viewBox="-110.0 -630.0 1003.9 1025.6"><title>Qube – The QualiPro Intranet</title>
+<rect x="-110" y="-630.0" width="1003.922" height="1025.5711111531907" fill="#111214"/>
+<g transform="translate(391.96,-320.00) scale(2.0)">
+<defs>
+  <linearGradient id="sd-edge" gradientUnits="userSpaceOnUse" x1="-95" y1="-70" x2="95" y2="70"><stop offset="0" stop-color="#8FFFE0"/><stop offset="0.28" stop-color="#22B8B6"/><stop offset="0.5" stop-color="#FFF0C9"/><stop offset="0.7" stop-color="#FFB817"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="sd-inner" gradientUnits="userSpaceOnUse" x1="0" y1="-60" x2="0" y2="100"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.45" stop-color="#FFF0C9"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="sd-top" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="87" y2="-50">
+    <stop offset="0" stop-color="#8FFFE0" stop-opacity="0.3"/><stop offset="0.5" stop-color="#FFF0C9" stop-opacity="0.42"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.35"/>
+  </linearGradient>
+  <linearGradient id="sd-left" gradientUnits="userSpaceOnUse" x1="-80" y1="-50" x2="0" y2="100">
+    <stop offset="0" stop-color="#8FFFE0" stop-opacity="0.34"/><stop offset="0.55" stop-color="#22B8B6" stop-opacity="0.26"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0.14300000000000002"/>
+  </linearGradient>
+  <linearGradient id="sd-right" gradientUnits="userSpaceOnUse" x1="10" y1="-20" x2="87" y2="90">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.294"/><stop offset="0.45" stop-color="#FFB817" stop-opacity="0.42"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.57"/>
+  </linearGradient>
+  <radialGradient id="sd-core" gradientUnits="userSpaceOnUse" cx="6" cy="8" r="62">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/><stop offset="0.35" stop-color="#FFF0C9" stop-opacity="0.385"/><stop offset="0.7" stop-color="#22B8B6" stop-opacity="0.099"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="sd-halo" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="135">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.4"/><stop offset="0.45" stop-color="#22B8B6" stop-opacity="0.18000000000000002"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="sd-haloGold" gradientUnits="userSpaceOnUse" cx="48" cy="22" r="105">
+    <stop offset="0" stop-color="#FFB817" stop-opacity="0.32000000000000006"/><stop offset="0.55" stop-color="#FFB817" stop-opacity="0.12"/><stop offset="1" stop-color="#FFB817" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="sd-sheen" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="-20" y2="40">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.35"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="sd-glow" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="wide"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="tight"/>
+    <feMerge><feMergeNode in="wide"/><feMergeNode in="wide"/><feMergeNode in="tight"/></feMerge>
+  </filter>
+  <filter id="sd-soft" x="-50%" y="-400%" width="200%" height="900%">
+    <feGaussianBlur stdDeviation="14"/>
+  </filter>
+</defs>
+<g>
+  
+  <!-- ambient glow behind the glass -->
+  <circle cx="0" cy="0" r="135" fill="url(#sd-halo)"/>
+  <circle cx="48" cy="22" r="105" fill="url(#sd-haloGold)"/>
+  <!-- see-through glass faces -->
+  <polygon points="0.00,-100.00 86.60,-50.00 0.00,0.00 -86.60,-50.00" fill="url(#sd-top)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#sd-left)"/>
+  <polygon points="0.00,0.00 86.60,-50.00 86.60,50.00 0.00,100.00" fill="url(#sd-right)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#sd-sheen)"/>
+  <!-- light trapped inside -->
+  <circle cx="6" cy="8" r="62" fill="url(#sd-core)"/>
+  <!-- hidden (back) edges, visible through the glass -->
+  <path d="M0.00,-100.00 L0.00,0.00 M-86.60,50.00 L0.00,0.00 L86.60,50.00" fill="none" stroke="url(#sd-edge)" stroke-width="1.6" stroke-opacity="0.38" stroke-linecap="round"/>
+  <!-- glow pass -->
+  <g filter="url(#sd-glow)" opacity="0.95" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#sd-edge)" stroke-width="5"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#sd-edge)" stroke-width="3.5"/>
+  </g>
+  <!-- crisp edges -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#sd-edge)" stroke-width="3.6"/>
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="1"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#sd-edge)" stroke-width="2.8"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#sd-inner)" stroke-opacity="0.75" stroke-width="1.1"/>
+  </g>
+</g></g><g transform="translate(-2941.7,-3608.4)"><path d="M2980.3,3745.51c12.045,32.896 42.699,56.076 72.875,43.434c0.55,-0.231 1.187,-0.038 1.504,0.467l3.316,5.275l1.243,1.917c0.446,0.688 0.1,1.614 -0.689,1.839c-8.178,2.327 -17.42,2.979 -25.247,2.959c-30.391,-0.077 -63.248,-18.643 -78.824,-47.095c-9.556,-17.454 -13.859,-37.026 -12.596,-57.117c1.35,-17.684 7.04,-34.718 17.194,-49.17c16.743,-23.827 38.948,-36.958 66.131,-39.519c0.726,-0.068 1.355,0.508 1.359,1.238l0.225,6.748c0.021,0.626 -0.437,1.16 -1.057,1.248c-7.535,1.066 -13.174,3.527 -19.481,8.093c-18.359,13.29 -27.769,33.692 -31.878,54.859c-4.213,21.705 -1.668,44.088 5.925,64.824" fill="#F6F2EA"/><path d="M3088.05,3751.69c-0.217,-0.333 -0.259,-0.747 -0.113,-1.116c2.727,-6.864 5.779,-16.407 7.314,-28.081c2.645,-20.117 -0.645,-35.656 -1.496,-39.421c-6.781,-30.012 -20.306,-49.848 -40.463,-60.524c-5.227,-2.769 -9.722,-4.329 -15.479,-4.942c-0.613,-0.065 -1.076,-0.585 -1.08,-1.201l-0.053,-6.845c-0.004,-0.674 0.539,-1.231 1.214,-1.23c14.418,0.009 26.403,3.677 39.197,10.554c32.205,17.311 52.519,52.614 51.029,88.466c-0.565,13.615 -1.875,20.164 -5.656,31.39c-3.393,10.078 -11.987,24.995 -19.57,32.579c-0.532,0.532 -1.41,0.47 -1.85,-0.14c-1.306,-1.81 -3.707,-5.156 -3.63,-5.183l-9.364,-14.306Z" fill="#FFB817"/><path d="M3131.67,3818.31c0.15,0.532 -1.947,1.912 -5.347,3.09c-1.863,0.646 -10.65,3.528 -23.039,0.281c-2.517,-0.66 -4.341,-1.352 -7.571,-2.577c-5.267,-1.998 -9.475,-4.024 -12.356,-5.516c-6.566,-9.606 -13.132,-19.213 -19.698,-28.82c-0.369,-0.541 -0.247,-1.275 0.278,-1.665c3.166,-2.353 7.137,-5.08 10.408,-9.079c3.411,-4.169 5.353,-6.72 7.505,-10.132c0.463,-0.734 1.525,-0.758 2.026,-0.05c9.636,13.605 15.554,23.259 25.475,37.168l8.457,12.671c0.833,1.047 2.116,2.361 3.985,3.289c4.675,2.319 9.653,0.551 9.877,1.34" fill="#FFB817"/><path d="M3008.41,3719.53c-0.151,-0.531 1.946,-1.911 5.346,-3.089c1.864,-0.646 10.65,-3.528 23.039,-0.281c2.518,0.659 4.341,1.351 7.572,2.577c5.115,1.94 9.231,3.907 12.102,5.384c0.169,0.087 0.309,0.213 0.416,0.369c6.394,9.356 12.789,18.713 19.184,28.069c0.221,0.323 0.296,0.751 0.106,1.093c-1.598,2.891 -6.6,9.919 -9.399,12.73c-3.427,3.443 -6.93,5.873 -9.69,7.205c-0.505,0.243 -1.111,0.077 -1.428,-0.386c-3.879,-5.677 -7.763,-11.352 -11.651,-17.025c-4.422,-6.453 -8.849,-12.901 -13.279,-19.345l-8.426,-12.626c-0.02,-0.03 -0.041,-0.059 -0.064,-0.087c-0.833,-1.04 -2.107,-2.332 -3.952,-3.247c-4.674,-2.32 -9.653,-0.552 -9.876,-1.341" fill="#FFB817"/></g><text x="212.50 427.86 628.82" y="190.00" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="262.00" fill="#F6F2EA" xml:space="preserve">UBE</text><rect x="0" y="228.00" width="783.92" height="5.0" rx="2.5" fill="#FFB817"/><text x="0.00 38.26 80.64 120.98 146.88 191.34 233.72 274.06 310.28 336.18 376.52 418.90 463.36 489.26 515.17 557.55 595.81 638.19 678.53 720.91 761.25" y="285.57" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="37.11" fill="#FFF0C9" xml:space="preserve">THE QUALIPRO INTRANET</text>
+</svg><svg x="1540" y="856.9590599506025" width="380" height="380.0" viewBox="0.0 0.0 512.0 512.0"><title>Qube app icon</title>
+
+<rect x="1.5" y="1.5" width="509" height="509" rx="112" fill="#111214"/><g transform="translate(256,256) scale(1.72)">
+<defs>
+  <linearGradient id="ad-edge" gradientUnits="userSpaceOnUse" x1="-95" y1="-70" x2="95" y2="70"><stop offset="0" stop-color="#8FFFE0"/><stop offset="0.28" stop-color="#22B8B6"/><stop offset="0.5" stop-color="#FFF0C9"/><stop offset="0.7" stop-color="#FFB817"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="ad-inner" gradientUnits="userSpaceOnUse" x1="0" y1="-60" x2="0" y2="100"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.45" stop-color="#FFF0C9"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="ad-top" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="87" y2="-50">
+    <stop offset="0" stop-color="#8FFFE0" stop-opacity="0.3"/><stop offset="0.5" stop-color="#FFF0C9" stop-opacity="0.42"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.35"/>
+  </linearGradient>
+  <linearGradient id="ad-left" gradientUnits="userSpaceOnUse" x1="-80" y1="-50" x2="0" y2="100">
+    <stop offset="0" stop-color="#8FFFE0" stop-opacity="0.34"/><stop offset="0.55" stop-color="#22B8B6" stop-opacity="0.26"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0.14300000000000002"/>
+  </linearGradient>
+  <linearGradient id="ad-right" gradientUnits="userSpaceOnUse" x1="10" y1="-20" x2="87" y2="90">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.294"/><stop offset="0.45" stop-color="#FFB817" stop-opacity="0.42"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.57"/>
+  </linearGradient>
+  <radialGradient id="ad-core" gradientUnits="userSpaceOnUse" cx="6" cy="8" r="62">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/><stop offset="0.35" stop-color="#FFF0C9" stop-opacity="0.385"/><stop offset="0.7" stop-color="#22B8B6" stop-opacity="0.099"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="ad-halo" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="135">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.4"/><stop offset="0.45" stop-color="#22B8B6" stop-opacity="0.18000000000000002"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="ad-haloGold" gradientUnits="userSpaceOnUse" cx="48" cy="22" r="105">
+    <stop offset="0" stop-color="#FFB817" stop-opacity="0.32000000000000006"/><stop offset="0.55" stop-color="#FFB817" stop-opacity="0.12"/><stop offset="1" stop-color="#FFB817" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="ad-sheen" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="-20" y2="40">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.35"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="ad-glow" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="wide"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="tight"/>
+    <feMerge><feMergeNode in="wide"/><feMergeNode in="wide"/><feMergeNode in="tight"/></feMerge>
+  </filter>
+  <filter id="ad-soft" x="-50%" y="-400%" width="200%" height="900%">
+    <feGaussianBlur stdDeviation="14"/>
+  </filter>
+</defs>
+<g>
+  
+  <!-- ambient glow behind the glass -->
+  <circle cx="0" cy="0" r="135" fill="url(#ad-halo)"/>
+  <circle cx="48" cy="22" r="105" fill="url(#ad-haloGold)"/>
+  <!-- see-through glass faces -->
+  <polygon points="0.00,-100.00 86.60,-50.00 0.00,0.00 -86.60,-50.00" fill="url(#ad-top)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#ad-left)"/>
+  <polygon points="0.00,0.00 86.60,-50.00 86.60,50.00 0.00,100.00" fill="url(#ad-right)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#ad-sheen)"/>
+  <!-- light trapped inside -->
+  <circle cx="6" cy="8" r="62" fill="url(#ad-core)"/>
+  <!-- hidden (back) edges, visible through the glass -->
+  <path d="M0.00,-100.00 L0.00,0.00 M-86.60,50.00 L0.00,0.00 L86.60,50.00" fill="none" stroke="url(#ad-edge)" stroke-width="1.6" stroke-opacity="0.38" stroke-linecap="round"/>
+  <!-- glow pass -->
+  <g filter="url(#ad-glow)" opacity="0.95" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#ad-edge)" stroke-width="5"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#ad-edge)" stroke-width="3.5"/>
+  </g>
+  <!-- crisp edges -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#ad-edge)" stroke-width="3.6"/>
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="1"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#ad-edge)" stroke-width="2.8"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#ad-inner)" stroke-opacity="0.75" stroke-width="1.1"/>
+  </g>
+</g></g>
+</svg><svg x="1980" y="856.9590599506025" width="380" height="380.0" viewBox="0.0 0.0 512.0 512.0"><title>Qube app icon</title>
+
+<rect x="1.5" y="1.5" width="509" height="509" rx="112" fill="#F6F2EA" stroke="#E2DACB" stroke-width="3"/><g transform="translate(256,256) scale(1.72)">
+<defs>
+  <linearGradient id="al-edge" gradientUnits="userSpaceOnUse" x1="-95" y1="-70" x2="95" y2="70"><stop offset="0" stop-color="#22B8B6"/><stop offset="0.3" stop-color="#22B8B6"/><stop offset="0.52" stop-color="#9FD9B8"/><stop offset="0.7" stop-color="#FFB817"/><stop offset="1" stop-color="#F5A800"/></linearGradient>
+  <linearGradient id="al-inner" gradientUnits="userSpaceOnUse" x1="0" y1="-60" x2="0" y2="100"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.5" stop-color="#FFF0C9"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="al-top" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="87" y2="-50">
+    <stop offset="0" stop-color="#22B8B6" stop-opacity="0.42"/><stop offset="0.5" stop-color="#FFF0C9" stop-opacity="0.54"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.47"/>
+  </linearGradient>
+  <linearGradient id="al-left" gradientUnits="userSpaceOnUse" x1="-80" y1="-50" x2="0" y2="100">
+    <stop offset="0" stop-color="#22B8B6" stop-opacity="0.44"/><stop offset="0.55" stop-color="#22B8B6" stop-opacity="0.36"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0.198"/>
+  </linearGradient>
+  <linearGradient id="al-right" gradientUnits="userSpaceOnUse" x1="10" y1="-20" x2="87" y2="90">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.385"/><stop offset="0.45" stop-color="#FFB817" stop-opacity="0.55"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.7000000000000001"/>
+  </linearGradient>
+  <radialGradient id="al-core" gradientUnits="userSpaceOnUse" cx="6" cy="8" r="62">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.6"/><stop offset="0.35" stop-color="#FFF0C9" stop-opacity="0.42"/><stop offset="0.7" stop-color="#22B8B6" stop-opacity="0.108"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="al-halo" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="135">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.3"/><stop offset="0.45" stop-color="#22B8B6" stop-opacity="0.135"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="al-haloGold" gradientUnits="userSpaceOnUse" cx="48" cy="22" r="105">
+    <stop offset="0" stop-color="#FFB817" stop-opacity="0.24"/><stop offset="0.55" stop-color="#FFB817" stop-opacity="0.09"/><stop offset="1" stop-color="#FFB817" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="al-sheen" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="-20" y2="40">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="al-glow" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="wide"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="tight"/>
+    <feMerge><feMergeNode in="wide"/><feMergeNode in="wide"/><feMergeNode in="tight"/></feMerge>
+  </filter>
+  <filter id="al-soft" x="-50%" y="-400%" width="200%" height="900%">
+    <feGaussianBlur stdDeviation="14"/>
+  </filter>
+</defs>
+<g>
+  <ellipse cx="0" cy="118" rx="80" ry="10" fill="#111214" opacity="0.10" filter="url(#al-soft)"/>
+  <!-- ambient glow behind the glass -->
+  <circle cx="0" cy="0" r="135" fill="url(#al-halo)"/>
+  <circle cx="48" cy="22" r="105" fill="url(#al-haloGold)"/>
+  <!-- see-through glass faces -->
+  <polygon points="0.00,-100.00 86.60,-50.00 0.00,0.00 -86.60,-50.00" fill="url(#al-top)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#al-left)"/>
+  <polygon points="0.00,0.00 86.60,-50.00 86.60,50.00 0.00,100.00" fill="url(#al-right)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#al-sheen)"/>
+  <!-- light trapped inside -->
+  <circle cx="6" cy="8" r="62" fill="url(#al-core)"/>
+  <!-- hidden (back) edges, visible through the glass -->
+  <path d="M0.00,-100.00 L0.00,0.00 M-86.60,50.00 L0.00,0.00 L86.60,50.00" fill="none" stroke="url(#al-edge)" stroke-width="1.6" stroke-opacity="0.45" stroke-linecap="round"/>
+  <!-- glow pass -->
+  <g filter="url(#al-glow)" opacity="0.65" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#al-edge)" stroke-width="5"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#al-edge)" stroke-width="3.5"/>
+  </g>
+  <!-- crisp edges -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#al-edge)" stroke-width="3.6"/>
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#al-edge)" stroke-width="2.8"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#al-inner)" stroke-opacity="0.55" stroke-width="1.1"/>
+  </g>
+</g></g>
+</svg><svg x="2420" y="856.9590599506025" width="380" height="380.0" viewBox="0.0 0.0 512.0 512.0"><title>Qube Q monogram</title>
+
+<rect x="1.5" y="1.5" width="509" height="509" rx="112" fill="#111214"/><g transform="translate(256,256) scale(1.72)">
+<defs>
+  <linearGradient id="md-edge" gradientUnits="userSpaceOnUse" x1="-95" y1="-70" x2="95" y2="70"><stop offset="0" stop-color="#8FFFE0"/><stop offset="0.28" stop-color="#22B8B6"/><stop offset="0.5" stop-color="#FFF0C9"/><stop offset="0.7" stop-color="#FFB817"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="md-inner" gradientUnits="userSpaceOnUse" x1="0" y1="-60" x2="0" y2="100"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.45" stop-color="#FFF0C9"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="md-top" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="87" y2="-50">
+    <stop offset="0" stop-color="#8FFFE0" stop-opacity="0.3"/><stop offset="0.5" stop-color="#FFF0C9" stop-opacity="0.42"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.35"/>
+  </linearGradient>
+  <linearGradient id="md-left" gradientUnits="userSpaceOnUse" x1="-80" y1="-50" x2="0" y2="100">
+    <stop offset="0" stop-color="#8FFFE0" stop-opacity="0.34"/><stop offset="0.55" stop-color="#22B8B6" stop-opacity="0.26"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0.14300000000000002"/>
+  </linearGradient>
+  <linearGradient id="md-right" gradientUnits="userSpaceOnUse" x1="10" y1="-20" x2="87" y2="90">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.294"/><stop offset="0.45" stop-color="#FFB817" stop-opacity="0.42"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.57"/>
+  </linearGradient>
+  <radialGradient id="md-core" gradientUnits="userSpaceOnUse" cx="6" cy="8" r="62">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/><stop offset="0.35" stop-color="#FFF0C9" stop-opacity="0.385"/><stop offset="0.7" stop-color="#22B8B6" stop-opacity="0.099"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="md-halo" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="135">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.4"/><stop offset="0.45" stop-color="#22B8B6" stop-opacity="0.18000000000000002"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="md-haloGold" gradientUnits="userSpaceOnUse" cx="48" cy="22" r="105">
+    <stop offset="0" stop-color="#FFB817" stop-opacity="0.32000000000000006"/><stop offset="0.55" stop-color="#FFB817" stop-opacity="0.12"/><stop offset="1" stop-color="#FFB817" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="md-sheen" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="-20" y2="40">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.35"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="md-glow" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="wide"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="tight"/>
+    <feMerge><feMergeNode in="wide"/><feMergeNode in="wide"/><feMergeNode in="tight"/></feMerge>
+  </filter>
+  <filter id="md-soft" x="-50%" y="-400%" width="200%" height="900%">
+    <feGaussianBlur stdDeviation="14"/>
+  </filter>
+</defs>
+<g>
+  
+  <!-- ambient glow behind the glass -->
+  <circle cx="0" cy="0" r="135" fill="url(#md-halo)"/>
+  <circle cx="48" cy="22" r="105" fill="url(#md-haloGold)"/>
+  <!-- see-through glass faces -->
+  <polygon points="0.00,-100.00 86.60,-50.00 0.00,0.00 -86.60,-50.00" fill="url(#md-top)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#md-left)"/>
+  <polygon points="0.00,0.00 86.60,-50.00 86.60,50.00 0.00,100.00" fill="url(#md-right)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#md-sheen)"/>
+  <!-- light trapped inside -->
+  <circle cx="6" cy="8" r="62" fill="url(#md-core)"/>
+  <!-- hidden (back) edges, visible through the glass -->
+  <path d="M0.00,-100.00 L0.00,0.00 M-86.60,50.00 L0.00,0.00 L86.60,50.00" fill="none" stroke="url(#md-edge)" stroke-width="1.6" stroke-opacity="0.38" stroke-linecap="round"/>
+  <!-- glow pass -->
+  <g filter="url(#md-glow)" opacity="0.95" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#md-edge)" stroke-width="5"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#md-edge)" stroke-width="3.5"/>
+  </g>
+  <!-- crisp edges -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#md-edge)" stroke-width="3.6"/>
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="1"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#md-edge)" stroke-width="2.8"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#md-inner)" stroke-opacity="0.75" stroke-width="1.1"/>
+  </g>
+</g></g><g transform="translate(187.26,186.73) scale(0.78)"><g transform="translate(-2941.7,-3608.4)"><path d="M2980.3,3745.51c12.045,32.896 42.699,56.076 72.875,43.434c0.55,-0.231 1.187,-0.038 1.504,0.467l3.316,5.275l1.243,1.917c0.446,0.688 0.1,1.614 -0.689,1.839c-8.178,2.327 -17.42,2.979 -25.247,2.959c-30.391,-0.077 -63.248,-18.643 -78.824,-47.095c-9.556,-17.454 -13.859,-37.026 -12.596,-57.117c1.35,-17.684 7.04,-34.718 17.194,-49.17c16.743,-23.827 38.948,-36.958 66.131,-39.519c0.726,-0.068 1.355,0.508 1.359,1.238l0.225,6.748c0.021,0.626 -0.437,1.16 -1.057,1.248c-7.535,1.066 -13.174,3.527 -19.481,8.093c-18.359,13.29 -27.769,33.692 -31.878,54.859c-4.213,21.705 -1.668,44.088 5.925,64.824" fill="#F6F2EA"/><path d="M3088.05,3751.69c-0.217,-0.333 -0.259,-0.747 -0.113,-1.116c2.727,-6.864 5.779,-16.407 7.314,-28.081c2.645,-20.117 -0.645,-35.656 -1.496,-39.421c-6.781,-30.012 -20.306,-49.848 -40.463,-60.524c-5.227,-2.769 -9.722,-4.329 -15.479,-4.942c-0.613,-0.065 -1.076,-0.585 -1.08,-1.201l-0.053,-6.845c-0.004,-0.674 0.539,-1.231 1.214,-1.23c14.418,0.009 26.403,3.677 39.197,10.554c32.205,17.311 52.519,52.614 51.029,88.466c-0.565,13.615 -1.875,20.164 -5.656,31.39c-3.393,10.078 -11.987,24.995 -19.57,32.579c-0.532,0.532 -1.41,0.47 -1.85,-0.14c-1.306,-1.81 -3.707,-5.156 -3.63,-5.183l-9.364,-14.306Z" fill="#FFB817"/><path d="M3131.67,3818.31c0.15,0.532 -1.947,1.912 -5.347,3.09c-1.863,0.646 -10.65,3.528 -23.039,0.281c-2.517,-0.66 -4.341,-1.352 -7.571,-2.577c-5.267,-1.998 -9.475,-4.024 -12.356,-5.516c-6.566,-9.606 -13.132,-19.213 -19.698,-28.82c-0.369,-0.541 -0.247,-1.275 0.278,-1.665c3.166,-2.353 7.137,-5.08 10.408,-9.079c3.411,-4.169 5.353,-6.72 7.505,-10.132c0.463,-0.734 1.525,-0.758 2.026,-0.05c9.636,13.605 15.554,23.259 25.475,37.168l8.457,12.671c0.833,1.047 2.116,2.361 3.985,3.289c4.675,2.319 9.653,0.551 9.877,1.34" fill="#FFB817"/><path d="M3008.41,3719.53c-0.151,-0.531 1.946,-1.911 5.346,-3.089c1.864,-0.646 10.65,-3.528 23.039,-0.281c2.518,0.659 4.341,1.351 7.572,2.577c5.115,1.94 9.231,3.907 12.102,5.384c0.169,0.087 0.309,0.213 0.416,0.369c6.394,9.356 12.789,18.713 19.184,28.069c0.221,0.323 0.296,0.751 0.106,1.093c-1.598,2.891 -6.6,9.919 -9.399,12.73c-3.427,3.443 -6.93,5.873 -9.69,7.205c-0.505,0.243 -1.111,0.077 -1.428,-0.386c-3.879,-5.677 -7.763,-11.352 -11.651,-17.025c-4.422,-6.453 -8.849,-12.901 -13.279,-19.345l-8.426,-12.626c-0.02,-0.03 -0.041,-0.059 -0.064,-0.087c-0.833,-1.04 -2.107,-2.332 -3.952,-3.247c-4.674,-2.32 -9.653,-0.552 -9.876,-1.341" fill="#FFB817"/></g></g>
+</svg><svg x="1540" y="1296.9590599506025" width="128" height="128.0" viewBox="0.0 0.0 64.0 64.0"><title>Qube favicon</title>
+
+<rect width="64" height="64" rx="14" fill="#111214"/><g transform="translate(32,32) scale(0.255)">
+<defs>
+  <linearGradient id="f-e" gradientUnits="userSpaceOnUse" x1="-90" y1="-60" x2="90" y2="60">
+    <stop offset="0" stop-color="#8FFFE0"/><stop offset="0.5" stop-color="#FFF0C9"/><stop offset="0.72" stop-color="#FFB817"/><stop offset="1" stop-color="#FFB817"/>
+  </linearGradient>
+</defs>
+<polygon points="0.00,-100.00 86.60,-50.00 0.00,0.00 -86.60,-50.00" fill="#FFF0C9" fill-opacity="0.55"/>
+<polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="#22B8B6" fill-opacity="0.55"/>
+<polygon points="0.00,0.00 86.60,-50.00 86.60,50.00 0.00,100.00" fill="#FFB817" fill-opacity="0.85"/>
+<g fill="none" stroke="url(#f-e)" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke-width="9"/>
+  <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke-width="7"/>
+</g></g>
+</svg><svg x="1700" y="1328.9590599506025" width="64" height="64.0" viewBox="0.0 0.0 64.0 64.0"><title>Qube favicon</title>
+
+<rect width="64" height="64" rx="14" fill="#111214"/><g transform="translate(32,32) scale(0.255)">
+<defs>
+  <linearGradient id="f-e" gradientUnits="userSpaceOnUse" x1="-90" y1="-60" x2="90" y2="60">
+    <stop offset="0" stop-color="#8FFFE0"/><stop offset="0.5" stop-color="#FFF0C9"/><stop offset="0.72" stop-color="#FFB817"/><stop offset="1" stop-color="#FFB817"/>
+  </linearGradient>
+</defs>
+<polygon points="0.00,-100.00 86.60,-50.00 0.00,0.00 -86.60,-50.00" fill="#FFF0C9" fill-opacity="0.55"/>
+<polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="#22B8B6" fill-opacity="0.55"/>
+<polygon points="0.00,0.00 86.60,-50.00 86.60,50.00 0.00,100.00" fill="#FFB817" fill-opacity="0.85"/>
+<g fill="none" stroke="url(#f-e)" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke-width="9"/>
+  <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke-width="7"/>
+</g></g>
+</svg><svg x="1800" y="1344.9590599506025" width="32" height="32.0" viewBox="0.0 0.0 64.0 64.0"><title>Qube favicon</title>
+
+<rect width="64" height="64" rx="14" fill="#111214"/><g transform="translate(32,32) scale(0.255)">
+<defs>
+  <linearGradient id="f-e" gradientUnits="userSpaceOnUse" x1="-90" y1="-60" x2="90" y2="60">
+    <stop offset="0" stop-color="#8FFFE0"/><stop offset="0.5" stop-color="#FFF0C9"/><stop offset="0.72" stop-color="#FFB817"/><stop offset="1" stop-color="#FFB817"/>
+  </linearGradient>
+</defs>
+<polygon points="0.00,-100.00 86.60,-50.00 0.00,0.00 -86.60,-50.00" fill="#FFF0C9" fill-opacity="0.55"/>
+<polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="#22B8B6" fill-opacity="0.55"/>
+<polygon points="0.00,0.00 86.60,-50.00 86.60,50.00 0.00,100.00" fill="#FFB817" fill-opacity="0.85"/>
+<g fill="none" stroke="url(#f-e)" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke-width="9"/>
+  <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke-width="7"/>
+</g></g>
+</svg><text x="1900.00 1919.46 1940.27 1961.08 1972.55 1994.68 2018.15 2040.28 2051.75 2069.90 2088.04 2106.18 2117.66 2129.13 2140.60 2158.74 2176.89 2188.36 2199.83 2211.30 2229.45 2247.59 2259.06 2277.21" y="1371.96" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="24.00" fill="#515151" xml:space="preserve">FAVICON 128 · 64 · 32 px</text><svg x="120" y="1580.7931071664607" width="2760" height="420.1" viewBox="-248.6 -110.0 3321.6 505.6"><title>Qube – Everything QualiPro. One place.</title>
+<rect x="-248.5640646055102" y="-110" width="3321.562129211021" height="505.57111115319066" fill="#F6F2EA"/>
+<g transform="translate(0,142.79) scale(1.6)">
+<defs>
+  <linearGradient id="Ybl-edge" gradientUnits="userSpaceOnUse" x1="-95" y1="-70" x2="95" y2="70"><stop offset="0" stop-color="#22B8B6"/><stop offset="0.3" stop-color="#22B8B6"/><stop offset="0.52" stop-color="#9FD9B8"/><stop offset="0.7" stop-color="#FFB817"/><stop offset="1" stop-color="#F5A800"/></linearGradient>
+  <linearGradient id="Ybl-inner" gradientUnits="userSpaceOnUse" x1="0" y1="-60" x2="0" y2="100"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.5" stop-color="#FFF0C9"/><stop offset="1" stop-color="#FFB817"/></linearGradient>
+  <linearGradient id="Ybl-top" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="87" y2="-50">
+    <stop offset="0" stop-color="#22B8B6" stop-opacity="0.42"/><stop offset="0.5" stop-color="#FFF0C9" stop-opacity="0.54"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.47"/>
+  </linearGradient>
+  <linearGradient id="Ybl-left" gradientUnits="userSpaceOnUse" x1="-80" y1="-50" x2="0" y2="100">
+    <stop offset="0" stop-color="#22B8B6" stop-opacity="0.44"/><stop offset="0.55" stop-color="#22B8B6" stop-opacity="0.36"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0.198"/>
+  </linearGradient>
+  <linearGradient id="Ybl-right" gradientUnits="userSpaceOnUse" x1="10" y1="-20" x2="87" y2="90">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.385"/><stop offset="0.45" stop-color="#FFB817" stop-opacity="0.55"/><stop offset="1" stop-color="#FFB817" stop-opacity="0.7000000000000001"/>
+  </linearGradient>
+  <radialGradient id="Ybl-core" gradientUnits="userSpaceOnUse" cx="6" cy="8" r="62">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.6"/><stop offset="0.35" stop-color="#FFF0C9" stop-opacity="0.42"/><stop offset="0.7" stop-color="#22B8B6" stop-opacity="0.108"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="Ybl-halo" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="135">
+    <stop offset="0" stop-color="#FFF0C9" stop-opacity="0.3"/><stop offset="0.45" stop-color="#22B8B6" stop-opacity="0.135"/><stop offset="1" stop-color="#22B8B6" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="Ybl-haloGold" gradientUnits="userSpaceOnUse" cx="48" cy="22" r="105">
+    <stop offset="0" stop-color="#FFB817" stop-opacity="0.24"/><stop offset="0.55" stop-color="#FFB817" stop-opacity="0.09"/><stop offset="1" stop-color="#FFB817" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="Ybl-sheen" gradientUnits="userSpaceOnUse" x1="-87" y1="-50" x2="-20" y2="40">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+  </linearGradient>
+  <filter id="Ybl-glow" x="-60%" y="-60%" width="220%" height="220%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="wide"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="tight"/>
+    <feMerge><feMergeNode in="wide"/><feMergeNode in="wide"/><feMergeNode in="tight"/></feMerge>
+  </filter>
+  <filter id="Ybl-soft" x="-50%" y="-400%" width="200%" height="900%">
+    <feGaussianBlur stdDeviation="14"/>
+  </filter>
+</defs>
+<g>
+  <ellipse cx="0" cy="118" rx="80" ry="10" fill="#111214" opacity="0.10" filter="url(#Ybl-soft)"/>
+  <!-- ambient glow behind the glass -->
+  <circle cx="0" cy="0" r="135" fill="url(#Ybl-halo)"/>
+  <circle cx="48" cy="22" r="105" fill="url(#Ybl-haloGold)"/>
+  <!-- see-through glass faces -->
+  <polygon points="0.00,-100.00 86.60,-50.00 0.00,0.00 -86.60,-50.00" fill="url(#Ybl-top)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#Ybl-left)"/>
+  <polygon points="0.00,0.00 86.60,-50.00 86.60,50.00 0.00,100.00" fill="url(#Ybl-right)"/>
+  <polygon points="-86.60,-50.00 0.00,0.00 0.00,100.00 -86.60,50.00" fill="url(#Ybl-sheen)"/>
+  <!-- light trapped inside -->
+  <circle cx="6" cy="8" r="62" fill="url(#Ybl-core)"/>
+  <!-- hidden (back) edges, visible through the glass -->
+  <path d="M0.00,-100.00 L0.00,0.00 M-86.60,50.00 L0.00,0.00 L86.60,50.00" fill="none" stroke="url(#Ybl-edge)" stroke-width="1.6" stroke-opacity="0.45" stroke-linecap="round"/>
+  <!-- glow pass -->
+  <g filter="url(#Ybl-glow)" opacity="0.65" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#Ybl-edge)" stroke-width="5"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#Ybl-edge)" stroke-width="3.5"/>
+  </g>
+  <!-- crisp edges -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="url(#Ybl-edge)" stroke-width="3.6"/>
+    <path d="M0.00,-100.00 L86.60,-50.00 L86.60,50.00 L0.00,100.00 L-86.60,50.00 L-86.60,-50.00 Z" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#Ybl-edge)" stroke-width="2.8"/>
+    <path d="M-86.60,-50.00 L0.00,0.00 L86.60,-50.00 M0.00,0.00 L0.00,100.00" stroke="url(#Ybl-inner)" stroke-opacity="0.55" stroke-width="1.1"/>
+  </g>
+</g></g><g transform="translate(233.56,0)"><g transform="translate(-2941.7,-3608.4)"><path d="M2980.3,3745.51c12.045,32.896 42.699,56.076 72.875,43.434c0.55,-0.231 1.187,-0.038 1.504,0.467l3.316,5.275l1.243,1.917c0.446,0.688 0.1,1.614 -0.689,1.839c-8.178,2.327 -17.42,2.979 -25.247,2.959c-30.391,-0.077 -63.248,-18.643 -78.824,-47.095c-9.556,-17.454 -13.859,-37.026 -12.596,-57.117c1.35,-17.684 7.04,-34.718 17.194,-49.17c16.743,-23.827 38.948,-36.958 66.131,-39.519c0.726,-0.068 1.355,0.508 1.359,1.238l0.225,6.748c0.021,0.626 -0.437,1.16 -1.057,1.248c-7.535,1.066 -13.174,3.527 -19.481,8.093c-18.359,13.29 -27.769,33.692 -31.878,54.859c-4.213,21.705 -1.668,44.088 5.925,64.824" fill="#111214"/><path d="M3088.05,3751.69c-0.217,-0.333 -0.259,-0.747 -0.113,-1.116c2.727,-6.864 5.779,-16.407 7.314,-28.081c2.645,-20.117 -0.645,-35.656 -1.496,-39.421c-6.781,-30.012 -20.306,-49.848 -40.463,-60.524c-5.227,-2.769 -9.722,-4.329 -15.479,-4.942c-0.613,-0.065 -1.076,-0.585 -1.08,-1.201l-0.053,-6.845c-0.004,-0.674 0.539,-1.231 1.214,-1.23c14.418,0.009 26.403,3.677 39.197,10.554c32.205,17.311 52.519,52.614 51.029,88.466c-0.565,13.615 -1.875,20.164 -5.656,31.39c-3.393,10.078 -11.987,24.995 -19.57,32.579c-0.532,0.532 -1.41,0.47 -1.85,-0.14c-1.306,-1.81 -3.707,-5.156 -3.63,-5.183l-9.364,-14.306Z" fill="#FFB817"/><path d="M3131.67,3818.31c0.15,0.532 -1.947,1.912 -5.347,3.09c-1.863,0.646 -10.65,3.528 -23.039,0.281c-2.517,-0.66 -4.341,-1.352 -7.571,-2.577c-5.267,-1.998 -9.475,-4.024 -12.356,-5.516c-6.566,-9.606 -13.132,-19.213 -19.698,-28.82c-0.369,-0.541 -0.247,-1.275 0.278,-1.665c3.166,-2.353 7.137,-5.08 10.408,-9.079c3.411,-4.169 5.353,-6.72 7.505,-10.132c0.463,-0.734 1.525,-0.758 2.026,-0.05c9.636,13.605 15.554,23.259 25.475,37.168l8.457,12.671c0.833,1.047 2.116,2.361 3.985,3.289c4.675,2.319 9.653,0.551 9.877,1.34" fill="#FFB817"/><path d="M3008.41,3719.53c-0.151,-0.531 1.946,-1.911 5.346,-3.089c1.864,-0.646 10.65,-3.528 23.039,-0.281c2.518,0.659 4.341,1.351 7.572,2.577c5.115,1.94 9.231,3.907 12.102,5.384c0.169,0.087 0.309,0.213 0.416,0.369c6.394,9.356 12.789,18.713 19.184,28.069c0.221,0.323 0.296,0.751 0.106,1.093c-1.598,2.891 -6.6,9.919 -9.399,12.73c-3.427,3.443 -6.93,5.873 -9.69,7.205c-0.505,0.243 -1.111,0.077 -1.428,-0.386c-3.879,-5.677 -7.763,-11.352 -11.651,-17.025c-4.422,-6.453 -8.849,-12.901 -13.279,-19.345l-8.426,-12.626c-0.02,-0.03 -0.041,-0.059 -0.064,-0.087c-0.833,-1.04 -2.107,-2.332 -3.952,-3.247c-4.674,-2.32 -9.653,-0.552 -9.876,-1.341" fill="#FFB817"/></g><text x="212.50 427.86 628.82" y="190.00" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="262.00" fill="#111214" xml:space="preserve">UBE</text><rect x="0" y="228.00" width="783.92" height="5.0" rx="2.5" fill="#FFB817"/><text x="0.00 38.26 80.64 120.98 146.88 191.34 233.72 274.06 310.28 336.18 376.52 418.90 463.36 489.26 515.17 557.55 595.81 638.19 678.53 720.91 761.25" y="285.57" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="37.11" fill="#111214" xml:space="preserve">THE QUALIPRO INTRANET</text></g><rect x="1147.49" y="-10" width="3" height="305.57" fill="#111214" opacity="0.35"/><text x="1277.49" y="150.00" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="118.00" fill="#111214" xml:space="preserve">Everything QualiPro. One place.</text><text x="1277.49 1326.41 1375.33 1428.69 1477.61 1522.09 1571.01 1604.37 1637.73 1670.37 1703.73 1737.10 1788.22 1837.14 1897.14 1946.06 1979.42 2012.78 2045.42 2078.78 2112.14 2158.82 2212.18 2265.55 2310.03 2358.95 2392.31 2425.67 2458.31 2491.67 2525.03 2573.95 2625.07 2678.43 2738.43 2782.92 2831.84 2882.96 2936.32" y="250.00" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="40.00" fill="#111214" xml:space="preserve">PEOPLE  |  NEWS  |  TOOLS  |  KNOWLEDGE</text>
+</svg><g transform="translate(120,2070.9087141028767) scale(1.4375)"><rect x="0" y="0" width="300" height="300" rx="22" fill="#111214"/><text x="26.00 49.94 58.88 81.14 103.40 124.01 146.27 168.53 192.47 213.08" y="62.00" font-family="Arial-BoldMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="700" font-size="30.00" fill="#F6F2EA" xml:space="preserve">Q CHARCOAL</text><text x="26.00 42.13 58.26 74.38 90.51 106.64 122.77" y="108.00" font-family="Arial-BoldMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="700" font-size="28.00" fill="#F6F2EA" xml:space="preserve">#111214</text><text x="26.00" y="266.00" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="22.00" fill="#F6F2EA" xml:space="preserve">Letters · light bg</text><rect x="324" y="0" width="300" height="300" rx="22" fill="#F6F2EA" stroke="#D9D3C7" stroke-width="2"/><text x="350.00 378.92 399.53 421.79 447.38 456.32 478.58 499.19 521.45 542.06 562.67" y="62.00" font-family="Arial-BoldMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="700" font-size="30.00" fill="#111214" xml:space="preserve">WARM CANVAS</text><text x="350.00 366.13 383.80 399.92 417.59 433.72 452.96" y="108.00" font-family="Arial-BoldMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="700" font-size="28.00" fill="#111214" xml:space="preserve">#F6F2EA</text><text x="350.00" y="266.00" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="22.00" fill="#111214" xml:space="preserve">Letters · dark bg</text><rect x="648" y="0" width="300" height="300" rx="22" fill="#FFB817"/><text x="674.00 697.94 706.88 730.82 754.76 772.04" y="62.00" font-family="Arial-BoldMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="700" font-size="30.00" fill="#111214" xml:space="preserve">Q GOLD</text><text x="674.00 690.13 707.80 725.46 744.70 760.83 776.96" y="108.00" font-family="Arial-BoldMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="700" font-size="28.00" fill="#111214" xml:space="preserve">#FFB817</text><text x="674.00" y="266.00" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="22.00" fill="#111214" xml:space="preserve">Q-mark · rule · cube right</text><rect x="972" y="0" width="300" height="300" rx="22" fill="#FFF0C9" stroke="#D9D3C7" stroke-width="2"/><text x="998.00 1020.26 1042.52 1063.13 1083.74 1109.33 1118.27 1138.88 1162.82 1185.08" y="62.00" font-family="Arial-BoldMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="700" font-size="30.00" fill="#111214" xml:space="preserve">CREAM SODA</text><text x="998.00 1014.13 1031.80 1049.46 1067.13 1083.26 1104.04" y="108.00" font-family="Arial-BoldMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="700" font-size="28.00" fill="#111214" xml:space="preserve">#FFF0C9</text><text x="998.00" y="266.00" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="22.00" fill="#111214" xml:space="preserve">Tagline · cube glow</text><rect x="1296" y="0" width="300" height="300" rx="22" fill="#22B8B6"/><text x="1322.00 1344.26 1353.20 1377.14 1386.08 1405.01 1425.62 1442.90 1451.84 1472.45 1496.39 1518.65" y="62.00" font-family="Arial-BoldMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="700" font-size="30.00" fill="#111214" xml:space="preserve">DIGITAL AQUA</text><text x="1322.00 1338.13 1354.26 1370.38 1389.62 1405.75 1424.98" y="108.00" font-family="Arial-BoldMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="700" font-size="28.00" fill="#111214" xml:space="preserve">#22B8B6</text><text x="1322.00" y="266.00" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="22.00" fill="#111214" xml:space="preserve">Cube left / edges</text><rect x="1620" y="0" width="300" height="300" rx="22" fill="#8FFFE0"/><text x="1646.00 1666.61 1690.55 1712.81 1733.42 1742.36 1761.29 1785.23 1805.84" y="62.00" font-family="Arial-BoldMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="700" font-size="30.00" fill="#111214" xml:space="preserve">AQUA FOAM</text><text x="1646.00 1662.13 1678.26 1695.92 1713.59 1731.26 1750.50" y="108.00" font-family="Arial-BoldMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-weight="700" font-size="28.00" fill="#111214" xml:space="preserve">#8FFFE0</text><text x="1646.00" y="266.00" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="22.00" fill="#111214" xml:space="preserve">Cube highlight</text></g><text x="120.00 138.63 153.93 170.91 187.89 204.87 215.16 232.14 249.12 266.10 281.40 290.04 298.68 318.99 329.28 336.24 353.22 360.18 368.82 385.80 406.11 416.40 423.36 440.34 447.30 472.59 491.22 499.86 508.50 517.14 537.45 547.74 554.70 571.68 578.64 588.93 609.24 626.22 633.18 650.16 675.45 694.08 711.06 719.70 728.34 736.98 765.60 782.58 792.87 809.85 835.14 852.12 862.41 877.71 886.35 894.99 905.28 922.26 937.56 952.86 959.82 976.80 993.78 1002.42 1019.40 1028.04 1045.02 1062.00 1078.98 1104.27 1112.91 1121.55 1130.19 1148.82 1165.80 1182.78 1189.74 1196.70 1213.68 1230.66 1239.30 1247.94 1258.23 1275.21 1290.51 1305.81 1312.77 1329.75 1346.73 1355.37 1372.35 1380.99 1397.97 1414.95 1431.93 1457.22 1465.86 1474.50 1483.14 1506.78 1515.42 1532.40 1541.04 1564.68 1581.66 1598.64 1605.60 1612.56 1632.87 1643.16 1660.14 1668.78 1692.42 1702.71 1728.00 1744.98 1755.27" y="2562.16" font-family="ArialMT, Arial, 'Helvetica Neue', Helvetica, sans-serif" font-size="30.00" fill="#515151" xml:space="preserve">Typography: Arial (ArialMT / Arial-BoldMT) · Wordmark tracking 0.10em · Tagline tracking 0.42em · Q = QualiPro Q-mark</text>
+</svg>
