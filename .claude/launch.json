@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "qp-dashboard",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": [
+        "-c",
+        "cd /Users/spizue/Downloads/qp-dashboard && exec python3 -m http.server 5178"
+      ],
+      "port": 5178
+    }
+  ]
+}

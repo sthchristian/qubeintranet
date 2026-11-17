@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QualiPro · AI Knowledge Hub</title>
+    <!-- Apply the saved light/dark theme before the page paints (avoids a flash) -->
+    <script>
+      try {
+        var t = localStorage.getItem("qp-theme");
+        document.documentElement.dataset.theme =
+          t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      } catch (e) {}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- ?v= makes the browser fetch a file again instead of using its cached copy.
+         Raise the number on every css/ and js/ line here and below whenever one of those files changes. -->
+    <link rel="stylesheet" href="css/base.css?v=5" />
+    <link rel="stylesheet" href="css/mascot.css?v=5" />
+    <link rel="stylesheet" href="css/topbar.css?v=5" />
+    <link rel="stylesheet" href="css/tour.css?v=5" />
+    <link rel="stylesheet" href="css/features.css?v=5" />
+    <link rel="stylesheet" href="css/light.css?v=5" />
+  </head>
+  <body>
+    <!-- ===== Icon sprites (referenced with <use href="#i-...">) ===== -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-bell" viewBox="0 0 24 24">
+        <path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+        <path d="M10.3 21a1.9 1.9 0 0 0 3.4 0" />
+      </symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="4" />
+        <path
+          d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+        />
+      </symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+      </symbol>
+      <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 21a8 8 0 0 1 16 0" />
+      </symbol>
+      <symbol id="i-cog" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="3" />
+        <path
+          d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"
+        />
+      </symbol>
+      <symbol id="i-search" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m20 20-3.5-3.5" />
+      </symbol>
+      <!-- Quick access tiles -->
+      <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" /></symbol>
+      <symbol id="i-server" viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="7" rx="2" />
+        <rect x="3" y="13" width="18" height="7" rx="2" />
+        <path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6" />
+      </symbol>
+      <symbol id="i-book" viewBox="0 0 24 24">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+        <path d="M9 7h6" />
+      </symbol>
+      <symbol id="i-laptop" viewBox="0 0 24 24">
+        <rect x="4" y="5" width="16" height="11" rx="2" />
+        <path d="M2 19.5h20" />
+      </symbol>
+      <symbol id="i-flow" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="7" height="6" rx="1.5" />
+        <rect x="14" y="3" width="7" height="6" rx="1.5" />
+        <rect x="8.5" y="15" width="7" height="6" rx="1.5" />
+        <path d="M10 6h4M12 6v9" />
+      </symbol>
+      <symbol id="i-users" viewBox="0 0 24 24">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+      </symbol>
+      <symbol id="i-grip" viewBox="0 0 24 24">
+        <circle cx="9" cy="6" r="1.6" /><circle cx="15" cy="6" r="1.6" />
+        <circle cx="9" cy="12" r="1.6" /><circle cx="15" cy="12" r="1.6" />
+        <circle cx="9" cy="18" r="1.6" /><circle cx="15" cy="18" r="1.6" />
+      </symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24">
+        <path d="M12 3 4.5 6v5.5c0 4.6 3.1 8 7.5 9.5 4.4-1.5 7.5-4.9 7.5-9.5V6z" />
+        <path d="m9 12 2.2 2.2L15 10.2" />
+      </symbol>
+      <symbol id="i-out" viewBox="0 0 24 24">
+        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+        <path d="M10 17l5-5-5-5M15 12H3" />
+      </symbol>
+    </svg>
+    <div class="shell">
+      <!-- ===== Sidebar navigation ===== -->
+      <aside class="rail">
+        <div class="brand">
+          <div class="brand-mark">Q</div>
+          <div class="brand-name">QualiPro<span>KNOWLEDGE HUB</span></div>
+        </div>
+        <div class="rail-label">Workspace</div>
+        <nav class="nav" aria-label="Workspace navigation">
+          <button class="active" data-view-link="dashboard" aria-current="page">
+            <span class="nav-icon">⌂</span><span class="label">Dashboard</span>
+          </button>
+          <button data-view-link="news">
+            <span class="nav-icon">▤</span><span class="label">News & information</span>
+          </button>
+          <button data-view-link="handbook">
+            <span class="nav-icon">▣</span><span class="label">Employee handbook</span>
+          </button>
+          <button data-view-link="it">
+            <span class="nav-icon">◉</span><span class="label">IT support</span>
+          </button>
+          <button data-view-link="projects">
+            <span class="nav-icon">⌘</span><span class="label">Projects</span>
+          </button>
+        </nav>
+        <div class="rail-label rail-label-row">
+          Quick links<button class="rail-edit" id="quick-edit" type="button">Edit</button>
+        </div>
+        <!-- filled in by js/features.js (the Edit button opens an editor; links are saved in the browser) -->
+        <nav class="nav quick-nav" id="quick-nav" aria-label="Quick links"></nav>
+        <div class="rail-label">System</div>
+        <nav class="nav">
+          <button data-view-link="settings">
+            <span class="nav-icon">⚙</span><span class="label">Settings</span>
+          </button>
+          <!-- only shown for the HR and Manager roles (js/app.js, "Role") -->
+          <button data-view-link="admin" data-admin-only hidden>
+            <span class="nav-icon"><svg class="ico"><use href="#i-shield" /></svg></span><span class="label">Admin Panel</span>
+          </button>
+        </nav>
+      </aside>
+      <main class="main">
+        <!-- ===== Top bar: theme toggle, tour, notifications, profile ===== -->
+        <header class="topbar">
+          <div class="crumb">Workspace&nbsp; / &nbsp;<b>Dashboard</b></div>
+          <!-- Search field: opens the command palette (also Cmd/Ctrl + K) -->
+          <button class="search-trigger" id="search-trigger" type="button" aria-label="Search and jump to (Cmd or Ctrl + K)">
+            <svg class="ico"><use href="#i-search" /></svg><span>Search or jump to…</span><kbd id="search-kbd">⌘K</kbd>
+          </button>
+          <div class="actions">
+            <button
+              class="icon-btn theme-btn"
+              id="theme-btn"
+              aria-label="Switch to light mode"
+              title="Switch light / dark mode"
+            >
+              <svg class="ico moon"><use href="#i-moon" /></svg
+              ><svg class="ico sun"><use href="#i-sun" /></svg>
+            </button>
+            <button class="icon-btn" id="tour-btn" aria-label="Take the tour" title="Take the tour">?</button>
+            <div class="pop-wrap">
+              <button
+                class="icon-btn"
+                id="notif-btn"
+                aria-label="Notifications, 2 unread"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="notif-menu"
+              >
+                <svg class="ico"><use href="#i-bell" /></svg><span class="badge" id="notif-badge">2</span>
+              </button>
+              <div class="menu" id="notif-menu" role="menu">
+                <div class="menu-head">
+                  <b>Notifications</b><button class="link-btn" id="mark-read">Mark all as read</button>
+                </div>
+                <div class="notif unread">
+                  <div class="news-ico">◈</div>
+                  <div>
+                    <strong>Register your security key</strong
+                    ><small>MFA becomes mandatory on Jun 15 · 2h ago</small>
+                  </div>
+                </div>
+                <div class="notif unread">
+                  <div class="news-ico">↗</div>
+                  <div>
+                    <strong>QualiPro Core v4.2 released</strong
+                    ><small>Engineering posted release notes · Yesterday</small>
+                  </div>
+                </div>
+                <div class="notif">
+                  <div class="news-ico">✳</div>
+                  <div>
+                    <strong>Maja mentioned you in Projects</strong
+                    ><small>“Alex, can you review the POC plan?” · Jun 4</small>
+                  </div>
+                </div>
+                <div class="menu-foot">
+                  <button class="link-btn" data-toast="All notifications">View all notifications</button>
+                </div>
+              </div>
+            </div>
+            <span class="top-sep"></span>
+            <div class="pop-wrap">
+              <button
+                class="profile-btn"
+                id="profile-btn"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="profile-menu"
+              >
+                <span class="avatar">AL</span
+                ><span class="user-meta">Alex Lindqvist<small>Software Engineer</small></span
+                ><svg class="ico chev"><use href="#i-chev" /></svg>
+              </button>
+              <div class="menu" id="profile-menu" role="menu" style="width: 250px">
+                <div class="me">
+                  <span class="avatar">AL</span>
+                  <div><b>Alex Lindqvist</b><small>Software Engineer · Stockholm</small></div>
+                </div>
+                <button class="menu-item" data-toast="My profile">
+                  <svg class="ico"><use href="#i-user" /></svg>My profile
+                </button>
+                <button class="menu-item" data-view-link="settings">
+                  <svg class="ico"><use href="#i-cog" /></svg>Settings
+                </button>
+                <button class="menu-item" id="menu-theme">
+                  <svg class="ico"><use href="#i-sun" /></svg><span>Light mode</span
+                  ><span class="kbd">D</span>
+                </button>
+                <div class="menu-sep"></div>
+                <button class="menu-item" data-toast="Signed out (prototype)">
+                  <svg class="ico"><use href="#i-out" /></svg>Sign out
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+        <!-- ===== VIEW: Dashboard ===== -->
+        <div class="view" data-view="dashboard">
+        <!-- ===== Greeting ===== -->
+        <section class="hero-head">
+          <div>
+            <div class="eyebrow">QualiPro · Secure knowledge</div>
+            <h1 id="greeting"><span id="greet-text">Good morning</span>, <span class="name">Alex.</span></h1>
+            <p>Answers from across your team's knowledge.</p>
+          </div>
+        </section>
+        <!-- ===== Chat card + QP robot ===== -->
+        <section class="chat-stage tilt" aria-label="AI knowledge assistant">
+          <div class="chat-top">
+            <div class="assistant-id">
+              <div class="assistant-icon">✳</div>
+              <div class="assistant-title">QualiChat <small>Knowledge assistant</small></div>
+            </div>
+            <button class="link-btn" id="open-thread" type="button">Conversation ↗</button>
+          </div>
+          <div class="dialog">
+            <div class="hello">
+              <div class="bot-dot">✳</div>
+              <p>
+                Hi Alex! Ask me about <strong>policies, projects or developer guides</strong>.
+              </p>
+            </div>
+            <div class="suggestions">
+              <button data-prompt="What changed in the latest company updates?">
+                Summarize recent updates</button
+              ><button data-prompt="What are our remote work guidelines?">Remote work policy</button
+              ><button data-prompt="Show me the developer onboarding guide">Developer onboarding</button>
+            </div>
+            <form id="chat-form" class="composer">
+              <textarea
+                id="chat-input"
+                rows="2"
+                aria-label="Ask the knowledge assistant"
+                placeholder="Ask anything…"
+              ></textarea
+              ><button class="send" type="submit" aria-label="Send question">↑</button>
+            </form>
+            <div class="helper">Enter to send&nbsp; · &nbsp;Shift + Enter for new line</div>
+            <div id="chat-toast" class="chat-toast" aria-live="polite"></div>
+          </div>
+          <div class="mascot-anchor">
+            <div class="mascot-note" id="mascot-note" title="Take the tour">
+              <b>QP</b> &nbsp;I'm here if you need me
+            </div>
+            <button
+              class="mascot"
+              id="mascot"
+              type="button"
+              aria-label="QP robot. Click for a wave, double-click for a jump, or drag me around"
+            >
+              <!-- 2D image: shown until the 3D model is ready, and kept if it cannot load -->
+              <img src="assets/qp-robot.webp" alt="" draggable="false" />
+              <!-- 3D model (animated by js/mascot3d.js) -->
+              <model-viewer
+                class="qp3d"
+                id="qp3d"
+                src="assets/qp.glb"
+                camera-orbit="-16deg 84deg 4.5m"
+                camera-target="0m 0.62m 0m"
+                field-of-view="20deg"
+                interpolation-decay="140"
+                interaction-prompt="none"
+                loading="eager"
+                aria-hidden="true"
+                tabindex="-1"
+                ><span slot="progress-bar"></span
+              ></model-viewer>
+            </button>
+          </div>
+        </section>
+        <!-- ===== Customize dashboard: reorder the boxes below (js/features.js, "Dashboard layout") ===== -->
+        <div class="dash-bar">
+          <span class="dash-hint" id="dash-hint" hidden>Drag a box by its Move handle, or use the arrow keys on it.</span>
+          <button type="button" class="btn" id="dash-reset" hidden>Reset layout</button>
+          <button type="button" class="link-btn" id="dash-edit" aria-pressed="false">
+            <svg class="ico"><use href="#i-grip" /></svg><span>Customize dashboard</span>
+          </button>
+        </div>
+        <!-- ===== Dashboard boxes: quick access (full width), then new hire setup, team activity, news and calendar
+             in two columns. Each data-dash box can be dragged to a new place in Customize mode. ===== -->
+        <div class="widgets">
+          <!-- Quick access: full-width card. Tiles open a tool/document (data-doc, see DOCS in js/features.js)
+               or a view (data-view-link). Pinned + recent are filled in by js/features.js -->
+          <section class="widget" id="quick" data-dash="quick" data-dash-wide aria-labelledby="quick-title">
+            <div class="widget-head"><h2 class="widget-title" id="quick-title">Quick access</h2></div>
+            <div class="quick-tiles">
+              <button type="button" class="tile" data-doc="devportal">
+                <span class="news-ico"><svg class="ico"><use href="#i-code" /></svg></span><strong>Dev Portal</strong><small>Engineering tools</small>
+              </button>
+              <button type="button" class="tile" data-doc="cicd">
+                <span class="news-ico"><svg class="ico"><use href="#i-server" /></svg></span><strong>CI/CD Status</strong><small>Builds &amp; deployments</small>
+              </button>
+              <button type="button" class="tile" data-doc="handbook">
+                <span class="news-ico"><svg class="ico"><use href="#i-book" /></svg></span><strong>Handbook</strong><small>People &amp; policies</small>
+              </button>
+              <button type="button" class="tile" data-doc="inventory">
+                <span class="news-ico"><svg class="ico"><use href="#i-laptop" /></svg></span><strong>IT Inventory</strong><small>Devices &amp; access</small>
+              </button>
+              <button type="button" class="tile" data-view-link="projects">
+                <span class="news-ico"><svg class="ico"><use href="#i-flow" /></svg></span><strong>Projects</strong><small>Team workspaces</small>
+              </button>
+              <button type="button" class="tile" data-doc="directory">
+                <span class="news-ico"><svg class="ico"><use href="#i-users" /></svg></span><strong>Directory</strong><small>Find a colleague</small>
+              </button>
+            </div>
+            <div class="quick-more">
+              <div>
+                <div class="widget-sub">Pinned</div>
+                <div class="chip-row" id="pin-list"></div>
+              </div>
+              <div>
+                <div class="widget-sub">Recent</div>
+                <div id="recent-list"></div>
+              </div>
+            </div>
+          </section>
+          <section class="widget" id="onboard" data-dash="onboard" aria-labelledby="onboard-title">
+            <div class="widget-head">
+              <h2 class="widget-title" id="onboard-title">New hire setup</h2>
+              <button class="widget-toggle" id="onboard-toggle" type="button" aria-expanded="true" aria-controls="onboard-body" aria-label="Show or hide the checklist">
+                <span class="pill" id="onboard-count">0/5</span><svg class="ico"><use href="#i-chev" /></svg>
+              </button>
+            </div>
+            <div class="bar"><i id="onboard-bar" style="width: 0"></i></div>
+            <div class="widget-body" id="onboard-body">
+              <ul class="checklist" id="onboard-list"></ul>
+            </div>
+          </section>
+          <section class="widget" id="feed" data-dash="feed" aria-labelledby="feed-title">
+            <div class="widget-head">
+              <h2 class="widget-title" id="feed-title">Team activity</h2>
+              <span class="live"><i></i>Live</span>
+            </div>
+            <ul class="feed-list" id="feed-list"></ul>
+          </section>
+          <!-- News -->
+          <section data-dash="news">
+            <div class="section-head">
+              <h2>News & information</h2>
+              <button data-view-link="news">View all ↗</button>
+            </div>
+            <!-- articles published in the Admin Panel are added here by js/features.js (newest first) -->
+            <div class="news-list" id="news-home">
+              <article class="news-item">
+                <div class="news-ico">◈</div>
+                <div class="news-copy">
+                  <strong>Multi-factor authentication rollout</strong
+                  ><small>Register your security key by Jun 15.</small>
+                </div>
+                <time class="date" datetime="2026-06-08">Jun 8</time>
+              </article>
+              <article class="news-item">
+                <div class="news-ico">↗</div>
+                <div class="news-copy">
+                  <strong>QualiPro Core v4.2 is here</strong
+                  ><small>Release notes from Engineering.</small>
+                </div>
+                <time class="date" datetime="2026-06-05">Jun 5</time>
+              </article>
+            </div>
+          </section>
+          <!-- Calendar -->
+          <section data-dash="calendar">
+            <div class="section-head">
+              <h2>Calendar</h2>
+              <button data-toast="Opening full calendar">Open calendar ↗</button>
+            </div>
+            <div class="cal" id="cal">
+              <div class="cal-top">
+                <b class="cal-month" id="cal-month"></b>
+                <div class="cal-nav">
+                  <button type="button" id="cal-prev" aria-label="Previous week">‹</button
+                  ><button type="button" id="cal-today">Today</button
+                  ><button type="button" id="cal-next" aria-label="Next week">›</button>
+                </div>
+              </div>
+              <div class="cal-week" id="cal-week" role="tablist" aria-label="Pick a day"></div>
+              <div class="cal-agenda" id="cal-agenda" aria-live="polite"></div>
+            </div>
+          </section>
+        </div>
+        <div class="footnote">Shown for your workspace role.</div>
+        </div>
+        <!-- ===== VIEW: News & information ===== -->
+        <div class="view" data-view="news" hidden>
+          <section class="hero-head">
+            <div>
+              <div class="eyebrow">Workspace</div>
+              <h1>News &amp; information</h1>
+              <p>Company updates, newest first.</p>
+            </div>
+          </section>
+          <div class="news-list" id="news-all">
+            <article class="news-item">
+              <div class="news-ico">◈</div>
+              <div class="news-copy">
+                <strong>Multi-factor authentication rollout</strong><small>Register your security key by Jun 15.</small>
+              </div>
+              <time class="date" datetime="2026-06-08">Jun 8</time>
+            </article>
+            <article class="news-item">
+              <div class="news-ico">↗</div>
+              <div class="news-copy">
+                <strong>QualiPro Core v4.2 is here</strong><small>Release notes from Engineering.</small>
+              </div>
+              <time class="date" datetime="2026-06-05">Jun 5</time>
+            </article>
+            <article class="news-item">
+              <div class="news-ico">☀</div>
+              <div class="news-copy">
+                <strong>Office closed on Midsummer Eve</strong><small>Plan deliveries and support cover early.</small>
+              </div>
+              <time class="date" datetime="2026-06-03">Jun 3</time>
+            </article>
+            <article class="news-item">
+              <div class="news-ico">▣</div>
+              <div class="news-copy">
+                <strong>Updated parental leave guide</strong><small>Now in the Employee handbook.</small>
+              </div>
+              <time class="date" datetime="2026-05-28">May 28</time>
+            </article>
+            <article class="news-item">
+              <div class="news-ico">✳</div>
+              <div class="news-copy">
+                <strong>Welcome to our new consultants</strong><small>Six people joined in May.</small>
+              </div>
+              <time class="date" datetime="2026-05-22">May 22</time>
+            </article>
+          </div>
+        </div>
+        <!-- ===== VIEW: Employee handbook ===== -->
+        <div class="view" data-view="handbook" hidden>
+          <section class="hero-head">
+            <div>
+              <div class="eyebrow">Workspace</div>
+              <h1>Employee handbook</h1>
+              <p>Policies and how-tos in one place.</p>
+            </div>
+          </section>
+          <div class="tile-grid">
+            <button class="tile" data-doc="onboarding"><span class="news-ico">✳</span><strong>Onboarding</strong><small>Your first weeks at QualiPro.</small></button>
+            <button class="tile" data-doc="remote"><span class="news-ico">⌂</span><strong>Remote work</strong><small>Working from home and abroad.</small></button>
+            <button class="tile" data-doc="leave"><span class="news-ico">☀</span><strong>Time off &amp; leave</strong><small>Vacation, sick leave, parental leave.</small></button>
+            <button class="tile" data-doc="expenses"><span class="news-ico">▤</span><strong>Expenses</strong><small>Travel, equipment and receipts.</small></button>
+            <button class="tile" data-doc="conduct"><span class="news-ico">◈</span><strong>Code of conduct</strong><small>How we work together.</small></button>
+            <button class="tile" data-doc="security"><span class="news-ico">◉</span><strong>Security</strong><small>Passwords, devices and data.</small></button>
+          </div>
+        </div>
+        <!-- ===== VIEW: IT support ===== -->
+        <div class="view" data-view="it" hidden>
+          <section class="hero-head">
+            <div>
+              <div class="eyebrow">Workspace</div>
+              <h1>IT support</h1>
+              <p>Get help or fix it yourself.</p>
+            </div>
+          </section>
+          <div class="split">
+            <div class="tile-grid">
+              <button class="tile" data-toast="New support ticket (prototype)"><span class="news-ico">✚</span><strong>Report an issue</strong><small>Open a ticket with the service desk.</small></button>
+              <button class="tile" data-toast="Password reset (prototype)"><span class="news-ico">◈</span><strong>Reset password</strong><small>Unlock or change your account.</small></button>
+              <button class="tile" data-toast="Hardware request (prototype)"><span class="news-ico">▣</span><strong>Request hardware</strong><small>Laptops, screens, accessories.</small></button>
+              <button class="tile" data-toast="Opening VPN guide"><span class="news-ico">◉</span><strong>VPN &amp; remote access</strong><small>Connect from anywhere.</small></button>
+            </div>
+            <div class="panel">
+              <div class="panel-row"><div><strong>Service desk</strong><small>Weekdays 08–17</small></div><span class="pill ok">Online</span></div>
+              <div class="panel-row"><div><strong>Your open tickets</strong><small>None right now</small></div><span class="pill muted">0</span></div>
+              <div class="panel-row"><div><strong>System status</strong><small>All services running</small></div><span class="pill ok">OK</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- ===== VIEW: Projects ===== -->
+        <div class="view" data-view="projects" hidden>
+          <section class="hero-head">
+            <div>
+              <div class="eyebrow">Workspace</div>
+              <h1>Projects</h1>
+              <p>What your team is working on.</p>
+            </div>
+          </section>
+          <div class="tile-grid">
+            <button class="tile" data-toast="Opening QP Launch Pad"><strong>QP Launch Pad</strong><small>Consultant onboarding platform.</small><span class="bar"><i style="width: 64%"></i></span><span class="tile-meta"><span class="pill">In progress</span>64%</span></button>
+            <button class="tile" data-toast="Opening Intranet redesign"><strong>Intranet redesign</strong><small>This knowledge hub.</small><span class="bar"><i style="width: 70%"></i></span><span class="tile-meta"><span class="pill">In progress</span>70%</span></button>
+            <button class="tile" data-toast="Opening POC Studio"><strong>POC Studio: Retail AI</strong><small>Proof of concept for a client.</small><span class="bar"><i style="width: 85%"></i></span><span class="tile-meta"><span class="pill ok">In review</span>85%</span></button>
+            <button class="tile" data-toast="Opening Core v4.3"><strong>QualiPro Core v4.3</strong><small>Next platform release.</small><span class="bar"><i style="width: 20%"></i></span><span class="tile-meta"><span class="pill muted">Planning</span>20%</span></button>
+          </div>
+        </div>
+        <!-- ===== VIEW: Settings ===== -->
+        <div class="view" data-view="settings" hidden>
+          <section class="hero-head">
+            <div>
+              <div class="eyebrow">System</div>
+              <h1>Settings</h1>
+              <p>Make the hub work your way.</p>
+            </div>
+          </section>
+          <div class="panel">
+            <div class="panel-row">
+              <div><strong>Appearance</strong><small>Also with the D key</small></div>
+              <div class="seg" role="group" aria-label="Theme">
+                <button type="button" data-theme-set="light" aria-pressed="false">Light</button><button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+              </div>
+            </div>
+            <div class="panel-row">
+              <div><strong>Email digest</strong><small>Weekly summary of news</small></div>
+              <button type="button" class="switch" role="switch" aria-checked="true" aria-label="Email digest"></button>
+            </div>
+            <div class="panel-row">
+              <div><strong>Desktop notifications</strong><small>Mentions and updates</small></div>
+              <button type="button" class="switch" role="switch" aria-checked="false" aria-label="Desktop notifications"></button>
+            </div>
+            <div class="panel-row">
+              <div><strong>Guided tour</strong><small>Walk through the hub again</small></div>
+              <button type="button" class="btn primary" id="settings-tour">Start tour</button>
+            </div>
+            <div class="panel-row">
+              <div><strong>Role (prototype)</strong><small>HR and Manager see the Admin Panel</small></div>
+              <div class="seg" role="group" aria-label="Role">
+                <button type="button" data-role-set="employee" aria-pressed="false">Employee</button><button type="button" data-role-set="hr" aria-pressed="false">HR</button><button type="button" data-role-set="manager" aria-pressed="false">Manager</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ===== VIEW: Admin Panel (HR + Manager only; forms handled by js/features.js) ===== -->
+        <div class="view" data-view="admin" hidden>
+          <section class="hero-head">
+            <div>
+              <div class="eyebrow">System</div>
+              <h1>Admin Panel</h1>
+              <p>Publish news and calendar events for everyone in the hub.</p>
+            </div>
+          </section>
+          <div class="admin-grid">
+            <section class="widget" aria-labelledby="admin-news-title">
+              <div class="widget-head">
+                <h2 class="widget-title" id="admin-news-title">Add news article</h2>
+                <span class="pill" id="admin-news-count">0</span>
+              </div>
+              <form class="admin-form" id="admin-news-form" autocomplete="off">
+                <label class="admin-field"><span>Title</span><input class="field" name="title" type="text" maxlength="80" placeholder="Headline" required /></label>
+                <label class="admin-field"><span>Text</span><textarea class="field" name="text" rows="3" maxlength="200" placeholder="One or two sentences" required></textarea></label>
+                <div class="admin-cols">
+                  <label class="admin-field"><span>Category</span><select class="field" name="cat" id="admin-news-cat"></select></label>
+                  <label class="admin-field"><span>Date</span><input class="field" name="date" type="date" required /></label>
+                </div>
+                <div class="admin-foot"><button type="submit" class="btn primary">Publish article</button></div>
+              </form>
+              <div class="widget-sub">Published from this panel</div>
+              <div id="admin-news-list"></div>
+            </section>
+            <section class="widget" aria-labelledby="admin-event-title">
+              <div class="widget-head">
+                <h2 class="widget-title" id="admin-event-title">Add calendar event</h2>
+                <span class="pill" id="admin-event-count">0</span>
+              </div>
+              <form class="admin-form" id="admin-event-form" autocomplete="off">
+                <label class="admin-field"><span>Title</span><input class="field" name="title" type="text" maxlength="60" placeholder="What is happening?" required /></label>
+                <div class="admin-field">
+                  <span id="admin-type-label">Type</span>
+                  <div class="seg" role="group" aria-labelledby="admin-type-label" id="admin-event-type">
+                    <button type="button" data-type="meeting" aria-pressed="true">Meeting</button><button type="button" data-type="event" aria-pressed="false">Event</button><button type="button" data-type="deadline" aria-pressed="false">Deadline</button>
+                  </div>
+                </div>
+                <div class="admin-cols three">
+                  <label class="admin-field"><span>Date</span><input class="field" name="date" type="date" required /></label>
+                  <label class="admin-field"><span>Time</span><input class="field" name="time" type="time" value="09:00" required /></label>
+                  <label class="admin-field"><span>Ends <i>optional</i></span><input class="field" name="end" type="time" /></label>
+                </div>
+                <label class="admin-field"><span>Location <i>optional</i></span><input class="field" name="where" type="text" maxlength="40" placeholder="Room, Teams, Meet…" /></label>
+                <div class="admin-foot"><button type="submit" class="btn primary">Publish event</button></div>
+              </form>
+              <div class="widget-sub">Published from this panel</div>
+              <div id="admin-event-list"></div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+    <!-- ===== Toast + tour overlay elements (filled in by JS) ===== -->
+    <div id="toast" class="toast" role="status"></div>
+    <div id="tour-layer" class="tour-layer"></div>
+    <div id="tour-spot" class="tour-spot"></div>
+    <div id="guide" class="guide" aria-hidden="true">
+      <div class="guide-body">
+        <img src="assets/qp-robot.webp" alt="" draggable="false" />
+        <!-- same model for the flying / dragged robot; mascot3d.js sets its src once the first one has loaded -->
+        <model-viewer
+          class="qp3d"
+          id="qp3d-guide"
+          camera-orbit="-16deg 84deg 4.5m"
+          camera-target="0m 0.62m 0m"
+          field-of-view="20deg"
+          interpolation-decay="140"
+          interaction-prompt="none"
+          loading="eager"
+          aria-hidden="true"
+          tabindex="-1"
+          ><span slot="progress-bar"></span
+        ></model-viewer>
+      </div>
+      <div class="jet"></div>
+      <div class="guide-shadow"></div>
+    </div>
+    <div id="tip" class="tip" aria-live="polite"></div>
+    <!-- ===== Command palette (Cmd/Ctrl + K), filled in by js/features.js ===== -->
+    <div class="overlay" id="cmdk" hidden>
+      <div class="cmdk" role="dialog" aria-modal="true" aria-label="Search and commands">
+        <div class="cmdk-input">
+          <svg class="ico"><use href="#i-search" /></svg>
+          <input id="cmdk-q" type="text" placeholder="Search views, tools and actions…" autocomplete="off" spellcheck="false" aria-controls="cmdk-list" />
+          <kbd>Esc</kbd>
+        </div>
+        <div class="cmdk-list" id="cmdk-list" role="listbox"></div>
+        <div class="cmdk-foot">
+          <span><kbd>↑</kbd><kbd>↓</kbd>Navigate</span><span><kbd>↵</kbd>Open</span>
+        </div>
+      </div>
+    </div>
+    <!-- ===== Modal: tools, handbook documents and the citation inspector ===== -->
+    <div class="overlay" id="modal" hidden>
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-head">
+          <div>
+            <div class="modal-kicker" id="modal-kicker"></div>
+            <h3 id="modal-title"></h3>
+          </div>
+          <div class="modal-actions">
+            <button class="icon-btn" id="modal-pin" type="button" aria-pressed="false">☆</button>
+            <button class="icon-btn" id="modal-close" type="button" aria-label="Close">✕</button>
+          </div>
+        </div>
+        <div class="modal-body" id="modal-body"></div>
+      </div>
+    </div>
+    <!-- ===== Calendar event details: popover next to the clicked event (filled in by js/calendar.js) ===== -->
+    <div class="cal-pop" id="cal-pop" role="dialog" aria-labelledby="cal-pop-title" hidden></div>
+    <!-- ===== AI drawer: QualiChat conversation (js/chat.js) ===== -->
+    <aside class="drawer" id="ai-drawer" aria-label="QualiChat conversation" aria-hidden="true">
+      <div class="drawer-head">
+        <div class="drawer-title">QualiChat<small>Simulated answers · prototype</small></div>
+        <div class="modal-actions">
+          <button class="icon-btn" id="drawer-new" type="button" aria-label="New conversation" title="New conversation">＋</button>
+          <button class="icon-btn" id="drawer-close" type="button" aria-label="Close conversation">✕</button>
+        </div>
+      </div>
+      <div class="thread" id="thread" aria-live="polite"></div>
+      <form class="drawer-form" id="drawer-form">
+        <textarea id="drawer-input" rows="1" aria-label="Ask a follow-up question" placeholder="Ask a follow-up…"></textarea>
+        <button class="send" type="submit" aria-label="Send question">↑</button>
+      </form>
+    </aside>
+    <script src="js/app.js?v=5"></script>
+    <script src="js/calendar.js?v=5"></script>
+    <script src="js/robot.js?v=5"></script>
+    <script src="js/tour.js?v=5"></script>
+    <script src="js/features.js?v=5"></script>
+    <script src="js/chat.js?v=5"></script>
+    <!-- 3D mascot: <model-viewer> (local copy, no internet needed) + the animation code -->
+    <script src="js/vendor/model-viewer-umd.min.js"></script>
+    <script src="js/mascot3d.js?v=5"></script>
+  </body>
+</html>

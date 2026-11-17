@@ -1,0 +1,534 @@
+/* light.css
+ * LIGHT MODE, styled after qualipro.se.
+ * Every rule is scoped to html[data-theme="light"], so dark mode is never affected.
+ */
+/* =====================================================================
+   LIGHT MODE: follows qualipro.se (warm off-white, grid paper, white
+   cards, heavy black type with sunshine-yellow accents)
+   ===================================================================== */
+html[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f6f4ee;
+  --panel: #ffffff;
+  --panel2: #faf8f3;
+  --line: #e9e5da;
+  --ink: #141412;
+  --muted: #6b6a63;
+  --gold: #f4b223;
+  --gold-soft: #f8c656;
+  --gold-ink: #a46f00;
+  --green: #4f8a3c;
+  --shadow: 0 1px 2px #2a220f0a, 0 18px 44px #2a220f12;
+  --card: #ffffff;
+  --card-line: var(--line);
+  --card-hover: #e6d6a8;
+}
+html[data-theme="light"] body {
+  font-family: "Inter", system-ui, sans-serif;
+  background:
+    linear-gradient(#1a170f0a 1px, transparent 1px) 0 0/80px 80px,
+    linear-gradient(90deg, #1a170f0a 1px, transparent 1px) 0 0/80px 80px,
+    radial-gradient(ellipse 55% 40% at 85% 0%, #f4b2231f, transparent 70%),
+    var(--bg);
+}
+html[data-theme="light"] body,
+html[data-theme="light"] .rail,
+html[data-theme="light"] .chat-stage,
+html[data-theme="light"] .news-item,
+html[data-theme="light"] .cal,
+html[data-theme="light"] .icon-btn,
+html[data-theme="light"] .profile-btn,
+html[data-theme="light"] .topbar {
+  transition:
+    background-color 0.3s,
+    border-color 0.3s,
+    color 0.3s;
+  border-color: #f1e2bb;
+}
+
+/* Headings: heavy, tight, black. Yellow highlight word like "next." / "belong." */
+html[data-theme="light"] .brand-name,
+html[data-theme="light"] .hero-head h1,
+html[data-theme="light"] .section-head h2,
+html[data-theme="light"] .assistant-title,
+html[data-theme="light"] .tip h3,
+html[data-theme="light"] .menu-head b,
+html[data-theme="light"] .me b {
+  font-family: "Inter Tight", "Inter", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+html[data-theme="light"] .hero-head p {
+  color: var(--muted);
+}
+html[data-theme="light"] .eyebrow {
+  color: #7d7b72;
+}
+html[data-theme="light"] .eyebrow:after {
+  background: #d8d3c6;
+}
+
+/* Sidebar */
+html[data-theme="light"] .rail {
+  background: #fbfaf6e6;
+  border-right-color: var(--line);
+  backdrop-filter: blur(6px);
+}
+html[data-theme="light"] .brand-mark {
+  color: #141412;
+  box-shadow: 0 8px 20px #f4b22340;
+  font-family: "Inter Tight";
+}
+html[data-theme="light"] .brand-name {
+  font-size: 16px;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+html[data-theme="light"] .brand-name span {
+  font-family: "Inter";
+  letter-spacing: 0.18em;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--muted);
+}
+html[data-theme="light"] .rail-label {
+  color: #9b988d;
+  font-weight: 600;
+}
+html[data-theme="light"] .nav button {
+  color: #5d5c55;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+html[data-theme="light"] .nav button:hover {
+  background: #14141208;
+  color: var(--ink);
+}
+html[data-theme="light"] .nav button.active {
+  color: var(--ink);
+  background: #fff7e2;
+  border-color: #f3dc9f;
+  font-weight: 600;
+}
+html[data-theme="light"] .nav button.active .nav-icon {
+  color: var(--gold-ink);
+}
+
+/* Top bar becomes the floating pill header from the website */
+html[data-theme="light"] .topbar {
+  background: #fffbf1;
+  border: 1px solid #f1e2bb;
+  border-radius: 18px;
+  padding: 9px 10px 9px 18px;
+  box-shadow: 0 10px 30px #f4b22314;
+}
+html[data-theme="light"] .crumb {
+  color: #8a877c;
+}
+html[data-theme="light"] .icon-btn {
+  background: #fff;
+  border-color: #ebe5d4;
+  color: #3f3e38;
+}
+html[data-theme="light"] .icon-btn:hover,
+html[data-theme="light"] .icon-btn[aria-expanded="true"] {
+  border-color: var(--gold);
+  color: var(--ink);
+}
+html[data-theme="light"] .badge {
+  color: #141412;
+  border-color: #fffbf1;
+}
+html[data-theme="light"] .top-sep {
+  background: #ebe2c9;
+}
+html[data-theme="light"] .profile-btn {
+  background: #141412;
+  border-color: #141412;
+  color: #fff;
+}
+html[data-theme="light"] .profile-btn:hover,
+html[data-theme="light"] .profile-btn[aria-expanded="true"] {
+  background: #2a2925;
+  border-color: #2a2925;
+}
+html[data-theme="light"] .profile-btn .user-meta small,
+html[data-theme="light"] .profile-btn .chev {
+  color: #b9b7ad;
+}
+html[data-theme="light"] .menu {
+  background: #fff;
+  border-color: var(--line);
+  box-shadow: 0 24px 60px #2a220f24;
+}
+html[data-theme="light"] .notif:hover,
+html[data-theme="light"] .menu-item:hover {
+  background: #f6f3ea;
+}
+html[data-theme="light"] .menu-item {
+  color: #3f3e38;
+}
+html[data-theme="light"] .menu-item:hover {
+  color: var(--ink);
+}
+html[data-theme="light"] .link-btn {
+  color: var(--gold-ink);
+  font-weight: 600;
+}
+html[data-theme="light"] .avatar {
+  color: #141412;
+}
+
+/* Chat card: white card with the short yellow top accent */
+html[data-theme="light"] .chat-stage {
+  background: #fff;
+  border-color: var(--line);
+  box-shadow:
+    0 1px 2px #2a220f0a,
+    0 24px 60px #2a220f14;
+}
+html[data-theme="light"] .chat-stage:before {
+  background: radial-gradient(ellipse at 88% 70%, #f4b2231c, transparent 38%);
+}
+html[data-theme="light"] .assistant-icon {
+  color: #141412;
+}
+html[data-theme="light"] .bot-dot {
+  background: #fff4d6;
+  color: var(--gold-ink);
+}
+html[data-theme="light"] .hello p {
+  color: #4a4943;
+}
+html[data-theme="light"] .hello strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+html[data-theme="light"] .suggestions button {
+  background: #fff;
+  border-color: #e3ded1;
+  color: #3f3e38;
+}
+html[data-theme="light"] .suggestions button:hover {
+  border-color: var(--gold);
+  color: var(--ink);
+  background: #fffbf0;
+}
+html[data-theme="light"] .composer {
+  background: #faf8f3;
+  border-color: #e0dacb;
+  box-shadow: none;
+}
+html[data-theme="light"] .composer:focus-within {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px #f4b22324;
+  background: #fff;
+}
+html[data-theme="light"] .composer textarea::placeholder {
+  color: #9b988d;
+}
+html[data-theme="light"] .send {
+  color: #141412;
+}
+html[data-theme="light"] .helper {
+  color: #9b988d;
+}
+html[data-theme="light"] .chat-toast {
+  background: #faf8f3;
+  border-color: var(--line);
+  color: #3f3e38;
+}
+html[data-theme="light"] .mascot {
+  filter: drop-shadow(0 12px 12px #6b4f0033);
+}
+html[data-theme="light"] .mascot:after {
+  background: #f4b22340;
+}
+html[data-theme="light"] .mascot-note {
+  background: #fff;
+  border-color: #f1e2bb;
+  color: #4a4943;
+  box-shadow: 0 8px 20px #2a220f14;
+}
+html[data-theme="light"] .mascot-note:after {
+  background: #fff;
+  border-color: #f1e2bb;
+}
+html[data-theme="light"] .mascot-note b {
+  color: var(--gold-ink);
+}
+
+/* Lower cards */
+html[data-theme="light"] .section-head button {
+  color: var(--gold-ink);
+  font-weight: 600;
+}
+html[data-theme="light"] .news-item,
+html[data-theme="light"] .cal {
+  background: #fff;
+  border-color: var(--line);
+  box-shadow: 0 1px 2px #2a220f08;
+}
+html[data-theme="light"] .news-item:hover {
+  border-color: #e6d6a8;
+  box-shadow: 0 12px 28px #2a220f12;
+}
+html[data-theme="light"] .news-ico {
+  background: #fff4d6;
+  color: var(--gold-ink);
+}
+html[data-theme="light"] .news-copy small {
+  color: var(--muted);
+}
+html[data-theme="light"] .date {
+  color: #9b988d;
+}
+/* Sidebar quick links + calendar */
+html[data-theme="light"] .rail-edit {
+  color: var(--gold-ink);
+  font-weight: 600;
+}
+html[data-theme="light"] .quick-nav .nav-icon,
+html[data-theme="light"] .quick-nav button:hover .ext {
+  color: var(--gold-ink);
+}
+html[data-theme="light"] .quick-nav button .ext {
+  color: #b5b2a7;
+}
+html[data-theme="light"] .cal,
+html[data-theme="light"] .cal-pop,
+html[data-theme="light"] .admin-list {
+  --c-meeting: var(--gold);
+  --c-deadline: #d9663f;
+}
+html[data-theme="light"] .cal-month,
+html[data-theme="light"] .cal-pop h3 {
+  font-family: "Inter Tight", "Inter", sans-serif;
+  font-weight: 800;
+}
+html[data-theme="light"] .cal-pop h3 {
+  letter-spacing: -0.045em;
+}
+html[data-theme="light"] .cal-nav button {
+  border-color: var(--line);
+  color: #5d5c55;
+  background: #fff;
+}
+html[data-theme="light"] .cal-nav button:hover {
+  border-color: var(--gold);
+  color: var(--ink);
+}
+html[data-theme="light"] .cal-day {
+  color: #3a3934;
+}
+html[data-theme="light"] .cal-day small {
+  color: #9b988d;
+}
+html[data-theme="light"] .cal-day:hover {
+  background: #14141208;
+}
+html[data-theme="light"] .cal-day.today b {
+  color: var(--gold-ink);
+}
+html[data-theme="light"] .cal-day.sel {
+  background: #fff7e2;
+  border-color: #f3dc9f;
+  color: var(--ink);
+}
+html[data-theme="light"] .cal-event {
+  background: var(--panel2);
+  color: var(--ink);
+}
+html[data-theme="light"] .cal-event:hover {
+  border-top-color: var(--line);
+  border-right-color: var(--line);
+  border-bottom-color: var(--line);
+  background: #fff;
+  box-shadow: 0 8px 20px #2a220f10;
+}
+html[data-theme="light"] .cal-time small {
+  color: #9b988d;
+}
+/* Calendar: event details popover */
+html[data-theme="light"] .cal-event.open {
+  background: #fff7e2;
+  border-top-color: #f3dc9f;
+  border-right-color: #f3dc9f;
+  border-bottom-color: #f3dc9f;
+  box-shadow: none;
+}
+html[data-theme="light"] .cal-pop {
+  background: #fff;
+  border-color: var(--line);
+  box-shadow: 0 24px 60px #2a220f24;
+}
+html[data-theme="light"] .cal-pop-meta {
+  border-top-color: var(--line);
+}
+html[data-theme="light"] .cal-people li {
+  background: #f6f3ea;
+}
+html[data-theme="light"] .footnote {
+  color: #9b988d;
+}
+html[data-theme="light"] .toast {
+  background: #141412;
+  border-color: #141412;
+  color: #fff;
+}
+
+/* Tour in light mode */
+html[data-theme="light"] .tour-spot {
+  border: 2px solid var(--gold);
+  box-shadow:
+    0 0 0 200vmax #1d1a10a3,
+    0 0 30px #f4b22340;
+}
+html[data-theme="light"] .tour-spot.empty {
+  border-color: transparent;
+  box-shadow: 0 0 0 200vmax #1d1a10a3;
+}
+html[data-theme="light"] .tip {
+  background: #fff;
+  border-color: #f1e2bb;
+  box-shadow: 0 24px 60px #0004;
+}
+html[data-theme="light"] .tip:before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: -1px;
+  width: 56px;
+  height: 4px;
+  border-radius: 0 0 4px 4px;
+  background: var(--gold);
+}
+html[data-theme="light"] .tip-step {
+  color: var(--gold-ink);
+}
+html[data-theme="light"] .tip p {
+  color: #4a4943;
+}
+html[data-theme="light"] .tip-dots i {
+  background: #e3ded1;
+}
+html[data-theme="light"] .tip-btns button {
+  border-color: #e0dacb;
+  color: #3f3e38;
+}
+html[data-theme="light"] .tip-btns button:hover {
+  border-color: var(--gold);
+  color: var(--ink);
+}
+html[data-theme="light"] .tip-btns .primary {
+  color: #141412;
+  border-color: var(--gold);
+}
+html[data-theme="light"] .tip-skip {
+  color: #9b988d;
+}
+html[data-theme="light"] .guide-body {
+  filter: drop-shadow(0 12px 14px #0004);
+}
+
+/* Views (news, handbook, IT, projects, settings) */
+html[data-theme="light"] .tile,
+html[data-theme="light"] .panel {
+  box-shadow: 0 1px 2px #2a220f08;
+}
+html[data-theme="light"] .tile:hover {
+  box-shadow: 0 12px 28px #2a220f12;
+}
+html[data-theme="light"] .tile .news-ico {
+  background: #fff4d6;
+}
+html[data-theme="light"] .pill {
+  background: #fff4d6;
+}
+html[data-theme="light"] .pill.ok {
+  background: #4f8a3c1a;
+}
+html[data-theme="light"] .pill.muted {
+  background: #14141208;
+}
+html[data-theme="light"] .switch:after {
+  background: #b5b2a7;
+}
+html[data-theme="light"] .switch[aria-checked="true"]:after,
+html[data-theme="light"] .seg button[aria-pressed="true"],
+html[data-theme="light"] .btn.primary {
+  color: #141412;
+}
+html[data-theme="light"] .switch[aria-checked="true"]:after {
+  background: #fff;
+}
+html[data-theme="light"] .btn:not(.primary) {
+  background: #fff;
+}
+
+/* Features (search, palette, modal, widgets, AI drawer): colours only */
+html[data-theme="light"] {
+  --hover: #14141208;
+  --scrim: #1d1a10a3;
+  --bad: #c2532c;
+}
+html[data-theme="light"] .widget-title,
+html[data-theme="light"] .insp-score b,
+html[data-theme="light"] .modal-head h3,
+html[data-theme="light"] .drawer-title {
+  font-family: "Inter Tight", "Inter", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+html[data-theme="light"] .drawer-title small,
+html[data-theme="light"] kbd {
+  font-family: "Inter", sans-serif;
+}
+html[data-theme="light"] .search-trigger {
+  background: #fff;
+  border-color: #ebe5d4;
+}
+html[data-theme="light"] .widget {
+  box-shadow: 0 1px 2px #2a220f08;
+}
+html[data-theme="light"] .cmdk,
+html[data-theme="light"] .modal {
+  box-shadow: 0 24px 60px #2a220f33;
+}
+html[data-theme="light"] .drawer {
+  box-shadow: -24px 0 60px #2a220f1f;
+}
+html[data-theme="light"] .recent-open .news-ico,
+html[data-theme="light"] .feed-item .news-ico {
+  background: #fff4d6;
+}
+html[data-theme="light"] .cite-n {
+  background: #ffe6a6;
+}
+html[data-theme="light"] .chunk mark {
+  background: #f4b22355;
+}
+html[data-theme="light"] .pill.bad {
+  background: #c2532c1a;
+}
+html[data-theme="light"] .check input:checked + .box,
+html[data-theme="light"] .msg.user .bubble {
+  color: #141412;
+}
+/* Dashboard layout: Customize dashboard */
+html[data-theme="light"] .dash-handle {
+  background: #fff;
+  box-shadow: 0 4px 14px #2a220f24;
+}
+html[data-theme="light"] .is-customizing [data-dash].dragging {
+  box-shadow: 0 24px 60px #2a220f3d;
+}
+html[data-theme="light"] .is-customizing [data-dash].dragging:not(.widget) {
+  box-shadow:
+    0 0 0 5px var(--bg),
+    0 24px 60px #2a220f3d;
+}
+html[data-theme="light"] .dash-slot {
+  background: #f4b2231a;
+}

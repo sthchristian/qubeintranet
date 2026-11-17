@@ -1,0 +1,288 @@
+/* tour.css
+ * First-time user tour: dark spotlight (.tour-spot), the flying guide robot (.guide)
+ * and the tooltip card (.tip). Logic lives in js/tour.js.
+ */
+/* ================= Tour layer ================= */
+.tour-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: none;
+}
+.tour-layer.on {
+  display: block;
+}
+.tour-spot {
+  position: fixed;
+  z-index: 51;
+  border-radius: 16px;
+  border: 1px solid #ffb817aa;
+  box-shadow:
+    0 0 0 200vmax #0b0b09b8,
+    0 0 30px #ffb81733;
+  pointer-events: none;
+  transition:
+    top 0.55s cubic-bezier(0.45, 0.05, 0.3, 1),
+    left 0.55s cubic-bezier(0.45, 0.05, 0.3, 1),
+    width 0.55s cubic-bezier(0.45, 0.05, 0.3, 1),
+    height 0.55s cubic-bezier(0.45, 0.05, 0.3, 1),
+    opacity 0.3s;
+  opacity: 0;
+}
+.tour-spot.on {
+  opacity: 1;
+}
+.tour-spot.empty {
+  border-color: transparent;
+  box-shadow: 0 0 0 200vmax #0b0b09b8;
+}
+
+/* Guide robot: flies between tour steps, and is what you hold while dragging */
+.guide {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 53;
+  width: 70px;
+  height: 135px;
+  pointer-events: none;
+  display: none;
+  will-change: transform;
+}
+.guide.on {
+  display: block;
+}
+.guide.held {
+  z-index: 70;
+}
+.guide-body {
+  width: 100%;
+  height: 100%;
+  animation: hover 2.6s ease-in-out infinite;
+  filter: drop-shadow(0 12px 14px #0007);
+}
+.guide-body img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.35s;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+.guide.flying .guide-body,
+.guide.held .guide-body {
+  animation: none;
+}
+.guide.held .guide-body {
+  filter: drop-shadow(0 28px 22px #0008);
+}
+.guide.wave .guide-body img {
+  animation: wave 0.7s ease;
+}
+.jet {
+  position: absolute;
+  left: 50%;
+  bottom: -16px;
+  width: 34px;
+  height: 30px;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.25s;
+  background: radial-gradient(ellipse at 50% 0%, #fff8 0 12%, #ffcf62 22%, #ffb81799 45%, transparent 70%);
+  filter: blur(1px);
+  animation: flicker 0.12s infinite alternate;
+}
+.guide.flying .jet {
+  opacity: 1;
+}
+.guide-shadow {
+  position: absolute;
+  left: 18%;
+  bottom: -6px;
+  width: 64%;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffb81730;
+  filter: blur(7px);
+  transition: opacity 0.3s;
+}
+.guide.flying .guide-shadow,
+.guide.held .guide-shadow {
+  opacity: 0;
+}
+
+/* Tooltip */
+.tip {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 54;
+  width: 300px;
+  max-width: calc(100vw - 28px);
+  background: #22231e;
+  border: 1px solid #57502f;
+  border-radius: 16px 16px 16px 4px;
+  padding: 16px 16px 14px;
+  box-shadow: 0 24px 60px #000a;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(6px) scale(0.98);
+  transition:
+    opacity 0.25s,
+    transform 0.25s;
+  pointer-events: none;
+}
+.tip.on {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.tip.stack {
+  border-radius: 16px;
+}
+.tip-step {
+  color: var(--gold);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.tip h3 {
+  font: 600 16px/1.25 "Space Grotesk";
+  letter-spacing: -0.03em;
+  margin: 6px 0 6px;
+}
+.tip p {
+  margin: 0;
+  color: #c9c7bc;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.tip-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  gap: 10px;
+}
+.tip-dots {
+  display: flex;
+  gap: 4px;
+}
+.tip-dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 99px;
+  background: #45463e;
+  transition: 0.25s;
+}
+.tip-dots i.on {
+  width: 16px;
+  background: var(--gold);
+}
+.tip-btns {
+  display: flex;
+  gap: 6px;
+}
+.tip-btns button {
+  border-radius: 9px;
+  padding: 7px 11px;
+  font-size: 11px;
+  border: 1px solid #45463e;
+  background: transparent;
+  color: #c4c2b7;
+}
+.tip-btns button:hover {
+  border-color: #8b7135;
+  color: var(--gold-soft);
+}
+.tip-btns .primary {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #201a0d;
+  font-weight: 600;
+}
+.tip-btns .primary:hover {
+  background: var(--gold-soft);
+  color: #201a0d;
+}
+.tip-skip {
+  background: none;
+  border: 0;
+  color: #7f7f75;
+  font-size: 10px;
+  padding: 0;
+  position: absolute;
+  top: 13px;
+  right: 14px;
+}
+.tip-skip:hover {
+  color: var(--ink);
+}
+.tip button:focus-visible,
+.mascot:focus-visible,
+.icon-btn:focus-visible,
+.profile-btn:focus-visible,
+.menu button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+@keyframes hover {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-7px) rotate(1.5deg);
+  }
+}
+@keyframes wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-9deg);
+  }
+  60% {
+    transform: rotate(7deg);
+  }
+}
+@keyframes flicker {
+  from {
+    transform: translateX(-50%) scaleY(0.85);
+  }
+  to {
+    transform: translateX(-50%) scaleY(1.15);
+  }
+}
+@media (max-width: 1000px) {
+  .profile-btn .user-meta,
+  .profile-btn .chev {
+    display: none;
+  }
+  .profile-btn {
+    padding: 0 3px;
+  }
+}
+@media (max-width: 700px) {
+  .guide {
+    width: 52px;
+    height: 100px;
+  }
+  .top-sep,
+  #tour-btn {
+    display: none;
+  }
+  .actions {
+    gap: 6px;
+  }
+
+}
+@media (prefers-reduced-motion: reduce) {
+  .guide-body,
+  .jet {
+    animation: none !important;
+  }
+}

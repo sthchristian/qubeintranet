@@ -1,0 +1,55 @@
+# QualiPro Knowledge Hub – dashboard
+
+Serve this folder with a web server and open it in a browser:
+
+    cd qp-dashboard && python3 -m http.server 5178      →  http://localhost:5178
+
+(Opening index.html by double-click also works, but the browser then blocks the
+3D model and the 2D robot image is shown instead.)
+
+To run on terminal use: python3 -m http.server 5178
+
+```
+index.html          Page markup (sections are marked with <!-- ===== ... ===== --> comments)
+css/
+  base.css          Layout + DARK mode (default). Colour tokens are at the top in :root
+  mascot.css        QP robot in the chat card, its speech bubble, and the 3D model
+  topbar.css        Theme toggle, tour button, notifications + profile dropdowns
+  tour.css          First-time tour: spotlight, flying robot, tooltip
+  features.css      Search field, command palette, modal, dashboard widgets, AI drawer, Admin Panel,
+                    Customize dashboard (drag-and-drop)
+  light.css         LIGHT mode (qualipro.se style). Only applies when light mode is on
+js/
+  app.js            Toasts, chat box, theme switch, dropdown menus, views, role (who sees the Admin Panel)
+  calendar.js       Calendar card: week strip + agenda + event details popover (edit the EVENTS array)
+  robot.js          Robot flight animation + drag-and-drop
+  tour.js           Tour steps (edit the STEPS array) and tour logic
+  features.js       Command palette (Cmd/Ctrl+K), modal + DOCS, checklist, quick access,
+                    activity feed, sidebar quick links + their Edit button,
+                    Admin Panel (publish news + calendar events),
+                    Customize dashboard (drag the boxes into a new order)
+  chat.js           QualiChat drawer: simulated answers with citations + citation inspector
+  mascot3d.js       3D robot: POSES, EYES, QUOTES and its behaviour
+  vendor/           <model-viewer> 4.0.0, local copy (no internet needed)
+assets/
+  qp.glb            The 3D robot
+  qp-robot.webp     2D robot, shown while the model loads or if it cannot load
+```
+
+Load order matters: CSS and scripts as listed in `index.html`.
+
+Handy:
+- Brand colours: `--gold`, `--bg`, `--panel`… in `base.css` (dark) and `light.css` (light).
+- See the tour again: run `qpTour.reset()` in the browser console and reload.
+- Add a tool or document: add an entry to `DOCS` in `js/features.js`.
+- Checklist: `TASKS` in `js/features.js`. Activity feed: `FEED_SEED` / `FEED_POOL`.
+- Chat answers are simulated: `KB` and `TOPICS` in `js/chat.js`.
+- Robot: `POSES`, `EYES`, `QUOTES`, `IDLE_AFTER` in `js/mascot3d.js`.
+- Admin Panel: only shown for the HR and Manager roles. Switch role under Settings (`ADMIN_ROLES` in
+  `js/app.js`). News categories: `NEWS_CATS` in `js/features.js`.
+- Dashboard boxes: the `data-dash` sections in `index.html`, in one two-column grid (`.widgets`). The one with
+  `data-dash-wide` (Quick access) fills a whole row. Default order: `DASH_DEFAULT` in `js/features.js`.
+- Quick access tiles: the `.quick-tiles` buttons in `index.html`. `data-doc="id"` opens an entry from `DOCS`,
+  `data-view-link="name"` opens a view.
+- Saved in the browser (localStorage): `qp-theme`, `qp-pins`, `qp-recent`,
+  `qp-onboarding`, `qp-quicklinks`, `qp-role`, `qp-news`, `qp-events`, `qp-dashboard-order-v2`.

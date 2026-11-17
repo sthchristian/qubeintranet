@@ -1,0 +1,117 @@
+/* mascot.css
+ * QP robot sitting in the chat card (.mascot) and its speech bubble (.mascot-note).
+ * Drag behaviour lives in js/robot.js.
+ */
+/* ================= Mascot (QP robot) ================= */
+.mascot {
+  cursor: grab;
+  background: none;
+  border: 0;
+  padding: 0;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.mascot img {
+  transform: rotateZ(2deg);
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.mascot:hover img {
+  transform: rotateZ(-3deg) scale(1.04);
+  transition: transform 0.25s;
+}
+.mascot-note {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.mascot-note:hover {
+  border-color: #8b7135;
+}
+.is-touring .mascot,
+.is-touring .mascot-note,
+.is-holding .mascot {
+  visibility: hidden;
+}
+.is-holding .mascot-note {
+  transform: rotate(2deg) scale(1.06);
+}
+body.grabbing,
+body.grabbing * {
+  cursor: grabbing !important;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ================= 3D mascot (<model-viewer>, animated by js/mascot3d.js) =================
+ * The model is drawn on a canvas that is larger than the robot's box, so a
+ * raised arm or a jump is not cut off. Its size follows .mascot-anchor, which
+ * already changes per screen size in base.css, so the robot scales with it.
+ */
+.mascot,
+.guide-body {
+  position: relative;
+}
+.qp3d {
+  position: absolute;
+  left: -45%;
+  top: -27%;
+  width: 190%;
+  height: 135%;
+  pointer-events: none; /* clicks and drags go to the button underneath */
+  background: transparent;
+  --poster-color: transparent;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.is-3d > .qp3d {
+  opacity: 1;
+}
+.mascot.is-3d > img,
+.guide-body.is-3d > img {
+  opacity: 0;
+}
+.mascot.is-3d:hover img {
+  transform: rotateZ(2deg);
+}
+/* widescreen: a little larger, the 3D figure is slimmer than the drawing */
+@media (min-width: 1001px) {
+  .mascot-anchor {
+    width: 128px;
+    height: 180px;
+  }
+}
+/* scroll glide (set from JS) should ease, not jump */
+.mascot {
+  transition:
+    translate 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+    rotate 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+/* click reaction: quick squash-and-bounce of the whole robot */
+.mascot.is-bouncing {
+  animation: mascot-bounce 0.55s cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+@keyframes mascot-bounce {
+  0% {
+    scale: 1;
+  }
+  25% {
+    scale: 1.08 0.9;
+  }
+  55% {
+    scale: 0.95 1.08;
+  }
+  100% {
+    scale: 1;
+  }
+}
+/* listening / thinking: highlight the speech bubble */
+.mascot-anchor:has(.mascot[data-state="thinking"]) .mascot-note,
+.mascot-anchor:has(.mascot[data-state="listening"]) .mascot-note {
+  border-color: var(--gold);
+}
+@media (prefers-reduced-motion: reduce) {
+  .mascot.is-bouncing {
+    animation: none;
+  }
+}

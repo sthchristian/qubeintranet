@@ -1,0 +1,246 @@
+/* topbar.css
+ * Top-right controls: theme toggle, tour button, notifications bell + dropdown,
+ * profile button + dropdown (.menu).
+ */
+/* ================= Top bar: theme, tour, notifications, profile ================= */
+.actions {
+  align-items: center;
+}
+.icon-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.icon-btn[aria-expanded="true"] {
+  border-color: #6c6551;
+  color: var(--gold);
+}
+.ico {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.theme-btn .sun {
+  display: none;
+}
+html[data-theme="light"] .theme-btn .sun {
+  display: block;
+}
+html[data-theme="light"] .theme-btn .moon {
+  display: none;
+}
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 99px;
+  background: var(--gold);
+  color: #201a0d;
+  font:
+    700 9px/17px "DM Sans",
+    sans-serif;
+  text-align: center;
+  border: 2px solid var(--bg);
+  transition: transform 0.2s;
+}
+.badge[hidden] {
+  display: block;
+  transform: scale(0);
+}
+.top-sep {
+  width: 1px;
+  height: 24px;
+  background: var(--line);
+  margin: 0 3px;
+}
+.profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 36px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+  border-radius: 10px;
+  padding: 0 9px 0 3px;
+  text-align: left;
+}
+.profile-btn:hover,
+.profile-btn[aria-expanded="true"] {
+  border-color: #6c6551;
+}
+.profile-btn .avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-size: 11px;
+}
+.profile-btn .user-meta {
+  line-height: 1.15;
+}
+.profile-btn .chev {
+  width: 13px;
+  height: 13px;
+  color: var(--muted);
+  transition: transform 0.2s;
+}
+.profile-btn[aria-expanded="true"] .chev {
+  transform: rotate(180deg);
+}
+.pop-wrap {
+  position: relative;
+}
+.menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  z-index: 30;
+  width: 310px;
+  max-width: calc(100vw - 28px);
+  background: #22231e;
+  border: 1px solid #45463e;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 7px;
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+  transform-origin: top right;
+  pointer-events: none;
+  transition:
+    opacity 0.18s,
+    transform 0.18s;
+}
+.menu.open {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 9px 9px;
+}
+.menu-head b {
+  font: 600 14px "Space Grotesk";
+  letter-spacing: -0.03em;
+}
+.link-btn {
+  background: none;
+  border: 0;
+  color: var(--gold);
+  font-size: 10px;
+  padding: 2px;
+}
+.link-btn:hover {
+  text-decoration: underline;
+}
+.notif {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 10px;
+  padding: 9px;
+  border-radius: 10px;
+  position: relative;
+}
+.notif:hover {
+  background: #ffffff0a;
+}
+.notif .news-ico {
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+}
+.notif strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  padding-right: 14px;
+}
+.notif small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 2px;
+}
+.notif.unread:after {
+  content: "";
+  position: absolute;
+  right: 11px;
+  top: 14px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+.menu-foot {
+  border-top: 1px solid var(--line);
+  margin-top: 5px;
+  padding: 7px 5px 2px;
+  text-align: center;
+}
+.me {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 9px 9px 11px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 5px;
+}
+.me .avatar {
+  width: 38px;
+  height: 38px;
+  font-size: 13px;
+}
+.me b {
+  display: block;
+  font: 600 13px "Space Grotesk";
+  letter-spacing: -0.02em;
+}
+.me small {
+  color: var(--muted);
+  font-size: 10px;
+}
+.menu-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: 0;
+  border-radius: 9px;
+  padding: 8px 9px;
+  font-size: 12px;
+  color: #c9c7bc;
+  text-align: left;
+}
+.menu-item:hover {
+  background: #ffffff0a;
+  color: var(--gold-soft);
+}
+.menu-item .ico {
+  color: var(--muted);
+}
+.menu-item .kbd {
+  margin-left: auto;
+  font-size: 9px;
+  color: #77786e;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 0 5px;
+}
+.menu-sep {
+  height: 1px;
+  background: var(--line);
+  margin: 5px 3px;
+}
+h1 .name {
+  color: inherit;
+}
