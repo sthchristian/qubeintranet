@@ -1233,12 +1233,6 @@ button {
   .split {
     grid-template-columns: minmax(0, 1fr);
   }
-  .shell {
-    display: block;
-  }
-  .rail {
-    display: none;
-  }
   .main {
     padding: 18px 14px 36px;
     min-width: 0;
@@ -1313,4 +1307,187 @@ button {
   .dialog {
     width: min(1100px, calc(100% - 320px));
   }
+}
+
+/* ===== Sidebar: icon rail on wider screens, slide-out drawer on phones (js/app.js, "Sidebar") ===== */
+.rail .nav-close,
+.nav-scrim {
+  display: none;
+}
+.quick-nav .ext .ico {
+  width: 12px;
+  height: 12px;
+}
+/* "Hide navigation" button under the logo: looks like a sidebar link */
+.nav-collapse {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: left;
+  white-space: nowrap;
+  transition:
+    color 0.18s,
+    border-color 0.18s,
+    background-color 0.18s;
+}
+.nav-collapse:hover {
+  border-color: var(--card-hover);
+  background: #ffffff0a;
+  color: var(--ink);
+}
+.nav-collapse .ico {
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@media (min-width: 1001px) {
+  .rail {
+    overflow: hidden; /* labels are clipped, not wrapped, while the column animates */
+    transition: padding 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .shell {
+    transition: grid-template-columns 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .rail .nav button {
+    white-space: nowrap;
+  }
+  /* collapsed: a 68px icon rail; only the icons and the expand button stay */
+  .nav-collapsed .shell {
+    grid-template-columns: 68px minmax(0, 1fr);
+  }
+  .nav-collapsed .rail {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+  .nav-collapsed .brand {
+    justify-content: center;
+    padding: 4px 0 22px;
+  }
+  .nav-collapsed .brand-logo {
+    width: 46px;
+    height: 50px;
+    object-fit: cover;
+    object-position: -1px 50%;
+  }
+  .nav-collapsed .brand-name,
+  .nav-collapsed .rail .label,
+  .nav-collapsed .quick-nav .ext,
+  .nav-collapsed .rail-edit {
+    display: none;
+  }
+  /* section headers become thin dividers between the groups */
+  .nav-collapsed .rail-label {
+    height: 1px;
+    margin: 12px 8px;
+    padding: 0;
+    overflow: hidden;
+    background: var(--line);
+    color: transparent;
+  }
+  .nav-collapsed .rail .nav button,
+  .nav-collapsed .nav-collapse {
+    justify-content: center;
+    padding: 11px 5px;
+  }
+  .nav-collapsed .nav-collapse .ico {
+    transform: rotate(180deg);
+  }
+}
+/* tablets already show the icon rail, so the button has nothing to do there */
+@media (max-width: 1000px) {
+  .nav-collapse {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .shell {
+    display: block;
+  }
+  .rail {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 42; /* above the AI drawer, below search, the modal and the tour */
+    width: min(280px, 86vw);
+    padding: 18px 14px max(24px, env(safe-area-inset-bottom));
+    overflow-y: auto; /* short screens: Settings stays reachable */
+    overscroll-behavior: contain;
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition:
+      transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+      visibility 0s 0.28s;
+  }
+  .nav-open .rail {
+    transform: none;
+    visibility: visible;
+    box-shadow: var(--shadow);
+    transition:
+      transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+      visibility 0s;
+  }
+  html.nav-open {
+    overflow: hidden; /* the page behind does not scroll */
+  }
+  /* full labels in the drawer (the tablet rules above show icons only) */
+  .brand {
+    justify-content: flex-start;
+    padding: 4px 4px 18px 6px;
+  }
+  .brand-logo {
+    flex: 1 1 auto;
+    width: 0;
+    max-width: 200px;
+    height: auto;
+    object-fit: contain;
+    object-position: 0 50%;
+  }
+  .brand-name,
+  .rail-label {
+    display: block;
+  }
+  .rail-label-row {
+    display: flex;
+  }
+  .nav .label,
+  .quick-nav .ext {
+    display: inline;
+  }
+  .nav button {
+    justify-content: flex-start;
+    padding: 10px 12px;
+  }
+  .rail .nav-close {
+    display: grid;
+    flex: none;
+    width: 32px;
+    height: 32px;
+    margin-left: auto;
+    font-size: 11px;
+  }
+  .nav-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 41;
+    background: var(--scrim);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s;
+  }
+  .nav-open .nav-scrim {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+.rail .nav button:focus-visible,
+.rail .rail-edit:focus-visible,
+.nav-btn:focus-visible,
+.rail .nav-close:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
 }

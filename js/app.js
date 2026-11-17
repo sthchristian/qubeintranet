@@ -125,6 +125,62 @@ document.addEventListener("click", () => closeMenus());
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeMenus();
 });
+/* ---------- Sidebar ----------
+ * Phones (<= 768px): the sidebar is a slide-out drawer. The hamburger in the top bar opens it;
+ * a link, the backdrop, the ✕ button or Esc closes it.
+ * Wider screens: "Hide navigation" under the logo shrinks the sidebar to an icon rail and back
+ * (saved as "qp-nav-collapsed"). Every link has a title, so the icons still say what they are.
+ * The classes live on <html> so the saved state applies before the page paints (see the <head> script). */
+const sideNav = $("#side-nav"),
+  navToggle = $("#nav-toggle"),
+  navCollapse = $("#nav-collapse"),
+  mobileNav = matchMedia("(max-width: 768px)");
+const navIsOpen = () => root.classList.contains("nav-open");
+function setNavOpen(open, { focus = true } = {}) {
+  if (open === navIsOpen()) return;
+  root.classList.toggle("nav-open", open);
+  navToggle.setAttribute("aria-expanded", open);
+  $(".main").inert = open; // the page behind the drawer cannot be tabbed into or clicked
+  if (open) {
+    closeMenus();
+    (sideNav.querySelector(".nav button.active") || sideNav.querySelector("button")).focus({ preventScroll: true });
+  } else if (focus && sideNav.contains(document.activeElement)) navToggle.focus({ preventScroll: true });
+}
+function setNavCollapsed(c) {
+  root.classList.toggle("nav-collapsed", c);
+  const label = c ? "Show navigation" : "Hide navigation";
+  navCollapse.setAttribute("aria-expanded", !c);
+  navCollapse.querySelector(".label").textContent = label;
+  navCollapse.title = label;
+  try {
+    localStorage.setItem("qp-nav-collapsed", c ? "1" : "0");
+  } catch (e) {}
+}
+navToggle.addEventListener("click", () => setNavOpen(!navIsOpen()));
+navCollapse.addEventListener("click", () => setNavCollapsed(!root.classList.contains("nav-collapsed")));
+$("#nav-close").addEventListener("click", () => setNavOpen(false));
+$("#nav-scrim").addEventListener("click", () => {
+  setNavOpen(false);
+  navToggle.focus({ preventScroll: true }); // the press on the backdrop already moved focus out of the drawer
+});
+/* any button in the drawer (a view, a quick link, Edit) closes it after doing its job */
+sideNav.addEventListener("click", (e) => {
+  if (mobileNav.matches && e.target.closest("button")) setNavOpen(false);
+});
+/* Esc closes the drawer first (unless search or a modal is open on top of it) */
+document.addEventListener(
+  "keydown",
+  (e) => {
+    if (e.key !== "Escape" || !navIsOpen() || document.querySelector(".overlay:not([hidden])")) return;
+    e.stopPropagation();
+    setNavOpen(false);
+  },
+  true,
+);
+mobileNav.addEventListener("change", (e) => !e.matches && setNavOpen(false, { focus: false }));
+addEventListener("popstate", () => setNavOpen(false, { focus: false }));
+setNavCollapsed(root.classList.contains("nav-collapsed"));
+
 $("#mark-read").addEventListener("click", () => {
   $$(".notif.unread").forEach((n) => n.classList.remove("unread"));
   $("#notif-badge").hidden = true;
