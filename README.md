@@ -18,6 +18,7 @@ css/
   tour.css          First-time tour: spotlight, flying robot, tooltip
   features.css      Search field, command palette, modal, dashboard widgets, AI drawer, Admin Panel,
                     Customize dashboard (drag-and-drop)
+  knowledge.css     Knowledge Hub only: toolbar, category chips and document cards
   light.css         LIGHT mode (qualipro.se style). Only applies when light mode is on
 js/
   app.js            Toasts, chat box, theme switch, dropdown menus, views, role (who sees the Admin Panel)
@@ -28,6 +29,9 @@ js/
                     activity feed, sidebar quick links + their Edit button,
                     Admin Panel (publish news + calendar events),
                     Customize dashboard (drag the boxes into a new order)
+  knowledge.js      Knowledge Hub view: the LIBRARY of documents, search, category filters,
+                    sorting, the document modal and the .txt download. Registers every
+                    document in DOCS (qp.addDocs), so they pin and appear under Recent
   chat.js           QualiChat drawer: simulated answers with citations + citation inspector
   mascot3d.js       3D robot: POSES, EYES, QUOTES and its behaviour
   vendor/           <model-viewer> 4.0.0, local copy (no internet needed)
@@ -42,6 +46,8 @@ Handy:
 - Brand colours: `--gold`, `--bg`, `--panel`… in `base.css` (dark) and `light.css` (light).
 - See the tour again: run `qpTour.reset()` in the browser console and reload.
 - Add a tool or document: add an entry to `DOCS` in `js/features.js`.
+- Add a Knowledge Hub document: add an entry to `LIBRARY` in `js/knowledge.js`. A new `category` becomes a new
+  filter chip on its own. Give it `doc: "<id>"` to reuse the body of a `DOCS` entry, or `body:` to write its own.
 - Checklist: `TASKS` in `js/features.js`. Activity feed: `FEED_SEED` / `FEED_POOL`.
 - Chat answers are simulated: `KB` and `TOPICS` in `js/chat.js`.
 - Robot: `POSES`, `EYES`, `QUOTES`, `IDLE_AFTER` in `js/mascot3d.js`.
@@ -52,4 +58,5 @@ Handy:
 - Quick access tiles: the `.quick-tiles` buttons in `index.html`. `data-doc="id"` opens an entry from `DOCS`,
   `data-view-link="name"` opens a view.
 - Saved in the browser (localStorage): `qp-theme`, `qp-pins`, `qp-recent`,
-  `qp-onboarding`, `qp-quicklinks`, `qp-role`, `qp-news`, `qp-events`, `qp-dashboard-order-v2`.
+  `qp-onboarding`, `qp-quicklinks`, `qp-role`, `qp-news`, `qp-events`, `qp-dashboard-order-v2`,
+  `qp-kb-filter`.
