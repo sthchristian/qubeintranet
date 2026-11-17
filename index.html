@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>QualiPro · AI Knowledge Hub</title>
+    <!-- Browser-tab icon; swapped to match the light/dark theme (here and in js/app.js) -->
+    <link rel="icon" id="favicon" type="image/svg+xml" href="assets/brand/gold-cream-cube/qube-app-icon-dark-transparent.svg" />
     <!-- Apply the saved light/dark theme before the page paints (avoids a flash) -->
     <script>
       try {
@@ -11,6 +13,8 @@
         document.documentElement.dataset.theme =
           t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
       } catch (e) {}
+      document.getElementById("favicon").href =
+        "assets/brand/gold-cream-cube/qube-app-icon-" + document.documentElement.dataset.theme + "-transparent.svg";
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,12 +24,12 @@
     />
     <!-- ?v= makes the browser fetch a file again instead of using its cached copy.
          Raise the number on every css/ and js/ line here and below whenever one of those files changes. -->
-    <link rel="stylesheet" href="css/base.css?v=5" />
-    <link rel="stylesheet" href="css/mascot.css?v=5" />
-    <link rel="stylesheet" href="css/topbar.css?v=5" />
-    <link rel="stylesheet" href="css/tour.css?v=5" />
-    <link rel="stylesheet" href="css/features.css?v=5" />
-    <link rel="stylesheet" href="css/light.css?v=5" />
+    <link rel="stylesheet" href="css/base.css?v=6" />
+    <link rel="stylesheet" href="css/mascot.css?v=6" />
+    <link rel="stylesheet" href="css/topbar.css?v=6" />
+    <link rel="stylesheet" href="css/tour.css?v=6" />
+    <link rel="stylesheet" href="css/features.css?v=6" />
+    <link rel="stylesheet" href="css/light.css?v=6" />
   </head>
   <body>
     <!-- ===== Icon sprites (referenced with <use href="#i-...">) ===== -->
@@ -103,8 +107,8 @@
       <!-- ===== Sidebar navigation ===== -->
       <aside class="rail">
         <div class="brand">
-          <div class="brand-mark">Q</div>
-          <div class="brand-name">QualiPro<span>KNOWLEDGE HUB</span></div>
+          <img class="brand-logo brand-logo--light" src="assets/brand/gold-cream-cube/qube-logo-horizontal-light-transparent.svg" alt="Qube – The QualiPro Intranet" width="900" height="314" />
+          <img class="brand-logo brand-logo--dark" src="assets/brand/gold-cream-cube/qube-logo-horizontal-dark-transparent.svg" alt="Qube – The QualiPro Intranet" width="900" height="314" />
         </div>
         <div class="rail-label">Workspace</div>
         <nav class="nav" aria-label="Workspace navigation">
@@ -691,14 +695,14 @@
         <button class="send" type="submit" aria-label="Send question">↑</button>
       </form>
     </aside>
-    <script src="js/app.js?v=5"></script>
-    <script src="js/calendar.js?v=5"></script>
-    <script src="js/robot.js?v=5"></script>
-    <script src="js/tour.js?v=5"></script>
-    <script src="js/features.js?v=5"></script>
-    <script src="js/chat.js?v=5"></script>
+    <script src="js/app.js?v=6"></script>
+    <script src="js/calendar.js?v=6"></script>
+    <script src="js/robot.js?v=6"></script>
+    <script src="js/tour.js?v=6"></script>
+    <script src="js/features.js?v=6"></script>
+    <script src="js/chat.js?v=6"></script>
     <!-- 3D mascot: <model-viewer> (local copy, no internet needed) + the animation code -->
     <script src="js/vendor/model-viewer-umd.min.js"></script>
-    <script src="js/mascot3d.js?v=5"></script>
+    <script src="js/mascot3d.js?v=6"></script>
   </body>
 </html>

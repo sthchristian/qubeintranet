@@ -74,6 +74,12 @@ html[data-theme="light"] .rail {
   border-right-color: var(--line);
   backdrop-filter: blur(6px);
 }
+html[data-theme="light"] .brand-logo--light {
+  display: block;
+}
+html[data-theme="light"] .brand-logo--dark {
+  display: none;
+}
 html[data-theme="light"] .brand-mark {
   color: #141412;
   box-shadow: 0 8px 20px #f4b22340;

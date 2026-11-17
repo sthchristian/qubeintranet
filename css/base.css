@@ -58,7 +58,19 @@ button {
   display: flex;
   align-items: center;
   gap: 11px;
-  padding: 4px 10px 27px;
+  padding: 0 0 18px;
+}
+/* Horizontal Qube logotype — one file per theme, swapped in light.css */
+.brand-logo {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.brand-logo--light {
+  display: none;
 }
 .brand-mark {
   width: 34px;
@@ -1148,7 +1160,14 @@ button {
   }
   .brand {
     justify-content: center;
-    padding: 4px 0 26px;
+    padding: 4px 0 22px;
+  }
+  /* Collapsed rail: crop the horizontal logo down to just the cube */
+  .brand-logo {
+    width: 46px;
+    height: 50px;
+    object-fit: cover;
+    object-position: -1px 50%;
   }
   .brand-name,
   .rail-label,

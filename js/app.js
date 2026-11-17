@@ -70,6 +70,8 @@ function syncThemeUI() {
   mi.querySelector("span").textContent = dark ? "Light mode" : "Dark mode";
   mi.querySelector("use").setAttribute("href", dark ? "#i-sun" : "#i-moon");
   $$("[data-theme-set]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.themeSet === root.dataset.theme));
+  // Browser-tab icon follows the theme
+  $("#favicon").href = `assets/brand/gold-cream-cube/qube-app-icon-${dark ? "dark" : "light"}-transparent.svg`;
 }
 function setTheme(t) {
   root.dataset.theme = t;
