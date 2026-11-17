@@ -226,6 +226,7 @@ const VIEWS = {
   dashboard: "Dashboard",
   news: "News & information",
   handbook: "Employee handbook",
+  knowledge: "Knowledge Hub",
   it: "IT support",
   projects: "Projects",
   settings: "Settings",

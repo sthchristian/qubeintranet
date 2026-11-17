@@ -322,6 +322,16 @@
     if (un) togglePin(un.dataset.unpin);
     else if (pin) togglePin(pin.dataset.pin);
   });
+  /* Lets a script that runs later (js/knowledge.js) add its own documents to DOCS,
+     so they open, pin and show up under Recent exactly like the ones above.
+     Pinned + recent are re-read from the browser afterwards: entries saved there
+     were dropped when this file loaded, because their document was not known yet. */
+  function addDocs(entries) {
+    Object.assign(DOCS, entries);
+    pins = store.get("qp-pins", pins).filter((id) => DOCS[id]);
+    recent = store.get("qp-recent", recent).filter((r) => DOCS[r.id]);
+    renderQuick();
+  }
   renderQuick();
 
   /* =====================================================================
@@ -330,7 +340,7 @@
   const pal = $("#cmdk"),
     palQ = $("#cmdk-q"),
     palList = $("#cmdk-list");
-  const VIEW_ICONS = { dashboard: "⌂", news: "▤", handbook: "▣", it: "◉", projects: "⌘", settings: "⚙", admin: `<svg class="ico"><use href="#i-shield" /></svg>` };
+  const VIEW_ICONS = { dashboard: "⌂", news: "▤", handbook: "▣", knowledge: `<svg class="ico"><use href="#i-library" /></svg>`, it: "◉", projects: "⌘", settings: "⚙", admin: `<svg class="ico"><use href="#i-shield" /></svg>` };
   const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
   $("#search-kbd").textContent = isMac ? "⌘K" : "Ctrl K";
   function closeOverlays() {
@@ -1381,5 +1391,5 @@
   }
 
   /* Shared with chat.js */
-  window.qp = { DOCS, openDoc, showModal, closeModal, closeOverlays, openPalette, esc, openArticle };
+  window.qp = { DOCS, addDocs, openDoc, showModal, closeModal, closeOverlays, openPalette, esc, openArticle };
 })();
