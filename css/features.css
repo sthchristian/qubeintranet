@@ -374,6 +374,35 @@ button.row:hover {
 .widgets > [data-dash-wide] {
   grid-column: 1 / -1;
 }
+/* New hire setup, team activity, news and calendar: one uniform size wherever they are placed.
+   The card inside fills the box; longer content scrolls inside it. */
+.widgets > :is([data-dash="onboard"], [data-dash="feed"], [data-dash="news"], [data-dash="calendar"]) {
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+}
+.widgets > [data-dash="onboard"]:has(.widget-body[hidden]) {
+  height: auto; /* collapsed checklist */
+}
+.widgets > [data-dash="onboard"] .widget-body,
+.widgets > [data-dash="feed"] .feed-list,
+.widgets > [data-dash="calendar"] .cal-agenda {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+.widgets > [data-dash="news"] .news-slider {
+  flex: 1;
+  aspect-ratio: auto;
+  min-height: 0;
+  max-height: none;
+}
+.widgets > [data-dash="calendar"] .cal {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
 .widget {
   background: var(--card);
   border: 1px solid var(--card-line);
