@@ -374,12 +374,17 @@ button.row:hover {
 .widgets > [data-dash-wide] {
   grid-column: 1 / -1;
 }
-/* New hire setup, team activity, news and calendar: one uniform size wherever they are placed.
-   The card inside fills the box; longer content scrolls inside it. */
+/* New hire setup, team activity, news and calendar: one uniform card size wherever they are placed.
+   Each card is 360px tall (news and calendar keep their heading above the card); longer content
+   scrolls inside it. */
 .widgets > :is([data-dash="onboard"], [data-dash="feed"], [data-dash="news"], [data-dash="calendar"]) {
-  height: 360px;
   display: flex;
   flex-direction: column;
+}
+.widgets > :is([data-dash="onboard"], [data-dash="feed"]),
+.widgets > [data-dash="news"] .news-slider,
+.widgets > [data-dash="calendar"] .cal {
+  height: 360px;
 }
 .widgets > [data-dash="onboard"]:has(.widget-body[hidden]) {
   height: auto; /* collapsed checklist */
@@ -390,16 +395,23 @@ button.row:hover {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  align-content: start; /* keep rows at their natural height instead of stretching to fill */
+}
+/* Calendar items a little narrower than the card so the 3px hover nudge and the focus ring
+   fit inside the scroll area (no horizontal scrollbar). The negative margin keeps the left edge in place. */
+.widgets > [data-dash="calendar"] .cal-agenda {
+  padding: 4px 6px 4px 4px;
+  margin: -4px 0 -4px -4px;
+  overflow-x: hidden;
 }
 .widgets > [data-dash="news"] .news-slider {
-  flex: 1;
+  flex: none;
   aspect-ratio: auto;
   min-height: 0;
   max-height: none;
 }
 .widgets > [data-dash="calendar"] .cal {
-  flex: 1;
-  min-height: 0;
+  flex: none;
   display: flex;
   flex-direction: column;
 }
