@@ -1,8 +1,8 @@
 /* mascot.css
- * QP robot sitting in the chat card (.mascot) and its speech bubble (.mascot-note).
+ * QBot robot sitting in the chat card (.mascot) and its speech bubble (.mascot-note).
  * Drag behaviour lives in js/robot.js.
  */
-/* ================= Mascot (QP robot) ================= */
+/* ================= Mascot (QBot robot) ================= */
 .mascot {
   cursor: grab;
   background: none;

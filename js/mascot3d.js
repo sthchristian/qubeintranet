@@ -1,5 +1,5 @@
 /* mascot3d.js
- * The 3D QP robot (assets/qp.glb) shown with <model-viewer>.
+ * The 3D QBot robot (assets/qp.glb) shown with <model-viewer>.
  *
  * The .glb has no built-in animations. It is a jointed figure (j_head,
  * j_shoulderL, j_leaf …), so everything here is animated from code:
@@ -7,8 +7,8 @@
  *   Rig        turns the joints, draws the eyes, makes the visor glow
  *   POSES      named body poses (angles in degrees)   <- edit these
  *   EYES       named eye shapes                        <- edit these
- *   QUOTES     what QP says when you click it          <- edit these
- *   Director   decides what QP does: thinking while you type or wait,
+ *   QUOTES     what QBot says when you click it        <- edit these
+ *   Director   decides what QBot does: thinking while you type or wait,
  *              curious after 30 s of no activity, gliding on scroll,
  *              a wave on click and a jump on double-click
  *
@@ -357,7 +357,7 @@
         if (rig.setup()) holder.classList.add("is-3d");
         else if (viewer.loaded) holder.classList.add("is-3d"); // model shows, but cannot be posed
       } catch (err) {
-        console.warn("QP 3D mascot: falling back to the 2D image.", err);
+        console.warn("QBot 3D mascot: falling back to the 2D image.", err);
       }
       viewer.dispatchEvent(new CustomEvent("qp-rig", { detail: rig }));
     };
@@ -367,10 +367,10 @@
   }
 
   /* =====================================================================
-     Director: decides what QP does on the dashboard
+     Director: decides what QBot does on the dashboard
      ===================================================================== */
-  const IDLE_AFTER = 30000; // ms without mouse, keyboard or scroll before QP gets curious
-  const TYPING_HOLD = 1600; // ms QP keeps listening after the last keystroke
+  const IDLE_AFTER = 30000; // ms without mouse, keyboard or scroll before QBot gets curious
+  const TYPING_HOLD = 1600; // ms QBot keeps listening after the last keystroke
   const CAMERA = { angle: -16, tilt: 84, distance: 4.5 }; // must match camera-orbit in index.html
 
   const button = document.getElementById("mascot"),
@@ -378,7 +378,7 @@
     viewer = document.getElementById("qp3d");
   if (!button || !viewer) return;
   const rig = mount(viewer, button);
-  const bubble = (text, ms = 2800) => typeof say === "function" && say("<b>QP</b> &nbsp;" + text, ms);
+  const bubble = (text, ms = 2800) => typeof say === "function" && say("<b>QBot</b> &nbsp;" + text, ms);
   const onScreen = () => button.offsetParent !== null && !document.hidden && !document.body.classList.contains("is-touring");
 
   const flags = { typing: false, waiting: false, curious: false };
@@ -516,7 +516,7 @@
       }
     }
   }
-  /* blink every few seconds so QP never looks frozen */
+  /* blink every few seconds so QBot never looks frozen */
   (function blinkLater() {
     setTimeout(
       () => {

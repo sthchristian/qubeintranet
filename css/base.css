@@ -275,6 +275,7 @@ button {
   place-items: center;
 }
 .assistant-title {
+  font-family: "DM Sans", sans-serif; /* set here so light mode (Inter body text) matches dark mode */
   font-weight: 600;
   font-size: 14px;
 }

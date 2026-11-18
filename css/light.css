@@ -48,9 +48,7 @@ html[data-theme="light"] .topbar {
 
 /* Headings: heavy, tight, black. Yellow highlight word like "next." / "belong." */
 html[data-theme="light"] .brand-name,
-html[data-theme="light"] .hero-head h1,
 html[data-theme="light"] .section-head h2,
-html[data-theme="light"] .assistant-title,
 html[data-theme="light"] .tip h3,
 html[data-theme="light"] .menu-head b,
 html[data-theme="light"] .me b {

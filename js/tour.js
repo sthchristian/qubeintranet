@@ -9,7 +9,7 @@ const tour = (function () {
   const STEPS = [
     {
       target: null,
-      title: "Hi Alex, I’m QP!",
+      title: "Hi Alex, I’m <span class=\"name\">QBot!</span>",
       text: "I’m your guide to the QualiPro Knowledge Hub. Let me show you around. It only takes 30 seconds.",
       next: "Let’s go",
     },

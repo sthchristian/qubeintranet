@@ -13,7 +13,7 @@ To run on terminal use: python3 -m http.server 5178
 index.html          Page markup (sections are marked with <!-- ===== ... ===== --> comments)
 css/
   base.css          Layout + DARK mode (default). Colour tokens are at the top in :root
-  mascot.css        QP robot in the chat card, its speech bubble, and the 3D model
+  mascot.css        QBot robot in the chat card, its speech bubble, and the 3D model
   topbar.css        Theme toggle, tour button, notifications + profile dropdowns
   tour.css          First-time tour: spotlight, flying robot, tooltip
   features.css      Search field, command palette, modal, dashboard widgets, AI drawer, Admin Panel,

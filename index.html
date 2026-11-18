@@ -26,13 +26,13 @@
     />
     <!-- ?v= makes the browser fetch a file again instead of using its cached copy.
          Raise the number on every css/ and js/ line here and below whenever one of those files changes. -->
-    <link rel="stylesheet" href="css/base.css?v=10" />
-    <link rel="stylesheet" href="css/mascot.css?v=10" />
-    <link rel="stylesheet" href="css/topbar.css?v=10" />
-    <link rel="stylesheet" href="css/tour.css?v=10" />
-    <link rel="stylesheet" href="css/features.css?v=10" />
-    <link rel="stylesheet" href="css/knowledge.css?v=10" />
-    <link rel="stylesheet" href="css/light.css?v=10" />
+    <link rel="stylesheet" href="css/base.css?v=14" />
+    <link rel="stylesheet" href="css/mascot.css?v=14" />
+    <link rel="stylesheet" href="css/topbar.css?v=14" />
+    <link rel="stylesheet" href="css/tour.css?v=14" />
+    <link rel="stylesheet" href="css/features.css?v=14" />
+    <link rel="stylesheet" href="css/knowledge.css?v=14" />
+    <link rel="stylesheet" href="css/light.css?v=14" />
   </head>
   <body>
     <!-- ===== Icon sprites (referenced with <use href="#i-...">) ===== -->
@@ -76,6 +76,11 @@
         <path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" />
       </symbol>
       <symbol id="i-ext" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" /></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24">
+        <path d="M3 6h18M8 6V4.5A1.5 1.5 0 0 1 9.5 3h5A1.5 1.5 0 0 1 16 4.5V6" />
+        <path d="M5.5 6l1 13.5A1.6 1.6 0 0 0 8.1 21h7.8a1.6 1.6 0 0 0 1.6-1.5L18.5 6" />
+        <path d="M10 10.5v6M14 10.5v6" />
+      </symbol>
       <symbol id="i-chevs" viewBox="0 0 24 24"><path d="m11 17-5-5 5-5M18 17l-5-5 5-5" /></symbol>
       <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /></symbol>
       <symbol id="i-user" viewBox="0 0 24 24">
@@ -298,7 +303,7 @@
             <p>Answers from across your team's knowledge.</p>
           </div>
         </section>
-        <!-- ===== Chat card + QP robot ===== -->
+        <!-- ===== Chat card + QBot robot ===== -->
         <section class="chat-stage tilt" aria-label="AI knowledge assistant">
           <div class="chat-top">
             <div class="assistant-id">
@@ -334,13 +339,13 @@
           </div>
           <div class="mascot-anchor">
             <div class="mascot-note" id="mascot-note" title="Take the tour">
-              <b>QP</b> &nbsp;I'm here if you need me
+              <b>QBot</b> &nbsp;I'm here if you need me
             </div>
             <button
               class="mascot"
               id="mascot"
               type="button"
-              aria-label="QP robot. Click for a wave, double-click for a jump, or drag me around"
+              aria-label="QBot robot. Click for a wave, double-click for a jump, or drag me around"
             >
               <!-- 2D image: shown until the 3D model is ready, and kept if it cannot load -->
               <img src="assets/qp-robot.webp" alt="" draggable="false" />
@@ -748,15 +753,15 @@
         <button class="send" type="submit" aria-label="Send question">↑</button>
       </form>
     </aside>
-    <script src="js/app.js?v=10"></script>
-    <script src="js/calendar.js?v=10"></script>
-    <script src="js/robot.js?v=10"></script>
-    <script src="js/tour.js?v=10"></script>
-    <script src="js/features.js?v=10"></script>
-    <script src="js/knowledge.js?v=10"></script>
-    <script src="js/chat.js?v=10"></script>
+    <script src="js/app.js?v=14"></script>
+    <script src="js/calendar.js?v=14"></script>
+    <script src="js/robot.js?v=14"></script>
+    <script src="js/tour.js?v=14"></script>
+    <script src="js/features.js?v=14"></script>
+    <script src="js/knowledge.js?v=14"></script>
+    <script src="js/chat.js?v=14"></script>
     <!-- 3D mascot: <model-viewer> (local copy, no internet needed) + the animation code -->
     <script src="js/vendor/model-viewer-umd.min.js"></script>
-    <script src="js/mascot3d.js?v=10"></script>
+    <script src="js/mascot3d.js?v=14"></script>
   </body>
 </html>

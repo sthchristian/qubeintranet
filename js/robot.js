@@ -1,8 +1,8 @@
 /* robot.js
- * QP robot: flight animation (shared with the tour) and drag-and-drop.
+ * QBot robot: flight animation (shared with the tour) and drag-and-drop.
  * Drag the robot anywhere; on release it flies back to its spot in the chat card.
  */
-/* ================= QP guide robot: shared flight helpers ================= */
+/* ================= QBot guide robot: shared flight helpers ================= */
 const mascot = $("#mascot"),
   note = $("#mascot-note"),
   guide = $("#guide"),
@@ -94,7 +94,7 @@ addEventListener(
       gBody.style.transformOrigin = `${(drag.offX / drag.w) * 100}% ${(drag.offY / drag.h) * 100}%`;
       guide.classList.add("on", "held");
       document.body.classList.add("is-holding", "grabbing");
-      say("<b>QP:</b> Wheee! Put me down!");
+      say("<b>QBot:</b> Wheee! Put me down!");
     }
     e.preventDefault();
     const now = performance.now(),
@@ -118,7 +118,7 @@ async function release(e) {
   gBody.style.transition = "transform .3s";
   gBody.style.transform = "";
   guide.classList.remove("held");
-  say("<b>QP:</b> Okay, flying home…");
+  say("<b>QBot:</b> Okay, flying home…");
   const h = homeOf();
   await flyTo(h.x, h.y);
   guide.classList.remove("on", "wave");
@@ -127,7 +127,7 @@ async function release(e) {
   gBody.style.transformOrigin = "";
   document.body.classList.remove("is-holding");
   returning = false;
-  say("<b>QP:</b> Home sweet home!", 1800);
+  say("<b>QBot:</b> Home sweet home!", 1800);
 }
 addEventListener("pointerup", release);
 addEventListener("pointercancel", release);

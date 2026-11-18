@@ -28,7 +28,7 @@ and open http://localhost:5178
 
 - `POSES`   body poses, angles in degrees per joint
 - `EYES`    eye shapes (happy, thinking, curious, calm …)
-- `QUOTES`  what QP says when clicked
+- `QUOTES`  what QBot says when clicked
 - `IDLE_AFTER` (30 s) and `TYPING_HOLD` near "Director"
 - Camera: the `camera-orbit` / `field-of-view` attributes in index.html
   (keep `CAMERA` in mascot3d.js the same as `camera-orbit`)

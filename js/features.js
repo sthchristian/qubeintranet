@@ -943,7 +943,7 @@
     if (openId && !news.some((n) => n.id === openId)) closeArticle();
   }
   const adminRow = (kind, id, icon, title, sub) =>
-    `<div class="row"><div class="news-ico">${icon}</div><span><strong>${esc(title)}</strong><small>${esc(sub)}</small></span><button type="button" class="icon-btn" data-del="${kind}" data-id="${esc(id)}" aria-label="Remove ${esc(title)}">✕</button></div>`;
+    `<div class="row"><div class="news-ico">${icon}</div><span><strong>${esc(title)}</strong><small>${esc(sub)}</small></span><button type="button" class="icon-btn" data-del="${kind}" data-id="${esc(id)}" aria-label="Remove ${esc(title)}"><svg class="ico"><use href="#i-trash" /></svg></button></div>`;
   function renderAdmin() {
     const byDate = (a, b) => (b.date + (b.time || "")).localeCompare(a.date + (a.time || ""));
     const draw = (sel, rows, empty) =>
