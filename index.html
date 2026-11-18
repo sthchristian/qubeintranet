@@ -26,13 +26,13 @@
     />
     <!-- ?v= makes the browser fetch a file again instead of using its cached copy.
          Raise the number on every css/ and js/ line here and below whenever one of those files changes. -->
-    <link rel="stylesheet" href="css/base.css?v=16" />
-    <link rel="stylesheet" href="css/mascot.css?v=16" />
-    <link rel="stylesheet" href="css/topbar.css?v=16" />
-    <link rel="stylesheet" href="css/tour.css?v=16" />
-    <link rel="stylesheet" href="css/features.css?v=16" />
-    <link rel="stylesheet" href="css/knowledge.css?v=16" />
-    <link rel="stylesheet" href="css/light.css?v=16" />
+    <link rel="stylesheet" href="css/base.css?v=17" />
+    <link rel="stylesheet" href="css/mascot.css?v=17" />
+    <link rel="stylesheet" href="css/topbar.css?v=17" />
+    <link rel="stylesheet" href="css/tour.css?v=17" />
+    <link rel="stylesheet" href="css/features.css?v=17" />
+    <link rel="stylesheet" href="css/knowledge.css?v=17" />
+    <link rel="stylesheet" href="css/light.css?v=17" />
   </head>
   <body>
     <!-- ===== Icon sprites (referenced with <use href="#i-...">) ===== -->
@@ -148,8 +148,11 @@
       <!-- On phones (<= 768px) this is a slide-out drawer opened from the top bar; on wider screens it can be hidden (js/app.js, "Sidebar") -->
       <aside class="rail" id="side-nav" aria-label="Sidebar">
         <div class="brand">
-          <img class="brand-logo brand-logo--light" src="assets/brand/gold-cream-cube/qube-logo-horizontal-light-transparent.svg" alt="Qube – The QualiPro Intranet" width="900" height="314" />
-          <img class="brand-logo brand-logo--dark" src="assets/brand/gold-cream-cube/qube-logo-horizontal-dark-transparent.svg" alt="Qube – The QualiPro Intranet" width="900" height="314" />
+          <!-- Logo = home: goes to the Dashboard (data-view-link, js/app.js "Sidebar views") -->
+          <button type="button" class="brand-home" data-view-link="dashboard" aria-label="Qube – go to Dashboard" title="Go to Dashboard">
+            <img class="brand-logo brand-logo--light" src="assets/brand/gold-cream-cube/qube-logo-horizontal-light-transparent.svg" alt="" width="900" height="314" />
+            <img class="brand-logo brand-logo--dark" src="assets/brand/gold-cream-cube/qube-logo-horizontal-dark-transparent.svg" alt="" width="900" height="314" />
+          </button>
           <button type="button" class="icon-btn nav-close" id="nav-close" aria-label="Close navigation">✕</button>
         </div>
         <!-- Hide navigation: shrinks the sidebar to an icon rail on wider screens (js/app.js, "Sidebar") -->
@@ -753,15 +756,15 @@
         <button class="send" type="submit" aria-label="Send question">↑</button>
       </form>
     </aside>
-    <script src="js/app.js?v=16"></script>
-    <script src="js/calendar.js?v=16"></script>
-    <script src="js/robot.js?v=16"></script>
-    <script src="js/tour.js?v=16"></script>
-    <script src="js/features.js?v=16"></script>
-    <script src="js/knowledge.js?v=16"></script>
-    <script src="js/chat.js?v=16"></script>
+    <script src="js/app.js?v=17"></script>
+    <script src="js/calendar.js?v=17"></script>
+    <script src="js/robot.js?v=17"></script>
+    <script src="js/tour.js?v=17"></script>
+    <script src="js/features.js?v=17"></script>
+    <script src="js/knowledge.js?v=17"></script>
+    <script src="js/chat.js?v=17"></script>
     <!-- 3D mascot: <model-viewer> (local copy, no internet needed) + the animation code -->
     <script src="js/vendor/model-viewer-umd.min.js"></script>
-    <script src="js/mascot3d.js?v=16"></script>
+    <script src="js/mascot3d.js?v=17"></script>
   </body>
 </html>

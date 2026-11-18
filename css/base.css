@@ -60,6 +60,24 @@ button {
   gap: 11px;
   padding: 0 0 18px;
 }
+/* The logo is a button to the Dashboard; it lays out like the logo did on its own */
+.brand-home {
+  display: flex;
+  align-items: center;
+  justify-content: inherit;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+.brand-home:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
 /* Horizontal Qube logotype — one file per theme, swapped in light.css */
 .brand-logo {
   display: block;
