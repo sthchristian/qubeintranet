@@ -26,13 +26,13 @@
     />
     <!-- ?v= makes the browser fetch a file again instead of using its cached copy.
          Raise the number on every css/ and js/ line here and below whenever one of those files changes. -->
-    <link rel="stylesheet" href="css/base.css?v=17" />
-    <link rel="stylesheet" href="css/mascot.css?v=17" />
-    <link rel="stylesheet" href="css/topbar.css?v=17" />
-    <link rel="stylesheet" href="css/tour.css?v=17" />
-    <link rel="stylesheet" href="css/features.css?v=17" />
-    <link rel="stylesheet" href="css/knowledge.css?v=17" />
-    <link rel="stylesheet" href="css/light.css?v=17" />
+    <link rel="stylesheet" href="css/base.css?v=24" />
+    <link rel="stylesheet" href="css/mascot.css?v=24" />
+    <link rel="stylesheet" href="css/topbar.css?v=24" />
+    <link rel="stylesheet" href="css/tour.css?v=24" />
+    <link rel="stylesheet" href="css/features.css?v=24" />
+    <link rel="stylesheet" href="css/knowledge.css?v=24" />
+    <link rel="stylesheet" href="css/light.css?v=24" />
   </head>
   <body>
     <!-- ===== Icon sprites (referenced with <use href="#i-...">) ===== -->
@@ -75,6 +75,10 @@
         <path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1" />
         <path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" />
       </symbol>
+      <!-- QualiChat / "new" sparkle (replaces ✳, which phones draw as a green emoji) -->
+      <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4" /></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z" /></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></symbol>
       <symbol id="i-ext" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" /></symbol>
       <symbol id="i-trash" viewBox="0 0 24 24">
         <path d="M3 6h18M8 6V4.5A1.5 1.5 0 0 1 9.5 3h5A1.5 1.5 0 0 1 16 4.5V6" />
@@ -242,14 +246,14 @@
                   </div>
                 </div>
                 <div class="notif unread">
-                  <div class="news-ico">↗</div>
+                  <div class="news-ico"><svg class="ico"><use href="#i-ext" /></svg></div>
                   <div>
                     <strong>QualiPro Core v4.2 released</strong
                     ><small>Engineering posted release notes · Yesterday</small>
                   </div>
                 </div>
                 <div class="notif">
-                  <div class="news-ico">✳</div>
+                  <div class="news-ico"><svg class="ico"><use href="#i-spark" /></svg></div>
                   <div>
                     <strong>Maja mentioned you in Projects</strong
                     ><small>“Alex, can you review the POC plan?” · Jun 4</small>
@@ -310,14 +314,14 @@
         <section class="chat-stage tilt" aria-label="AI knowledge assistant">
           <div class="chat-top">
             <div class="assistant-id">
-              <div class="assistant-icon">✳</div>
+              <div class="assistant-icon"><svg class="ico"><use href="#i-spark" /></svg></div>
               <div class="assistant-title">QualiChat <small>Knowledge assistant</small></div>
             </div>
-            <button class="link-btn" id="open-thread" type="button">Conversation ↗</button>
+            <button class="link-btn" id="open-thread" type="button">Conversation <svg class="ico ico-inline"><use href="#i-ext" /></svg></button>
           </div>
           <div class="dialog">
             <div class="hello">
-              <div class="bot-dot">✳</div>
+              <div class="bot-dot"><svg class="ico"><use href="#i-spark" /></svg></div>
               <p>
                 Hi Alex! Ask me about <strong>policies, projects or developer guides</strong>.
               </p>
@@ -385,36 +389,21 @@
                or a view (data-view-link). Pinned + recent are filled in by js/features.js -->
           <section class="widget" id="quick" data-dash="quick" data-dash-wide aria-labelledby="quick-title">
             <div class="widget-head"><h2 class="widget-title" id="quick-title">Quick access</h2></div>
-            <div class="quick-tiles">
-              <button type="button" class="tile" data-doc="devportal">
-                <span class="news-ico"><svg class="ico"><use href="#i-code" /></svg></span><strong>Dev Portal</strong><small>Engineering tools</small>
-              </button>
-              <button type="button" class="tile" data-doc="cicd">
-                <span class="news-ico"><svg class="ico"><use href="#i-server" /></svg></span><strong>CI/CD Status</strong><small>Builds &amp; deployments</small>
-              </button>
-              <button type="button" class="tile" data-doc="handbook">
-                <span class="news-ico"><svg class="ico"><use href="#i-book" /></svg></span><strong>Handbook</strong><small>People &amp; policies</small>
-              </button>
-              <button type="button" class="tile" data-doc="inventory">
-                <span class="news-ico"><svg class="ico"><use href="#i-laptop" /></svg></span><strong>IT Inventory</strong><small>Devices &amp; access</small>
-              </button>
-              <button type="button" class="tile" data-view-link="projects">
-                <span class="news-ico"><svg class="ico"><use href="#i-flow" /></svg></span><strong>Projects</strong><small>Team workspaces</small>
-              </button>
-              <button type="button" class="tile" data-doc="directory">
-                <span class="news-ico"><svg class="ico"><use href="#i-users" /></svg></span><strong>Directory</strong><small>Find a colleague</small>
-              </button>
+            <!-- Favorites + Recent are drawn by js/features.js ("Quick access"); saved in localStorage -->
+            <div class="quick-head">
+              <div class="widget-sub" id="fav-title">Favorites</div>
+              <button type="button" class="mini-link" id="fav-edit" aria-pressed="false" aria-controls="fav-grid">Edit</button>
             </div>
-            <div class="quick-more">
-              <div>
-                <div class="widget-sub">Pinned</div>
-                <div class="chip-row" id="pin-list"></div>
-              </div>
-              <div>
-                <div class="widget-sub">Recent</div>
-                <div id="recent-list"></div>
-              </div>
+            <div class="quick-tiles fav-grid" id="fav-grid" role="list" aria-labelledby="fav-title"></div>
+            <p class="fav-hint" id="fav-hint" hidden>Drag a card, or use its arrows, to change the order. ✕ removes it.</p>
+            <div class="quick-head">
+              <div class="widget-sub" id="recent-title">Recent</div>
+              <button type="button" class="mini-link" id="recent-clear" hidden>Clear</button>
             </div>
+            <div class="recent-row" id="recent-list" role="list" aria-labelledby="recent-title" hidden></div>
+            <p class="recent-help" id="recent-help" hidden>
+              Nothing opened yet. <button type="button" class="mini-link" data-open-search>Try the search field →</button>
+            </p>
           </section>
           <section class="widget" id="onboard" data-dash="onboard" aria-labelledby="onboard-title">
             <div class="widget-head">
@@ -439,7 +428,7 @@
           <section data-dash="news">
             <div class="section-head">
               <h2>News & information</h2>
-              <button data-view-link="news">View all ↗</button>
+              <button data-view-link="news">View all <svg class="ico ico-inline"><use href="#i-ext" /></svg></button>
             </div>
             <!-- Slideshow of the newest articles, built by js/features.js ("News") from localStorage -->
             <div class="news-slider" id="news-home" role="region" aria-roledescription="carousel" aria-label="Latest news"></div>
@@ -448,7 +437,7 @@
           <section data-dash="calendar">
             <div class="section-head">
               <h2>Calendar</h2>
-              <button data-toast="Opening full calendar">Open calendar ↗</button>
+              <button data-toast="Opening full calendar">Open calendar <svg class="ico ico-inline"><use href="#i-ext" /></svg></button>
             </div>
             <div class="cal" id="cal">
               <div class="cal-top">
@@ -490,9 +479,9 @@
             </div>
           </section>
           <div class="tile-grid">
-            <button class="tile" data-doc="onboarding"><span class="news-ico">✳</span><strong>Onboarding</strong><small>Your first weeks at QualiPro.</small></button>
+            <button class="tile" data-doc="onboarding"><span class="news-ico"><svg class="ico"><use href="#i-spark" /></svg></span><strong>Onboarding</strong><small>Your first weeks at QualiPro.</small></button>
             <button class="tile" data-doc="remote"><span class="news-ico">⌂</span><strong>Remote work</strong><small>Working from home and abroad.</small></button>
-            <button class="tile" data-doc="leave"><span class="news-ico">☀</span><strong>Time off &amp; leave</strong><small>Vacation, sick leave, parental leave.</small></button>
+            <button class="tile" data-doc="leave"><span class="news-ico"><svg class="ico"><use href="#i-sun" /></svg></span><strong>Time off &amp; leave</strong><small>Vacation, sick leave, parental leave.</small></button>
             <button class="tile" data-doc="expenses"><span class="news-ico">▤</span><strong>Expenses</strong><small>Travel, equipment and receipts.</small></button>
             <button class="tile" data-doc="conduct"><span class="news-ico">◈</span><strong>Code of conduct</strong><small>How we work together.</small></button>
             <button class="tile" data-doc="security"><span class="news-ico">◉</span><strong>Security</strong><small>Passwords, devices and data.</small></button>
@@ -732,7 +721,7 @@
             <h3 id="modal-title"></h3>
           </div>
           <div class="modal-actions">
-            <button class="icon-btn" id="modal-pin" type="button" aria-pressed="false">☆</button>
+            <button class="icon-btn" id="modal-pin" type="button" aria-pressed="false"><svg class="ico"><use href="#i-star" /></svg></button>
             <button class="icon-btn" id="modal-close" type="button" aria-label="Close">✕</button>
           </div>
         </div>
@@ -756,15 +745,15 @@
         <button class="send" type="submit" aria-label="Send question">↑</button>
       </form>
     </aside>
-    <script src="js/app.js?v=17"></script>
-    <script src="js/calendar.js?v=17"></script>
-    <script src="js/robot.js?v=17"></script>
-    <script src="js/tour.js?v=17"></script>
-    <script src="js/features.js?v=17"></script>
-    <script src="js/knowledge.js?v=17"></script>
-    <script src="js/chat.js?v=17"></script>
+    <script src="js/app.js?v=24"></script>
+    <script src="js/calendar.js?v=24"></script>
+    <script src="js/robot.js?v=24"></script>
+    <script src="js/tour.js?v=24"></script>
+    <script src="js/features.js?v=24"></script>
+    <script src="js/knowledge.js?v=24"></script>
+    <script src="js/chat.js?v=24"></script>
     <!-- 3D mascot: <model-viewer> (local copy, no internet needed) + the animation code -->
     <script src="js/vendor/model-viewer-umd.min.js"></script>
-    <script src="js/mascot3d.js?v=17"></script>
+    <script src="js/mascot3d.js?v=24"></script>
   </body>
 </html>

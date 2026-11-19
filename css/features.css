@@ -544,44 +544,423 @@ button.row:hover {
   text-decoration: underline;
 }
 
-/* Quick access: icon tiles (they reuse .tile from base.css), then pinned chips + recent list side by side */
+/* Quick access: Favorites (big cards, reuse .tile from base.css) + Recent (cards and dashed empty slots) */
+/* "FAVORITES  ·····  Edit" and "RECENT  ·····  Clear": label left, link far right, one row */
+.quick-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 12px;
+}
+.quick-head .widget-sub {
+  margin: 0;
+}
+.quick-head .mini-link {
+  margin-right: 0;
+}
+/* six cards across the full width of the box */
 .quick-tiles {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 12px;
+  gap: 14px;
+  width: 100%;
+  margin: 10px 0 18px;
+}
+.fav {
+  position: relative;
+  min-width: 0;
+  display: grid;
 }
 .quick-tiles .tile {
   gap: 3px;
   min-width: 0;
+  width: 100%;
   background: var(--panel2);
+  color: var(--ink);
+  font: inherit;
   cursor: pointer;
+  transition:
+    border-color 0.18s,
+    transform 0.18s,
+    box-shadow 0.18s;
+}
+.quick-tiles .tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px #0000002e;
+}
+.quick-tiles .tile strong {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .quick-tiles .news-ico {
   width: 38px;
   height: 38px;
   border-radius: 10px;
   margin-bottom: 10px;
+  color: #ffb817;
 }
 .quick-tiles .news-ico .ico {
   width: 19px;
   height: 19px;
 }
-.quick-tiles .tile:focus-visible {
+.quick-tiles .tile:focus-visible,
+.fav-add:focus-visible,
+.fav-tools button:focus-visible,
+.recent-open:focus-visible,
+.recent-card .star:focus-visible,
+.fav-pick-item:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
 }
-.quick-more {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
-  gap: 0 24px;
-  margin-top: 4px;
+/* Edit mode: cards show their tools and can be dragged */
+.fav-grid.editing .fav {
+  cursor: grab;
 }
-.quick-more #recent-list {
+.fav-grid.editing .tile {
+  pointer-events: none;
+  border-style: dashed;
+  border-color: var(--quick-dash);
+}
+.fav-grid.editing .tile:hover {
+  transform: none;
+  box-shadow: none;
+}
+.fav.fav-dragging {
+  opacity: 0.35;
+}
+.fav-tools {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 3px;
+}
+.fav-tools button {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--card-line);
+  border-radius: 7px;
+  background: var(--card);
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+}
+.fav-tools button:hover:not(:disabled) {
+  color: var(--ink);
+  border-color: var(--gold);
+}
+.fav-tools button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.fav-tools .ico {
+  width: 13px;
+  height: 13px;
+}
+.fav-tools [data-fav-move="-1"] .ico {
+  transform: rotate(90deg);
+}
+.fav-tools [data-fav-move="1"] .ico {
+  transform: rotate(-90deg);
+}
+.fav-tools .fav-remove:hover {
+  color: #ff6b5e;
+  border-color: #ff6b5e;
+}
+/* no favorites: the single "Add favorite" card stays in the first place on the left, at full card height */
+.fav-grid.is-empty .fav-add {
+  min-height: 122px;
+}
+.fav-add {
+  width: 100%;
+  display: grid;
+  gap: 3px;
+  align-content: start;
+  min-height: 100%;
+  padding: 16px;
+  border: 1.5px dashed var(--quick-dash);
+  border-radius: 13px;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.18s,
+    color 0.18s;
+}
+.fav-add strong {
+  color: var(--ink);
+  font-size: 13px;
+}
+.fav-add small,
+.quick-tiles .tile small {
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fav-add .news-ico {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  color: #ffb817;
+}
+.fav-add:hover:not(:disabled),
+.fav-add:focus-visible {
+  border-color: #ffb817;
+  color: var(--ink);
+}
+.fav-add:hover .news-ico {
+  background: #ffb8172e;
+}
+/* small × on a favorite: shows on hover / keyboard focus, always on touch screens */
+.fav-x {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--card-line);
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    opacity 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+}
+.fav-x:hover {
+  color: #ff6b5e;
+  border-color: #ff6b5e;
+}
+.fav-x:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+@media (hover: hover) {
+  .fav-x {
+    opacity: 0;
+  }
+  .fav:hover .fav-x,
+  .fav:focus-within .fav-x {
+    opacity: 1;
+  }
+}
+.fav-add:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.fav-hint {
+  margin: -8px 0 16px;
+  color: var(--muted);
+  font-size: 11px;
+}
+/* dashed outline colour: light mode overrides it in light.css */
+#quick,
+#modal {
+  --quick-dash: rgba(255, 255, 255, 0.22);
+}
+/* Recent: compact cards side by side, wrapping onto a new line */
+.recent-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 4px;
+}
+.recent-row[hidden] {
+  display: none;
+}
+.recent-card {
+  position: relative;
+  flex: 0 1 220px;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--card-line);
+  border-radius: 14px;
+  background: var(--panel2);
+  transition:
+    border-color 0.18s,
+    transform 0.18s;
+}
+.recent-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+.recent-open {
+  flex: 1;
+  min-width: 0;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 4px 9px 12px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.recent-open > span:last-child {
+  min-width: 0;
+}
+.recent-open .news-ico {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+  color: #ffb817;
+}
+.recent-open strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.recent-open small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.star {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  margin-right: 4px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+.star .ico,
+#modal-pin .ico {
+  width: 15px;
+  height: 15px;
+}
+.star:hover {
+  color: var(--ink);
+}
+.star.on,
+#modal-pin.on {
+  color: #ffb817;
+}
+.star.on .ico,
+#modal-pin.on .ico {
+  fill: currentColor;
+}
+/* the star only shows on hover / focus unless it is on (always visible on touch screens) */
+@media (hover: hover) {
+  .recent-card .star:not(.on) {
+    opacity: 0;
+  }
+  .recent-card:hover .star,
+  .recent-card:focus-within .star {
+    opacity: 1;
+  }
+}
+.recent-help {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.recent-help .mini-link {
+  margin: 0;
+  padding: 0 2px;
+  font-size: 12px;
+}
+/* "Add favorites" picker in the modal */
+.fav-pick-note {
+  color: var(--muted);
+  font-size: 12px;
+}
+.fav-pick {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 12px;
+  gap: 8px;
+  margin-bottom: 6px;
 }
-.quick-more .empty-note {
+.fav-pick-item {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--card-line);
+  border-radius: 11px;
+  background: var(--panel2);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.fav-pick-item:hover {
+  border-color: var(--gold);
+}
+.fav-pick-item .news-ico {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  color: #ffb817;
+}
+.fav-pick-item > span:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+}
+.fav-pick-item strong {
+  display: block;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fav-pick-item small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+}
+.fav-pick-item i {
+  flex: none;
+  padding: 3px 9px;
+  border: 1px solid var(--card-line);
+  border-radius: 99px;
+  color: var(--muted);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 600;
+}
+.fav-pick-item.on {
+  border-color: var(--gold);
+}
+.fav-pick-item.on i {
+  background: #ffb817;
+  border-color: #ffb817;
+  color: #141412;
+}
+.empty-note {
   grid-column: 1 / -1;
 }
 .chip-row {
@@ -987,12 +1366,15 @@ button.row:hover {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
-  .quick-tiles .tile {
+  .quick-tiles .tile,
+  .fav-add {
     padding: 13px;
   }
-  .quick-more,
-  .quick-more #recent-list {
-    grid-template-columns: minmax(0, 1fr);
+  .fav-pick {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .recent-card {
+    flex: 1 1 calc(50% - 5px); /* two per row on phones */
   }
 }
 
