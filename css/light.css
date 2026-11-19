@@ -136,11 +136,12 @@ html[data-theme="light"] .crumb {
   }
 }
 html[data-theme="light"] .nav-collapse {
+  background: #fbfaf6; /* solid, so the sidebar border doesn't show through */
   color: #5d5c55;
   border-color: #e3ddcd;
 }
 html[data-theme="light"] .nav-collapse:hover {
-  background: #14141208;
+  background: #f4f3ef;
   border-color: var(--gold);
   color: var(--ink);
 }

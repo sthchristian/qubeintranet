@@ -296,7 +296,7 @@ $("#sp-tour").addEventListener("click", () => {
 /* ---------- Sidebar ----------
  * Phones (<= 768px): the sidebar is a slide-out drawer. The hamburger in the top bar opens it;
  * a link, the backdrop, the ✕ button or Esc closes it.
- * Wider screens: "Hide navigation" under the logo shrinks the sidebar to an icon rail and back
+ * Wider screens: the arrow on the line between the sidebar and the page shrinks the sidebar to an icon rail and back
  * (saved as "qp-nav-collapsed"). Every link has a title, so the icons still say what they are.
  * The classes live on <html> so the saved state applies before the page paints (see the <head> script). */
 const sideNav = $("#side-nav"),
@@ -316,7 +316,7 @@ function setNavOpen(open, { focus = true } = {}) {
 }
 function syncNavLabel() {
   const label = root.classList.contains("nav-collapsed") ? "Show navigation" : "Hide navigation";
-  navCollapse.querySelector(".label").textContent = label;
+  navCollapse.setAttribute("aria-label", label); // the button is just an arrow on the sidebar edge
   navCollapse.title = label;
 }
 function setNavCollapsed(c) {

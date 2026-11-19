@@ -26,13 +26,13 @@
     />
     <!-- ?v= makes the browser fetch a file again instead of using its cached copy.
          Raise the number on every css/ and js/ line here and below whenever one of those files changes. -->
-    <link rel="stylesheet" href="css/base.css?v=36" />
-    <link rel="stylesheet" href="css/mascot.css?v=36" />
-    <link rel="stylesheet" href="css/topbar.css?v=36" />
-    <link rel="stylesheet" href="css/tour.css?v=36" />
-    <link rel="stylesheet" href="css/features.css?v=36" />
-    <link rel="stylesheet" href="css/knowledge.css?v=36" />
-    <link rel="stylesheet" href="css/light.css?v=36" />
+    <link rel="stylesheet" href="css/base.css?v=37" />
+    <link rel="stylesheet" href="css/mascot.css?v=37" />
+    <link rel="stylesheet" href="css/topbar.css?v=37" />
+    <link rel="stylesheet" href="css/tour.css?v=37" />
+    <link rel="stylesheet" href="css/features.css?v=37" />
+    <link rel="stylesheet" href="css/knowledge.css?v=37" />
+    <link rel="stylesheet" href="css/light.css?v=37" />
   </head>
   <body>
     <!-- ===== Icon sprites (referenced with <use href="#i-...">) ===== -->
@@ -161,10 +161,6 @@
           </button>
           <button type="button" class="icon-btn nav-close" id="nav-close" aria-label="Close navigation">✕</button>
         </div>
-        <!-- Hide navigation: shrinks the sidebar to an icon rail on wider screens (js/app.js, "Sidebar") -->
-        <button type="button" class="nav-collapse" id="nav-collapse" aria-controls="side-nav" aria-expanded="true">
-          <span class="nav-icon"><svg class="ico"><use href="#i-chevs" /></svg></span><span class="label">Hide navigation</span>
-        </button>
         <!-- Workspace + Quick links: scroll on their own when they don't fit (css/base.css, "Sidebar") -->
         <div class="rail-scroll">
           <div class="rail-label">Workspace</div>
@@ -205,6 +201,10 @@
           </nav>
         </div>
       </aside>
+      <!-- Hide/show navigation: the arrow on the line between the sidebar and the page, wider screens only (js/app.js, "Sidebar") -->
+      <button type="button" class="nav-collapse" id="nav-collapse" aria-controls="side-nav" aria-expanded="true" aria-label="Hide navigation" title="Hide navigation">
+        <span class="nav-icon"><svg class="ico"><use href="#i-chevs" /></svg></span>
+      </button>
       <main class="main">
         <!-- ===== Top bar: search, settings, notifications, profile ===== -->
         <header class="topbar">
@@ -785,16 +785,16 @@
       </form>
     </aside>
     <!-- Swedish texts for the language setting (js/app.js, "Language") -->
-    <script src="js/lang-sv.js?v=36"></script>
-    <script src="js/app.js?v=36"></script>
-    <script src="js/calendar.js?v=36"></script>
-    <script src="js/robot.js?v=36"></script>
-    <script src="js/tour.js?v=36"></script>
-    <script src="js/features.js?v=36"></script>
-    <script src="js/knowledge.js?v=36"></script>
-    <script src="js/chat.js?v=36"></script>
+    <script src="js/lang-sv.js?v=37"></script>
+    <script src="js/app.js?v=37"></script>
+    <script src="js/calendar.js?v=37"></script>
+    <script src="js/robot.js?v=37"></script>
+    <script src="js/tour.js?v=37"></script>
+    <script src="js/features.js?v=37"></script>
+    <script src="js/knowledge.js?v=37"></script>
+    <script src="js/chat.js?v=37"></script>
     <!-- 3D mascot: <model-viewer> (local copy, no internet needed) + the animation code -->
     <script src="js/vendor/model-viewer-umd.min.js"></script>
-    <script src="js/mascot3d.js?v=36"></script>
+    <script src="js/mascot3d.js?v=37"></script>
   </body>
 </html>
