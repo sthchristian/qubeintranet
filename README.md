@@ -49,6 +49,10 @@ Handy:
 - Sidebar icons: SVG `<symbol>`s at the top of `index.html` (quick links: `LINK_ICONS` in `js/features.js`).
 - News: the starting articles are `NEWS_DEFAULTS` in `js/features.js` (copied into the browser on the first
   visit), covers per category in `NEWS_COVERS`, slideshow length/speed in `HOME_SLIDES` / `SLIDE_EVERY`.
+- Language: the gear (top right) switches between English and Svenska. The Swedish texts are in
+  `js/lang-sv.js` (English text -> Swedish); `js/app.js` ("Language") swaps every text on the page,
+  including text added later by the scripts. Texts with changing parts (dates, "5 min ago") are
+  handled by `LANG_PATTERNS` in `js/app.js`. Anything missing from the list simply stays in English.
 - Brand colours: `--gold`, `--bg`, `--panel`… in `base.css` (dark) and `light.css` (light).
 - See the tour again: run `qpTour.reset()` in the browser console and reload.
 - Add a tool or document: add an entry to `DOCS` in `js/features.js`.
@@ -64,7 +68,7 @@ Handy:
 - Quick access: Favorites are drawn by `js/features.js` ("Quick access"). The six default cards are `FAV_CARDS`
   (title, subtitle, icon); users add more with Edit → Add favorite or the ☆ in a document. Recent fills itself
   from what is opened (documents, and pages opened from a card or the search).
-- Saved in the browser (localStorage): `qp-theme`, `qp-favorites`, `qp-recent`,
+- Saved in the browser (localStorage): `qp-theme`, `qp-favorites`, `qp-lang`, `qp-recent`,
   `qp-onboarding`, `qp-quicklinks`, `qp-role`, `qp-news`, `qp-events`, `qp-dashboard-order-v2`,
   `qp-nav-collapsed`, `qp-kb-filter`, `qp-news-v2` (all news, newest first; uploaded cover images are
   stored in it, so the browser's ~5 MB limit applies).

@@ -41,12 +41,12 @@ const tour = (function () {
     {
       target: "#profile-btn",
       title: "Your profile",
-      text: "Your profile, settings and sign-out live up here.",
+      text: "Your profile and sign-out live up here.",
     },
     {
-      target: "#theme-btn",
-      title: "Light or dark?",
-      text: "Switch between light and dark mode whenever you like (or press D). We’ll remember your choice.",
+      target: "#settings-btn",
+      title: "Your settings",
+      text: "The gear opens your settings: light or dark mode (or press D), language, and help. We’ll remember your choices.",
     },
     {
       target: "#news-home",
@@ -64,9 +64,9 @@ const tour = (function () {
       text: "Search pages, tools and actions here, or press Cmd/Ctrl + K from anywhere.",
     },
     {
-      target: "#tour-btn",
+      target: "#settings-btn",
       title: "That’s the tour!",
-      text: "Replay it any time from here, or click my speech bubble. Psst: click me for a wave, double-click for a jump, or grab me and drag me around!",
+      text: "Replay it any time from the gear (Take the tour), or click my speech bubble. Psst: click me for a wave, double-click for a jump, or grab me and drag me around!",
       next: "Finish",
     },
   ];
@@ -273,7 +273,6 @@ const tour = (function () {
   });
   addEventListener("resize", reflow);
   addEventListener("scroll", reflow, { passive: true });
-  $("#tour-btn").addEventListener("click", start);
   $("#settings-tour").addEventListener("click", start);
   if (!store.get()) addEventListener("load", () => setTimeout(start, 900));
   api.start = start;

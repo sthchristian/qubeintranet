@@ -1532,3 +1532,27 @@ button {
   height: 13px;
   vertical-align: -2px;
 }
+
+/* QBot's speech bubble stays on his left. Desktop: js/robot.js limits its width to the free space between
+   the chat box and QBot, so a long (or Swedish) line wraps instead of covering the text box.
+   Tablet + phone: QBot sits under the text box, so the bubble goes to his left, below the hint line. */
+@media (max-width: 1000px) {
+  .mascot-note,
+  .chat-stage .mascot-note {
+    bottom: auto;
+    top: 48px;
+    right: calc(100% + 10px);
+    max-width: min(190px, calc(100vw - 170px));
+    transform-origin: right center;
+  }
+  .mascot-note:after,
+  .chat-stage .mascot-note:after {
+    top: 50%;
+    bottom: auto;
+    right: -6px;
+    border-bottom: 0;
+    border-top: 1px solid #54492f;
+    border-right: 1px solid #54492f;
+    transform: translateY(-50%) rotate(45deg);
+  }
+}

@@ -53,13 +53,27 @@ const homeOf = () => {
 };
 
 /* ================= Drag the robot around; it flies home when released ================= */
-const NOTE_IDLE = note.innerHTML;
+const NOTE_IDLE = "<b>QBot</b> &nbsp;I'm here if you need me"; // English, like the HTML (js/app.js translates it when Svenska is chosen)
 let noteTimer;
 function say(html, ms) {
   clearTimeout(noteTimer);
   note.innerHTML = html;
   if (ms) noteTimer = setTimeout(() => (note.innerHTML = NOTE_IDLE), ms);
 }
+/* Desktop: the speech bubble sits on QBot's left, so it may only use the free space between the
+   chat box and QBot. A longer (or Swedish) line then wraps onto another row instead of covering
+   the text box. Tablet and phone place it with CSS (css/base.css, "QBot's speech bubble"). */
+const noteDialog = $(".dialog"),
+  noteAnchor = $(".mascot-anchor"),
+  noteWide = matchMedia("(min-width: 1001px)");
+function fitNote() {
+  if (!noteWide.matches) return (note.style.maxWidth = "");
+  const free = noteAnchor.getBoundingClientRect().left - noteDialog.getBoundingClientRect().right - 22;
+  note.style.maxWidth = Math.max(96, Math.min(190, Math.floor(free))) + "px";
+}
+new ResizeObserver(fitNote).observe(noteDialog.parentElement); // window size, sidebar shown / hidden
+noteWide.addEventListener("change", fitNote);
+fitNote();
 let drag = null,
   justDragged = false,
   returning = false;

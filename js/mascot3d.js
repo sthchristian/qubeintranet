@@ -418,7 +418,7 @@
       rig.pose("rest", 5);
       rig.look("happy");
     }
-    if ((next === "rest" || next === "curious") && typeof NOTE_IDLE === "string" && /listening|let me check/.test(note.textContent)) say(NOTE_IDLE);
+    if ((next === "rest" || next === "curious") && typeof NOTE_IDLE === "string" && /listening|let me check|lyssnar|kollar/.test(note.textContent)) say(NOTE_IDLE);
   }
 
   /* ---------- 2. Typing / thinking ---------- */

@@ -279,7 +279,7 @@
      An id is a DOCS key ("devportal") or a page ("view:projects").
      ===================================================================== */
   const sym = (id) => `<svg class="ico"><use href="#${id}" /></svg>`;
-  /* the six default cards: their own title, subtitle and icon */
+  /* the six suggested cards (listed first in the "Add favorite" picker): their own title, subtitle and icon */
   const FAV_CARDS = {
     devportal: { title: "Dev Portal", sub: "Engineering tools", icon: "i-code" },
     cicd: { title: "CI/CD Status", sub: "Builds & deployments", icon: "i-server" },
@@ -327,11 +327,7 @@
   }
   function loadFavs() {
     let list = store.get("qp-favorites", null);
-    if (!Array.isArray(list)) {
-      /* first visit: the six default cards, plus anything pinned with the old ☆ (only if it was changed from the defaults) */
-      const oldPins = store.get("qp-pins", null);
-      list = [...FAV_DEFAULT, ...(Array.isArray(oldPins) ? oldPins : [])];
-    }
+    if (!Array.isArray(list)) list = []; // a new user starts with no favorites, just the "Add favorite" card
     return [...new Set(list)].filter((id) => typeof id === "string" && quickItem(id)).slice(0, FAV_MAX);
   }
   let favs = loadFavs();

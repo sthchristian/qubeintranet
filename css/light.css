@@ -604,3 +604,18 @@ html[data-theme="light"] .fav-x {
   background: #fff;
   border-color: #ebe5d4;
 }
+/* Settings popover */
+html[data-theme="light"] .theme-switch {
+  background: #fff;
+  border-color: #ebe5d4;
+}
+html[data-theme="light"] .ts-thumb {
+  box-shadow: 0 2px 6px #2a220f33;
+}
+html[data-theme="light"] .sp-help {
+  border-color: #ebe5d4;
+  background: #fff8e6;
+}
+html[data-theme="light"] .sp-help:hover {
+  border-color: #ffb817;
+}
