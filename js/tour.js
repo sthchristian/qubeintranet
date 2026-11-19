@@ -103,6 +103,21 @@ const tour = (function () {
     },
   };
 
+  /* Resolves once the page has stopped scrolling (a smooth scroll can take well over half a second on a
+     long page), so the spotlight is measured where the element really ends up. */
+  function scrollSettled(max = 1500) {
+    return new Promise((done) => {
+      const t0 = performance.now();
+      let last = NaN,
+        still = 0;
+      (function check() {
+        still = scrollY === last ? still + 1 : 0;
+        last = scrollY;
+        if (still >= 3 || performance.now() - t0 > max) done();
+        else requestAnimationFrame(check);
+      })();
+    });
+  }
   function renderTip() {
     const s = steps[i],
       last = i === steps.length - 1;
@@ -190,7 +205,7 @@ const tour = (function () {
       const b = el.getBoundingClientRect();
       if (b.top < 70 || b.bottom > innerHeight - 70) {
         el.scrollIntoView({ block: "center", behavior: reduce() ? "auto" : "smooth" });
-        await sleep(reduce() ? 30 : 450);
+        await scrollSettled();
       }
     }
     renderTip();
@@ -204,9 +219,10 @@ const tour = (function () {
     busy = false;
   }
   function reflow() {
-    if (!api.active || busy) return;
+    if (!api.active) return;
     const L = layout();
-    placeSpot(L.r);
+    placeSpot(L.r); // the spotlight follows the page even while QBot is still flying to it
+    if (busy) return;
     setGuide(L.robot.x, L.robot.y);
     tip.style.left = L.t.x + "px";
     tip.style.top = L.t.y + "px";
@@ -222,7 +238,7 @@ const tour = (function () {
     steps = STEPS.filter((s) => !s.target || visible($(s.target)));
     if (scrollY > 10) {
       scrollTo({ top: 0, behavior: reduce() ? "auto" : "smooth" });
-      await sleep(reduce() ? 30 : 500);
+      await scrollSettled();
     }
     guide.classList.add("on");
     const h = homeOf();
