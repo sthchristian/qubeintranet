@@ -6,7 +6,7 @@
  * --panel2, --muted, --gold, --gold-ink, --ink.
  *
  * Every selector is scoped to #kb-grid or a .kb-* class, so the shared .tile and
- * .tile-grid used by Handbook, IT support and Projects are left untouched. The two
+ * .tile-grid used by IT support and Projects are left untouched. The two
  * exceptions are at the bottom: they size the hub's SVG icon where a Knowledge Hub
  * document shows up in the dashboard's Quick access, next to the text icons.
  * Type scale in the hub: card title 16 · description 13 · chips/buttons 13 ·

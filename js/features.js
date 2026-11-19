@@ -66,7 +66,7 @@
     devportal: {
       title: "Dev Portal",
       kind: "Tool",
-      icon: "⌘",
+      icon: svgIcon("i-code"),
       keys: "developer api docs services environments",
       html: `<p>Services, APIs and environments in one place.</p>
         <div class="rows">
@@ -84,7 +84,7 @@
     cicd: {
       title: "CI/CD pipelines",
       kind: "Tool",
-      icon: "↻",
+      icon: svgIcon("i-server"),
       keys: "deploy deployment pipeline build release",
       html: `<p>Latest pipeline runs for your teams.</p>
         <div class="rows">
@@ -98,7 +98,7 @@
     directory: {
       title: "Directory",
       kind: "Tool",
-      icon: "◉",
+      icon: svgIcon("i-users"),
       keys: "people colleagues contacts phone team",
       html: `<input class="field" id="dir-q" type="text" placeholder="Search people, roles or teams…" autocomplete="off" />
         <div class="rows" id="dir-list"></div>`,
@@ -124,7 +124,7 @@
     inventory: {
       title: "IT Inventory",
       kind: "Tool",
-      icon: "▦",
+      icon: svgIcon("i-laptop"),
       keys: "devices laptop hardware equipment access licences accounts",
       html: `<p>Devices and access registered to you.</p>
         <div class="rows">
@@ -144,16 +144,36 @@
     handbook: {
       title: "Personalhandbok 2026",
       kind: "Handbook",
-      icon: "▣",
+      icon: svgIcon("i-book"),
       keys: "employee handbook policy personal",
+      /* The handbook is now one document in the Knowledge Hub (js/knowledge.js, "employee-handbook").
+         Each topic points to the hub document(s) that cover it, so nothing is written twice. */
       html: `<p>The complete employee handbook. Pick a chapter.</p>
+        <h4>Onboarding</h4>
         <div class="rows">
-          <button class="row" data-doc="onboarding"><span><strong>§1 Onboarding</strong><small>Your first weeks</small></span>›</button>
-          <button class="row" data-doc="remote"><span><strong>§2 Distansarbete</strong><small>Remote and hybrid work</small></span>›</button>
-          <button class="row" data-doc="leave"><span><strong>§5 Ledighet</strong><small>Vacation, sick and parental leave</small></span>›</button>
-          <button class="row" data-doc="expenses"><span><strong>§7 Utlägg</strong><small>Expenses and equipment</small></span>›</button>
-          <button class="row" data-doc="conduct"><span><strong>§9 Uppförandekod</strong><small>Code of conduct</small></span>›</button>
-          <button class="row" data-doc="security"><span><strong>IT Security Policy</strong><small>Keys, passwords, devices</small></span>›</button>
+          <button class="row" data-doc="onboarding-checklist"><span><strong>Onboarding Checklist</strong><small>Your first weeks at QualiPro.</small></span>›</button>
+        </div>
+        <h4>Remote work</h4>
+        <div class="rows">
+          <button class="row" data-doc="remote-work-policy"><span><strong>Remote Work Policy</strong><small>Working from home and abroad.</small></span>›</button>
+        </div>
+        <h4>Time off &amp; leave</h4>
+        <div class="rows">
+          <button class="row" data-doc="vacation-policy"><span><strong>Vacation Policy</strong><small>Vacation days and how to request them.</small></span>›</button>
+          <button class="row" data-doc="hr-guidelines"><span><strong>HR Guidelines</strong><small>Sick leave, parental leave and benefits.</small></span>›</button>
+        </div>
+        <h4>Expenses</h4>
+        <div class="rows">
+          <button class="row" data-doc="expense-travel-guide"><span><strong>Expense &amp; Travel Guide</strong><small>Travel, equipment and receipts.</small></span>›</button>
+        </div>
+        <h4>Code of conduct</h4>
+        <div class="rows">
+          <button class="row" data-doc="code-of-conduct"><span><strong>Code of Conduct</strong><small>How we work together.</small></span>›</button>
+        </div>
+        <h4>Security</h4>
+        <div class="rows">
+          <button class="row" data-doc="it-security-policy"><span><strong>IT Security Policy</strong><small>Security keys, devices and incidents.</small></span>›</button>
+          <button class="row" data-doc="password-access-guide"><span><strong>Password &amp; Access Guide</strong><small>Passwords and access to systems.</small></span>›</button>
         </div>`,
     },
     onboarding: {
@@ -168,7 +188,7 @@
     remote: {
       title: "Remote work",
       kind: "Handbook",
-      icon: "⌂",
+      icon: svgIcon("i-home"),
       keys: "distansarbete hybrid home abroad",
       html: `<p>Personalhandbok 2026 · §2 Distansarbete</p>
         <ul><li>Up to three remote days per week, agreed with your manager.</li><li>Core hours are 09:30–15:00 CET.</li><li>Working from abroad: up to 20 days per year inside the EU/EEA, approved in advance.</li><li>Always use the company VPN and a managed device.</li></ul>`,
@@ -179,12 +199,16 @@
       icon: ICON.sun,
       keys: "vacation semester sick parental ledighet",
       html: `<p>Personalhandbok 2026 · §5 Ledighet</p>
-        <ul><li>30 vacation days per year.</li><li>Request summer vacation before April 30.</li><li>Sick leave: tell your manager before 09:00. A doctor's note is needed from day 8.</li><li>Parental leave is topped up to 90% of salary for six months.</li></ul>`,
+        <ul><li>30 vacation days per year.</li><li>Request summer vacation before April 30.</li></ul>
+        <h4>Sick and parental leave</h4>
+        <div class="rows">
+          <button class="row" data-doc="hr-guidelines"><span><strong>HR Guidelines</strong><small>Sick leave, parental leave and benefits.</small></span>›</button>
+        </div>`,
     },
     expenses: {
       title: "Expenses",
       kind: "Handbook",
-      icon: "▤",
+      icon: svgIcon("i-doc"),
       keys: "utlägg receipts travel equipment reimbursement",
       html: `<p>Personalhandbok 2026 · §7 Utlägg</p>
         <ul><li>Submit receipts within 30 days.</li><li>Purchases over 2,000 SEK need approval first.</li><li>Home-office equipment: up to 5,000 SEK every three years.</li><li>Travel is booked through the travel portal.</li></ul>`,
@@ -192,7 +216,7 @@
     conduct: {
       title: "Code of conduct",
       kind: "Handbook",
-      icon: "◈",
+      icon: svgIcon("i-board"),
       keys: "uppförandekod values behaviour",
       html: `<p>Personalhandbok 2026 · §9 Uppförandekod</p>
         <ul><li>Treat colleagues, clients and candidates with respect.</li><li>Speak up early. Concerns go to your manager or People & Culture.</li><li>Keep client information confidential.</li></ul>`,
@@ -200,13 +224,27 @@
     security: {
       title: "Security",
       kind: "Handbook",
-      icon: "◉",
+      icon: svgIcon("i-shield"),
       keys: "yubikey mfa password device security key policy",
       html: `<p>IT Security Policy · §4</p>
         <ul><li>A hardware security key (YubiKey) is required for all accounts from June 15.</li><li>Register two keys: one primary, one backup.</li><li>Lost key? Report it to IT support within 24 hours.</li><li>Devices lock after 5 minutes and are fully encrypted.</li></ul>
         <div class="modal-foot"><button class="btn primary" data-say="Opening key registration (prototype)">Register a key</button></div>`,
     },
   };
+  /* The Employee handbook moved into the Knowledge Hub. The handbook entries above stay, because the
+     hub documents borrow their text (doc: "…" in js/knowledge.js), but anything that opens one of them
+     (the checklist, QualiChat sources, the search, saved favorites and recents) gets the hub document. */
+  const MOVED = {
+    handbook: "employee-handbook",
+    onboarding: "onboarding-checklist",
+    remote: "remote-work-policy",
+    leave: "vacation-policy",
+    expenses: "expense-travel-guide",
+    conduct: "code-of-conduct",
+    security: "it-security-policy",
+    "view:handbook": "view:knowledge",
+  };
+  const canon = (id) => MOVED[id] || id;
 
   /* =====================================================================
      Modal
@@ -237,6 +275,7 @@
     if (modalFocus && modalFocus.focus) modalFocus.focus({ preventScroll: true });
   }
   function openDoc(id) {
+    if (DOCS[canon(id)]) id = canon(id); // a handbook chapter opens its Knowledge Hub document
     const d = DOCS[id];
     if (!d) return;
     showModal({ kicker: d.kind, title: d.title, html: d.html, pinId: id });
@@ -283,19 +322,16 @@
   const FAV_CARDS = {
     devportal: { title: "Dev Portal", sub: "Engineering tools", icon: "i-code" },
     cicd: { title: "CI/CD Status", sub: "Builds & deployments", icon: "i-server" },
-    handbook: { title: "Handbook", sub: "People & policies", icon: "i-book" },
+    "employee-handbook": { title: "Handbook", sub: "People & policies", icon: "i-book" },
     inventory: { title: "IT Inventory", sub: "Devices & access", icon: "i-laptop" },
     "view:projects": { title: "Projects", sub: "Team workspaces", icon: "i-flow" },
     directory: { title: "Directory", sub: "Find a colleague", icon: "i-users" },
   };
   const FAV_DEFAULT = Object.keys(FAV_CARDS);
   const FAV_MAX = 12;
-  /* SVG icons for the other documents, so every card matches the six above */
-  const DOC_SYMS = { onboarding: "i-spark", remote: "i-home", leave: "i-sun", expenses: "i-doc", conduct: "i-board", security: "i-shield" };
   /* pages that can be a favorite */
   const FAV_VIEWS = {
     news: { sub: "Company updates", icon: "i-news" },
-    handbook: { sub: "Policies & guides", icon: "i-book" },
     knowledge: { sub: "Document library", icon: "i-library" },
     it: { sub: "Help & tickets", icon: "i-headset" },
     projects: { sub: "Team workspaces", icon: "i-flow" },
@@ -316,7 +352,7 @@
       title: c ? c.title : d.title,
       sub: c ? c.sub : d.kind,
       kind: d.kind,
-      icon: c ? sym(c.icon) : DOC_SYMS[id] ? sym(DOC_SYMS[id]) : d.icon,
+      icon: c ? sym(c.icon) : d.icon,
     };
   }
   function openQuick(id) {
@@ -328,10 +364,20 @@
   function loadFavs() {
     let list = store.get("qp-favorites", null);
     if (!Array.isArray(list)) list = []; // a new user starts with no favorites, just the "Add favorite" card
-    return [...new Set(list)].filter((id) => typeof id === "string" && quickItem(id)).slice(0, FAV_MAX);
+    list = list.filter((id) => typeof id === "string").map(canon); // a saved handbook chapter becomes its hub document
+    return [...new Set(list)].filter((id) => quickItem(id)).slice(0, FAV_MAX);
+  }
+  /* recently opened, newest first; a saved handbook chapter becomes its hub document (listed once) */
+  function loadRecent(fallback) {
+    const seen = new Set();
+    return store
+      .get("qp-recent", fallback)
+      .filter((r) => r && typeof r.id === "string")
+      .map((r) => ({ ...r, id: canon(r.id) }))
+      .filter((r) => !seen.has(r.id) && seen.add(r.id) && quickItem(r.id));
   }
   let favs = loadFavs();
-  let recent = store.get("qp-recent", []).filter((r) => r && typeof r.id === "string" && quickItem(r.id));
+  let recent = loadRecent([]);
   let favEditing = false;
   const RECENT_SHOWN = 6; // how many recent items the dashboard shows
   const isFav = (id) => favs.includes(id);
@@ -433,7 +479,7 @@
   });
   /* "Add favorite": a picker in the shared document window */
   function pickerHtml() {
-    const ids = [...FAV_DEFAULT, ...Object.keys(FAV_VIEWS).map((v) => "view:" + v), ...Object.keys(DOCS)];
+    const ids = [...FAV_DEFAULT, ...Object.keys(FAV_VIEWS).map((v) => "view:" + v), ...Object.keys(DOCS)].filter((id) => !MOVED[id]); // handbook chapters: listed once, as hub documents
     const groups = {};
     [...new Set(ids)].forEach((id) => {
       const it = quickItem(id);
@@ -538,7 +584,7 @@
   function addDocs(entries) {
     Object.assign(DOCS, entries);
     favs = loadFavs();
-    recent = store.get("qp-recent", recent).filter((r) => r && typeof r.id === "string" && quickItem(r.id));
+    recent = loadRecent(recent);
     renderQuick();
   }
   renderQuick();
@@ -553,7 +599,6 @@
   const VIEW_ICONS = {
     dashboard: sym("i-home"),
     news: sym("i-news"),
-    handbook: sym("i-book"),
     knowledge: sym("i-library"),
     it: sym("i-headset"),
     projects: sym("i-flow"),
@@ -593,12 +638,12 @@
         })),
       ...docs("Tool"),
       ...docs("Handbook"),
-      { group: "Actions", label: "Toggle theme", icon: "◐", hint: "D", keys: "dark light mode appearance", run: toggleTheme },
+      { group: "Actions", label: "Toggle theme", icon: svgIcon("i-moon"), hint: "D", keys: "dark light mode appearance", run: toggleTheme },
       { group: "Actions", label: "Open settings", icon: ICON.cog, hint: "S", keys: "settings preferences language svenska english theme help", run: () => setTimeout(toggleSettings) },
       {
         group: "Actions",
         label: "Replay tour",
-        icon: "?",
+        icon: svgIcon("i-help"),
         keys: "guide help onboarding walkthrough",
         run: () => {
           closeOverlays();
@@ -621,7 +666,7 @@
       {
         group: "Actions",
         label: "Mark notifications as read",
-        icon: "✓",
+        icon: svgIcon("i-bell"),
         keys: "bell inbox",
         run: () => $("#mark-read").click(),
       },
@@ -773,18 +818,18 @@
      ===================================================================== */
   const BADGE = { ok: ["ok", "Success"], run: ["", "Running"], bad: ["bad", "Failed"], info: ["muted", "Info"] };
   const FEED_SEED = [
-    { icon: "↻", title: "core-api deployed to production", by: "CI/CD · #1842", status: "ok", min: 4 },
+    { icon: svgIcon("i-server"), title: "core-api deployed to production", by: "CI/CD · #1842", status: "ok", min: 4 },
     { icon: ICON.ext, title: "Core v4.2 release notes published", by: "Engineering", status: "info", label: "Release", min: 38 },
-    { icon: "◈", title: "Security policy acknowledged", by: "Maja Berg", status: "ok", label: "Signed", min: 95 },
-    { icon: "↻", title: "data-ingest integration tests", by: "CI/CD · #310", status: "bad", min: 170 },
+    { icon: svgIcon("i-shield"), title: "Security policy acknowledged", by: "Maja Berg", status: "ok", label: "Signed", min: 95 },
+    { icon: svgIcon("i-server"), title: "data-ingest integration tests", by: "CI/CD · #310", status: "bad", min: 170 },
     { icon: ICON.spark, title: "Linnea joined Engineering Guild", by: "People", status: "info", label: "New", min: 300 },
   ];
   const FEED_POOL = [
-    { icon: "↻", title: "web-intranet build finished", by: "CI/CD · #771", status: "ok" },
-    { icon: "◈", title: "Security policy acknowledged", by: "Jonas Ek", status: "ok", label: "Signed" },
-    { icon: "↻", title: "poc-retail-ai deploying to staging", by: "CI/CD · #59", status: "run" },
+    { icon: svgIcon("i-server"), title: "web-intranet build finished", by: "CI/CD · #771", status: "ok" },
+    { icon: svgIcon("i-shield"), title: "Security policy acknowledged", by: "Jonas Ek", status: "ok", label: "Signed" },
+    { icon: svgIcon("i-server"), title: "poc-retail-ai deploying to staging", by: "CI/CD · #59", status: "run" },
     { icon: ICON.ext, title: "Core v4.2.1 hotfix tagged", by: "Platform", status: "info", label: "Release" },
-    { icon: "◈", title: "Security key registered", by: "Omar Haddad", status: "ok", label: "MFA" },
+    { icon: svgIcon("i-shield"), title: "Security key registered", by: "Omar Haddad", status: "ok", label: "MFA" },
   ];
   let feed = FEED_SEED.map((f) => ({ ...f, t: Date.now() - f.min * 60000 }));
   let poolAt = 0;
@@ -931,8 +976,8 @@
     {
       id: "parental-leave",
       title: "Updated parental leave guide",
-      text: "Now in the Employee handbook.",
-      body: "The parental leave chapter has been rewritten with clearer steps, a planning checklist and the new top-up rules: 90% of your salary for six months. Find it under Employee handbook, Time off & leave.",
+      text: "Now in the Knowledge Hub.",
+      body: "The parental leave chapter has been rewritten with clearer steps, a planning checklist and the new top-up rules: 90% of your salary for six months. Find it in the Knowledge Hub, under HR Guidelines.",
       cat: "hr",
       date: "2026-05-28",
       img: "assets/news/hr.jpg",

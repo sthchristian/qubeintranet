@@ -464,7 +464,7 @@ html[data-theme="light"] .guide-body {
   filter: drop-shadow(0 12px 14px #0004);
 }
 
-/* Views (news, handbook, IT, projects, settings) */
+/* Views (news, IT, projects, settings) */
 html[data-theme="light"] .tile,
 html[data-theme="light"] .panel {
   box-shadow: 0 1px 2px #2a220f08;
