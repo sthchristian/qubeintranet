@@ -392,11 +392,10 @@ function setRole(r) {
   if (!isAdmin() && !$('.view[data-view="admin"]').hidden) showView("dashboard");
 }
 
-/* ---------- Sidebar views (Dashboard, News, Handbook, IT, Projects, Settings, Admin Panel) ---------- */
+/* ---------- Sidebar views (Dashboard, News, Knowledge Hub, IT, Projects, Settings, Admin Panel) ---------- */
 const VIEWS = {
   dashboard: "Dashboard",
   news: "News & information",
-  handbook: "Employee handbook",
   knowledge: "Knowledge Hub",
   it: "IT support",
   projects: "Projects",
@@ -408,7 +407,13 @@ function syncViewLabel() {
   $(".crumb b").textContent = VIEWS[currentView];
   document.title = (currentView === "dashboard" ? "" : tr(VIEWS[currentView]) + " · ") + "QualiPro · AI Knowledge Hub";
 }
+/* pages that moved: an old link or bookmark opens the new place (the Employee handbook is now in the Knowledge Hub) */
+const MOVED_VIEWS = { handbook: "knowledge" };
 function showView(name, { push = true } = {}) {
+  if (MOVED_VIEWS[name]) {
+    name = MOVED_VIEWS[name];
+    if (!push) history.replaceState(null, "", "#" + name);
+  }
   if (!VIEWS[name] || (name === "admin" && !isAdmin())) name = "dashboard";
   currentView = name;
   $$(".view").forEach((v) => (v.hidden = v.dataset.view !== name));

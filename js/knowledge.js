@@ -12,6 +12,10 @@
  *
  * Reuse: documents with `doc: "<id>"` borrow their body from DOCS in js/features.js,
  * so a chapter is written once and shown in both places.
+ * Employee handbook: there is no separate handbook page any more. "Personalhandbok 2026"
+ * below is its entry point — its six topics link to the documents in this library that
+ * cover them — and those documents have "employee handbook" in their keys, so searching
+ * for "handbook" lists the handbook together with everything it points to.
  * Styling: existing classes only (.hero-head, .tile, .pill, .btn, .field, .news-ico)
  * plus the small .kb-* additions in css/knowledge.css. No new colours or fonts.
  */
@@ -35,8 +39,8 @@
       owner: "People & Culture",
       format: "PDF",
       size: "2.4 MB",
-      keys: "employee handbook personalhandbok culture ways of working",
-      description: "Everything a QualiPro employee needs to know — culture, practical information and how we work together.",
+      keys: "employee handbook personalhandbok culture ways of working onboarding remote work time off leave expenses code of conduct security",
+      description: "Everything a QualiPro employee needs to know, in six topics: onboarding, remote work, time off & leave, expenses, code of conduct and security.",
       doc: "handbook",
     },
     {
@@ -48,7 +52,7 @@
       owner: "People & Culture",
       format: "PDF",
       size: "480 KB",
-      keys: "vacation semester time off leave ledighet days",
+      keys: "vacation semester time off leave ledighet days employee handbook",
       description: "How vacation days work: how many you have, how to request time off and when the blackout periods are.",
       doc: "leave",
     },
@@ -61,7 +65,7 @@
       owner: "People & Culture",
       format: "PDF",
       size: "1.1 MB",
-      keys: "parental leave sick reporting benefits wellness insurance",
+      keys: "parental leave sick reporting benefits wellness insurance time off employee handbook",
       description: "Guidelines for leave of absence, parental leave, sick reporting and the benefits you have as an employee.",
       body: `<p>HR Guidelines · 2026 edition</p>
         <ul>
@@ -104,7 +108,7 @@
       owner: "Platform & Security",
       format: "PDF",
       size: "920 KB",
-      keys: "security yubikey mfa devices incidents data",
+      keys: "security yubikey mfa devices incidents data employee handbook",
       description: "Rules for devices, software installation, handling data and reporting a security incident.",
       doc: "security",
     },
@@ -117,7 +121,7 @@
       owner: "IT Support",
       format: "PDF",
       size: "640 KB",
-      keys: "password manager access request login sso account",
+      keys: "password manager access request login sso account security employee handbook",
       description: "How to manage passwords, use the password manager and request access to internal systems.",
       body: `<p>Password &amp; Access Guide · IT Support</p>
         <ul>
@@ -156,7 +160,7 @@
       owner: "People & Culture",
       format: "PDF",
       size: "420 KB",
-      keys: "remote hybrid distansarbete home office abroad",
+      keys: "remote hybrid distansarbete home office abroad employee handbook",
       description: "Our hybrid setup: expectations, equipment and the rules for working from home or abroad.",
       doc: "remote",
     },
@@ -169,7 +173,7 @@
       owner: "People & Culture",
       format: "PDF",
       size: "380 KB",
-      keys: "uppforandekod conduct values respect whistleblowing",
+      keys: "uppforandekod conduct values respect whistleblowing employee handbook",
       description: "How we treat colleagues, clients and candidates — and where to raise a concern.",
       doc: "conduct",
     },
@@ -201,7 +205,7 @@
       owner: "People & Culture",
       format: "DOCX",
       size: "210 KB",
-      keys: "onboarding new hire first week buddy start checklist",
+      keys: "onboarding new hire first week buddy start checklist employee handbook",
       description: "Step-by-step checklist for new employees through their first weeks at QualiPro.",
       doc: "onboarding",
     },
@@ -233,7 +237,7 @@
       owner: "Finance",
       format: "PDF",
       size: "560 KB",
-      keys: "expenses utlagg travel receipts reimbursement booking",
+      keys: "expenses utlagg travel receipts reimbursement booking employee handbook",
       description: "How to report expenses, book business travel and get your money back.",
       doc: "expenses",
     },
