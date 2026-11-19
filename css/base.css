@@ -1377,7 +1377,7 @@ button {
   margin-right: -14px; /* half its width: centred on the border */
   padding: 0;
   border: 1px solid var(--line);
-  border-radius: 50%;
+  border-radius: 8px; /* rounded square, like the other icon buttons */
   background: #141512; /* the sidebar colour, solid so the border doesn't show through */
   color: var(--muted);
   transition:

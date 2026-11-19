@@ -549,7 +549,17 @@
   const pal = $("#cmdk"),
     palQ = $("#cmdk-q"),
     palList = $("#cmdk-list");
-  const VIEW_ICONS = { dashboard: "⌂", news: "▤", handbook: "▣", knowledge: `<svg class="ico"><use href="#i-library" /></svg>`, it: "◉", projects: "⌘", settings: ICON.cog, admin: `<svg class="ico"><use href="#i-shield" /></svg>` };
+  /* the same line icons as the sidebar, so search looks like the rest of the app */
+  const VIEW_ICONS = {
+    dashboard: sym("i-home"),
+    news: sym("i-news"),
+    handbook: sym("i-book"),
+    knowledge: sym("i-library"),
+    it: sym("i-headset"),
+    projects: sym("i-flow"),
+    settings: ICON.cog,
+    admin: sym("i-shield"),
+  };
   const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
   $("#search-kbd").textContent = isMac ? "⌘K" : "Ctrl K";
   function closeOverlays() {
@@ -564,7 +574,7 @@
         .map(([id, d]) => ({
           group: kind === "Tool" ? "Tools" : "Handbook",
           label: d.title,
-          icon: d.icon,
+          icon: (quickItem(id) || d).icon, // same icon as on the Favorites cards
           keys: d.keys,
           run: () => openDoc(id),
         }));
@@ -584,6 +594,7 @@
       ...docs("Tool"),
       ...docs("Handbook"),
       { group: "Actions", label: "Toggle theme", icon: "◐", hint: "D", keys: "dark light mode appearance", run: toggleTheme },
+      { group: "Actions", label: "Open settings", icon: ICON.cog, hint: "S", keys: "settings preferences language svenska english theme help", run: () => setTimeout(toggleSettings) },
       {
         group: "Actions",
         label: "Replay tour",
@@ -625,6 +636,9 @@
       const hay = (c.label + " " + c.group + " " + (c.keys || "")).toLowerCase();
       return words.every((w) => hay.includes(w));
     });
+    /* a result whose name starts with what was typed goes first ("open settings" -> Open settings) */
+    const q = query.toLowerCase();
+    if (q) palItems.sort((a, b) => !a.label.toLowerCase().startsWith(q) - !b.label.toLowerCase().startsWith(q));
     if (query)
       palItems.push({
         group: "Ask",

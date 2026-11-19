@@ -49,6 +49,7 @@ Handy:
 - Sidebar icons: SVG `<symbol>`s at the top of `index.html` (quick links: `LINK_ICONS` in `js/features.js`).
 - News: the starting articles are `NEWS_DEFAULTS` in `js/features.js` (copied into the browser on the first
   visit), covers per category in `NEWS_COVERS`, slideshow length/speed in `HOME_SLIDES` / `SLIDE_EVERY`.
+- Shortcuts: Cmd/Ctrl + K search, D light/dark mode, S open / hide the Settings popover (js/app.js).
 - Language: the gear (top right) switches between English and Svenska. The Swedish texts are in
   `js/lang-sv.js` (English text -> Swedish); `js/app.js` ("Language") swaps every text on the page,
   including text added later by the scripts. Texts with changing parts (dates, "5 min ago") are

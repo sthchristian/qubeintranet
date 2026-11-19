@@ -288,6 +288,33 @@ $("#settings-btn").addEventListener("click", () => {
   if ($("#settings-pop").classList.contains("open")) requestAnimationFrame(() => $("#theme-switch").focus({ preventScroll: true }));
 });
 $$("[data-lang-set]").forEach((b) => b.addEventListener("click", () => setLang(b.dataset.langSet)));
+/* Shortcut: S opens the Settings popover, S again (or Esc) hides it.
+   Not while typing, not with Cmd / Ctrl / Alt, and not during the tour. */
+function toggleSettings() {
+  const open = $("#settings-pop").classList.contains("open");
+  if (open) {
+    closeMenus();
+    $("#settings-btn").focus({ preventScroll: true });
+  } else {
+    if (window.qp) window.qp.closeOverlays(); // search, a document window or the chat drawer
+    $("#settings-btn").click();
+  }
+}
+document.addEventListener("keydown", (e) => {
+  if (
+    e.key.toLowerCase() !== "s" ||
+    e.metaKey ||
+    e.ctrlKey ||
+    e.altKey ||
+    e.repeat ||
+    /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) ||
+    document.activeElement.isContentEditable ||
+    document.body.classList.contains("is-touring")
+  )
+    return;
+  e.preventDefault();
+  toggleSettings();
+});
 $("#sp-help").addEventListener("click", () => showView("it")); // showView closes the popover
 $("#sp-tour").addEventListener("click", () => {
   closeMenus();

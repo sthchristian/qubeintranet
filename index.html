@@ -24,15 +24,15 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <!-- ?v= makes the browser fetch a file again instead of using its cached copy.
+    <!-- ?v= makes the browser fetch a file again instead of using its cached copy (the sidebar logo images have one too).
          Raise the number on every css/ and js/ line here and below whenever one of those files changes. -->
-    <link rel="stylesheet" href="css/base.css?v=38" />
-    <link rel="stylesheet" href="css/mascot.css?v=38" />
-    <link rel="stylesheet" href="css/topbar.css?v=38" />
-    <link rel="stylesheet" href="css/tour.css?v=38" />
-    <link rel="stylesheet" href="css/features.css?v=38" />
-    <link rel="stylesheet" href="css/knowledge.css?v=38" />
-    <link rel="stylesheet" href="css/light.css?v=38" />
+    <link rel="stylesheet" href="css/base.css?v=42" />
+    <link rel="stylesheet" href="css/mascot.css?v=42" />
+    <link rel="stylesheet" href="css/topbar.css?v=42" />
+    <link rel="stylesheet" href="css/tour.css?v=42" />
+    <link rel="stylesheet" href="css/features.css?v=42" />
+    <link rel="stylesheet" href="css/knowledge.css?v=42" />
+    <link rel="stylesheet" href="css/light.css?v=42" />
   </head>
   <body>
     <!-- ===== Icon sprites (referenced with <use href="#i-...">) ===== -->
@@ -156,8 +156,8 @@
         <div class="brand">
           <!-- Logo = home: goes to the Dashboard (data-view-link, js/app.js "Sidebar views") -->
           <button type="button" class="brand-home" data-view-link="dashboard" aria-label="Qube – go to Dashboard" title="Go to Dashboard">
-            <img class="brand-logo brand-logo--light" src="assets/brand/gold-cream-cube/qube-logo-horizontal-light-transparent.svg" alt="" width="900" height="314" />
-            <img class="brand-logo brand-logo--dark" src="assets/brand/gold-cream-cube/qube-logo-horizontal-dark-transparent.svg" alt="" width="900" height="314" />
+            <img class="brand-logo brand-logo--light" src="assets/brand/gold-cream-cube/qube-logo-horizontal-light-transparent.svg?v=42" alt="" width="900" height="314" />
+            <img class="brand-logo brand-logo--dark" src="assets/brand/gold-cream-cube/qube-logo-horizontal-dark-transparent.svg?v=42" alt="" width="900" height="314" />
           </button>
           <button type="button" class="icon-btn nav-close" id="nav-close" aria-label="Close navigation">✕</button>
         </div>
@@ -225,9 +225,8 @@
                 class="icon-btn settings-btn"
                 id="settings-btn"
                 aria-label="Settings"
-               
-                title="Settings"
-               
+                aria-keyshortcuts="S"
+                title="Settings (S)"
                 aria-haspopup="dialog"
                 aria-expanded="false"
                 aria-controls="settings-pop"
@@ -235,7 +234,9 @@
                 <svg class="ico"><use href="#i-cog" /></svg>
               </button>
               <div class="menu settings-pop" id="settings-pop" role="dialog" aria-labelledby="settings-pop-title">
-                <div class="menu-head"><b id="settings-pop-title">Settings</b></div>
+                <div class="menu-head">
+                  <b id="settings-pop-title">Settings</b><span class="sp-key"><span>Open / hide</span> <kbd>S</kbd></span>
+                </div>
                 <div class="sp-row">
                   <div class="sp-text">
                     <strong>Appearance</strong><small id="theme-state">Dark mode</small>
@@ -427,11 +428,13 @@
           <!-- Quick access: full-width card. Tiles open a tool/document (data-doc, see DOCS in js/features.js)
                or a view (data-view-link). Pinned + recent are filled in by js/features.js -->
           <section class="widget" id="quick" data-dash="quick" data-dash-wide aria-labelledby="quick-title">
-            <div class="widget-head"><h2 class="widget-title" id="quick-title">Quick access</h2></div>
+            <div class="widget-head">
+              <h2 class="widget-title" id="quick-title">Quick access</h2>
+              <button type="button" class="mini-link" id="fav-edit" aria-pressed="false" aria-controls="fav-grid" aria-label="Edit favorites">Edit</button>
+            </div>
             <!-- Favorites + Recent are drawn by js/features.js ("Quick access"); saved in localStorage -->
             <div class="quick-head">
               <div class="widget-sub" id="fav-title">Favorites</div>
-              <button type="button" class="mini-link" id="fav-edit" aria-pressed="false" aria-controls="fav-grid">Edit</button>
             </div>
             <div class="quick-tiles fav-grid" id="fav-grid" role="list" aria-labelledby="fav-title"></div>
             <p class="fav-hint" id="fav-hint" hidden>Drag a card, or use its arrows, to change the order. ✕ removes it.</p>
@@ -441,7 +444,7 @@
             </div>
             <div class="recent-row" id="recent-list" role="list" aria-labelledby="recent-title" hidden></div>
             <p class="recent-help" id="recent-help" hidden>
-              <span>Nothing opened yet.</span> <button type="button" class="mini-link" data-open-search>Try the search field →</button>
+              <span>Nothing opened yet.</span> <button type="button" class="mini-link" data-open-search>Try the search field ←</button>
             </p>
           </section>
           <section class="widget" id="onboard" data-dash="onboard" aria-labelledby="onboard-title">
@@ -785,16 +788,16 @@
       </form>
     </aside>
     <!-- Swedish texts for the language setting (js/app.js, "Language") -->
-    <script src="js/lang-sv.js?v=38"></script>
-    <script src="js/app.js?v=38"></script>
-    <script src="js/calendar.js?v=38"></script>
-    <script src="js/robot.js?v=38"></script>
-    <script src="js/tour.js?v=38"></script>
-    <script src="js/features.js?v=38"></script>
-    <script src="js/knowledge.js?v=38"></script>
-    <script src="js/chat.js?v=38"></script>
+    <script src="js/lang-sv.js?v=42"></script>
+    <script src="js/app.js?v=42"></script>
+    <script src="js/calendar.js?v=42"></script>
+    <script src="js/robot.js?v=42"></script>
+    <script src="js/tour.js?v=42"></script>
+    <script src="js/features.js?v=42"></script>
+    <script src="js/knowledge.js?v=42"></script>
+    <script src="js/chat.js?v=42"></script>
     <!-- 3D mascot: <model-viewer> (local copy, no internet needed) + the animation code -->
     <script src="js/vendor/model-viewer-umd.min.js"></script>
-    <script src="js/mascot3d.js?v=38"></script>
+    <script src="js/mascot3d.js?v=42"></script>
   </body>
 </html>

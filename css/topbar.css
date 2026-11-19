@@ -403,3 +403,20 @@ h1 .name {
     transition: none;
   }
 }
+/* "Open / hide  S" in the Settings popover header */
+.sp-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 10px;
+}
+.sp-key kbd {
+  min-width: 18px;
+  padding: 1px 5px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  font: 600 10px/1.4 inherit;
+  text-align: center;
+  color: var(--ink);
+}
