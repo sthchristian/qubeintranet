@@ -255,7 +255,7 @@
     open();
     add(`<div class="bubble"></div>`, "user").firstChild.textContent = question;
     const wait = add(
-      `<div class="bot-dot">✳</div><div class="bubble"><span class="typing" aria-label="QualiChat is typing"><i></i><i></i><i></i></span></div>`,
+      `<div class="bot-dot"><svg class="ico"><use href="#i-spark" /></svg></div><div class="bubble"><span class="typing" aria-label="QualiChat is typing"><i></i><i></i><i></i></span></div>`,
       "bot",
     );
     document.dispatchEvent(new CustomEvent("qp:chat", { detail: "waiting" })); // the robot starts thinking

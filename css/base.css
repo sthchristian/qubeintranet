@@ -1533,3 +1533,25 @@ button {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
 }
+
+/* ===== SVG icons that replaced the sparkle, arrow, sun and gear characters (phones drew them as colour emoji) ===== */
+.ico-inline {
+  width: 1.05em;
+  height: 1.05em;
+  vertical-align: -0.18em;
+}
+.assistant-icon .ico,
+.bot-dot .ico {
+  width: 15px;
+  height: 15px;
+  stroke-width: 2.2;
+}
+.news-ico .ico {
+  width: 16px;
+  height: 16px;
+}
+.chip button i .ico {
+  width: 13px;
+  height: 13px;
+  vertical-align: -2px;
+}

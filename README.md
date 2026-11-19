@@ -61,9 +61,10 @@ Handy:
   `js/app.js`). News categories: `NEWS_CATS` in `js/features.js`.
 - Dashboard boxes: the `data-dash` sections in `index.html`, in one two-column grid (`.widgets`). The one with
   `data-dash-wide` (Quick access) fills a whole row. Default order: `DASH_DEFAULT` in `js/features.js`.
-- Quick access tiles: the `.quick-tiles` buttons in `index.html`. `data-doc="id"` opens an entry from `DOCS`,
-  `data-view-link="name"` opens a view.
-- Saved in the browser (localStorage): `qp-theme`, `qp-pins`, `qp-recent`,
+- Quick access: Favorites are drawn by `js/features.js` ("Quick access"). The six default cards are `FAV_CARDS`
+  (title, subtitle, icon); users add more with Edit → Add favorite or the ☆ in a document. Recent fills itself
+  from what is opened (documents, and pages opened from a card or the search).
+- Saved in the browser (localStorage): `qp-theme`, `qp-favorites`, `qp-recent`,
   `qp-onboarding`, `qp-quicklinks`, `qp-role`, `qp-news`, `qp-events`, `qp-dashboard-order-v2`,
   `qp-nav-collapsed`, `qp-kb-filter`, `qp-news-v2` (all news, newest first; uploaded cover images are
   stored in it, so the browser's ~5 MB limit applies).

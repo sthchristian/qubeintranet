@@ -1,8 +1,8 @@
 /* features.js
  * Intranet features on top of the dashboard:
  *   - DOCS: the tools and handbook documents that open in the modal
- *   - Modal (open / close / pin)
- *   - Quick access: pinned + recently opened (saved in localStorage)
+ *   - Modal (open / close / add to favorites)
+ *   - Quick access: favorites (add / remove / reorder) + recently opened (saved in localStorage)
  *   - Command palette (Cmd/Ctrl + K, or the search field in the top bar)
  *   - New hire checklist (saved in localStorage)
  *   - Team activity feed (example data, edit FEED_SEED / FEED_POOL)
@@ -29,6 +29,9 @@
       } catch (e) {}
     },
   };
+  /* SVG icons for the symbols that phones would otherwise draw as colour emoji (the sparkle, arrow, sun and gear) */
+  const svgIcon = (id) => `<svg class="ico"><use href="#${id}" /></svg>`;
+  const ICON = { spark: svgIcon("i-spark"), ext: svgIcon("i-ext"), sun: svgIcon("i-sun"), cog: svgIcon("i-cog") };
   const esc = (s) =>
     String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   function ago(ts) {
@@ -156,7 +159,7 @@
     onboarding: {
       title: "Onboarding",
       kind: "Handbook",
-      icon: "✳",
+      icon: ICON.spark,
       keys: "new hire first week start",
       html: `<p>Personalhandbok 2026 · §1</p>
         <ul><li>Day 1: laptop, accounts and your security key.</li><li>Week 1: meet your buddy and your manager.</li><li>Week 2: join a guild and pick your first task.</li></ul>
@@ -173,7 +176,7 @@
     leave: {
       title: "Time off & leave",
       kind: "Handbook",
-      icon: "☀",
+      icon: ICON.sun,
       keys: "vacation semester sick parental ledighet",
       html: `<p>Personalhandbok 2026 · §5 Ledighet</p>
         <ul><li>30 vacation days per year.</li><li>Request summer vacation before April 30.</li><li>Sick leave: tell your manager before 09:00. A doctor's note is needed from day 8.</li><li>Parental leave is topped up to 90% of salary for six months.</li></ul>`,
@@ -270,66 +273,276 @@
   });
 
   /* =====================================================================
-     Quick access: pinned + recently opened
+     Quick access: Favorites (big cards the user picks, removes and reorders)
+     + Recent (the last things opened, filled in automatically)
+     Saved in localStorage: "qp-favorites" (ids in order), "qp-recent" ([{id, t}]).
+     An id is a DOCS key ("devportal") or a page ("view:projects").
      ===================================================================== */
-  let pins = store.get("qp-pins", ["remote", "leave", "expenses"]).filter((id) => DOCS[id]);
-  let recent = store.get("qp-recent", []).filter((r) => DOCS[r.id]);
-  const isPinned = (id) => pins.includes(id);
-  function togglePin(id) {
-    pins = isPinned(id) ? pins.filter((p) => p !== id) : [...pins, id];
-    store.set("qp-pins", pins);
-    notify(isPinned(id) ? `Pinned ${DOCS[id].title}` : `Unpinned ${DOCS[id].title}`);
+  const sym = (id) => `<svg class="ico"><use href="#${id}" /></svg>`;
+  /* the six default cards: their own title, subtitle and icon */
+  const FAV_CARDS = {
+    devportal: { title: "Dev Portal", sub: "Engineering tools", icon: "i-code" },
+    cicd: { title: "CI/CD Status", sub: "Builds & deployments", icon: "i-server" },
+    handbook: { title: "Handbook", sub: "People & policies", icon: "i-book" },
+    inventory: { title: "IT Inventory", sub: "Devices & access", icon: "i-laptop" },
+    "view:projects": { title: "Projects", sub: "Team workspaces", icon: "i-flow" },
+    directory: { title: "Directory", sub: "Find a colleague", icon: "i-users" },
+  };
+  const FAV_DEFAULT = Object.keys(FAV_CARDS);
+  const FAV_MAX = 12;
+  /* SVG icons for the other documents, so every card matches the six above */
+  const DOC_SYMS = { onboarding: "i-spark", remote: "i-home", leave: "i-sun", expenses: "i-doc", conduct: "i-board", security: "i-shield" };
+  /* pages that can be a favorite */
+  const FAV_VIEWS = {
+    news: { sub: "Company updates", icon: "i-news" },
+    handbook: { sub: "Policies & guides", icon: "i-book" },
+    knowledge: { sub: "Document library", icon: "i-library" },
+    it: { sub: "Help & tickets", icon: "i-headset" },
+    projects: { sub: "Team workspaces", icon: "i-flow" },
+  };
+  /* Everything a favorite or recent card needs to know about an id (null if it no longer exists) */
+  function quickItem(id) {
+    if (id.startsWith("view:")) {
+      const v = id.slice(5);
+      if (!FAV_VIEWS[v] || !VIEWS[v]) return null;
+      const c = FAV_CARDS[id] || {};
+      return { id, title: c.title || VIEWS[v], sub: c.sub || FAV_VIEWS[v].sub, kind: "Page", icon: sym(c.icon || FAV_VIEWS[v].icon) };
+    }
+    const d = DOCS[id];
+    if (!d) return null;
+    const c = FAV_CARDS[id];
+    return {
+      id,
+      title: c ? c.title : d.title,
+      sub: c ? c.sub : d.kind,
+      kind: d.kind,
+      icon: c ? sym(c.icon) : DOC_SYMS[id] ? sym(DOC_SYMS[id]) : d.icon,
+    };
+  }
+  function openQuick(id) {
+    if (id.startsWith("view:")) {
+      showView(id.slice(5));
+      touchRecent(id);
+    } else openDoc(id); // openDoc records it under Recent itself
+  }
+  function loadFavs() {
+    let list = store.get("qp-favorites", null);
+    if (!Array.isArray(list)) {
+      /* first visit: the six default cards, plus anything pinned with the old ☆ (only if it was changed from the defaults) */
+      const oldPins = store.get("qp-pins", null);
+      list = [...FAV_DEFAULT, ...(Array.isArray(oldPins) ? oldPins : [])];
+    }
+    return [...new Set(list)].filter((id) => typeof id === "string" && quickItem(id)).slice(0, FAV_MAX);
+  }
+  let favs = loadFavs();
+  let recent = store.get("qp-recent", []).filter((r) => r && typeof r.id === "string" && quickItem(r.id));
+  let favEditing = false;
+  const RECENT_SHOWN = 6; // how many recent items the dashboard shows
+  const isFav = (id) => favs.includes(id);
+  const saveFavs = () => store.set("qp-favorites", favs);
+  function toggleFav(id, quiet) {
+    const it = quickItem(id);
+    if (!it) return;
+    if (isFav(id)) favs = favs.filter((f) => f !== id);
+    else if (favs.length >= FAV_MAX) return notify(`You can have up to ${FAV_MAX} favorites. Remove one first.`);
+    else favs = [...favs, id];
+    saveFavs();
+    if (!quiet) notify(isFav(id) ? `Added ${it.title} to favorites` : `Removed ${it.title} from favorites`);
     renderQuick();
     syncPinButton();
   }
+  function moveFav(id, to) {
+    const from = favs.indexOf(id);
+    if (from < 0 || to < 0 || to >= favs.length || to === from) return false;
+    favs.splice(from, 1);
+    favs.splice(to, 0, id);
+    saveFavs();
+    renderQuick();
+    return true;
+  }
   function touchRecent(id) {
-    recent = [{ id, t: Date.now() }, ...recent.filter((r) => r.id !== id)].slice(0, 6);
+    if (!quickItem(id)) return;
+    recent = [{ id, t: Date.now() }, ...recent.filter((r) => r.id !== id)].slice(0, 8);
     store.set("qp-recent", recent);
     renderQuick();
   }
+  /* the star in the document window adds / removes that document as a favorite */
   function syncPinButton() {
     if (!modalDoc) return;
-    const on = isPinned(modalDoc);
-    mPin.textContent = on ? "★" : "☆";
+    const on = isFav(modalDoc),
+      label = on ? "Remove from favorites" : "Add to favorites";
+    mPin.classList.toggle("on", on);
     mPin.setAttribute("aria-pressed", on);
-    mPin.setAttribute("aria-label", on ? "Unpin from quick access" : "Pin to quick access");
-    mPin.title = on ? "Unpin from quick access" : "Pin to quick access";
+    mPin.setAttribute("aria-label", label);
+    mPin.title = label;
   }
-  mPin.addEventListener("click", () => modalDoc && togglePin(modalDoc));
+  mPin.addEventListener("click", () => modalDoc && toggleFav(modalDoc));
+
+  const favGrid = $("#fav-grid"),
+    favEditBtn = $("#fav-edit"),
+    recentList = $("#recent-list");
+  const starBtn = (id, title) => {
+    const on = isFav(id);
+    return `<button type="button" class="star${on ? " on" : ""}" data-fav-toggle="${esc(id)}" aria-pressed="${on}" aria-label="${on ? "Remove" : "Add"} ${esc(title)} ${on ? "from" : "to"} favorites" title="${on ? "Remove from" : "Add to"} favorites">${sym("i-star")}</button>`;
+  };
   function renderQuick() {
-    $("#pin-list").innerHTML = pins.length
-      ? pins
-          .map((id) => {
-            const d = DOCS[id];
-            return `<span class="chip"><button type="button" data-doc="${id}"><i>${d.icon}</i>${esc(d.title)}</button><button type="button" class="chip-x" data-unpin="${id}" aria-label="Unpin ${esc(d.title)}">×</button></span>`;
-          })
-          .join("")
-      : `<div class="empty-note">Nothing pinned. Use ☆ to pin a tool or document.</div>`;
-    $("#recent-list").innerHTML = recent.length
-      ? recent
-          .slice(0, 4)
-          .map(({ id, t }) => {
-            const d = DOCS[id],
-              on = isPinned(id);
-            return `<div class="recent"><button type="button" class="recent-open" data-doc="${id}"><span class="news-ico">${d.icon}</span><span><strong>${esc(d.title)}</strong><small>${d.kind} · ${ago(t)}</small></span></button><button type="button" class="star" data-pin="${id}" aria-pressed="${on}" aria-label="${on ? "Unpin" : "Pin"} ${esc(d.title)}">${on ? "★" : "☆"}</button></div>`;
-          })
-          .join("")
-      : `<div class="empty-note">Nothing opened yet. Try the search field.</div>`;
+    /* Favorites */
+    const cards = favs.map((id, i) => {
+      const it = quickItem(id),
+        t = esc(it.title);
+      return `<div class="fav" role="listitem" data-fav="${esc(id)}"${favEditing ? ' draggable="true"' : ""}>
+        <button type="button" class="tile fav-open" data-open="${esc(id)}"${favEditing ? ' tabindex="-1" aria-hidden="true"' : ""}><span class="news-ico">${it.icon}</span><strong>${t}</strong><small>${esc(it.sub)}</small></button>
+        ${
+          favEditing
+            ? `<div class="fav-tools">
+          <button type="button" data-fav-move="-1" aria-label="Move ${t} earlier"${i ? "" : " disabled"}>${sym("i-chev")}</button>
+          <button type="button" data-fav-move="1" aria-label="Move ${t} later"${i < favs.length - 1 ? "" : " disabled"}>${sym("i-chev")}</button>
+          <button type="button" class="fav-remove" data-fav-remove aria-label="Remove ${t} from favorites">✕</button>
+        </div>`
+            : `<button type="button" class="fav-x" data-fav-remove aria-label="Remove ${t} from favorites" title="Remove from favorites">×</button>`
+        }
+      </div>`;
+    });
+    /* one dashed "Add favorite" card right after the last favorite (centred on its own when there are none) */
+    if (favs.length < FAV_MAX)
+      cards.push(
+        `<div class="fav" role="listitem"><button type="button" class="fav-add" data-fav-pick><span class="news-ico">${sym("i-plus")}</span><strong>Add favorite</strong><small>Tools, documents, pages</small></button></div>`,
+      );
+    favGrid.innerHTML = cards.join("");
+    favGrid.classList.toggle("editing", favEditing);
+    favGrid.classList.toggle("is-empty", !favs.length);
+    $("#fav-hint").hidden = !favEditing;
+
+    /* Recent: compact cards in a row; nothing opened yet = one helper line */
+    recentList.innerHTML = recent
+      .slice(0, RECENT_SHOWN)
+      .map(({ id, t }) => {
+        const it = quickItem(id);
+        return `<div class="recent-card" role="listitem"><button type="button" class="recent-open" data-open="${esc(id)}"><span class="news-ico">${it.icon}</span><span><strong>${esc(it.title)}</strong><small>${esc(it.kind)} · ${ago(t)}</small></span></button>${starBtn(id, it.title)}</div>`;
+      })
+      .join("");
+    recentList.hidden = !recent.length;
+    $("#recent-help").hidden = recent.length > 0;
+    $("#recent-clear").hidden = !recent.length;
   }
-  $("#quick").addEventListener("click", (e) => {
-    const un = e.target.closest("[data-unpin]"),
-      pin = e.target.closest("[data-pin]");
-    if (un) togglePin(un.dataset.unpin);
-    else if (pin) togglePin(pin.dataset.pin);
+  function setFavEditing(on) {
+    favEditing = on;
+    favEditBtn.textContent = on ? "Done" : "Edit";
+    favEditBtn.setAttribute("aria-pressed", on);
+    renderQuick();
+  }
+  favEditBtn.addEventListener("click", () => {
+    setFavEditing(!favEditing);
+    if (!favEditing) favEditBtn.focus();
   });
+  /* "Add favorite": a picker in the shared document window */
+  function pickerHtml() {
+    const ids = [...FAV_DEFAULT, ...Object.keys(FAV_VIEWS).map((v) => "view:" + v), ...Object.keys(DOCS)];
+    const groups = {};
+    [...new Set(ids)].forEach((id) => {
+      const it = quickItem(id);
+      if (it) (groups[{ Page: "Pages", Tool: "Tools" }[it.kind] || it.kind] ||= []).push(it);
+    });
+    return (
+      `<p class="fav-pick-note">Choose what appears as a card under Favorites. ${favs.length} of ${FAV_MAX} used.</p>` +
+      Object.entries(groups)
+        .map(
+          ([g, items]) =>
+            `<h4>${esc(g)}</h4><div class="fav-pick">${items
+              .map((it) => {
+                const on = isFav(it.id);
+                return `<button type="button" class="fav-pick-item${on ? " on" : ""}" data-fav-pick-toggle="${esc(it.id)}" aria-pressed="${on}"><span class="news-ico">${it.icon}</span><span><strong>${esc(it.title)}</strong><small>${esc(it.sub)}</small></span><i>${on ? "Added" : "Add"}</i></button>`;
+              })
+              .join("")}</div>`,
+        )
+        .join("")
+    );
+  }
+  function openPicker() {
+    showModal({ kicker: "Quick access", title: "Add favorites", html: pickerHtml() });
+  }
+  mBody.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-fav-pick-toggle]");
+    if (!b) return;
+    toggleFav(b.dataset.favPickToggle, true);
+    const id = b.dataset.favPickToggle;
+    mBody.innerHTML = pickerHtml();
+    mBody.querySelector(`[data-fav-pick-toggle="${CSS.escape(id)}"]`)?.focus();
+  });
+
+  $("#quick").addEventListener("click", (e) => {
+    const open = e.target.closest("[data-open]"),
+      tog = e.target.closest("[data-fav-toggle]"),
+      move = e.target.closest("[data-fav-move]"),
+      rm = e.target.closest("[data-fav-remove]");
+    if (tog) return toggleFav(tog.dataset.favToggle);
+    if (e.target.closest("[data-fav-pick]")) return openPicker();
+    if (move || rm) {
+      const id = e.target.closest("[data-fav]").dataset.fav,
+        title = quickItem(id).title;
+      if (rm) {
+        const at = favs.indexOf(id);
+        toggleFav(id, true);
+        notify(`Removed ${title} from favorites`);
+        (favGrid.querySelectorAll("[data-fav-remove]")[Math.min(at, favs.length - 1)] || favGrid.querySelector("[data-fav-pick]") || favEditBtn)?.focus();
+      } else if (moveFav(id, favs.indexOf(id) + +move.dataset.favMove)) {
+        const btn = favGrid.querySelector(`[data-fav="${CSS.escape(id)}"] [data-fav-move="${move.dataset.favMove}"]`);
+        (btn && !btn.disabled ? btn : favGrid.querySelector(`[data-fav="${CSS.escape(id)}"] [data-fav-move]:not([disabled])`))?.focus();
+      }
+      return;
+    }
+    if (open && !favEditing) openQuick(open.dataset.open);
+  });
+  $("#recent-clear").addEventListener("click", () => {
+    recent = [];
+    store.set("qp-recent", recent);
+    renderQuick();
+    $("#fav-edit").focus();
+  });
+  $("[data-open-search]").addEventListener("click", () => openPalette()); // the top search, with the cursor in it
+
+  /* reorder favorites by dragging (Edit mode, mouse); touch and keyboard use the arrows */
+  let dragFav = null;
+  favGrid.addEventListener("dragstart", (e) => {
+    const f = e.target.closest("[data-fav]");
+    if (!favEditing || !f) return e.preventDefault();
+    dragFav = f.dataset.fav;
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", dragFav);
+    requestAnimationFrame(() => f.classList.add("fav-dragging"));
+  });
+  favGrid.addEventListener("dragover", (e) => {
+    const over = e.target.closest("[data-fav]");
+    if (!dragFav || !over) return;
+    e.preventDefault();
+    if (over.dataset.fav === dragFav) return;
+    const to = favs.indexOf(over.dataset.fav);
+    favs.splice(favs.indexOf(dragFav), 1);
+    favs.splice(to, 0, dragFav);
+    /* move the element itself so the drag keeps going; saved on drop */
+    const el = favGrid.querySelector(`[data-fav="${CSS.escape(dragFav)}"]`);
+    favGrid.insertBefore(el, favs.indexOf(dragFav) > [...favGrid.children].indexOf(over) ? over.nextSibling : over);
+  });
+  const endFavDrag = () => {
+    if (!dragFav) return;
+    dragFav = null;
+    saveFavs();
+    renderQuick();
+  };
+  favGrid.addEventListener("drop", (e) => {
+    e.preventDefault();
+    endFavDrag();
+  });
+  favGrid.addEventListener("dragend", endFavDrag);
+
   /* Lets a script that runs later (js/knowledge.js) add its own documents to DOCS,
-     so they open, pin and show up under Recent exactly like the ones above.
-     Pinned + recent are re-read from the browser afterwards: entries saved there
+     so they open, can be favorites and show up under Recent exactly like the ones above.
+     Favorites + recent are re-read from the browser afterwards: entries saved there
      were dropped when this file loaded, because their document was not known yet. */
   function addDocs(entries) {
     Object.assign(DOCS, entries);
-    pins = store.get("qp-pins", pins).filter((id) => DOCS[id]);
-    recent = store.get("qp-recent", recent).filter((r) => DOCS[r.id]);
+    favs = loadFavs();
+    recent = store.get("qp-recent", recent).filter((r) => r && typeof r.id === "string" && quickItem(r.id));
     renderQuick();
   }
   renderQuick();
@@ -340,7 +553,7 @@
   const pal = $("#cmdk"),
     palQ = $("#cmdk-q"),
     palList = $("#cmdk-list");
-  const VIEW_ICONS = { dashboard: "⌂", news: "▤", handbook: "▣", knowledge: `<svg class="ico"><use href="#i-library" /></svg>`, it: "◉", projects: "⌘", settings: "⚙", admin: `<svg class="ico"><use href="#i-shield" /></svg>` };
+  const VIEW_ICONS = { dashboard: "⌂", news: "▤", handbook: "▣", knowledge: `<svg class="ico"><use href="#i-library" /></svg>`, it: "◉", projects: "⌘", settings: ICON.cog, admin: `<svg class="ico"><use href="#i-shield" /></svg>` };
   const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
   $("#search-kbd").textContent = isMac ? "⌘K" : "Ctrl K";
   function closeOverlays() {
@@ -367,7 +580,10 @@
           label,
           icon: VIEW_ICONS[id] || "›",
           keys: "view page open " + id + (id === "admin" ? " publish news event manage" : ""),
-          run: () => showView(id),
+          run: () => {
+            showView(id);
+            if (FAV_VIEWS[id]) touchRecent("view:" + id);
+          },
         })),
       ...docs("Tool"),
       ...docs("Handbook"),
@@ -382,7 +598,7 @@
           window.qpTour.start();
         },
       },
-      { group: "Actions", label: "Open QualiChat", icon: "✳", keys: "ai assistant chat ask", run: () => window.qpChat.open() },
+      { group: "Actions", label: "Open QualiChat", icon: ICON.spark, keys: "ai assistant chat ask", run: () => window.qpChat.open() },
       {
         group: "Actions",
         label: "Customize dashboard",
@@ -417,7 +633,7 @@
       palItems.push({
         group: "Ask",
         label: `Ask QualiChat: “${query}”`,
-        icon: "✳",
+        icon: ICON.spark,
         run: () => window.qpChat.ask(query),
       });
     palIndex = Math.min(palIndex, Math.max(palItems.length - 1, 0));
@@ -548,16 +764,16 @@
   const BADGE = { ok: ["ok", "Success"], run: ["", "Running"], bad: ["bad", "Failed"], info: ["muted", "Info"] };
   const FEED_SEED = [
     { icon: "↻", title: "core-api deployed to production", by: "CI/CD · #1842", status: "ok", min: 4 },
-    { icon: "↗", title: "Core v4.2 release notes published", by: "Engineering", status: "info", label: "Release", min: 38 },
+    { icon: ICON.ext, title: "Core v4.2 release notes published", by: "Engineering", status: "info", label: "Release", min: 38 },
     { icon: "◈", title: "Security policy acknowledged", by: "Maja Berg", status: "ok", label: "Signed", min: 95 },
     { icon: "↻", title: "data-ingest integration tests", by: "CI/CD · #310", status: "bad", min: 170 },
-    { icon: "✳", title: "Linnea joined Engineering Guild", by: "People", status: "info", label: "New", min: 300 },
+    { icon: ICON.spark, title: "Linnea joined Engineering Guild", by: "People", status: "info", label: "New", min: 300 },
   ];
   const FEED_POOL = [
     { icon: "↻", title: "web-intranet build finished", by: "CI/CD · #771", status: "ok" },
     { icon: "◈", title: "Security policy acknowledged", by: "Jonas Ek", status: "ok", label: "Signed" },
     { icon: "↻", title: "poc-retail-ai deploying to staging", by: "CI/CD · #59", status: "run" },
-    { icon: "↗", title: "Core v4.2.1 hotfix tagged", by: "Platform", status: "info", label: "Release" },
+    { icon: ICON.ext, title: "Core v4.2.1 hotfix tagged", by: "Platform", status: "info", label: "Release" },
     { icon: "◈", title: "Security key registered", by: "Omar Haddad", status: "ok", label: "MFA" },
   ];
   let feed = FEED_SEED.map((f) => ({ ...f, t: Date.now() - f.min * 60000 }));
@@ -655,11 +871,11 @@
      News view; events are drawn by js/calendar.js.
      ===================================================================== */
   const NEWS_CATS = {
-    company: ["Company", "☀"],
-    engineering: ["Engineering", "↗"],
+    company: ["Company", ICON.sun],
+    engineering: ["Engineering", ICON.ext],
     security: ["Security", "◈"],
     hr: ["HR & policies", "▣"],
-    people: ["People", "✳"],
+    people: ["People", ICON.spark],
   };
   const EVENT_TYPES = { meeting: "Meeting", event: "Event", deadline: "Deadline" };
   const HOME_SLIDES = 5; // how many of the newest articles the dashboard slideshow shows

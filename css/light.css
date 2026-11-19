@@ -531,6 +531,8 @@ html[data-theme="light"] .drawer {
   box-shadow: -24px 0 60px #2a220f1f;
 }
 html[data-theme="light"] .recent-open .news-ico,
+html[data-theme="light"] .fav-pick-item .news-ico,
+html[data-theme="light"] .fav-add .news-ico,
 html[data-theme="light"] .feed-item .news-ico {
   background: #fff4d6;
 }
@@ -578,4 +580,27 @@ html[data-theme="light"] .news-reader h2 {
 html[data-theme="light"] .news-row.open {
   border-color: var(--gold);
   box-shadow: 0 8px 20px #2a220f10;
+}
+/* Quick access: favorites + recent */
+html[data-theme="light"] #quick,
+html[data-theme="light"] #modal {
+  --quick-dash: rgba(0, 0, 0, 0.22);
+}
+html[data-theme="light"] .quick-tiles .tile:hover {
+  box-shadow: 0 10px 24px #2a220f14;
+}
+html[data-theme="light"] .recent-card,
+html[data-theme="light"] .fav-pick-item {
+  background: #fff;
+  border-color: #ebe5d4;
+}
+html[data-theme="light"] .recent-card:hover,
+html[data-theme="light"] .fav-pick-item:hover,
+html[data-theme="light"] .fav-pick-item.on {
+  border-color: var(--gold);
+}
+html[data-theme="light"] .fav-tools button,
+html[data-theme="light"] .fav-x {
+  background: #fff;
+  border-color: #ebe5d4;
 }

@@ -214,7 +214,7 @@
       ${
         links.length
           ? `<div class="cal-pop-foot">${links
-              .map((l, i) => `<a class="btn${i === 0 ? " primary" : ""}" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`)
+              .map((l, i) => `<a class="btn${i === 0 ? " primary" : ""}" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} <svg class="ico ico-inline"><use href="#i-ext" /></svg></a>`)
               .join("")}</div>`
           : ""
       }`;
@@ -272,7 +272,7 @@
       const a = e.target.closest("a[href]");
       if (!a) return;
       e.preventDefault();
-      say(`Opening “${a.textContent.replace(" ↗", "")}” (prototype)`);
+      say(`Opening “${a.textContent.trim()}” (prototype)`);
     });
     /* keep Tab inside the open popover */
     el.pop.addEventListener("keydown", (e) => {
