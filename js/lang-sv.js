@@ -268,6 +268,7 @@ window.QP_SV = {
   "JPG, PNG or WebP. Large photos are resized automatically.": "JPG, PNG eller WebP. Stora bilder skalas om automatiskt.",
   "Jump anywhere": "Hoppa till valfri plats",
   "Jump between News, the Employee handbook, IT support and Projects from this menu.": "Hoppa mellan Nyheter, Personalhandboken, IT-support och Projekt från den här menyn.",
+  "Jump between News, the Employee handbook, the Knowledge Hub and Projects from this menu.": "Hoppa mellan Nyheter, Personalhandboken, Kunskapsnavet och Projekt i den här menyn.",
   "just now": "just nu",
   "Keep client information confidential.": "Håll kundinformation konfidentiell.",
   "Keys, passwords, devices": "Nycklar, lösenord, enheter",

@@ -26,13 +26,13 @@
     />
     <!-- ?v= makes the browser fetch a file again instead of using its cached copy.
          Raise the number on every css/ and js/ line here and below whenever one of those files changes. -->
-    <link rel="stylesheet" href="css/base.css?v=35" />
-    <link rel="stylesheet" href="css/mascot.css?v=35" />
-    <link rel="stylesheet" href="css/topbar.css?v=35" />
-    <link rel="stylesheet" href="css/tour.css?v=35" />
-    <link rel="stylesheet" href="css/features.css?v=35" />
-    <link rel="stylesheet" href="css/knowledge.css?v=35" />
-    <link rel="stylesheet" href="css/light.css?v=35" />
+    <link rel="stylesheet" href="css/base.css?v=36" />
+    <link rel="stylesheet" href="css/mascot.css?v=36" />
+    <link rel="stylesheet" href="css/topbar.css?v=36" />
+    <link rel="stylesheet" href="css/tour.css?v=36" />
+    <link rel="stylesheet" href="css/features.css?v=36" />
+    <link rel="stylesheet" href="css/knowledge.css?v=36" />
+    <link rel="stylesheet" href="css/light.css?v=36" />
   </head>
   <body>
     <!-- ===== Icon sprites (referenced with <use href="#i-...">) ===== -->
@@ -165,42 +165,45 @@
         <button type="button" class="nav-collapse" id="nav-collapse" aria-controls="side-nav" aria-expanded="true">
           <span class="nav-icon"><svg class="ico"><use href="#i-chevs" /></svg></span><span class="label">Hide navigation</span>
         </button>
-        <div class="rail-label">Workspace</div>
-        <nav class="nav" aria-label="Workspace navigation">
-          <button class="active" data-view-link="dashboard" aria-current="page" title="Dashboard">
-            <span class="nav-icon"><svg class="ico"><use href="#i-home" /></svg></span><span class="label">Dashboard</span>
-          </button>
-          <button data-view-link="news" title="News &amp; information">
-            <span class="nav-icon"><svg class="ico"><use href="#i-news" /></svg></span><span class="label">News & information</span>
-          </button>
-          <button data-view-link="handbook" title="Employee handbook">
-            <span class="nav-icon"><svg class="ico"><use href="#i-book" /></svg></span><span class="label">Employee handbook</span>
-          </button>
-          <button data-view-link="knowledge" title="Knowledge Hub">
-            <span class="nav-icon"><svg class="ico"><use href="#i-library" /></svg></span><span class="label">Knowledge Hub</span>
-          </button>
-          <button data-view-link="it" title="IT support">
-            <span class="nav-icon"><svg class="ico"><use href="#i-headset" /></svg></span><span class="label">IT support</span>
-          </button>
-          <button data-view-link="projects" title="Projects">
-            <span class="nav-icon"><svg class="ico"><use href="#i-flow" /></svg></span><span class="label">Projects</span>
-          </button>
-        </nav>
-        <div class="rail-label rail-label-row">
-          <span>Quick links</span><button class="rail-edit" id="quick-edit" type="button">Edit</button>
+        <!-- Workspace + Quick links: scroll on their own when they don't fit (css/base.css, "Sidebar") -->
+        <div class="rail-scroll">
+          <div class="rail-label">Workspace</div>
+          <nav class="nav" aria-label="Workspace navigation">
+            <button class="active" data-view-link="dashboard" aria-current="page" title="Dashboard">
+              <span class="nav-icon"><svg class="ico"><use href="#i-home" /></svg></span><span class="label">Dashboard</span>
+            </button>
+            <button data-view-link="news" title="News &amp; information">
+              <span class="nav-icon"><svg class="ico"><use href="#i-news" /></svg></span><span class="label">News & information</span>
+            </button>
+            <button data-view-link="handbook" title="Employee handbook">
+              <span class="nav-icon"><svg class="ico"><use href="#i-book" /></svg></span><span class="label">Employee handbook</span>
+            </button>
+            <button data-view-link="knowledge" title="Knowledge Hub">
+              <span class="nav-icon"><svg class="ico"><use href="#i-library" /></svg></span><span class="label">Knowledge Hub</span>
+            </button>
+            <button data-view-link="projects" title="Projects">
+              <span class="nav-icon"><svg class="ico"><use href="#i-flow" /></svg></span><span class="label">Projects</span>
+            </button>
+          </nav>
+          <div class="rail-label rail-label-row">
+            Quick links<button class="rail-edit" id="quick-edit" type="button">Edit</button>
+          </div>
+          <!-- filled in by js/features.js (the Edit button opens an editor; links are saved in the browser) -->
+          <nav class="nav quick-nav" id="quick-nav" aria-label="Quick links"></nav>
         </div>
-        <!-- filled in by js/features.js (the Edit button opens an editor; links are saved in the browser) -->
-        <nav class="nav quick-nav" id="quick-nav" aria-label="Quick links"></nav>
-        <div class="rail-label">System</div>
-        <nav class="nav">
-          <button data-view-link="settings" title="Settings">
-            <span class="nav-icon"><svg class="ico"><use href="#i-cog" /></svg></span><span class="label">Settings</span>
-          </button>
-          <!-- only shown for the HR and Manager roles (js/app.js, "Role") -->
-          <button data-view-link="admin" data-admin-only hidden title="Admin Panel">
-            <span class="nav-icon"><svg class="ico"><use href="#i-shield" /></svg></span><span class="label">Admin Panel</span>
-          </button>
-        </nav>
+        <!-- System: always at the bottom of the sidebar -->
+        <div class="rail-system">
+          <div class="rail-label">System</div>
+          <nav class="nav">
+            <button data-view-link="it" title="IT support">
+              <span class="nav-icon"><svg class="ico"><use href="#i-headset" /></svg></span><span class="label">IT support</span>
+            </button>
+            <!-- only shown for the HR and Manager roles (js/app.js, "Role") -->
+            <button data-view-link="admin" data-admin-only hidden title="Admin Panel">
+              <span class="nav-icon"><svg class="ico"><use href="#i-shield" /></svg></span><span class="label">Admin Panel</span>
+            </button>
+          </nav>
+        </div>
       </aside>
       <main class="main">
         <!-- ===== Top bar: search, settings, notifications, profile ===== -->
@@ -782,16 +785,16 @@
       </form>
     </aside>
     <!-- Swedish texts for the language setting (js/app.js, "Language") -->
-    <script src="js/lang-sv.js?v=35"></script>
-    <script src="js/app.js?v=35"></script>
-    <script src="js/calendar.js?v=35"></script>
-    <script src="js/robot.js?v=35"></script>
-    <script src="js/tour.js?v=35"></script>
-    <script src="js/features.js?v=35"></script>
-    <script src="js/knowledge.js?v=35"></script>
-    <script src="js/chat.js?v=35"></script>
+    <script src="js/lang-sv.js?v=36"></script>
+    <script src="js/app.js?v=36"></script>
+    <script src="js/calendar.js?v=36"></script>
+    <script src="js/robot.js?v=36"></script>
+    <script src="js/tour.js?v=36"></script>
+    <script src="js/features.js?v=36"></script>
+    <script src="js/knowledge.js?v=36"></script>
+    <script src="js/chat.js?v=36"></script>
     <!-- 3D mascot: <model-viewer> (local copy, no internet needed) + the animation code -->
     <script src="js/vendor/model-viewer-umd.min.js"></script>
-    <script src="js/mascot3d.js?v=35"></script>
+    <script src="js/mascot3d.js?v=36"></script>
   </body>
 </html>
