@@ -11,6 +11,7 @@
   touch-action: none;
   -webkit-user-select: none;
   user-select: none;
+  transform: scaleX(-1); /* mirrored so QBot faces left, towards the page */
 }
 .mascot img {
   transform: rotateZ(2deg);
