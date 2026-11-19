@@ -1337,6 +1337,29 @@ button {
   width: 12px;
   height: 12px;
 }
+/* Sidebar body: Workspace + Quick links scroll on their own if they don't fit; System stays at the bottom */
+.rail-scroll {
+  flex: 1 1 auto;
+  min-height: 0; /* lets this part shrink and scroll instead of pushing System down */
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain; /* scrolling the menu doesn't scroll the page */
+  scrollbar-width: thin;
+  margin: 0 -4px -4px; /* 4px of room so focus outlines aren't clipped; */
+  padding: 0 4px 4px; /* the negative margin keeps the layout unchanged */
+}
+.rail-system {
+  flex: none;
+}
+/* tablets and desktops: the sidebar stays in view while the page scrolls (phones use the drawer) */
+@media (min-width: 769px) {
+  .rail {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh; /* visible height on browsers with sliding toolbars, e.g. iPad Safari */
+  }
+}
 /* "Hide navigation" button under the logo: looks like a sidebar link */
 .nav-collapse {
   display: flex;
@@ -1433,7 +1456,7 @@ button {
     z-index: 42; /* above the AI drawer, below search, the modal and the tour */
     width: min(280px, 86vw);
     padding: 18px 14px max(24px, env(safe-area-inset-bottom));
-    overflow-y: auto; /* short screens: Settings stays reachable */
+    overflow-y: auto; /* short screens: System stays reachable */
     overscroll-behavior: contain;
     transform: translateX(-100%);
     visibility: hidden;
