@@ -1354,26 +1354,32 @@ button {
 /* tablets and desktops: the sidebar stays in view while the page scrolls (phones use the drawer) */
 @media (min-width: 769px) {
   .rail {
+    grid-area: 1 / 1; /* shares its column with the collapse arrow below */
     position: sticky;
     top: 0;
     height: 100vh;
     height: 100dvh; /* visible height on browsers with sliding toolbars, e.g. iPad Safari */
   }
 }
-/* "Hide navigation" button under the logo: looks like a sidebar link */
+/* Hide/show navigation: a round arrow centred on the line between the sidebar and the page.
+ * It sits in the sidebar's grid column, so it follows the column as it animates (240px <-> 68px). */
 .nav-collapse {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  width: 100%;
-  padding: 9px 12px;
-  border: 1px dashed var(--line);
-  border-radius: 10px;
-  background: transparent;
+  grid-area: 1 / 1;
+  justify-self: end;
+  align-self: start;
+  position: sticky;
+  top: 96px; /* just below the logo, clear of it in both states */
+  z-index: 25; /* above the page, below the top bar menus, drawers, search and the tour */
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-right: -14px; /* half its width: centred on the border */
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: #141512; /* the sidebar colour, solid so the border doesn't show through */
   color: var(--muted);
-  font-size: 12px;
-  text-align: left;
-  white-space: nowrap;
   transition:
     color 0.18s,
     border-color 0.18s,
@@ -1381,8 +1387,11 @@ button {
 }
 .nav-collapse:hover {
   border-color: var(--card-hover);
-  background: #ffffff0a;
+  background: #1d1e1b;
   color: var(--ink);
+}
+.nav-collapse .nav-icon {
+  width: auto;
 }
 .nav-collapse .ico {
   transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -1431,8 +1440,7 @@ button {
     background: var(--line);
     color: transparent;
   }
-  .nav-collapsed .rail .nav button,
-  .nav-collapsed .nav-collapse {
+  .nav-collapsed .rail .nav button {
     justify-content: center;
     padding: 11px 5px;
   }
@@ -1529,6 +1537,7 @@ button {
 .rail .nav button:focus-visible,
 .rail .rail-edit:focus-visible,
 .nav-btn:focus-visible,
+.nav-collapse:focus-visible,
 .rail .nav-close:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
