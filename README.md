@@ -70,7 +70,7 @@ Handy:
 - Quick access: Favorites are drawn by `js/features.js` ("Quick access"). The six default cards are `FAV_CARDS`
   (title, subtitle, icon); users add more with Edit → Add favorite or the ☆ in a document. Recent fills itself
   from what is opened (documents, and pages opened from a card or the search).
-- Saved in the browser (localStorage): `qp-theme`, `qp-favorites`, `qp-lang`, `qp-chats` (QualiChat's previous chats: the questions only), `qp-recent`,
+- Saved in the browser (localStorage): `qp-theme`, `qp-favorites`, `qp-lang`, `qp-chats`, `qp-forum` (Bulletin Board posts, comments and likes; js/forum.js) (QualiChat's previous chats: the questions only), `qp-recent`,
   `qp-onboarding`, `qp-quicklinks`, `qp-role`, `qp-news`, `qp-events`, `qp-dashboard-order-v2`,
   `qp-nav-collapsed`, `qp-kb-filter`, `qp-news-v2` (all news, newest first; uploaded cover images are
   stored in it, so the browser's ~5 MB limit applies).

@@ -372,6 +372,7 @@
     knowledge: { sub: "Document library", icon: "i-library" },
     it: { sub: "Help & tickets", icon: "i-headset" },
     projects: { sub: "Team workspaces", icon: "i-flow" },
+    forum: { sub: "Links, tips & discussions", icon: "i-forum" },
   };
   /* Everything a favorite or recent card needs to know about an id (null if it no longer exists) */
   function quickItem(id) {
@@ -639,6 +640,7 @@
     knowledge: sym("i-library"),
     it: sym("i-headset"),
     projects: sym("i-flow"),
+    forum: sym("i-forum"),
     settings: ICON.cog,
     admin: sym("i-shield"),
   };
