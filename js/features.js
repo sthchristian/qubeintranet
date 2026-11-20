@@ -250,15 +250,21 @@
      Modal
      ===================================================================== */
   const modal = $("#modal"),
+    mBox = modal.querySelector(".modal"),
     mBody = $("#modal-body"),
     mPin = $("#modal-pin");
   let modalDoc = null,
-    modalFocus = null;
+    modalFocus = null,
+    onConfirm = null; // what "Delete" runs while a confirmation is open (see confirmDelete)
   function showModal({ kicker, title, html, pinId = null }) {
     closePalette();
     closeMenus();
     if (modal.hidden) modalFocus = document.activeElement;
     modalDoc = pinId;
+    onConfirm = null; // anything else opening in the window cancels a pending confirmation
+    mBox.classList.remove("is-confirm");
+    mBox.setAttribute("role", "dialog");
+    mBox.removeAttribute("aria-describedby");
     $("#modal-kicker").textContent = kicker;
     $("#modal-title").textContent = title;
     mBody.innerHTML = html;
@@ -272,6 +278,7 @@
     if (modal.hidden) return;
     modal.hidden = true;
     modalDoc = null;
+    onConfirm = null; // closing (✕, a click outside, Esc, Cancel) never deletes anything
     if (modalFocus && modalFocus.focus) modalFocus.focus({ preventScroll: true });
   }
   function openDoc(id) {
@@ -282,6 +289,36 @@
     if (d.mount) d.mount(mBody);
     touchRecent(id);
   }
+  /* ---------- Confirm before deleting ----------
+     Asks in the same document window, so it looks and closes like every other one.
+     Cancel, ✕, a click outside or Esc only close it. Delete closes it and then runs
+     onConfirm: the delete code that used to run straight away. Used by the Admin Panel
+     (news) and QualiChat (previous chats, through window.qp.confirmDelete).
+     item = { name, sub, icon } describes what will be deleted (name is shown as typed). */
+  function confirmDelete({ kicker, title, item, text, onConfirm: run }) {
+    showModal({
+      kicker,
+      title,
+      html: `<div class="rows admin-list"><div class="row">${item.icon ? `<div class="news-ico">${item.icon}</div>` : ""}<span><strong data-no-tr>${esc(item.name)}</strong>${item.sub ? `<small>${esc(item.sub)}</small>` : ""}</span></div></div>
+        <p class="confirm-text" id="confirm-text">${esc(text)}</p>
+        <div class="modal-foot">
+          <button type="button" class="btn" data-confirm="cancel">Cancel</button>
+          <button type="button" class="btn primary" data-confirm="delete">Delete</button>
+        </div>`,
+    });
+    onConfirm = run;
+    mBox.classList.add("is-confirm");
+    mBox.setAttribute("role", "alertdialog");
+    mBox.setAttribute("aria-describedby", "confirm-text");
+    mBody.querySelector('[data-confirm="cancel"]').focus({ preventScroll: true }); // the safe choice has the focus
+  }
+  mBody.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-confirm]");
+    if (!b) return;
+    const run = b.dataset.confirm === "delete" ? onConfirm : null;
+    closeModal(); // focus goes back to the trash button first, so the delete code can move it on
+    if (run) run();
+  });
   $("#modal-close").addEventListener("click", closeModal);
   modal.addEventListener("click", (e) => {
     if (e.target === modal) closeModal();
@@ -1473,20 +1510,35 @@
       notify(`Published “${title}” in the calendar`);
     });
     /* ✕ in the "Published from this panel" lists */
-    $('.view[data-view="admin"]').addEventListener("click", (e) => {
-      const b = e.target.closest("[data-del]");
-      if (!b || !isAdmin()) return;
-      if (b.dataset.del === "news") {
-        news = news.filter((n) => n.id !== b.dataset.id);
+    function removePublished(kind, id) {
+      if (!isAdmin()) return;
+      if (kind === "news") {
+        news = news.filter((n) => n.id !== id);
         saveNews();
         renderNews();
       } else {
-        events = events.filter((ev) => ev.id !== b.dataset.id);
+        events = events.filter((ev) => ev.id !== id);
         store.set("qp-events", events);
         if (window.qpCalendar) window.qpCalendar.reload();
       }
       renderAdmin();
       notify("Removed");
+    }
+    $('.view[data-view="admin"]').addEventListener("click", (e) => {
+      const b = e.target.closest("[data-del]");
+      if (!b || !isAdmin()) return;
+      const { del: kind, id } = b.dataset;
+      if (kind !== "news") return removePublished(kind, id);
+      /* a news article: ask first */
+      const n = news.find((x) => x.id === id);
+      if (!n) return;
+      confirmDelete({
+        kicker: "Admin Panel",
+        title: "Delete this news item?",
+        item: { name: n.title, sub: `${cat(n)[0]} · ${newsDate(n.date)}`, icon: `<img src="${esc(cover(n))}" data-cover="${n.cat}" alt="" />` },
+        text: "It will be removed from the dashboard slideshow and the News page. This can’t be undone.",
+        onConfirm: () => removePublished("news", id),
+      });
     });
     resetForm(newsForm);
     resetForm(eventForm);
@@ -1741,5 +1793,5 @@
   }
 
   /* Shared with chat.js */
-  window.qp = { DOCS, addDocs, openDoc, showModal, closeModal, closeOverlays, openPalette, esc, openArticle, articleMailto };
+  window.qp = { DOCS, addDocs, openDoc, showModal, closeModal, confirmDelete, closeOverlays, openPalette, esc, openArticle, articleMailto };
 })();
