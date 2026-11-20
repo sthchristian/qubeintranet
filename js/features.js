@@ -1073,14 +1073,25 @@
   const markOpen = () =>
     newsAll?.querySelectorAll("[data-open-news]").forEach((b) => b.classList.toggle("open", b.dataset.openNews === openId));
   /* Opens an article in the News view (from the slideshow, the list, or anywhere with data-open-news) */
-  function openArticle(id) {
+  /* Every article has its own address, "#news/<id>": it can be shared, bookmarked, and Back / Forward work */
+  const articleUrl = (id) => location.href.split("#")[0] + "#news/" + encodeURIComponent(id);
+  function openArticle(id, { fromHistory = false } = {}) {
     const n = news.find((x) => x.id === id);
     if (!n || !reader) return;
-    if ($('.view[data-view="news"]').hidden) showView("news");
+    const wasHidden = $('.view[data-view="news"]').hidden;
+    if (wasHidden) showView("news", { push: !fromHistory });
+    if (!fromHistory && location.hash !== "#news/" + encodeURIComponent(id))
+      history[wasHidden ? "replaceState" : "pushState"](null, "", "#news/" + encodeURIComponent(id));
     openId = id;
     reader.innerHTML = `<img class="news-reader-cover" src="${esc(cover(n))}" data-cover="${n.cat}" alt="" />
       <div class="news-reader-body">
-        <div class="news-reader-meta"><span>${esc(cat(n)[0])}</span><time datetime="${n.date}">${longDate(n.date)}</time></div>
+        <div class="news-reader-meta">
+          <span>${esc(cat(n)[0])}</span><time datetime="${n.date}">${longDate(n.date)}</time>
+          <div class="news-share">
+            <button type="button" class="btn share-btn" data-share-mail="${esc(n.id)}"><svg class="ico"><use href="#i-mail" /></svg>Share via Email</button>
+            <button type="button" class="btn share-btn" data-share-copy="${esc(n.id)}"><svg class="ico"><use href="#i-link" /></svg>Copy link</button>
+          </div>
+        </div>
         <h2 id="news-reader-title">${esc(n.title)}</h2>
         <p class="news-reader-lead">${esc(n.text || "")}</p>
         ${n.body ? `<p>${esc(n.body)}</p>` : ""}
@@ -1094,6 +1105,7 @@
   function closeArticle(refocus) {
     if (!reader || reader.hidden) return;
     const was = openId;
+    if (location.hash.startsWith("#news/")) history.replaceState(null, "", "#news"); // back to the list's address
     reader.hidden = true;
     openId = null;
     markOpen();
@@ -1107,6 +1119,72 @@
     } else if (e.target.closest("[data-close-reader]")) closeArticle(true);
     else if (e.target.closest('[data-view-link="news"]')) closeArticle(); // "View all" / sidebar: back to the list
   });
+  /* ---------- Share an article: email draft (mailto:) or copy its link ---------- */
+  /* The email follows the language chosen in Settings: tr() (js/app.js) gives the Swedish text from
+     js/lang-sv.js. An article written in the Admin Panel has no translation and is sent as written. */
+  function shareText(n) {
+    const sv = document.documentElement.lang === "sv",
+      title = tr(n.title),
+      date = sv ? day(n.date).toLocaleDateString("sv-SE", { day: "numeric", month: "long", year: "numeric" }) : longDate(n.date),
+      words = [n.text, n.body]
+        .filter(Boolean)
+        .map((t) => tr(t.trim()))
+        .join(" ")
+        .replace(/\s+/g, " ")
+        .trim(),
+      excerpt = words.length > 320 ? words.slice(0, 320).replace(/\s+\S*$/, "") + "…" : words;
+    return {
+      subject: `${tr("QualiPro News:")} ${title}`,
+      body: `${title}\n${date}\n\n${excerpt}\n\n${tr("Read it on the intranet:")}\n${articleUrl(n.id)}\n`,
+    };
+  }
+  /* "mailto:?subject=…&body=…", every part URL-encoded; line breaks as CRLF, which mail apps expect */
+  function articleMailto(id) {
+    const n = news.find((x) => x.id === id);
+    if (!n) return null;
+    const { subject, body } = shareText(n);
+    return `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body.replace(/\n/g, "\r\n"))}`;
+  }
+  function shareByMail(id) {
+    const mailtoUrl = articleMailto(id);
+    if (!mailtoUrl) return;
+    notify("Opening email draft…");
+    window.location.href = mailtoUrl; // the default mail app (Outlook, Apple Mail…) opens with the draft
+  }
+  async function copyArticleLink(id) {
+    const url = articleUrl(id);
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch (e) {
+      /* older browsers / no permission: copy through a hidden text field */
+      const t = Object.assign(document.createElement("textarea"), { value: url });
+      t.setAttribute("readonly", "");
+      t.style.cssText = "position:fixed;opacity:0;pointer-events:none";
+      document.body.appendChild(t);
+      t.select();
+      const ok = document.execCommand("copy");
+      t.remove();
+      if (!ok) return notify("Couldn't copy the link. Copy it from the address bar.");
+    }
+    notify("Link copied");
+  }
+  document.addEventListener("click", (e) => {
+    const m = e.target.closest("[data-share-mail]"),
+      c = e.target.closest("[data-share-copy]");
+    if (m) shareByMail(m.dataset.shareMail);
+    else if (c) copyArticleLink(c.dataset.shareCopy);
+  });
+  /* Back / Forward between articles, and opening a shared "#news/<id>" link */
+  const linkedArticle = () => {
+    const m = location.hash.match(/^#news\/(.+)$/);
+    return m ? decodeURIComponent(m[1]) : null;
+  };
+  addEventListener("popstate", () => {
+    const id = linkedArticle();
+    if (id) openArticle(id, { fromHistory: true });
+    else if (location.hash === "#news") closeArticle();
+  });
+
   /* leaving the News view (sidebar, search, back button) puts the article away */
   const newsView = $('.view[data-view="news"]');
   if (newsView) new MutationObserver(() => newsView.hidden && closeArticle()).observe(newsView, { attributeFilter: ["hidden"] });
@@ -1416,6 +1494,7 @@
     renderAdmin();
   }
   renderNews();
+  if (linkedArticle()) openArticle(linkedArticle(), { fromHistory: true }); // the page was opened from a shared "#news/<id>" link
 
   /* =====================================================================
      Dashboard layout: "Customize dashboard" turns on an edit mode where the
@@ -1662,5 +1741,5 @@
   }
 
   /* Shared with chat.js */
-  window.qp = { DOCS, addDocs, openDoc, showModal, closeModal, closeOverlays, openPalette, esc, openArticle };
+  window.qp = { DOCS, addDocs, openDoc, showModal, closeModal, closeOverlays, openPalette, esc, openArticle, articleMailto };
 })();

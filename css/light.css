@@ -627,3 +627,11 @@ html[data-theme="light"] .chat-history {
 html[data-theme="light"] .chat-item.current {
   background: #fff8e6;
 }
+/* News article share buttons: the envelope / link icons keep the accent, the text stays dark */
+html[data-theme="light"] .share-btn .ico {
+  color: #d99a00;
+}
+html[data-theme="light"] .share-btn:hover {
+  border-color: #ffb817;
+  background: #fff8e6;
+}

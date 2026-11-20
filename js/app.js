@@ -441,6 +441,7 @@ function syncViewLabel() {
 /* pages that moved: an old link or bookmark opens the new place (the Employee handbook is now in the Knowledge Hub) */
 const MOVED_VIEWS = { handbook: "knowledge" };
 function showView(name, { push = true } = {}) {
+  name = String(name || "").split("/")[0]; // "#news/<article>" = the News view (js/features.js opens the article)
   if (MOVED_VIEWS[name]) {
     name = MOVED_VIEWS[name];
     if (!push) history.replaceState(null, "", "#" + name);
@@ -455,7 +456,7 @@ function showView(name, { push = true } = {}) {
     else b.removeAttribute("aria-current");
   });
   syncViewLabel();
-  if (push && location.hash !== "#" + name) history.pushState(null, "", "#" + name);
+  if (push && location.hash.split("/")[0] !== "#" + name) history.pushState(null, "", "#" + name);
   closeMenus();
   scrollTo({ top: 0 });
 }
