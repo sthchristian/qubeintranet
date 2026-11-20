@@ -620,3 +620,10 @@ html[data-theme="light"] .sp-help {
 html[data-theme="light"] .sp-help:hover {
   border-color: #ffb817;
 }
+/* QualiChat: previous chats */
+html[data-theme="light"] .chat-history {
+  background: #faf8f2;
+}
+html[data-theme="light"] .chat-item.current {
+  background: #fff8e6;
+}

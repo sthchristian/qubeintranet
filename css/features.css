@@ -1998,3 +1998,193 @@ button.news-item {
     grid-template-columns: 112px minmax(0, 1fr);
   }
 }
+
+/* ================= QualiChat: previous chats (logic in js/chat.js, "Previous chats") ================= */
+.drawer-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+.drawer-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.drawer-main .thread {
+  flex: 1;
+}
+#drawer-history[aria-expanded="true"] {
+  border-color: var(--gold);
+  color: var(--gold-ink);
+}
+.chat-history {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--panel2);
+}
+.chat-history[hidden] {
+  display: none;
+}
+.chat-history-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 10px 8px 14px;
+}
+.chat-history-head h3 {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.chat-history-close {
+  width: 28px;
+  height: 28px;
+}
+.chat-history-close .ico {
+  transform: rotate(90deg); /* points left: "put the list away" */
+}
+.chat-list {
+  flex: 1;
+  margin: 0;
+  padding: 0 8px 12px;
+  list-style: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.chat-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 4px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
+}
+.chat-item:hover {
+  background: var(--hover);
+}
+.chat-item.current {
+  border-color: var(--gold);
+  background: #ffb8170f;
+}
+.chat-open {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+  padding: 8px 4px 8px 10px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.chat-open strong {
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.chat-open small {
+  color: var(--muted);
+  font-size: 10px;
+}
+.chat-del {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  margin-right: 4px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+.chat-del .ico {
+  width: 15px;
+  height: 15px;
+}
+.chat-del:hover {
+  color: #ff6b5e;
+  background: #ff6b5e1a;
+}
+/* the trash can shows on hover / keyboard focus (always on touch screens) */
+@media (hover: hover) {
+  .chat-del {
+    opacity: 0;
+  }
+  .chat-item:hover .chat-del,
+  .chat-item:focus-within .chat-del {
+    opacity: 1;
+  }
+}
+.chat-open:focus-visible,
+.chat-del:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+  opacity: 1;
+}
+.chat-none {
+  padding: 10px 8px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+/* computers: the drawer widens and the list sits beside the chat */
+@media (min-width: 900px) {
+  .drawer.show-history {
+    width: min(680px, 100vw);
+  }
+  .drawer.show-history .chat-history {
+    flex: none;
+    width: 250px;
+    border-right: 1px solid var(--card-line);
+  }
+  .drawer {
+    transition:
+      transform 0.28s cubic-bezier(0.3, 0.7, 0.2, 1),
+      width 0.25s ease,
+      visibility 0s 0.28s;
+  }
+  .drawer.open {
+    transition:
+      transform 0.28s cubic-bezier(0.3, 0.7, 0.2, 1),
+      width 0.25s ease;
+  }
+}
+/* phones / tablets: the list slides over the chat */
+@media (max-width: 899px) {
+  .chat-history {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    animation: chat-history-in 0.22s ease;
+  }
+}
+@keyframes chat-history-in {
+  from {
+    transform: translateX(-24px);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chat-history {
+    animation: none;
+  }
+}

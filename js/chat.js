@@ -253,7 +253,8 @@
     if (!question) return;
     window.qp.closeModal();
     open();
-    add(`<div class="bubble"></div>`, "user").firstChild.textContent = question;
+    add(`<div class="bubble" data-no-tr></div>`, "user").firstChild.textContent = question;
+    record(question);
     const wait = add(
       `<div class="bot-dot"><svg class="ico"><use href="#i-spark" /></svg></div><div class="bubble"><span class="typing" aria-label="QualiChat is typing"><i></i><i></i><i></i></span></div>`,
       "bot",
@@ -270,8 +271,126 @@
   }
   function reset() {
     retrievals.clear();
+    chatId = null; // the next question starts a new saved chat; the old one stays under Previous chats
     thread.innerHTML = `<div class="thread-empty">Ask about policies, projects or developer guides. Answers show their sources.</div>`;
+    renderHistory();
   }
+
+  /* ---------- Previous chats ----------
+   * Every conversation is saved in the browser ("qp-chats", newest first, at most 30).
+   * Only the questions are stored: the simulated answers are rebuilt from them when a chat is reopened.
+   * The clock button in the header shows the list; a chat can be reopened or deleted (trash can). */
+  const CHATS_KEY = "qp-chats",
+    MAX_CHATS = 30;
+  const history = $("#chat-history"),
+    chatList = $("#chat-list"),
+    historyBtn = $("#drawer-history");
+  let chats = (() => {
+    try {
+      const v = JSON.parse(localStorage.getItem(CHATS_KEY));
+      return Array.isArray(v) ? v.filter((c) => c && c.id && Array.isArray(c.msgs) && c.msgs.length) : [];
+    } catch (e) {
+      return [];
+    }
+  })();
+  let chatId = null; // the chat on screen (null = a new one that has no questions yet)
+  function saveChats() {
+    chats = chats.slice(0, MAX_CHATS);
+    try {
+      localStorage.setItem(CHATS_KEY, JSON.stringify(chats));
+    } catch (e) {}
+  }
+  function record(question) {
+    let c = chats.find((x) => x.id === chatId);
+    if (!c) {
+      c = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), title: question.slice(0, 80), msgs: [] };
+      chatId = c.id;
+    }
+    c.msgs.push(question);
+    c.t = Date.now();
+    chats = [c, ...chats.filter((x) => x.id !== c.id)];
+    saveChats();
+    renderHistory();
+  }
+  /* "Today 14:05", "Yesterday 09:12", "18 Nov" */
+  function when(t) {
+    const d = new Date(t),
+      today = new Date(),
+      hm = d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" }),
+      days = Math.round((new Date(today.toDateString()) - new Date(d.toDateString())) / 864e5);
+    if (days === 0) return "Today " + hm;
+    if (days === 1) return "Yesterday " + hm;
+    return d.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+  }
+  function renderHistory() {
+    chatList.innerHTML = chats.length
+      ? chats
+          .map(
+            (c) => `<li class="chat-item${c.id === chatId ? " current" : ""}">
+          <button type="button" class="chat-open" data-chat-open="${esc(c.id)}"${c.id === chatId ? ' aria-current="true"' : ""}>
+            <strong data-no-tr>${esc(c.title)}</strong><small>${when(c.t)} · ${c.msgs.length} ${c.msgs.length === 1 ? "question" : "questions"}</small>
+          </button>
+          <button type="button" class="chat-del" data-chat-del="${esc(c.id)}" aria-label="Delete “${esc(c.title)}”" title="Delete chat">
+            <svg class="ico"><use href="#i-trash" /></svg>
+          </button>
+        </li>`,
+          )
+          .join("")
+      : `<li class="chat-none">No previous chats yet. Your conversations are saved here automatically.</li>`;
+  }
+  function loadChat(id) {
+    const c = chats.find((x) => x.id === id);
+    if (!c) return;
+    retrievals.clear();
+    thread.innerHTML = "";
+    chatId = c.id;
+    c.msgs.forEach((q) => {
+      add(`<div class="bubble" data-no-tr></div>`, "user").firstChild.textContent = q;
+      add(`<div class="bot-dot"><svg class="ico"><use href="#i-spark" /></svg></div><div class="bubble">${reply(q)}</div>`, "bot");
+    });
+    renderHistory();
+    if (narrow.matches) showHistory(false);
+    dInput.focus({ preventScroll: true });
+  }
+  function deleteChat(id) {
+    const at = chats.findIndex((x) => x.id === id);
+    if (at < 0) return;
+    chats.splice(at, 1);
+    saveChats();
+    if (id === chatId) reset();
+    else renderHistory();
+    notify("Chat deleted");
+    /* keep the keyboard in the list: the next chat's trash can, or the panel's close button */
+    (chatList.querySelectorAll("[data-chat-del]")[Math.min(at, chats.length - 1)] || $("#chat-history-close")).focus();
+  }
+  const narrow = matchMedia("(max-width: 899px)"); // phones / tablets: the list slides over the chat
+  function showHistory(on) {
+    history.hidden = !on;
+    drawer.classList.toggle("show-history", on);
+    historyBtn.setAttribute("aria-expanded", on);
+    if (on) {
+      renderHistory();
+      (chatList.querySelector(".current .chat-open") || chatList.querySelector("button") || $("#chat-history-close")).focus({ preventScroll: true });
+    }
+  }
+  historyBtn.addEventListener("click", () => showHistory(history.hidden));
+  $("#chat-history-close").addEventListener("click", () => {
+    showHistory(false);
+    historyBtn.focus();
+  });
+  chatList.addEventListener("click", (e) => {
+    const o = e.target.closest("[data-chat-open]"),
+      d = e.target.closest("[data-chat-del]");
+    if (d) deleteChat(d.dataset.chatDel);
+    else if (o) loadChat(o.dataset.chatOpen);
+  });
+  /* Esc inside the list closes the list first (not the whole chat) */
+  history.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    e.stopPropagation();
+    showHistory(false);
+    historyBtn.focus();
+  });
 
   /* ---------- Citation inspector ---------- */
   function inspect(id, i) {
@@ -324,11 +443,12 @@
   $("#drawer-close").addEventListener("click", close);
   $("#drawer-new").addEventListener("click", () => {
     reset();
+    if (narrow.matches) showHistory(false);
     dInput.focus();
   });
   $("#open-thread").addEventListener("click", open);
   drawer.inert = true;
   reset();
 
-  window.qpChat = { ask, open, close, reset };
+  window.qpChat = { ask, open, close, reset, showHistory };
 })();
