@@ -453,6 +453,13 @@
     }
   });
   $("#drawer-close").addEventListener("click", close);
+  /* A press anywhere outside the drawer closes it, the same way the calendar popover works
+     (js/calendar.js). pointerdown runs before the click that opens the drawer, so the button
+     that opens it never closes it again. Windows opened on top of the chat (a cited source,
+     the delete confirmation, search) are .overlay: pressing in them keeps the chat open. */
+  document.addEventListener("pointerdown", (e) => {
+    if (drawer.classList.contains("open") && !drawer.contains(e.target) && !e.target.closest(".overlay")) close();
+  });
   $("#drawer-new").addEventListener("click", () => {
     reset();
     if (narrow.matches) showHistory(false);
