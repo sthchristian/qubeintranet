@@ -52,6 +52,16 @@
 .guide.on {
   display: block;
 }
+/* QBot's tour effects (smoke, sparks, confetti ...), drawn by js/qbot-fx.js: above the dimmed page and
+   the spotlight, below QBot and the tooltip. Only shown while an effect is running. */
+.qbot-fx {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 52;
+  pointer-events: none;
+}
 .guide.held {
   z-index: 70;
 }

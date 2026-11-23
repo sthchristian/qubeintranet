@@ -1,6 +1,7 @@
 /* tour.js
  * First-time user tour. Edit the STEPS array to change the text or add steps.
  * Each step points at a CSS selector; the robot flies there and shows the tooltip.
+ * `act` names what QBot does on that step (the ACTS in js/qbot-acts.js); without one he just points.
  * Tip: run qpTour.reset() in the console, then reload, to see it again.
  */
 /* ================= First-time user tour ================= */
@@ -8,6 +9,7 @@ const tour = (function () {
   const TOUR_KEY = "qp-tour-done-v2";
   const STEPS = [
     {
+      act: "hello",
       target: null,
       title: "Hi Alex, I’m <span class=\"name\">QBot!</span>",
       text: "I’m your guide to the QualiPro Knowledge Hub. Let me show you around. It only takes 30 seconds.",
@@ -15,55 +17,66 @@ const tour = (function () {
     },
     {
       target: "#chat-form",
+      act: "ask",
       title: "Ask anything",
       text: "Type a question about policies, projects or developer guides. Press Enter to ask, Shift + Enter for a new line.",
     },
     {
       target: ".suggestions",
+      act: "tap",
       title: "Not sure where to start?",
       text: "Tap a suggestion and I’ll fill in a ready-made question for you.",
     },
     {
       target: ".rail .nav",
+      act: "nav",
       title: "Find your way",
       text: "Jump between News, the Knowledge Hub and Projects from this menu.",
     },
     {
       target: ".quick-nav",
+      act: "tinker",
       title: "Your shortcuts",
       text: "One click to Jira, GitHub and the architecture wiki. Use Edit to make them your own.",
     },
     {
       target: "#notif-btn",
+      act: "bell",
       title: "Notifications",
       text: "New updates and mentions land here. The yellow badge shows how many you haven’t read yet.",
     },
     {
       target: "#profile-btn",
+      act: "salute",
       title: "Your profile",
       text: "Your profile and sign-out live up here.",
     },
     {
+      act: "bazooka",
       target: "#settings-btn",
       title: "Your settings",
       text: "The gear opens your settings: light or dark mode (or press D), language, and help. We’ll remember your choices.",
     },
     {
       target: "#news-home",
+      act: "rocket",
       title: "Stay in the loop",
       text: "The newest company updates, as a slideshow. Click one to read it.",
     },
     {
       target: "#cal",
+      act: "watch",
       title: "What’s coming up",
       text: "Meetings, events and deadlines for the week. Pick a day to see its agenda, or use the arrows to change week.",
     },
     {
       target: "#search-trigger",
+      act: "magnify",
       title: "Jump anywhere",
       text: "Search pages, tools and actions here, or press Cmd/Ctrl + K from anywhere.",
     },
     {
+      act: "celebrate",
       target: "#settings-btn",
       title: "That’s the tour!",
       text: "Replay it any time from the gear (Take the tour), or click my speech bubble. Psst: click me for a wave, double-click for a jump, or grab me and drag me around!",
@@ -73,6 +86,8 @@ const tour = (function () {
   const layer = $("#tour-layer"),
     spot = $("#tour-spot"),
     tip = $("#tip");
+  /* QBot's step acts (js/qbot-acts.js, loaded after this file); null if that file is missing */
+  const qbotActs = () => (typeof QBotActs !== "undefined" ? QBotActs : null);
   let steps = [],
     i = 0,
     busy = false,
@@ -201,22 +216,45 @@ const tour = (function () {
     tip.classList.remove("on");
     const s = steps[i],
       el = s.target ? $(s.target) : null;
+    const acts = qbotActs(); // QBot's act for this step (js/qbot-acts.js)
+    if (acts) acts.begin(s); // the previous step's act stops right here
+    let ride = null; // { from, to }: an act (the rocket) that scrolls the page itself, in step with its flight
     if (el) {
       const b = el.getBoundingClientRect();
       if (b.top < 70 || b.bottom > innerHeight - 70) {
-        el.scrollIntoView({ block: "center", behavior: reduce() ? "auto" : "smooth" });
-        await scrollSettled();
+        if (acts && acts.ridesScroll()) ride = { from: scrollY, to: scrollY + b.top - (innerHeight - b.height) / 2 };
+        else {
+          el.scrollIntoView({ block: "center", behavior: reduce() ? "auto" : "smooth" });
+          await scrollSettled();
+        }
       }
     }
     renderTip();
-    const L = layout();
-    placeSpot(L.r);
-    await flyTo(L.robot.x, L.robot.y);
+    let L, dest;
+    if (ride) {
+      /* where everything will be once the page has scrolled: jump there, measure, jump back - all in
+         one go, so nothing is drawn in between and the page does not visibly move yet */
+      scrollTo({ top: ride.to, behavior: "instant" });
+      ride.to = scrollY; // the page may not scroll quite that far
+      L = layout();
+      dest = acts.place(L.robot, L);
+      scrollTo({ top: ride.from, behavior: "instant" });
+    } else {
+      L = layout();
+      placeSpot(L.r);
+    }
+    if (acts) await acts.travel(L.robot, L, ride && { dest, ride });
+    else await flyTo(L.robot.x, L.robot.y);
+    if (ride) {
+      if (scrollY !== ride.to) scrollTo({ top: ride.to, behavior: "instant" }); // the act was cut short
+      placeSpot(layout().r);
+    }
     tip.style.left = L.t.x + "px";
     tip.style.top = L.t.y + "px";
     tip.classList.add("on");
     tip.querySelector('[data-act="next"]').focus({ preventScroll: true });
     busy = false;
+    if (acts) acts.perform();
   }
   function reflow() {
     if (!api.active) return;
@@ -226,6 +264,7 @@ const tour = (function () {
     setGuide(L.robot.x, L.robot.y);
     tip.style.left = L.t.x + "px";
     tip.style.top = L.t.y + "px";
+    if (qbotActs()) qbotActs().reflow(L); // QBot may stand elsewhere for this step, and keeps pointing at it
   }
   async function start() {
     if (api.active || returning || drag) return;
@@ -256,6 +295,7 @@ const tour = (function () {
     if (!api.active) return;
     busy = true;
     store.set();
+    if (qbotActs()) qbotActs().stop(); // whatever QBot is doing stops, props and effects go away
     tip.classList.remove("on");
     spot.classList.remove("on");
     const sb = $(".chat-stage").getBoundingClientRect();

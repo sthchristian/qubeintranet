@@ -26,14 +26,14 @@
     />
     <!-- ?v= makes the browser fetch a file again instead of using its cached copy (the sidebar logo images have one too).
          Raise the number on every css/ and js/ line here and below whenever one of those files changes. -->
-    <link rel="stylesheet" href="css/base.css?v=56" />
-    <link rel="stylesheet" href="css/mascot.css?v=56" />
-    <link rel="stylesheet" href="css/topbar.css?v=56" />
-    <link rel="stylesheet" href="css/tour.css?v=56" />
-    <link rel="stylesheet" href="css/features.css?v=56" />
-    <link rel="stylesheet" href="css/knowledge.css?v=56" />
-    <link rel="stylesheet" href="css/forum.css?v=56" />
-    <link rel="stylesheet" href="css/light.css?v=56" />
+    <link rel="stylesheet" href="css/base.css?v=57" />
+    <link rel="stylesheet" href="css/mascot.css?v=57" />
+    <link rel="stylesheet" href="css/topbar.css?v=57" />
+    <link rel="stylesheet" href="css/tour.css?v=57" />
+    <link rel="stylesheet" href="css/features.css?v=57" />
+    <link rel="stylesheet" href="css/knowledge.css?v=57" />
+    <link rel="stylesheet" href="css/forum.css?v=57" />
+    <link rel="stylesheet" href="css/light.css?v=57" />
   </head>
   <body>
     <!-- ===== Icon sprites (referenced with <use href="#i-...">) ===== -->
@@ -166,8 +166,8 @@
         <div class="brand">
           <!-- Logo = home: goes to the Dashboard (data-view-link, js/app.js "Sidebar views") -->
           <button type="button" class="brand-home" data-view-link="dashboard" aria-label="Qube – go to Dashboard" title="Go to Dashboard">
-            <img class="brand-logo brand-logo--light" src="assets/brand/gold-cream-cube/qube-logo-horizontal-light-transparent.svg?v=56" alt="" width="900" height="314" />
-            <img class="brand-logo brand-logo--dark" src="assets/brand/gold-cream-cube/qube-logo-horizontal-dark-transparent.svg?v=56" alt="" width="900" height="314" />
+            <img class="brand-logo brand-logo--light" src="assets/brand/gold-cream-cube/qube-logo-horizontal-light-transparent.svg?v=57" alt="" width="900" height="314" />
+            <img class="brand-logo brand-logo--dark" src="assets/brand/gold-cream-cube/qube-logo-horizontal-dark-transparent.svg?v=57" alt="" width="900" height="314" />
           </button>
           <button type="button" class="icon-btn nav-close" id="nav-close" aria-label="Close navigation">✕</button>
         </div>
@@ -740,13 +740,19 @@
     <div id="guide" class="guide" aria-hidden="true">
       <div class="guide-body">
         <img src="assets/qp-robot.webp" alt="" draggable="false" />
-        <!-- same model for the flying / dragged robot; mascot3d.js sets its src once the first one has loaded -->
+        <!-- same model for the flying / dragged robot; mascot3d.js sets its src once the first one has loaded.
+             Its canvas is twice the size (css/mascot.css, room for props) with a matching wider field of view.
+             max-camera-orbit pins the camera distance to the one QBot always had (4.0437m: model-viewer's
+             automatic limit at 20deg); left on "auto" it would move the camera closer for the wider view
+             and draw QBot twice as big. -->
         <model-viewer
           class="qp3d"
           id="qp3d-guide"
           camera-orbit="-16deg 84deg 4.5m"
           camera-target="0m 0.62m 0m"
-          field-of-view="20deg"
+          field-of-view="38.85deg"
+          max-field-of-view="60deg"
+          max-camera-orbit="auto auto 4.0437m"
           interpolation-decay="140"
           interaction-prompt="none"
           loading="eager"
@@ -826,17 +832,21 @@
       </div>
     </aside>
     <!-- Swedish texts for the language setting (js/app.js, "Language") -->
-    <script src="js/lang-sv.js?v=56"></script>
-    <script src="js/app.js?v=56"></script>
-    <script src="js/calendar.js?v=56"></script>
-    <script src="js/robot.js?v=56"></script>
-    <script src="js/tour.js?v=56"></script>
-    <script src="js/features.js?v=56"></script>
-    <script src="js/knowledge.js?v=56"></script>
-    <script src="js/forum.js?v=56"></script>
-    <script src="js/chat.js?v=56"></script>
+    <script src="js/lang-sv.js?v=57"></script>
+    <script src="js/app.js?v=57"></script>
+    <script src="js/calendar.js?v=57"></script>
+    <script src="js/robot.js?v=57"></script>
+    <script src="js/tour.js?v=57"></script>
+    <script src="js/features.js?v=57"></script>
+    <script src="js/knowledge.js?v=57"></script>
+    <script src="js/forum.js?v=57"></script>
+    <script src="js/chat.js?v=57"></script>
     <!-- 3D mascot: <model-viewer> (local copy, no internet needed) + the animation code -->
     <script src="js/vendor/model-viewer-umd.min.js"></script>
-    <script src="js/mascot3d.js?v=56"></script>
+    <script src="js/mascot3d.js?v=57"></script>
+    <!-- QBot's tour acts: screen effects, 3D props, and the step choreography (in that order) -->
+    <script src="js/qbot-fx.js?v=57"></script>
+    <script src="js/qbot-props.js?v=57"></script>
+    <script src="js/qbot-acts.js?v=59"></script>
   </body>
 </html>
