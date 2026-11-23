@@ -68,6 +68,15 @@ body.grabbing * {
 .is-3d > .qp3d {
   opacity: 1;
 }
+/* The tour robot gets a canvas twice as wide and tall (same centre), so props and an outstretched arm
+   fit. Its field-of-view in index.html is widened to match (2 × tan 10° → 38.85°), so QBot himself
+   renders at exactly the same size and place as before. */
+#qp3d-guide {
+  left: -140%;
+  top: -94.5%;
+  width: 380%;
+  height: 270%;
+}
 .mascot.is-3d > img,
 .guide-body.is-3d > img {
   opacity: 0;

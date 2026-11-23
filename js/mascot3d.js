@@ -232,6 +232,49 @@
       this.start();
     }
 
+    /* ---------- Used by the tour acts (js/qbot-acts.js) ---------- */
+    /* eyes look in a direction: x / y from -1 to 1 (screen right / down).
+       smile: keep the closed, smiling eyes (the "happy" arcs), just shifted towards that direction */
+    gaze(x, y, size = 1, smile = false) {
+      if (!this.ready) return;
+      x = Math.max(-1, Math.min(1, x));
+      y = Math.max(-1, Math.min(1, y));
+      EYES.__gaze = smile ? { ...EYES.happy, r: EYES.happy.r * size, x: x * 0.07, y: EYES.happy.y + y * 0.05 } : { type: "dot", rx: 0.13 * size, ry: 0.19 * size, x: x * 0.13, y: y * 0.12 };
+      this.eye.name = this.eye.shape = "__gaze";
+      this.eye.drawn = null; // redraw even if we were already gazing
+      this.start();
+    }
+    /* stop every repeating motion (waves, wiggles) started by anyone */
+    stopAll() {
+      this.osc.forEach((o) => (o.on = false));
+      this.pulse(false);
+    }
+    /* thicker smile / closed-eye arcs (1 = normal), so they still read when QBot is small on the page */
+    boldEyes(k = 1) {
+      if (!this.ready || this.eyeBold === k) return;
+      this.eyeBold = k;
+      this.eye.drawn = null;
+      this.start();
+    }
+    /* a joint ("wristR") or a part ("handPointR") of the model */
+    node(name) {
+      return this.ready ? this.parts["j_" + name] || this.parts[name] || null : null;
+    }
+    /* where a point on the model is on the page: obj's origin, or a point given in obj's own space */
+    toScreen(obj, local) {
+      if (!this.ready || !obj) return null;
+      const cam = this.scene.camera,
+        v = obj.position.clone();
+      if (!cam) return null;
+      this.scene.updateMatrixWorld(true);
+      if (local) v.set(local[0], local[1], local[2]);
+      else v.set(0, 0, 0);
+      obj.localToWorld(v);
+      v.project(cam);
+      const r = this.viewer.getBoundingClientRect();
+      return { x: r.left + ((v.x + 1) / 2) * r.width, y: r.top + ((1 - v.y) / 2) * r.height };
+    }
+
     /* The eye meshes are flat 25 x 25 grids lying on the visor. We keep the
        original surface and move the grid points so they trace an arc or a dot. */
     readEye(mesh) {
@@ -263,7 +306,7 @@
               v2 = Math.sin(ang) * s.ry * b;
             } else {
               const ang = Math.PI * a,
-                thick = s.t * Math.sqrt(1 - Math.pow(Math.abs(2 * a - 1), 6)), // rounded ends
+                thick = s.t * (this.eyeBold || 1) * Math.sqrt(1 - Math.pow(Math.abs(2 * a - 1), 6)), // rounded ends
                 rad = s.r + (b - 0.5) * thick;
               u = -Math.cos(ang) * rad;
               v2 = -Math.sin(ang) * rad * (s.flip ? -1 : 1);
@@ -618,6 +661,8 @@
   /* ---------- The flying / dragged robot (tour + drag) uses the model too ---------- */
   const guide = document.getElementById("guide"),
     guideViewer = document.getElementById("qp3d-guide");
+  let guideRig = null,
+    guideRelease = () => {};
   if (guide && guideViewer) {
     const gRig = mount(guideViewer, guideViewer.parentElement);
     let gStops = [],
@@ -625,6 +670,8 @@
     const sync = () => {
       const c = guide.classList,
         next = !c.contains("on") ? "off" : c.contains("held") ? "held" : c.contains("flying") ? "fly" : c.contains("wave") ? "wave" : "rest";
+      /* a tour act (js/qbot-acts.js) is in charge: it poses QBot itself, flights included */
+      if (guide.dataset.act) return;
       if (next === gMode || !gRig.ready) return;
       gMode = next;
       gStops.forEach((stop) => stop());
@@ -652,7 +699,15 @@
     guideViewer.addEventListener("qp-rig", sync);
     /* load the second copy only after the first one is on screen */
     viewer.addEventListener("qp-rig", () => guideViewer.setAttribute("src", viewer.getAttribute("src")), { once: true });
+    /* tour acts hand QBot back: forget the last mode so the next sync re-poses him */
+    guideRelease = () => {
+      gStops.forEach((stop) => stop());
+      gStops = [];
+      gMode = "";
+      sync();
+    };
+    guideRig = gRig;
   }
 
-  window.qpMascot = { rig, react, click, flags, settle };
+  window.qpMascot = { rig, react, click, flags, settle, guide: guideRig, releaseGuide: () => guideRelease() };
 })();
