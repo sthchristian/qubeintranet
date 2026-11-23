@@ -266,6 +266,11 @@ const QBotActs = (() => {
       y: p.y + Math.max(0, 4 - d.top) - Math.max(0, d.bottom - (innerHeight - 4)),
     };
   }
+  /* an act's own sideways nudge (shiftX, in px at desktop size, scaled with QBot); acts without one stay put */
+  function shifted(p, a) {
+    if (!a || !a.shiftX) return p;
+    return { x: p.x + a.shiftX * (guideEl.offsetHeight / 135), y: p.y };
+  }
   function stage(dest, L) {
     const s = step,
       a = s && ACTS[s.act];
@@ -395,26 +400,22 @@ const QBotActs = (() => {
   }
   /* the prop's screen point (e.g. the muzzle) */
   const propPoint = (r, prop, local) => r.toScreen(prop, local);
-  /* The model's own hammer sits in the hand hanging head-down (upside down for a swing). Turn it, about
-     the grip, so the handle carries on from the arm and the head is out at the end, upright when the
-     arm is raised. Returns a function that puts it back exactly as it was. */
+  /* The model's own hammer sits in the fist the way a hammer is held (handle across the fist), but
+     flipped: the head is on the wrong end, so it hangs head-down. Turn it 180° about the hand's own
+     axis, through the grip: the handle stays on the same line through the fist, and the head comes
+     out on top. Returns a function that puts it back exactly as it was. */
   function holdHammer(r, side) {
     const hm = r.node("hammer" + side),
-      grip = hm && hm.children.find((o) => /_1$/.test(o.name)),
-      head = hm && hm.children.find((o) => /_3$/.test(o.name));
-    if (!grip || !head) return () => {};
+      grip = hm && hm.children.find((o) => /_1$/.test(o.name));
+    if (!grip) return () => {};
     const { V } = T(r);
     const p0 = hm.position.clone(),
       q0 = hm.quaternion.clone();
-    const centre = (o) => {
-      o.geometry.computeBoundingBox();
-      o.updateMatrix();
-      return o.geometry.boundingBox.getCenter(new V()).applyMatrix4(o.matrix); // in the hammer's own space
-    };
-    const g = centre(grip),
-      along = centre(head).sub(g).normalize(),
-      arm = fingertip(r, side).clone().normalize(); // the hand's pointing direction (wrist space)
-    const q = hm.quaternion.clone().setFromUnitVectors(along, arm);
+    grip.geometry.computeBoundingBox();
+    grip.updateMatrix();
+    const g = grip.geometry.boundingBox.getCenter(new V()).applyMatrix4(grip.matrix), // grip centre, in the hammer's own space
+      hand = fingertip(r, side).clone().normalize(); // the hand's axis (wrist space = the hammer's space)
+    const q = hm.quaternion.clone().setFromAxisAngle(hand, Math.PI);
     hm.quaternion.copy(q);
     hm.position.copy(g.clone().sub(g.clone().applyQuaternion(q))); // the grip stays in the fist
     r.render();
@@ -568,6 +569,7 @@ const QBotActs = (() => {
 
     /* Step 6 (notifications): ding the bell with QBot's hammer */
     bell: {
+      shiftX: -36, // px at desktop size: a bit further left, so the raised hammer clears the tooltip
       async perform(c) {
         const r = c.rig;
         const p = c.target();
@@ -975,7 +977,7 @@ const QBotActs = (() => {
     const c = ctx,
       a = pick(step);
     if (ride) dest = ride.dest;
-    else if (a) dest = stage(dest, L);
+    else if (a) dest = shifted(stage(dest, L), a);
     if (!c) return flyTo(dest.x, dest.y);
     try {
       if (a && a.travel) return await a.travel(c, dest, ride && ride.ride);
@@ -1007,7 +1009,7 @@ const QBotActs = (() => {
     if (L) {
       const a = pick(step);
       if (a) {
-        const d = stage(L.robot, L);
+        const d = shifted(stage(L.robot, L), a);
         setGuide(d.x, d.y);
       }
     }
