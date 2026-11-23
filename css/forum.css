@@ -1,0 +1,567 @@
+/* forum.css
+ * BULLETIN BOARD (js/forum.js): post cards, category badges, the thread and its comments.
+ * The toolbar and category pills reuse the Knowledge Hub's .kb-* styles, the forms the
+ * Admin Panel's .admin-field, and buttons / inputs the shared .btn / .field.
+ * Only existing theme tokens are used, so light and dark mode follow automatically:
+ * --card, --card-line, --card-hover, --panel2, --ink, --muted, --gold, --gold-ink, --hover.
+ */
+
+/* ---------- Header + toolbar ---------- */
+.fm-new {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: none;
+  padding: 10px 16px;
+  border-radius: 11px;
+  font-size: 13px;
+}
+.fm-new .ico {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.4;
+}
+.fm-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+.fm-count {
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.fm-mod {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 9px 12px;
+  border: 1px dashed #ffb81755;
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.fm-mod .ico {
+  width: 15px;
+  height: 15px;
+  color: var(--gold-ink);
+  flex: none;
+}
+.fm-mod[hidden] {
+  display: none;
+}
+
+/* ---------- Feed: post cards ---------- */
+.fm-feed {
+  display: grid;
+  gap: 12px;
+}
+.fm-card,
+.fm-post {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  padding: 18px 20px 14px;
+  background: var(--card);
+  border: 1px solid var(--card-line);
+  border-radius: 13px;
+  min-width: 0;
+}
+.fm-card {
+  cursor: pointer;
+  transition:
+    border-color 0.18s,
+    transform 0.18s;
+}
+.fm-card:hover {
+  border-color: var(--card-hover);
+}
+.fm-card.is-pinned {
+  border-color: #ffb81766;
+  background: linear-gradient(#ffb8170d, #ffb8170d), var(--card);
+}
+.fm-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.fm-by {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.fm-by > span {
+  display: grid;
+  min-width: 0;
+  font-size: 13px;
+}
+.fm-by strong {
+  font-weight: 600;
+}
+.fm-by small {
+  color: var(--muted);
+  font-size: 11px;
+}
+.fm-avatar {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--panel2);
+  border: 1px solid var(--card-line);
+  color: var(--gold-ink);
+  font-size: 12px;
+  font-weight: 700;
+}
+.fm-avatar.is-me {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #241d0b;
+}
+.fm-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.fm-you {
+  display: inline-block;
+  flex: none;
+  padding: 1px 6px;
+  border-radius: 99px;
+  background: #ffb8171f;
+  color: var(--gold-ink);
+  font-size: 10px;
+  font-weight: 600;
+}
+.fm-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  flex: none;
+}
+.fm-cat,
+.fm-pin {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid var(--card-line);
+  background: var(--panel2);
+  color: var(--muted);
+}
+.fm-pin {
+  border-color: #ffb81755;
+  background: #ffb8171a;
+  color: var(--gold-ink);
+}
+.fm-pin .ico {
+  width: 12px;
+  height: 12px;
+}
+/* one quiet tint per category, readable in both themes */
+.fm-cat[data-cat="tech"] {
+  color: #7fa7e8;
+  border-color: #7fa7e840;
+  background: #7fa7e814;
+}
+.fm-cat[data-cat="tips"] {
+  color: var(--green);
+  border-color: #9bb28a40;
+  background: #9bb28a14;
+}
+.fm-cat[data-cat="links"] {
+  color: #d49ad8;
+  border-color: #d49ad840;
+  background: #d49ad814;
+}
+.fm-card h3,
+.fm-post h2 {
+  margin: 2px 0 0;
+}
+.fm-title {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: 600 17px/1.3 "Space Grotesk", system-ui, sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+.fm-card:hover .fm-title {
+  color: var(--gold-ink);
+}
+.fm-post h2 {
+  font: 600 clamp(22px, 2.4vw, 28px) / 1.2 "Space Grotesk", system-ui, sans-serif;
+  outline: none;
+}
+.fm-excerpt,
+.fm-body,
+.fm-comment-text {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.fm-excerpt p,
+.fm-body p,
+.fm-comment-text p {
+  margin: 0 0 8px;
+}
+.fm-excerpt {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* the full text is in the thread */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.fm-body {
+  color: var(--ink);
+  font-size: 14px;
+  max-width: 72ch;
+}
+
+/* ---------- Link (resource card) ---------- */
+.fm-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 560px;
+  padding: 10px 12px;
+  border: 1px solid var(--card-line);
+  border-radius: 11px;
+  background: var(--panel2);
+  color: var(--ink);
+  text-decoration: none;
+  transition:
+    border-color 0.18s,
+    background-color 0.18s;
+}
+.fm-link:hover {
+  border-color: #ffb817;
+  background: #ffb8170f;
+}
+.fm-link-ico {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: #ffb8171f;
+  color: var(--gold-ink);
+}
+.fm-link-ico .ico {
+  width: 17px;
+  height: 17px;
+}
+.fm-link-txt {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+}
+.fm-link-txt strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+.fm-link-txt small {
+  color: var(--muted);
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fm-link-ext {
+  flex: none;
+  width: 15px;
+  height: 15px;
+  color: var(--muted);
+}
+
+/* ---------- Like / comments / delete ---------- */
+.fm-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+.fm-act {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    background-color 0.15s,
+    border-color 0.15s;
+}
+.fm-act .ico {
+  width: 16px;
+  height: 16px;
+}
+.fm-act:hover {
+  background: var(--hover);
+  color: var(--ink);
+}
+.fm-act.is-static {
+  cursor: default;
+}
+.fm-act.is-static:hover {
+  background: none;
+  color: var(--muted);
+}
+.fm-like.on {
+  color: var(--gold-ink);
+  border-color: #ffb81755;
+  background: #ffb81714;
+}
+.fm-like.on .ico {
+  fill: currentColor;
+}
+.fm-like.on .ico {
+  animation: fm-pop 0.3s ease;
+}
+@keyframes fm-pop {
+  50% {
+    transform: scale(1.3);
+  }
+}
+.fm-del {
+  margin-left: auto;
+  padding: 6px 8px;
+}
+.fm-del:hover {
+  color: #ff6b5e;
+  background: #ff6b5e1a;
+}
+.fm-card :focus-visible,
+.fm-thread :focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+/* the title only takes the focus so screen readers start reading there; no frame around it */
+.fm-thread h2:focus,
+.fm-thread h2:focus-visible {
+  outline: none;
+}
+.fm-empty {
+  display: grid;
+  gap: 4px;
+  padding: 34px 20px;
+  border: 1.5px dashed var(--card-line);
+  border-radius: 13px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 13px;
+}
+.fm-empty strong {
+  color: var(--ink);
+}
+
+/* ---------- Thread ---------- */
+.fm-thread {
+  display: grid;
+  gap: 14px;
+  max-width: 860px;
+}
+.fm-thread[hidden] {
+  display: none;
+}
+.fm-back {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.fm-back .ico {
+  width: 14px;
+  height: 14px;
+  transform: rotate(90deg); /* points left */
+}
+.fm-post {
+  padding: 22px 24px 16px;
+}
+.fm-comments {
+  display: grid;
+  gap: 10px;
+  padding: 18px 20px;
+  background: var(--card);
+  border: 1px solid var(--card-line);
+  border-radius: 13px;
+}
+.fm-sub {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.fm-comment-list {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.fm-comment {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  padding: 12px 44px 8px 0;
+  border-bottom: 1px solid var(--card-line);
+}
+.fm-comment .fm-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  font-size: 11px;
+}
+.fm-comment-text {
+  padding-left: 40px; /* lines up with the name */
+  color: var(--ink);
+}
+.fm-comment .fm-del {
+  position: absolute;
+  top: 10px;
+  right: 0;
+}
+@media (hover: hover) {
+  .fm-comment .fm-del {
+    opacity: 0;
+  }
+  .fm-comment:hover .fm-del,
+  .fm-comment:focus-within .fm-del {
+    opacity: 1;
+  }
+}
+.fm-none {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+.fm-reply {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 6px;
+}
+.fm-reply .field {
+  flex: 1;
+  height: auto;
+  min-height: 44px;
+  margin: 0;
+  padding: 10px 12px;
+  resize: vertical;
+  line-height: 1.45;
+}
+.fm-reply .btn {
+  flex: none;
+  padding: 11px 16px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.fm-thread .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- New post (in the shared window) ---------- */
+.fm-compose textarea.field {
+  height: auto;
+  padding: 10px 11px;
+  resize: vertical;
+  line-height: 1.5;
+}
+.fm-error {
+  margin: 0 0 6px;
+  color: #ff6b5e;
+  font-size: 12px;
+}
+.fm-error[hidden] {
+  display: none;
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 640px) {
+  .fm-board .hero-head,
+  #fm-board .hero-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .fm-new {
+    justify-content: center;
+  }
+  .fm-card,
+  .fm-post,
+  .fm-comments {
+    padding: 14px;
+  }
+  .fm-card-top {
+    flex-direction: column;
+  }
+  .fm-tags {
+    justify-content: flex-start;
+  }
+  .fm-reply .fm-avatar {
+    display: none;
+  }
+  .fm-comment-text {
+    padding-left: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fm-like.on .ico {
+    animation: none;
+  }
+}
+
+/* ---------- Light mode: darker category tints for contrast on white ---------- */
+html[data-theme="light"] .fm-cat[data-cat="tech"] {
+  color: #2f5fae;
+  border-color: #2f5fae33;
+  background: #2f5fae0f;
+}
+html[data-theme="light"] .fm-cat[data-cat="links"] {
+  color: #8a3d91;
+  border-color: #8a3d9133;
+  background: #8a3d910f;
+}
+html[data-theme="light"] .fm-cat[data-cat="tips"] {
+  border-color: #4f8a3c33;
+  background: #4f8a3c0f;
+}
+html[data-theme="light"] .fm-card.is-pinned {
+  background: #fffaf0;
+}
+html[data-theme="light"] .fm-link:hover {
+  background: #fff8e6;
+}
+html[data-theme="light"] .fm-del:hover,
+html[data-theme="light"] .fm-error {
+  color: #c4372b;
+}

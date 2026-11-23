@@ -361,6 +361,26 @@ button.row:hover {
   gap: 8px;
   margin-top: 14px;
 }
+/* Confirm before deleting (js/features.js): the same window, narrower, with the gold Delete (.btn.primary).
+   The item row reuses the Admin Panel list look (.rows.admin-list); Cancel stays the plain .btn. */
+.modal.is-confirm {
+  width: min(440px, 100%);
+}
+.modal-body .confirm-text {
+  margin: 12px 0 0;
+}
+.is-confirm .modal-foot .btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+@media (max-width: 480px) {
+  /* phones: two full-width buttons, easier to tap */
+  .is-confirm .modal-foot .btn {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+}
 
 /* ================= 4. Dashboard grid + widgets ================= */
 /* Two columns for every dashboard box (widgets, news, calendar); a data-dash-wide box fills a whole row */
@@ -1875,7 +1895,9 @@ button.news-item {
 }
 .news-reader-meta {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
   color: var(--muted);
   font-size: 11px;
 }
@@ -2186,5 +2208,45 @@ button.news-item {
 @media (prefers-reduced-motion: reduce) {
   .chat-history {
     animation: none;
+  }
+}
+
+/* ================= News article: Share via Email / Copy link (logic in js/features.js, "Share an article") ================= */
+.news-share {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-left: auto; /* right end of the category / date row */
+}
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: 9px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color 0.18s,
+    color 0.18s,
+    background-color 0.18s;
+}
+.share-btn .ico {
+  width: 14px;
+  height: 14px;
+  color: #ffb817;
+}
+.share-btn:hover {
+  border-color: #ffb817;
+  background: #ffb81714;
+}
+.share-btn:focus-visible {
+  outline: 2px solid #ffb817;
+  outline-offset: 2px;
+}
+@media (max-width: 700px) {
+  .news-share {
+    width: 100%;
+    margin: 6px 0 2px; /* own row under the category and date on phones */
   }
 }

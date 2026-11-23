@@ -103,6 +103,9 @@ const LANG_PATTERNS = [
   ],
   [/^Week (\d+)$/, (m) => `Vecka ${m[1]}`],
   [/^Today (\d\d:\d\d)$/, (m) => `Idag ${m[1]}`],
+  [/^(\d+) comments?$/, (m) => `${m[1]} ${plural(m[1], "kommentar", "kommentarer")}`],
+  [/^(\d+) posts?$/, (m) => `${m[1]} inlägg`],
+  [/^Like \((\d+)\)$/, (m) => `Gilla (${m[1]})`],
   [/^Yesterday (\d\d:\d\d)$/, (m) => `Igår ${m[1]}`],
   [/^(\d+) questions?$/, (m) => `${m[1]} ${plural(m[1], "fråga", "frågor")}`],
   [/^Delete “(.+)”$/, (m) => `Ta bort ”${m[1]}”`],
@@ -430,6 +433,7 @@ const VIEWS = {
   knowledge: "Knowledge Hub",
   it: "IT support",
   projects: "Projects",
+  forum: "Bulletin Board",
   settings: "Settings",
   admin: "Admin Panel",
 };
@@ -441,6 +445,7 @@ function syncViewLabel() {
 /* pages that moved: an old link or bookmark opens the new place (the Employee handbook is now in the Knowledge Hub) */
 const MOVED_VIEWS = { handbook: "knowledge" };
 function showView(name, { push = true } = {}) {
+  name = String(name || "").split("/")[0]; // "#news/<article>" / "#forum/<post>" = that view (js/features.js / js/forum.js open the item)
   if (MOVED_VIEWS[name]) {
     name = MOVED_VIEWS[name];
     if (!push) history.replaceState(null, "", "#" + name);
@@ -455,7 +460,7 @@ function showView(name, { push = true } = {}) {
     else b.removeAttribute("aria-current");
   });
   syncViewLabel();
-  if (push && location.hash !== "#" + name) history.pushState(null, "", "#" + name);
+  if (push && location.hash.split("/")[0] !== "#" + name) history.pushState(null, "", "#" + name);
   closeMenus();
   scrollTo({ top: 0 });
 }

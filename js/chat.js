@@ -10,7 +10,7 @@
  * assistant endpoint when it exists.
  */
 (function () {
-  const { showModal, esc, DOCS } = window.qp;
+  const { showModal, confirmDelete, esc, DOCS } = window.qp;
 
   /* The signed-in user's access, used as the metadata filter for retrieval */
   const RBAC = {
@@ -363,6 +363,18 @@
     /* keep the keyboard in the list: the next chat's trash can, or the panel's close button */
     (chatList.querySelectorAll("[data-chat-del]")[Math.min(at, chats.length - 1)] || $("#chat-history-close")).focus();
   }
+  /* the trash can asks first (js/features.js, "Confirm before deleting"); only Delete runs deleteChat */
+  function askDeleteChat(id) {
+    const c = chats.find((x) => x.id === id);
+    if (!c) return;
+    confirmDelete({
+      kicker: "QualiChat",
+      title: "Delete this chat?",
+      item: { name: c.title, sub: `${when(c.t)} · ${c.msgs.length} ${c.msgs.length === 1 ? "question" : "questions"}` },
+      text: "The conversation and all its questions will be deleted from this browser. This can’t be undone.",
+      onConfirm: () => deleteChat(id),
+    });
+  }
   const narrow = matchMedia("(max-width: 899px)"); // phones / tablets: the list slides over the chat
   function showHistory(on) {
     history.hidden = !on;
@@ -381,7 +393,7 @@
   chatList.addEventListener("click", (e) => {
     const o = e.target.closest("[data-chat-open]"),
       d = e.target.closest("[data-chat-del]");
-    if (d) deleteChat(d.dataset.chatDel);
+    if (d) askDeleteChat(d.dataset.chatDel);
     else if (o) loadChat(o.dataset.chatOpen);
   });
   /* Esc inside the list closes the list first (not the whole chat) */
