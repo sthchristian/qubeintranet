@@ -307,6 +307,7 @@ window.QP_SV = {
   "Jump between News, the Employee handbook, IT support and Projects from this menu.": "Hoppa mellan Nyheter, Personalhandboken, IT-support och Projekt från den här menyn.",
   "Jump between News, the Employee handbook, the Knowledge Hub and Projects from this menu.": "Hoppa mellan Nyheter, Personalhandboken, Kunskapsnavet och Projekt i den här menyn.",
   "Jump between News, the Knowledge Hub and Projects from this menu.": "Hoppa mellan Nyheter, Kunskapsnavet och Projekt i den här menyn.",
+  "Jump between News, the Knowledge Hub and the Bulletin Board from this menu.": "Hoppa mellan Nyheter, Kunskapsnavet och Anslagstavlan i den här menyn.",
   "just now": "just nu",
   "Keep client information confidential.": "Håll kundinformation konfidentiell.",
   "Keep it friendly and work related. Anything confidential (client details, passwords, salaries) stays out of the board.": "Håll en vänlig ton och håll dig till jobbet. Allt konfidentiellt (kunduppgifter, lösenord, löner) hör inte hemma här.",
