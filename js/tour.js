@@ -31,7 +31,7 @@ const tour = (function () {
       target: ".rail .nav",
       act: "nav",
       title: "Find your way",
-      text: "Jump between News, the Knowledge Hub and Projects from this menu.",
+      text: "Jump between News, the Knowledge Hub and the Bulletin Board from this menu.",
     },
     {
       target: ".quick-nav",
