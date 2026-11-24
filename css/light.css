@@ -464,7 +464,7 @@ html[data-theme="light"] .guide-body {
   filter: drop-shadow(0 12px 14px #0004);
 }
 
-/* Views (news, IT, projects, settings) */
+/* Views (news, IT, settings) */
 html[data-theme="light"] .tile,
 html[data-theme="light"] .panel {
   box-shadow: 0 1px 2px #2a220f08;
@@ -533,8 +533,7 @@ html[data-theme="light"] .drawer {
 }
 html[data-theme="light"] .recent-open .news-ico,
 html[data-theme="light"] .fav-pick-item .news-ico,
-html[data-theme="light"] .fav-add .news-ico,
-html[data-theme="light"] .feed-item .news-ico {
+html[data-theme="light"] .fav-add .news-ico {
   background: #fff4d6;
 }
 html[data-theme="light"] .cite-n {

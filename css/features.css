@@ -6,7 +6,7 @@
  *   1. Search trigger in the top bar
  *   2. Overlay + command palette (Cmd/Ctrl + K)
  *   3. Modal (tools, handbook documents, citation inspector)
- *   4. Dashboard grid + widgets: quick access (tiles, pinned, recent), checklist, team activity
+ *   4. Dashboard grid + widgets: quick access (tiles, pinned, recent), checklist
  *   5. AI drawer (chat thread) + citations
  *   6. Admin Panel (forms + published lists), at the end of the file
  *   7. Dashboard layout: Customize dashboard (drag-and-drop), at the end of the file
@@ -391,17 +391,18 @@ button.row:hover {
   margin-top: 24px;
   align-items: start; /* a box keeps its own height wherever it is dropped */
 }
-.widgets > [data-dash-wide] {
+.widgets > [data-dash-wide],
+.widgets > .dash-full {
   grid-column: 1 / -1;
 }
-/* New hire setup, team activity, news and calendar: one uniform card size wherever they are placed.
+/* New hire setup, news and calendar: one uniform card size wherever they are placed.
    Each card is 360px tall (news and calendar keep their heading above the card); longer content
    scrolls inside it. */
-.widgets > :is([data-dash="onboard"], [data-dash="feed"], [data-dash="news"], [data-dash="calendar"]) {
+.widgets > :is([data-dash="onboard"], [data-dash="news"], [data-dash="calendar"]) {
   display: flex;
   flex-direction: column;
 }
-.widgets > :is([data-dash="onboard"], [data-dash="feed"]),
+.widgets > [data-dash="onboard"],
 .widgets > [data-dash="news"] .news-slider,
 .widgets > [data-dash="calendar"] .cal {
   height: 360px;
@@ -410,7 +411,6 @@ button.row:hover {
   height: auto; /* collapsed checklist */
 }
 .widgets > [data-dash="onboard"] .widget-body,
-.widgets > [data-dash="feed"] .feed-list,
 .widgets > [data-dash="calendar"] .cal-agenda {
   flex: 1;
   min-height: 0;
@@ -1077,61 +1077,6 @@ button.row:hover {
   color: var(--muted);
   font-size: 11px;
   padding: 4px 2px;
-}
-
-/* Team activity feed */
-.live {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--muted);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.live i {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--green);
-  animation: pulse 2s ease-in-out infinite;
-}
-.feed-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 2px;
-}
-.feed-item {
-  display: grid;
-  grid-template-columns: 28px minmax(0, 1fr) auto;
-  gap: 10px;
-  align-items: center;
-  padding: 7px 4px;
-  border-radius: 9px;
-}
-.feed-item.new {
-  animation: appear 0.35s ease;
-}
-.feed-item .news-ico {
-  width: 28px;
-  height: 28px;
-  font-size: 12px;
-}
-.feed-item strong {
-  display: block;
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.feed-item small {
-  display: block;
-  color: var(--muted);
-  font-size: 10px;
 }
 
 /* ================= 5. AI drawer + chat thread ================= */

@@ -5,7 +5,6 @@
  *   - Quick access: favorites (add / remove / reorder) + recently opened (saved in localStorage)
  *   - Command palette (Cmd/Ctrl + K, or the search field in the top bar)
  *   - New hire checklist (saved in localStorage)
- *   - Team activity feed (example data, edit FEED_SEED / FEED_POOL)
  *   - News: slideshow on the dashboard, article reader + list in the News view (saved in localStorage)
  *   - Admin Panel: publish news articles (with a cover image) and calendar events (saved in localStorage)
  *   - Dashboard layout: "Customize dashboard" drag-and-drop order (saved in localStorage)
@@ -352,16 +351,15 @@
      Quick access: Favorites (big cards the user picks, removes and reorders)
      + Recent (the last things opened, filled in automatically)
      Saved in localStorage: "qp-favorites" (ids in order), "qp-recent" ([{id, t}]).
-     An id is a DOCS key ("devportal") or a page ("view:projects").
+     An id is a DOCS key ("devportal") or a page ("view:knowledge").
      ===================================================================== */
   const sym = (id) => `<svg class="ico"><use href="#${id}" /></svg>`;
-  /* the six suggested cards (listed first in the "Add favorite" picker): their own title, subtitle and icon */
+  /* the suggested cards (listed first in the "Add favorite" picker): their own title, subtitle and icon */
   const FAV_CARDS = {
     devportal: { title: "Dev Portal", sub: "Engineering tools", icon: "i-code" },
     cicd: { title: "CI/CD Status", sub: "Builds & deployments", icon: "i-server" },
     "employee-handbook": { title: "Handbook", sub: "People & policies", icon: "i-book" },
     inventory: { title: "IT Inventory", sub: "Devices & access", icon: "i-laptop" },
-    "view:projects": { title: "Projects", sub: "Team workspaces", icon: "i-flow" },
     directory: { title: "Directory", sub: "Find a colleague", icon: "i-users" },
   };
   const FAV_DEFAULT = Object.keys(FAV_CARDS);
@@ -371,7 +369,6 @@
     news: { sub: "Company updates", icon: "i-news" },
     knowledge: { sub: "Document library", icon: "i-library" },
     it: { sub: "Help & tickets", icon: "i-headset" },
-    projects: { sub: "Team workspaces", icon: "i-flow" },
     forum: { sub: "Links, tips & discussions", icon: "i-forum" },
   };
   /* Everything a favorite or recent card needs to know about an id (null if it no longer exists) */
@@ -639,7 +636,6 @@
     news: sym("i-news"),
     knowledge: sym("i-library"),
     it: sym("i-headset"),
-    projects: sym("i-flow"),
     forum: sym("i-forum"),
     settings: ICON.cog,
     admin: sym("i-shield"),
@@ -853,43 +849,11 @@
   syncChecklist();
 
   /* =====================================================================
-     Team activity feed (example data). status: ok | run | bad | info
+     Recent: the "2 min ago" times under Quick access refresh every 30 s
      ===================================================================== */
-  const BADGE = { ok: ["ok", "Success"], run: ["", "Running"], bad: ["bad", "Failed"], info: ["muted", "Info"] };
-  const FEED_SEED = [
-    { icon: svgIcon("i-server"), title: "core-api deployed to production", by: "CI/CD · #1842", status: "ok", min: 4 },
-    { icon: ICON.ext, title: "Core v4.2 release notes published", by: "Engineering", status: "info", label: "Release", min: 38 },
-    { icon: svgIcon("i-shield"), title: "Security policy acknowledged", by: "Maja Berg", status: "ok", label: "Signed", min: 95 },
-    { icon: svgIcon("i-server"), title: "data-ingest integration tests", by: "CI/CD · #310", status: "bad", min: 170 },
-    { icon: ICON.spark, title: "Linnea joined Engineering Guild", by: "People", status: "info", label: "New", min: 300 },
-  ];
-  const FEED_POOL = [
-    { icon: svgIcon("i-server"), title: "web-intranet build finished", by: "CI/CD · #771", status: "ok" },
-    { icon: svgIcon("i-shield"), title: "Security policy acknowledged", by: "Jonas Ek", status: "ok", label: "Signed" },
-    { icon: svgIcon("i-server"), title: "poc-retail-ai deploying to staging", by: "CI/CD · #59", status: "run" },
-    { icon: ICON.ext, title: "Core v4.2.1 hotfix tagged", by: "Platform", status: "info", label: "Release" },
-    { icon: svgIcon("i-shield"), title: "Security key registered", by: "Omar Haddad", status: "ok", label: "MFA" },
-  ];
-  let feed = FEED_SEED.map((f) => ({ ...f, t: Date.now() - f.min * 60000 }));
-  let poolAt = 0;
-  const feedList = $("#feed-list");
-  function renderFeed(fresh) {
-    feedList.innerHTML = feed
-      .slice(0, 5)
-      .map((f, n) => {
-        const [cls, text] = BADGE[f.status];
-        return `<li class="feed-item${fresh && n === 0 ? " new" : ""}"><span class="news-ico">${f.icon}</span><span><strong>${esc(f.title)}</strong><small>${esc(f.by)} · ${ago(f.t)}</small></span><span class="pill ${cls}">${f.label || text}</span></li>`;
-      })
-      .join("");
-  }
-  renderFeed();
-  /* a new example event every 30 s; timestamps refresh at the same time */
   setInterval(() => {
     if (document.hidden) return;
-    feed.unshift({ ...FEED_POOL[poolAt++ % FEED_POOL.length], t: Date.now() });
-    feed = feed.slice(0, 8);
-    renderFeed(true);
-    if (!$("#quick").contains(document.activeElement)) renderQuick(); // refresh “2 min ago”
+    if (!$("#quick").contains(document.activeElement)) renderQuick();
   }, 30000);
 
   /* =====================================================================
@@ -1554,13 +1518,15 @@
      Dashboard layout: "Customize dashboard" turns on an edit mode where the
      boxes (data-dash="…" in index.html) can be dragged into a new order.
      They all sit in one two-column grid (.widgets). The box marked data-dash-wide
-     (Quick access) fills a whole row; the others take one column each.
-     The order is saved in localStorage ("qp-dashboard-order-v2").
+     (Quick access) fills a whole row; the others take one column each, two per row.
+     With an odd number of one-column boxes the last one would be alone on its row,
+     so it fills the row too (class "dash-full", set in layoutDash).
+     The order is saved in localStorage ("qp-dashboard-order-v3").
      Mouse: drag a box anywhere. Touch: drag its Move handle (so the page still scrolls).
      Keyboard: focus a Move handle and use the arrow keys.
      ===================================================================== */
-  const DASH_DEFAULT = ["quick", "onboard", "feed", "news", "calendar"];
-  const DASH_KEY = "qp-dashboard-order-v2"; // v2: the layout changed, so an order saved for the old one is not reused
+  const DASH_DEFAULT = ["quick", "news", "calendar", "onboard"];
+  const DASH_KEY = "qp-dashboard-order-v3"; // v3: Team activity was removed, so an order saved for the old layout is not reused
   const dashGrid = $(".widgets");
   const dashWide = $("[data-dash-wide]")?.dataset.dash; // id of the full-width box
   const dashBox = {};
@@ -1608,10 +1574,13 @@
   }
   /* Puts the boxes into the grid in dashOrder. Only boxes that are out of place are moved. */
   function layoutDash() {
+    const halves = dashHalves(dashOrder);
     dashOrder.forEach((id, i) => {
       if (dashGrid.children[i] !== dashBox[id]) dashGrid.insertBefore(dashBox[id], dashGrid.children[i] || null);
       const h = dashBox[id].querySelector(".dash-handle");
       if (h) h.setAttribute("aria-label", `Move ${h.dataset.name}: position ${i + 1} of ${dashOrder.length}. Use the arrow keys.`);
+      /* the last one-column box fills its row when it would otherwise be alone on it */
+      dashBox[id].classList.toggle("dash-full", halves.length % 2 === 1 && id === halves[halves.length - 1]);
     });
   }
   /* Changes the order and slides every box from where it was to its new cell.

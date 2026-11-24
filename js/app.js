@@ -470,13 +470,12 @@ $("#admin-banner-lock").addEventListener("click", () => {
   $("#admin-mode-toggle").focus();
 });
 
-/* ---------- Sidebar views (Dashboard, News, Knowledge Hub, IT, Projects, Settings, Admin Panel) ---------- */
+/* ---------- Sidebar views (Dashboard, News, Knowledge Hub, IT, Bulletin Board, Settings, Admin Panel) ---------- */
 const VIEWS = {
   dashboard: "Dashboard",
   news: "News & information",
   knowledge: "Knowledge Hub",
   it: "IT support",
-  projects: "Projects",
   forum: "Bulletin Board",
   settings: "Settings",
   admin: "Admin Panel",
