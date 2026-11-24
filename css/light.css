@@ -635,3 +635,28 @@ html[data-theme="light"] .share-btn:hover {
   border-color: #ffb817;
   background: #fff8e6;
 }
+/* Admin Mode: banner, toggle and outlines on the light background */
+html[data-theme="light"] .admin-banner {
+  background: rgba(255, 184, 23, 0.16);
+}
+html[data-theme="light"] .admin-mode-toggle {
+  background: #fff;
+  border-color: #f1e2bb;
+  color: #6b6a63;
+}
+html[data-theme="light"] .admin-mode-toggle[aria-pressed="true"] {
+  background: #ffb817;
+  border-color: #ffb817;
+  color: #201a0d;
+}
+html[data-theme="light"] body.admin-mode-active [data-admin-editable] {
+  outline-color: #e0a10ccc;
+}
+html[data-theme="light"] .admin-banner .admin-banner-lock {
+  background: #ffb817;
+  border-color: #ffb817;
+  color: #201a0d;
+}
+html[data-theme="light"] .admin-banner .admin-banner-lock:hover {
+  background: #ffc53d;
+}

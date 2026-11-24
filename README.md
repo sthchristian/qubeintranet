@@ -51,6 +51,7 @@ Handy:
   visit), covers per category in `NEWS_COVERS`, slideshow length/speed in `HOME_SLIDES` / `SLIDE_EVERY`.
 - Shortcuts: Cmd/Ctrl + K search, D light/dark mode, S open / hide the Settings popover (js/app.js).
 - News articles have their own address (`#news/<id>`). The article view has Share via Email (a `mailto:` draft) and Copy link (js/features.js, "Share an article").
+- Admin Mode: HR / Manager browse in the normal view and unlock editing with the padlock in the top bar (`#admin-mode-toggle`). Unlocked shows a live-changes banner, `body.admin-mode-active`, the Admin Panel link, Manage slides / events / news and Bulletin Board pin / delete. Kept in sessionStorage (`qp-admin-mode`), so a new browser session starts locked (js/app.js, "Admin Mode").
 - Language: the gear (top right) switches between English and Svenska. The Swedish texts are in
   `js/lang-sv.js` (English text -> Swedish); `js/app.js` ("Language") swaps every text on the page,
   including text added later by the scripts. Texts with changing parts (dates, "5 min ago") are

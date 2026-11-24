@@ -413,18 +413,62 @@ try {
   role = localStorage.getItem("qp-role") || role;
 } catch (e) {}
 const isAdmin = () => ADMIN_ROLES.includes(role);
+
+/* ---------- Admin Mode (lock / unlock) ----------
+ * Admins browse in the normal employee view ("View Mode", locked) and unlock "Admin Mode" with the
+ * padlock in the top bar when they want to edit. While unlocked:
+ *   - body.admin-mode-active is set: CSS shows dashed outlines on editable sections ([data-admin-editable])
+ *   - [data-admin-mode-only] controls appear (Admin Panel link, Manage slides / events / news)
+ *   - the banner above the top bar says that changes are live, with a Lock button
+ *   - the Bulletin Board shows pin / delete on everyone's posts (js/forum.js)
+ * Saved in sessionStorage ("qp-admin-mode"): it survives a refresh, but a new browser session starts locked.
+ * Other scripts listen for the "qp:adminmode" event. As with roles, this only changes what is shown. */
+let adminMode = false;
+try {
+  adminMode = sessionStorage.getItem("qp-admin-mode") === "1";
+} catch (e) {}
+const isAdminMode = () => adminMode && isAdmin();
+function syncAdminMode() {
+  const on = isAdminMode(),
+    t = $("#admin-mode-toggle");
+  document.body.classList.toggle("admin-mode-active", on);
+  $$("[data-admin-mode-only]").forEach((el) => (el.hidden = !on));
+  $("#admin-banner").hidden = !on;
+  t.setAttribute("aria-pressed", on);
+  t.setAttribute("aria-label", on ? "Lock Admin Mode" : "Unlock Admin Mode");
+  t.title = on ? "Lock Admin Mode" : "Unlock Admin Mode";
+  t.querySelector("use").setAttribute("href", on ? "#i-unlock" : "#i-lock");
+  t.querySelector(".amt-label").textContent = on ? "Admin Mode" : "View Mode";
+  if (!on && typeof showView === "function" && !$('.view[data-view="admin"]').hidden) showView("dashboard");
+  document.dispatchEvent(new CustomEvent("qp:adminmode", { detail: { on } }));
+}
+function setAdminMode(on, { announce = true } = {}) {
+  adminMode = !!on && isAdmin();
+  try {
+    if (adminMode) sessionStorage.setItem("qp-admin-mode", "1");
+    else sessionStorage.removeItem("qp-admin-mode");
+  } catch (e) {}
+  syncAdminMode();
+  if (announce) notify(adminMode ? "Admin Mode on: your changes are live" : "Locked: back to the employee view");
+}
 function syncRoleUI() {
   $$("[data-admin-only]").forEach((el) => (el.hidden = !isAdmin()));
   $$("[data-role-set]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.roleSet === role));
+  syncAdminMode();
 }
 function setRole(r) {
   role = r;
   try {
     localStorage.setItem("qp-role", r);
   } catch (e) {}
+  if (!isAdmin()) setAdminMode(false, { announce: false }); // an employee account is always locked
   syncRoleUI();
-  if (!isAdmin() && !$('.view[data-view="admin"]').hidden) showView("dashboard");
 }
+$("#admin-mode-toggle").addEventListener("click", () => setAdminMode(!isAdminMode()));
+$("#admin-banner-lock").addEventListener("click", () => {
+  setAdminMode(false);
+  $("#admin-mode-toggle").focus();
+});
 
 /* ---------- Sidebar views (Dashboard, News, Knowledge Hub, IT, Projects, Settings, Admin Panel) ---------- */
 const VIEWS = {
@@ -450,7 +494,7 @@ function showView(name, { push = true } = {}) {
     name = MOVED_VIEWS[name];
     if (!push) history.replaceState(null, "", "#" + name);
   }
-  if (!VIEWS[name] || (name === "admin" && !isAdmin())) name = "dashboard";
+  if (!VIEWS[name] || (name === "admin" && !isAdminMode())) name = "dashboard"; // the Admin Panel needs Admin Mode unlocked
   currentView = name;
   $$(".view").forEach((v) => (v.hidden = v.dataset.view !== name));
   $$(".nav [data-view-link]").forEach((b) => {
@@ -473,7 +517,7 @@ $$("[data-theme-set]").forEach((b) => b.addEventListener("click", () => setTheme
 $$("[data-role-set]").forEach((b) =>
   b.addEventListener("click", () => {
     setRole(b.dataset.roleSet);
-    notify(isAdmin() ? "Admin Panel is now in the sidebar" : "Admin Panel hidden for this role");
+    notify(isAdmin() ? "Unlock Admin Mode with the padlock in the top bar to edit" : "Admin tools hidden for this role");
   }),
 );
 syncRoleUI();

@@ -2250,3 +2250,217 @@ button.news-item {
     margin: 6px 0 2px; /* own row under the category and date on phones */
   }
 }
+
+/* ================= Admin Mode: padlock toggle, live banner, inline admin controls (logic in js/app.js, "Admin Mode") ================= */
+/* Toggle in the top bar, left of the gear and bell (admin roles only) */
+.admin-mode-toggle {
+  flex: none;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 12px 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+.admin-mode-toggle[hidden] {
+  display: none;
+}
+.admin-mode-toggle .ico {
+  width: 16px;
+  height: 16px;
+}
+.admin-mode-toggle:hover {
+  color: var(--ink);
+  border-color: #ffb81780;
+}
+.admin-mode-toggle[aria-pressed="true"] {
+  background: #ffb817;
+  border-color: #ffb817;
+  color: #201a0d;
+  font-weight: 700;
+}
+.admin-mode-toggle[aria-pressed="true"]:hover {
+  background: #ffc53d;
+  color: #201a0d;
+}
+.admin-mode-toggle:focus-visible {
+  outline: 2px solid #ffb817;
+  outline-offset: 2px;
+}
+
+/* Banner: across the top of the workspace, stays visible while scrolling */
+.admin-banner {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* edge to edge of the workspace: cancels .main's padding, which changes at 1000px and 700px (css/base.css) */
+  --main-pad-t: 22px;
+  --main-pad-x: clamp(18px, 4vw, 56px);
+  margin: calc(-1 * var(--main-pad-t)) calc(-1 * var(--main-pad-x)) 18px;
+  padding: 10px var(--main-pad-x);
+  background: rgba(255, 184, 23, 0.14);
+  border-bottom: 2px solid #ffb817;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--ink);
+  font-size: 13px;
+  animation: admin-banner-in 0.25s ease;
+}
+.admin-banner[hidden] {
+  display: none;
+}
+.admin-banner > .ico {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--gold-ink);
+}
+.admin-banner p {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  line-height: 1.4;
+}
+.admin-banner strong {
+  color: var(--gold-ink);
+}
+.admin-banner .btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.admin-banner .btn .ico {
+  width: 14px;
+  height: 14px;
+}
+.admin-banner .admin-banner-lock {
+  background: #ffb817;
+  border-color: #ffb817;
+  color: #201a0d;
+}
+.admin-banner .admin-banner-lock:hover {
+  background: #ffc53d;
+}
+.admin-banner .btn:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+@keyframes admin-banner-in {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+/* Inline admin controls (only while unlocked: [data-admin-mode-only]) */
+.admin-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  margin-right: 12px;
+  padding: 4px 9px !important;
+  border: 1px dashed #ffb817 !important;
+  border-radius: 8px;
+  background: #ffb81714 !important;
+  color: var(--gold-ink) !important;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.admin-inline[hidden] {
+  display: none;
+}
+.admin-inline .ico {
+  width: 13px;
+  height: 13px;
+}
+.admin-inline:hover {
+  background: #ffb81729 !important;
+}
+.admin-inline.is-big {
+  margin: 0;
+  padding: 9px 14px !important;
+  border-radius: 10px;
+  font-size: 13px;
+  align-self: center;
+}
+.admin-inline.is-big .ico {
+  width: 15px;
+  height: 15px;
+}
+
+/* Editable sections get a subtle dashed accent outline while Admin Mode is on */
+body.admin-mode-active [data-admin-editable] {
+  outline: 1.5px dashed #ffb81799;
+  outline-offset: 6px;
+  border-radius: 14px;
+  transition: outline-color 0.2s;
+}
+body.admin-mode-active [data-admin-editable]:hover {
+  outline-color: #ffb817;
+}
+
+/* Bulletin Board: Pin / Unpin (Admin Mode only, js/forum.js) */
+.fm-pin-btn.on {
+  color: var(--gold-ink);
+}
+.fm-pin-btn.on .ico {
+  fill: currentColor;
+}
+
+@media (max-width: 1000px) {
+  .admin-banner {
+    --main-pad-x: 24px;
+  }
+}
+@media (max-width: 700px) {
+  .admin-banner {
+    --main-pad-t: 18px;
+    --main-pad-x: 14px;
+  }
+  .amt-label {
+    display: none; /* icon only on phones; the label is still read out (aria-label) */
+  }
+  .admin-mode-toggle {
+    width: 36px;
+    padding: 0;
+    justify-content: center;
+  }
+  .admin-banner {
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    font-size: 12px;
+  }
+  .admin-banner p {
+    flex-basis: calc(100% - 30px);
+  }
+  .admin-banner .btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .admin-banner {
+    animation: none;
+  }
+}

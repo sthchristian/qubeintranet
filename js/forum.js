@@ -7,8 +7,9 @@
  *     optional link (shown as a resource card), message.
  *   - Thread: clicking a post (or Comments) opens it at "#forum/<id>", so it can be linked
  *     and Back / Forward work. Comments are listed oldest first, with a box to add one.
- *   - Like a post (one like per person), delete your own posts / comments. HR and Manager
- *     (the Admin roles, see setRole in js/app.js) can remove anyone's: moderation.
+ *   - Like a post (one like per person), delete your own posts / comments. An admin (HR / Manager)
+ *     who has unlocked Admin Mode (padlock in the top bar, js/app.js) can also pin / unpin and
+ *     remove anyone's: moderation. Locked, admins see the board like everyone else.
  *     Deleting asks first, in the shared "Delete?" window (window.qp.confirmDelete).
  *
  * Everything is saved in the browser ("qp-forum"). Four sample discussions are added the
@@ -121,7 +122,7 @@
   }
   const find = (id) => posts.find((x) => x.id === id);
   const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-  const canDelete = (author) => author.id === ME.id || isAdmin();
+  const canDelete = (author) => author.id === ME.id || isAdminMode();
   const lastActivity = (p) => Math.max(p.t, ...p.comments.map((c) => c.t));
 
   /* ---------- Small helpers ---------- */
@@ -215,6 +216,7 @@
           <div class="fm-actions">
             ${likeBtn(p)}
             <button type="button" class="fm-act" data-fm-open="${esc(p.id)}" data-fm-focus="comment"><svg class="ico"><use href="#i-chat" /></svg><span>${commentsLabel(p.comments.length)}</span></button>
+            ${isAdminMode() ? `<button type="button" class="fm-act fm-pin-btn${p.pinned ? " on" : ""}" data-fm-pin="${esc(p.id)}" aria-pressed="${!!p.pinned}"><svg class="ico"><use href="#i-pin" /></svg><span>${p.pinned ? "Unpin" : "Pin"}</span></button>` : ""}
             ${canDelete(p.author) ? delBtn("data-fm-del-post", p.id, "Delete post") : ""}
           </div>
         </article>`,
@@ -240,6 +242,7 @@
         <div class="fm-actions">
           ${likeBtn(p)}
           <span class="fm-act is-static"><svg class="ico"><use href="#i-chat" /></svg><span>${commentsLabel(p.comments.length)}</span></span>
+          ${isAdminMode() ? `<button type="button" class="fm-act fm-pin-btn${p.pinned ? " on" : ""}" data-fm-pin="${esc(p.id)}" aria-pressed="${!!p.pinned}"><svg class="ico"><use href="#i-pin" /></svg><span>${p.pinned ? "Unpin" : "Pin"}</span></button>` : ""}
           ${canDelete(p.author) ? delBtn("data-fm-del-post", p.id, "Delete post") : ""}
         </div>
       </article>
@@ -440,6 +443,15 @@
       b.outerHTML = likeBtn(p);
       return view.querySelector(`[data-fm-like="${CSS.escape(p.id)}"]`).focus();
     }
+    if ((b = t.closest("[data-fm-pin]")) && isAdminMode()) {
+      const p = find(b.dataset.fmPin);
+      p.pinned = !p.pinned;
+      save();
+      if (openId && !thread.hidden) renderThread();
+      else renderFeed();
+      notify(p.pinned ? "Post pinned to the top" : "Post unpinned");
+      return view.querySelector(`[data-fm-pin="${CSS.escape(p.id)}"]`)?.focus();
+    }
     if ((b = t.closest("[data-fm-del-post]"))) return deletePost(b.dataset.fmDelPost);
     if ((b = t.closest("[data-fm-del-comment]"))) return deleteComment(b.dataset.fmDelComment);
     if (t.closest("[data-fm-back]")) return closeThread();
@@ -450,10 +462,9 @@
   });
   q.addEventListener("input", renderFeed);
 
-  /* switching role (HR / Manager can moderate) or language updates the delete buttons and times */
-  const syncMod = () => ($("#fm-mod").hidden = !isAdmin());
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest("[data-role-set]")) return;
+  /* locking / unlocking Admin Mode (or changing role) shows or hides pin / delete on everyone's posts */
+  const syncMod = () => ($("#fm-mod").hidden = !isAdminMode());
+  document.addEventListener("qp:adminmode", () => {
     syncMod();
     renderFeed();
     if (openId && !thread.hidden) renderThread();

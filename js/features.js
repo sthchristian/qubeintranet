@@ -664,7 +664,7 @@
         }));
     return [
       ...Object.entries(VIEWS)
-        .filter(([id]) => id !== "admin" || isAdmin())
+        .filter(([id]) => id !== "admin" || isAdminMode())
         .map(([id, label]) => ({
           group: "Go to",
           label,
@@ -1468,7 +1468,7 @@
 
     newsForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      if (!isAdmin()) return notify("Only HR and managers can publish");
+      if (!isAdminMode()) return notify("Unlock Admin Mode to publish");
       const f = newsForm.elements,
         title = f.title.value.trim(),
         text = f.text.value.trim(),
@@ -1492,7 +1492,7 @@
     });
     eventForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      if (!isAdmin()) return notify("Only HR and managers can publish");
+      if (!isAdminMode()) return notify("Unlock Admin Mode to publish");
       const f = eventForm.elements,
         title = f.title.value.trim(),
         type = typeSeg.querySelector('[aria-pressed="true"]').dataset.type,
@@ -1513,7 +1513,7 @@
     });
     /* ✕ in the "Published from this panel" lists */
     function removePublished(kind, id) {
-      if (!isAdmin()) return;
+      if (!isAdminMode()) return;
       if (kind === "news") {
         news = news.filter((n) => n.id !== id);
         saveNews();
@@ -1528,7 +1528,7 @@
     }
     $('.view[data-view="admin"]').addEventListener("click", (e) => {
       const b = e.target.closest("[data-del]");
-      if (!b || !isAdmin()) return;
+      if (!b || !isAdminMode()) return;
       const { del: kind, id } = b.dataset;
       if (kind !== "news") return removePublished(kind, id);
       /* a news article: ask first */
@@ -1793,6 +1793,17 @@
     /* leaving the dashboard ends customize mode */
     new MutationObserver(() => dashView.hidden && setDashEdit(false)).observe(dashView, { attributeFilter: ["hidden"] });
   }
+
+  /* Admin Mode shortcuts: "Manage slides / news / events" open the matching Admin Panel form */
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-admin-go]");
+    if (!b || !isAdminMode()) return;
+    showView("admin");
+    const form = $(b.dataset.adminGo === "event" ? "#admin-event-form" : "#admin-news-form");
+    if (!form) return;
+    form.closest("section").scrollIntoView({ block: "start", behavior: reduce() ? "auto" : "smooth" });
+    form.querySelector("input, textarea").focus({ preventScroll: true });
+  });
 
   /* Shared with chat.js */
   window.qp = { DOCS, addDocs, openDoc, showModal, closeModal, confirmDelete, closeOverlays, openPalette, esc, openArticle, articleMailto };
