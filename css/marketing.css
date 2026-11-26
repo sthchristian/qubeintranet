@@ -1,0 +1,874 @@
+/* marketing.css
+ * MARKETING (js/marketing.js): Quick Launch tools, resource cards, the colour palette window and the
+ * resource window. Cards, search and pills come from the Knowledge Hub (.tile, .kb-*), forms from
+ * the Admin Panel (.admin-field), so light and dark mode follow the existing tokens:
+ * --card, --card-line, --card-hover, --panel2, --ink, --muted, --gold, --gold-ink, --hover.
+ */
+
+.mk-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: none;
+  padding: 10px 16px;
+  border-radius: 11px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.mk-add[hidden] {
+  display: none;
+}
+.mk-add .ico {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.4;
+}
+
+/* ---------- Top: Quick Launch ---------- */
+.mk-top {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 26px;
+}
+.mk-block {
+  min-width: 0; /* lets the tab row scroll instead of widening the page */
+}
+.mk-label {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.mk-label span {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  opacity: 0.8;
+}
+.mk-tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 12px;
+}
+.mk-tool-wrap {
+  position: relative;
+  min-width: 0;
+}
+.mk-tool {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  min-height: 64px;
+  padding: 11px 14px 11px 11px;
+  border: 1px solid var(--card-line);
+  border-radius: 99px;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  text-decoration: none;
+  text-align: left;
+  transition:
+    border-color 0.18s,
+    background-color 0.18s,
+    transform 0.18s;
+}
+.mk-tool:hover {
+  border-color: #ffb817;
+  background: linear-gradient(#ffb8170d, #ffb8170d), var(--card);
+  transform: translateY(-1px);
+}
+.mk-tool-ico {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #ffb8171f;
+  color: var(--gold-ink);
+}
+.mk-tool-ico .ico {
+  width: 20px;
+  height: 20px;
+}
+.mk-tool-txt {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+}
+.mk-tool-txt strong {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mk-tool-txt small {
+  color: var(--muted);
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mk-ext {
+  flex: none;
+  width: 15px;
+  height: 15px;
+  color: var(--muted);
+}
+.mk-tool:hover .mk-ext {
+  color: var(--gold-ink);
+}
+.mk-tool-add {
+  justify-content: center;
+  gap: 8px;
+  border: 1.5px dashed #ffb81799;
+  background: transparent;
+  color: var(--gold-ink);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.mk-tool-add[hidden] {
+  display: none;
+}
+.mk-tool-add .ico {
+  width: 17px;
+  height: 17px;
+}
+/* edit / delete on a tool (Admin Mode): small buttons on the pill's top-right edge */
+.mk-admin-tools {
+  position: absolute;
+  top: -9px;
+  right: 10px;
+  display: flex;
+  gap: 4px;
+}
+.mk-admin-tools[hidden],
+.mk-card-admin[hidden] {
+  display: none;
+}
+.mk-mini {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #ffb81799;
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--gold-ink);
+  cursor: pointer;
+}
+.mk-mini .ico {
+  width: 13px;
+  height: 13px;
+}
+.mk-mini:hover {
+  background: #ffb8171f;
+}
+.mk-mini.is-del:hover {
+  border-color: #ff6b5e;
+  color: #ff6b5e;
+  background: #ff6b5e1a;
+}
+
+/* ---------- Color palette: tabs + swatches ---------- */
+/* The palette opens from its library card, in the shared window (made wider for it) */
+.modal.mk-pal-modal {
+  width: min(920px, 100%);
+}
+.mk-pal-hint {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.mk-pal-tabs {
+  display: flex;
+  scroll-behavior: smooth;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 2px 2px 0;
+}
+.mk-pal-tabs::-webkit-scrollbar {
+  display: none;
+}
+.mk-pal-tab {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px 8px 8px;
+  border: 1px solid var(--card-line);
+  border-bottom: 0;
+  border-radius: 12px 12px 0 0;
+  background: var(--panel2);
+  color: var(--muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color 0.18s,
+    background-color 0.18s;
+}
+.mk-pal-tab:hover {
+  color: var(--ink);
+}
+.mk-pal-tab[aria-selected="true"] {
+  background: var(--panel2);
+  color: var(--ink);
+  box-shadow: inset 0 2px 0 #ffb817;
+}
+.mk-pal-tab:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+}
+.mk-pal-badge {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.mk-pal-dots {
+  display: inline-grid;
+  grid-template-columns: repeat(2, 10px);
+  gap: 2px;
+  padding: 1px;
+}
+.mk-pal-dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px #8883;
+}
+.mk-pal-panel {
+  padding: 16px;
+  border: 1px solid var(--card-line);
+  border-radius: 0 14px 14px 14px;
+  background: var(--panel2);
+}
+.mk-pal-panel:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+.mk-pal-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.mk-pal-head strong {
+  font: 600 16px "Space Grotesk", system-ui, sans-serif;
+}
+.mk-pal-head small {
+  color: var(--muted);
+  font-size: 12px;
+}
+.mk-swatches {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+.mk-color {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+  border: 1px solid var(--card-line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--panel2);
+}
+.mk-color-fill {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  min-height: 104px;
+  padding: 12px 14px;
+  border: 0;
+  color: #fff;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.mk-color-fill.is-light {
+  color: #111214;
+  box-shadow: inset 0 -1px 0 #8882;
+}
+.mk-color-fill strong {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.mk-color-fill code {
+  font: 600 13px/1.3 ui-monospace, "SF Mono", Menlo, monospace;
+}
+.mk-color-copy {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  border-radius: 99px;
+  background: #0000002e;
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.mk-color-fill.is-light .mk-color-copy {
+  background: #ffffff8c;
+}
+.mk-color-copy .ico {
+  width: 12px;
+  height: 12px;
+}
+.mk-color-fill:hover .mk-color-copy,
+.mk-color-fill:focus-visible .mk-color-copy {
+  opacity: 1;
+}
+@media (hover: none) {
+  .mk-color-copy {
+    opacity: 1;
+  }
+}
+.mk-color-fill:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -4px;
+}
+.mk-color-info {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 10px 12px 12px;
+}
+.mk-rgb {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border: 1px solid var(--card-line);
+  border-radius: 7px;
+  background: var(--card);
+  color: var(--muted);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.mk-rgb code {
+  white-space: nowrap;
+  color: var(--ink);
+  font: 500 11px ui-monospace, "SF Mono", Menlo, monospace;
+}
+.mk-rgb .ico {
+  width: 12px;
+  height: 12px;
+}
+.mk-rgb:hover {
+  border-color: #ffb817;
+}
+.mk-rgb:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+.mk-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.mk-words span {
+  padding: 2px 7px;
+  border-radius: 99px;
+  background: var(--hover);
+  color: var(--muted);
+  font-size: 11px;
+}
+.mk-note {
+  color: var(--muted);
+  font-size: 11px;
+  font-style: italic;
+}
+.mk-tool:focus-visible,
+.mk-mini:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ---------- Resource cards (on top of the Knowledge Hub's .kb-card) ---------- */
+.mk-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.mk-card {
+  min-height: 270px;
+}
+.mk-card-admin {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+.mk-card .kb-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.mk-card .kb-actions .btn .ico {
+  width: 14px;
+  height: 14px;
+}
+
+/* ---------- Resource window (shared modal) ---------- */
+.mk-h {
+  margin: 18px 0 8px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.mk-outline {
+  margin: 0 0 12px;
+  padding-left: 20px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.mk-wide,
+.mk-row .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.mk-wide .ico,
+.mk-row .ico {
+  width: 15px;
+  height: 15px;
+}
+.mk-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+/* ---------- Files: thumbnails + large preview (js/marketing.js, "File preview") ---------- */
+.mk-h span {
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  opacity: 0.85;
+}
+.mk-thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+.mk-thumb {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  margin: 0;
+  min-width: 0;
+  border: 1px solid var(--card-line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--panel2);
+  transition: border-color 0.18s;
+}
+.mk-thumb:hover {
+  border-color: #ffb817;
+}
+.mk-thumb-img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 112px; /* every thumbnail the same height, whatever the picture's shape */
+  padding: 12px;
+  border: 0;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+.mk-thumb-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* the whole file fits, nothing is cropped */
+}
+.mk-thumb-ext {
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
+.mk-thumb-ext {
+  font: 700 13px ui-monospace, "SF Mono", Menlo, monospace;
+  color: var(--muted);
+}
+.mk-thumb-zoom {
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: #000a;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.mk-thumb-zoom .ico {
+  width: 13px;
+  height: 13px;
+}
+.mk-thumb-img:hover .mk-thumb-zoom,
+.mk-thumb-img:focus-visible .mk-thumb-zoom {
+  opacity: 1;
+}
+@media (hover: none) {
+  .mk-thumb-zoom {
+    opacity: 1;
+  }
+}
+.mk-thumb-img:focus-visible,
+.mk-thumb-dl:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -3px;
+}
+.mk-thumb figcaption {
+  display: grid;
+  align-content: start;
+  gap: 1px;
+  padding: 8px 40px 9px 10px;
+  border-top: 1px solid var(--card-line);
+}
+.mk-thumb figcaption strong {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.mk-thumb figcaption small {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+.mk-thumb-dl {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: var(--gold-ink);
+}
+.mk-thumb-dl .ico {
+  width: 16px;
+  height: 16px;
+}
+.mk-thumb-dl:hover {
+  background: #ffb8171f;
+}
+/* backgrounds: dark-background files on charcoal, light ones on canvas, others on a checkerboard */
+.bg-dark {
+  background: #111214;
+}
+.bg-light {
+  background: #f6f2ea;
+}
+.bg-check {
+  background: repeating-conic-gradient(#8882 0% 25%, transparent 0% 50%) 0 0 / 16px 16px, #fff;
+}
+
+/* the large preview, on top of the resource window */
+.mk-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 60; /* above the window (.overlay 45), below toasts */
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(8, 8, 9, 0.78);
+  animation: fade 0.15s ease;
+}
+.mk-viewer[hidden] {
+  display: none;
+}
+.mk-viewer-box {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  width: min(980px, 100%);
+  height: min(720px, 100%);
+  border: 1px solid var(--card-line);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+.mk-viewer-top,
+.mk-viewer-bottom {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px 10px 16px;
+}
+.mk-viewer-top {
+  border-bottom: 1px solid var(--card-line);
+}
+.mk-viewer-bottom {
+  justify-content: space-between;
+  border-top: 1px solid var(--card-line);
+}
+.mk-viewer-name {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+}
+.mk-viewer-name strong {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mk-viewer-name small {
+  color: var(--muted);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.mk-viewer-count {
+  flex: none;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+.mk-viewer-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: 28px 64px;
+  touch-action: pan-y; /* horizontal swipes go to the preview */
+  user-select: none;
+}
+.mk-viewer-stage img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  -webkit-user-drag: none;
+}
+.mk-viewer-nav {
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #fff3;
+  border-radius: 50%;
+  background: #000000a6;
+  color: #fff;
+  cursor: pointer;
+}
+.mk-viewer-nav.prev {
+  left: 12px;
+}
+.mk-viewer-nav.next {
+  right: 12px;
+}
+.mk-viewer-nav .ico {
+  width: 18px;
+  height: 18px;
+}
+.mk-viewer-nav.prev .ico {
+  transform: rotate(90deg);
+}
+.mk-viewer-nav.next .ico {
+  transform: rotate(-90deg);
+}
+.mk-viewer-nav:hover {
+  background: #000;
+  border-color: #ffb817;
+}
+.mk-viewer.is-single .mk-viewer-nav {
+  display: none;
+}
+.mk-viewer-bgs {
+  display: flex;
+  gap: 6px;
+}
+.mk-viewer-bgs button {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--card-line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.mk-viewer-bgs button[aria-pressed="true"] {
+  outline: 2px solid #ffb817;
+  outline-offset: 2px;
+}
+.mk-viewer-dl {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  text-decoration: none;
+}
+.mk-viewer-dl .ico {
+  width: 16px;
+  height: 16px;
+}
+.mk-viewer :focus-visible {
+  outline: 2px solid #ffb817;
+  outline-offset: 2px;
+}
+body.mk-viewing {
+  overflow: hidden;
+}
+.mk-sig {
+  margin-bottom: 10px;
+  padding: 14px;
+  border: 1px solid var(--card-line);
+  border-radius: 10px;
+  background: #fff; /* the signature is shown as it looks in an email */
+  overflow-x: auto;
+}
+.mk-form textarea.field {
+  height: auto;
+  padding: 10px 11px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* ---------- Smaller screens ---------- */
+@media (max-width: 1100px) {
+  .mk-grid,
+  .mk-swatches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 700px) {
+  .mk-grid,
+  .mk-tools {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .mk-pal-panel {
+    padding: 12px;
+    border-radius: 0 0 14px 14px;
+  }
+  .mk-pal-head {
+    flex-direction: column;
+    gap: 0;
+  }
+  .mk-swatches {
+    gap: 8px;
+  }
+  .mk-color-info {
+    padding: 8px;
+  }
+  .mk-rgb {
+    gap: 4px;
+    padding: 3px 6px;
+  }
+  .mk-thumbs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .mk-thumb-img {
+    height: 96px;
+    padding: 10px;
+  }
+  /* the preview fills the phone screen; ‹ › sit over the picture, swiping also works */
+  .mk-viewer {
+    padding: 0;
+  }
+  .mk-viewer-box {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+  }
+  .mk-viewer-stage {
+    padding: 16px 12px;
+  }
+  .mk-viewer-nav {
+    width: 36px;
+    height: 36px;
+    top: auto;
+    bottom: 12px;
+    margin: 0;
+  }
+  .mk-viewer-dl {
+    flex: 1;
+    justify-content: center;
+  }
+  .view[data-view="marketing"] .hero-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .mk-add {
+    justify-content: center;
+  }
+  .mk-card {
+    min-height: 0;
+  }
+}
+
+/* ---------- Light mode ---------- */
+html[data-theme="light"] .mk-tool {
+  background: #fff;
+}
+html[data-theme="light"] .mk-tool:hover {
+  background: #fffaf0;
+}
+html[data-theme="light"] .mk-tool-add {
+  background: transparent;
+  border-color: #e0a10ccc;
+}
+html[data-theme="light"] .mk-mini.is-del:hover {
+  color: #c4372b;
+  border-color: #c4372b;
+}
+html[data-theme="light"] .mk-pal-tab {
+  background: #faf6ec;
+}
+html[data-theme="light"] .mk-color {
+  background: #fff;
+}
+html[data-theme="light"] .mk-pal-tab[aria-selected="true"],
+html[data-theme="light"] .mk-pal-panel {
+  background: #faf8f2;
+}
+html[data-theme="light"] .mk-thumb {
+  background: #fff;
+}
