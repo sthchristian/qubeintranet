@@ -26,14 +26,15 @@
     />
     <!-- ?v= makes the browser fetch a file again instead of using its cached copy (the sidebar logo images have one too).
          Raise the number on every css/ and js/ line here and below whenever one of those files changes. -->
-    <link rel="stylesheet" href="css/base.css?v=57" />
-    <link rel="stylesheet" href="css/mascot.css?v=57" />
-    <link rel="stylesheet" href="css/topbar.css?v=57" />
-    <link rel="stylesheet" href="css/tour.css?v=57" />
-    <link rel="stylesheet" href="css/features.css?v=57" />
-    <link rel="stylesheet" href="css/knowledge.css?v=57" />
-    <link rel="stylesheet" href="css/forum.css?v=57" />
-    <link rel="stylesheet" href="css/light.css?v=57" />
+    <link rel="stylesheet" href="css/base.css?v=75" />
+    <link rel="stylesheet" href="css/mascot.css?v=75" />
+    <link rel="stylesheet" href="css/topbar.css?v=75" />
+    <link rel="stylesheet" href="css/tour.css?v=75" />
+    <link rel="stylesheet" href="css/features.css?v=75" />
+    <link rel="stylesheet" href="css/knowledge.css?v=75" />
+    <link rel="stylesheet" href="css/forum.css?v=75" />
+    <link rel="stylesheet" href="css/marketing.css?v=75" />
+    <link rel="stylesheet" href="css/light.css?v=75" />
   </head>
   <body>
     <!-- ===== Icon sprites (referenced with <use href="#i-...">) ===== -->
@@ -90,6 +91,19 @@
       <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 3.5V16A2.5 2.5 0 0 1 4 13.5Z" /></symbol>
       <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.3a4.3 4.3 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20Z" /></symbol>
       <symbol id="i-pin" viewBox="0 0 24 24"><path d="M9 3.5h6l-1 5 3.5 3.5H6.5L10 8.5Z" /><path d="M12 12v8.5" /></symbol>
+      <!-- Admin Mode padlock (js/app.js, "Admin Mode"): closed = view mode, open = editing -->
+      <!-- Marketing (js/marketing.js): megaphone, slides, web, palette, pen, folder, copy, download -->
+      <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M4 10v4a1.5 1.5 0 0 0 1.5 1.5H8l7 4V4.5l-7 4H5.5A1.5 1.5 0 0 0 4 10Z" /><path d="M8 15.5 9.5 20h2.5l-1.3-4" /><path d="M18.5 9.5a3.5 3.5 0 0 1 0 5" /></symbol>
+      <symbol id="i-mk-slides" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2" /><path d="M12 16v4M8.5 20h7" /><path d="m10 8 4 2-4 2Z" /></symbol>
+      <symbol id="i-mk-web" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5" /><path d="M3 8.5h18" /><path d="M6 6.2h.01M8.5 6.2h.01" /><path d="M7 12.5h6M7 15.5h10" /></symbol>
+      <symbol id="i-mk-palette" viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 0 0 0 17c1.2 0 1.8-.8 1.8-1.7 0-1.3-1-1.6-1-2.8 0-1 .8-1.6 1.8-1.6H17a3.5 3.5 0 0 0 3.5-3.5c0-4.3-3.8-7.4-8.5-7.4Z" /><path d="M7.8 11.5h.01M10 7.8h.01M14.2 7.8h.01M16.6 11h.01" /></symbol>
+      <symbol id="i-mk-pen" viewBox="0 0 24 24"><path d="M12 3 5.5 10l2.5 8h8l2.5-8Z" /><path d="M12 3v7" /><circle cx="12" cy="11.5" r="1.6" /><path d="M8 21h8" /></symbol>
+      <symbol id="i-mk-folder" viewBox="0 0 24 24"><path d="M3.5 7.5A2 2 0 0 1 5.5 5.5H10l2 2h6.5a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2Z" /><path d="M3.5 10.5h17" /></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2.2" /><path d="M15.5 8.5v-2a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h2" /></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5" /><path d="M5 19.5h14" /></symbol>
+      <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16Z" /><path d="m13.5 6.5 4 4" /></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5" /><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" /><path d="M12 14.5v2" /></symbol>
+      <symbol id="i-unlock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5" /><path d="M8 10.5V8a4 4 0 0 1 7.7-1.5" /><path d="M12 14.5v2" /></symbol>
       <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></symbol>
       <symbol id="i-ext" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" /></symbol>
       <symbol id="i-trash" viewBox="0 0 24 24">
@@ -166,8 +180,8 @@
         <div class="brand">
           <!-- Logo = home: goes to the Dashboard (data-view-link, js/app.js "Sidebar views") -->
           <button type="button" class="brand-home" data-view-link="dashboard" aria-label="Qube – go to Dashboard" title="Go to Dashboard">
-            <img class="brand-logo brand-logo--light" src="assets/brand/gold-cream-cube/qube-logo-horizontal-light-transparent.svg?v=57" alt="" width="900" height="314" />
-            <img class="brand-logo brand-logo--dark" src="assets/brand/gold-cream-cube/qube-logo-horizontal-dark-transparent.svg?v=57" alt="" width="900" height="314" />
+            <img class="brand-logo brand-logo--light" src="assets/brand/gold-cream-cube/qube-logo-horizontal-light-transparent.svg?v=75" alt="" width="900" height="314" />
+            <img class="brand-logo brand-logo--dark" src="assets/brand/gold-cream-cube/qube-logo-horizontal-dark-transparent.svg?v=75" alt="" width="900" height="314" />
           </button>
           <button type="button" class="icon-btn nav-close" id="nav-close" aria-label="Close navigation">✕</button>
         </div>
@@ -183,6 +197,9 @@
             </button>
             <button data-view-link="knowledge" title="Knowledge Hub">
               <span class="nav-icon"><svg class="ico"><use href="#i-library" /></svg></span><span class="label">Knowledge Hub</span>
+            </button>
+            <button data-view-link="marketing" title="Marketing">
+              <span class="nav-icon"><svg class="ico"><use href="#i-megaphone" /></svg></span><span class="label">Marketing</span>
             </button>
             <button data-view-link="forum" title="Bulletin Board">
               <span class="nav-icon"><svg class="ico"><use href="#i-forum" /></svg></span><span class="label">Bulletin Board</span>
@@ -202,7 +219,7 @@
               <span class="nav-icon"><svg class="ico"><use href="#i-headset" /></svg></span><span class="label">IT support</span>
             </button>
             <!-- only shown for the HR and Manager roles (js/app.js, "Role") -->
-            <button data-view-link="admin" data-admin-only hidden title="Admin Panel">
+            <button data-view-link="admin" data-admin-mode-only hidden title="Admin Panel">
               <span class="nav-icon"><svg class="ico"><use href="#i-shield" /></svg></span><span class="label">Admin Panel</span>
             </button>
           </nav>
@@ -214,6 +231,13 @@
       </button>
       <main class="main">
         <!-- ===== Top bar: search, settings, notifications, profile ===== -->
+        <!-- Admin Mode banner: shown while an admin has unlocked editing (js/app.js, "Admin Mode") -->
+        <div class="admin-banner" id="admin-banner" role="status" hidden>
+          <svg class="ico"><use href="#i-unlock" /></svg>
+          <p><strong>Admin Mode Active</strong> — <span>Any edits or posts you make here are live and visible to everyone.</span></p>
+          <button type="button" class="btn" data-view-link="admin" id="admin-banner-panel">Admin Panel</button>
+          <button type="button" class="btn admin-banner-lock" id="admin-banner-lock"><svg class="ico"><use href="#i-lock" /></svg>Lock</button>
+        </div>
         <header class="topbar">
           <!-- Hamburger: opens the sidebar drawer on phones (hidden on wider screens) -->
           <button type="button" class="icon-btn nav-btn nav-toggle" id="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="side-nav">
@@ -225,6 +249,19 @@
             <svg class="ico"><use href="#i-search" /></svg><span>Search or jump to…</span><kbd id="search-kbd">⌘K</kbd>
           </button>
           <div class="actions">
+            <!-- Admin Mode lock / unlock: only for admin roles (HR, Manager); js/app.js, "Admin Mode" -->
+            <button
+              type="button"
+              class="admin-mode-toggle"
+              id="admin-mode-toggle"
+              data-admin-only
+              hidden
+              aria-pressed="false"
+              aria-label="Unlock Admin Mode"
+              title="Unlock Admin Mode"
+            >
+              <svg class="ico"><use href="#i-lock" /></svg><span class="amt-label">View Mode</span>
+            </button>
             <!-- Settings: gear next to the notifications bell, opens a small popover (js/app.js, "Settings popover") -->
             <div class="pop-wrap settings-wrap">
               <button
@@ -449,18 +486,20 @@
             </p>
           </section>
           <!-- News -->
-          <section data-dash="news">
+          <section data-dash="news" data-admin-editable>
             <div class="section-head">
               <h2>News & information</h2>
+              <button type="button" class="admin-inline" data-admin-mode-only hidden data-admin-go="news"><svg class="ico"><use href="#i-edit" /></svg><span>Manage slides</span></button>
               <button data-view-link="news"><span>View all</span> <svg class="ico ico-inline"><use href="#i-ext" /></svg></button>
             </div>
             <!-- Slideshow of the newest articles, built by js/features.js ("News") from localStorage -->
             <div class="news-slider" id="news-home" role="region" aria-roledescription="carousel" aria-label="Latest news"></div>
           </section>
           <!-- Calendar -->
-          <section data-dash="calendar">
+          <section data-dash="calendar" data-admin-editable>
             <div class="section-head">
               <h2>Calendar</h2>
+              <button type="button" class="admin-inline" data-admin-mode-only hidden data-admin-go="event"><svg class="ico"><use href="#i-edit" /></svg><span>Manage events</span></button>
               <button data-toast="Opening full calendar"><span>Open calendar</span> <svg class="ico ico-inline"><use href="#i-ext" /></svg></button>
             </div>
             <div class="cal" id="cal">
@@ -499,11 +538,12 @@
               <h1>News &amp; information</h1>
               <p>Company updates, newest first.</p>
             </div>
+            <button type="button" class="admin-inline is-big" data-admin-mode-only hidden data-admin-go="news"><svg class="ico"><use href="#i-edit" /></svg><span>Manage news</span></button>
           </section>
           <!-- The article opened from the dashboard slideshow or the list below (js/features.js, "News") -->
           <article class="news-reader" id="news-reader" aria-labelledby="news-reader-title" tabindex="-1" hidden></article>
           <!-- every article, newest first (js/features.js, "News") -->
-          <div class="news-list" id="news-all"></div>
+          <div class="news-list" id="news-all" data-admin-editable></div>
         </div>
         <!-- ===== VIEW: Knowledge Hub (library, search + filters: js/knowledge.js) ===== -->
         <!-- Bulletin Board: links, tips and discussions with comments (js/forum.js, css/forum.css) -->
@@ -527,8 +567,8 @@
               <div class="kb-filters" id="fm-filters" role="group" aria-label="Categories"></div>
               <span class="fm-count" id="fm-count" aria-live="polite"></span>
             </div>
-            <p class="fm-mod" id="fm-mod" hidden><svg class="ico"><use href="#i-shield" /></svg>Moderator: with the HR or Manager role you can remove any post or comment.</p>
-            <div class="fm-feed" id="fm-feed"></div>
+            <p class="fm-mod" id="fm-mod" hidden><svg class="ico"><use href="#i-shield" /></svg>Admin Mode: you can pin, unpin and remove any post or comment.</p>
+            <div class="fm-feed" id="fm-feed" data-admin-editable></div>
           </div>
           <div class="fm-thread" id="fm-thread" aria-labelledby="fm-thread-title" hidden></div>
         </div>
@@ -563,6 +603,33 @@
           <p class="kb-count" id="kb-count" aria-live="polite"></p>
           <div class="tile-grid" id="kb-grid"></div>
           <p class="empty-note" id="kb-empty" hidden>No documents match your search. Try another word or pick a different category.</p>
+        </div>
+        <!-- ===== VIEW: Marketing: tools, brand values, templates and assets (js/marketing.js, css/marketing.css) ===== -->
+        <div class="view" data-view="marketing" hidden>
+          <section class="hero-head">
+            <div>
+              <div class="eyebrow">Workspace</div>
+              <h1>Marketing</h1>
+              <p>Tools, templates, slide decks, website assets and brand resources in one place.</p>
+            </div>
+            <button type="button" class="btn primary mk-add" id="mk-add" data-admin-mode-only hidden><svg class="ico"><use href="#i-plus" /></svg>Add Resource / Template</button>
+          </section>
+          <section class="mk-top" aria-label="Quick Launch tools">
+            <div class="mk-block">
+              <h2 class="mk-label">Quick Launch Tools</h2>
+              <div class="mk-tools" id="mk-tools" data-admin-editable></div>
+            </div>
+          </section>
+          <div class="kb-toolbar">
+            <div class="kb-search">
+              <svg class="ico"><use href="#i-search" /></svg>
+              <input class="field" id="mk-q" type="search" placeholder="Search templates and assets…" aria-label="Search templates and assets" autocomplete="off" />
+            </div>
+          </div>
+          <div class="kb-filters" id="mk-filters" role="group" aria-label="Filter by category"></div>
+          <p class="kb-count" id="mk-count" aria-live="polite"></p>
+          <div class="tile-grid mk-grid" id="mk-grid" data-admin-editable></div>
+          <p class="empty-note" id="mk-empty" hidden>Nothing matches your search. Try another word or pick a different category.</p>
         </div>
         <!-- ===== VIEW: IT support ===== -->
         <div class="view" data-view="it" hidden>
@@ -800,21 +867,22 @@
       </div>
     </aside>
     <!-- Swedish texts for the language setting (js/app.js, "Language") -->
-    <script src="js/lang-sv.js?v=57"></script>
-    <script src="js/app.js?v=57"></script>
-    <script src="js/calendar.js?v=57"></script>
-    <script src="js/robot.js?v=57"></script>
-    <script src="js/tour.js?v=57"></script>
-    <script src="js/features.js?v=57"></script>
-    <script src="js/knowledge.js?v=57"></script>
-    <script src="js/forum.js?v=57"></script>
-    <script src="js/chat.js?v=57"></script>
+    <script src="js/lang-sv.js?v=75"></script>
+    <script src="js/app.js?v=75"></script>
+    <script src="js/calendar.js?v=75"></script>
+    <script src="js/robot.js?v=75"></script>
+    <script src="js/tour.js?v=75"></script>
+    <script src="js/features.js?v=75"></script>
+    <script src="js/knowledge.js?v=75"></script>
+    <script src="js/forum.js?v=75"></script>
+    <script src="js/marketing.js?v=75"></script>
+    <script src="js/chat.js?v=75"></script>
     <!-- 3D mascot: <model-viewer> (local copy, no internet needed) + the animation code -->
     <script src="js/vendor/model-viewer-umd.min.js"></script>
-    <script src="js/mascot3d.js?v=57"></script>
+    <script src="js/mascot3d.js?v=75"></script>
     <!-- QBot's tour acts: screen effects, 3D props, and the step choreography (in that order) -->
-    <script src="js/qbot-fx.js?v=57"></script>
-    <script src="js/qbot-props.js?v=57"></script>
-    <script src="js/qbot-acts.js?v=59"></script>
+    <script src="js/qbot-fx.js?v=75"></script>
+    <script src="js/qbot-props.js?v=75"></script>
+    <script src="js/qbot-acts.js?v=75"></script>
   </body>
 </html>
